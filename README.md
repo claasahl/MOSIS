@@ -11,3 +11,8 @@ Examples
 A few rudimentary samples can be found in the directory below. The samples demonstrate the very basic usage of MOSIS as well as some of its functionality.
 
     ./src/main/samples/
+
+
+Issues
+======
+For any issues or questions, please refer to [link](https://github.com/claasahl/MOSIS/issues).
