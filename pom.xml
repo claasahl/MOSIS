@@ -11,14 +11,19 @@
 
 
     <name>MOSIS</name>
-    <description>This is an open source framework for signal processing, stream analysis, machine learning and stream mining applications. MOSIS is designed to ease benchmarking efforts and rapid prototyping of stream-based algorithms. Furthermore, it facilitates a design pattern driven approach and can easily be expanded to include new modules as well as algorithms. The nature of MOSIS enables use by researchers, enthusiasts and practitioners alike.</description>
+    <description>This is an open source framework for signal processing, stream analysis, machine learning and stream
+        mining applications. MOSIS is designed to ease benchmarking efforts and rapid prototyping of stream-based
+        algorithms. Furthermore, it facilitates a design pattern driven approach and can easily be expanded to include
+        new modules as well as algorithms. The nature of MOSIS enables use by researchers, enthusiasts and practitioners
+        alike.
+    </description>
     <url>https://github.com/claasahl/MOSIS</url>
     <inceptionYear>2013</inceptionYear>
     <developers>
         <developer>
             <id>claasahl</id>
             <name>Claas Ahlrichs</name>
-            <email>claasahl__AT_informatik.uni-bremen.de</email>
+            <email>claasahl__AT_tzi.de</email>
         </developer>
     </developers>
 
@@ -40,6 +45,30 @@
                     <source>${java-version}</source>
                     <target>${java-version}</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
