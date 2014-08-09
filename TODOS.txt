@@ -1,0 +1,10 @@
+- Add support for accessing multiple InputStreams in a row (i.e. SequenceInputStream). Allow to read from multiple files, URLs, etc.
+- Add possibility to (dynamically) adjust parameters (e.g. through Decorator implementation).
+- Add support for ARFF data format.
+- Review documentation of all source files
+- Review documentation of all tests
+- Add support for channels (java.nio)?
+- Add (minimal) support for database connections
+- Add CommandLine module for executing system commands
+- Add DecoratingProcessor for Logging
+- Enhence "flow"-management
