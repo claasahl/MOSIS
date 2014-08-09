@@ -2,6 +2,7 @@ package de.claas.mosis.flow;
 
 import static org.junit.Assert.fail;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -16,7 +17,7 @@ import org.junit.Test;
  */
 public class UnbiasedLinkTest {
 
-    @Test
+    @Ignore
     public void test() {
 	fail("Not yet implemented");
     }
