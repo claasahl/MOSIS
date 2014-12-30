@@ -38,6 +38,16 @@ public class RelationTest {
         _Args = args;
     }
 
+    @Parameters
+    public static Collection<?> implementations() {
+        List<Object> impl = new Vector<Object>();
+        impl.add(new Object[]{Relation.LastChanged.class, new Object[]{}});
+        impl.add(new Object[]{Relation.ParameterHistory.class,
+                new Object[]{}});
+        impl.add(new Object[]{Relation.UpdateVersion.class, new Object[]{}});
+        return impl;
+    }
+
     /**
      * Returns an instantiated {@link Relation} class. The concrete class of the
      * instantiated object and its arguments are provided by the {@link #_Clazz}
@@ -56,6 +66,14 @@ public class RelationTest {
         assertNotSame(Object.class, m.getDeclaringClass());
     }
 
+    // TODO Require overriding hashCode? See documentation of equals method.
+
+    /**
+     * Implementations must override {@link #hashCode()}. This method must be
+     * implemented as a consequence of overriding {@link #equals(Object)}. See
+     * general documentation of {@link #equals(Object)} method for details.
+     */
+    // public void shouldOverrideHashCode() throws Exception {}
     @Test
     public void shouldImplementEquals() throws Exception {
         Relation r1 = build();
@@ -67,14 +85,6 @@ public class RelationTest {
         assertFalse(r1.equals(new Object()));
     }
 
-    // TODO Require overriding hashCode? See documentation of equals method.
-    /**
-     * Implementations must override {@link #hashCode()}. This method must be
-     * implemented as a consequence of overriding {@link #equals(Object)}. See
-     * general documentation of {@link #equals(Object)} method for details.
-     */
-    // public void shouldOverrideHashCode() throws Exception {}
-
     /**
      * Implementation must properly realize {@link #hashCode()}. See general
      * documentation of {@link #hashCode()} method for details.
@@ -84,16 +94,6 @@ public class RelationTest {
     public void shouldHandleNullValues() throws Exception {
         Relation r = build();
         r.compute(new ConfigurableAdapter(), null, null);
-    }
-
-    @Parameters
-    public static Collection<?> implementations() {
-        List<Object> impl = new Vector<Object>();
-        impl.add(new Object[]{Relation.LastChanged.class, new Object[]{}});
-        impl.add(new Object[]{Relation.ParameterHistory.class,
-                new Object[]{}});
-        impl.add(new Object[]{Relation.UpdateVersion.class, new Object[]{}});
-        return impl;
     }
 
 }
