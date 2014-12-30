@@ -1,61 +1,60 @@
 package de.claas.mosis.io;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import org.junit.Test;
 
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * The JUnit test for class {@link StandardInputOutputImpl}. It is intended to
  * collect and document a set of test cases for the tested class. Please refer
  * to the individual tests for more detailed information.
- * 
+ *
  * @author Claas Ahlrichs (claasahl@tzi.de)
- * 
  */
 public class StandardInputOutputImplTest extends StreamHandlerImplTest {
 
     @Override
     public StandardInputOutputImpl build() throws Exception {
-	return new StandardInputOutputImpl();
+        return new StandardInputOutputImpl();
     }
 
     @Override
     @Test
     public void shouldReturnNewInputStream() throws Exception {
-	// INFO: System.in-stream does not change
-	InputStream s1 = _I.getInputStream();
-	InputStream s2 = _I.getInputStream();
-	assertNotNull(s1);
-	assertNotNull(s2);
-	assertEquals(s1, s2);
+        // INFO: System.in-stream does not change
+        InputStream s1 = _I.getInputStream();
+        InputStream s2 = _I.getInputStream();
+        assertNotNull(s1);
+        assertNotNull(s2);
+        assertEquals(s1, s2);
     }
 
     @Override
     @Test
     public void shouldReturnNewOuputStream() throws Exception {
-	// INFO: System.out-stream does not change
-	OutputStream s1 = _I.getOutputStream();
-	OutputStream s2 = _I.getOutputStream();
-	assertNotNull(s1);
-	assertNotNull(s2);
-	assertEquals(s1, s2);
+        // INFO: System.out-stream does not change
+        OutputStream s1 = _I.getOutputStream();
+        OutputStream s2 = _I.getOutputStream();
+        assertNotNull(s1);
+        assertNotNull(s2);
+        assertEquals(s1, s2);
     }
 
     @Test
     public void shouldReturnSystemOut() throws Exception {
-	OutputStream s1 = _I.getOutputStream();
-	assertNotNull(s1);
-	assertEquals(System.out, s1);
+        OutputStream s1 = _I.getOutputStream();
+        assertNotNull(s1);
+        assertEquals(System.out, s1);
     }
 
     @Test
     public void shouldReturnSystemIn() throws Exception {
-	InputStream s1 = _I.getInputStream();
-	assertNotNull(s1);
-	assertEquals(System.in, s1);
+        InputStream s1 = _I.getInputStream();
+        assertNotNull(s1);
+        assertEquals(System.in, s1);
     }
 }

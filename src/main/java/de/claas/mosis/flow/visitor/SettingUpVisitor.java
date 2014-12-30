@@ -12,9 +12,8 @@ import java.util.Set;
  * The class {@link SettingUpVisitor}. It is an implementation of the
  * {@link Visitor} interface. It is intended to initialize all processing
  * modules within a graph.
- * 
+ *
  * @author Claas Ahlrichs (claasahl@tzi.de)
- * 
  */
 public class SettingUpVisitor implements Visitor {
 
@@ -22,18 +21,18 @@ public class SettingUpVisitor implements Visitor {
 
     @Override
     public boolean visitPlainNode(PlainNode node) {
-	Processor p = node.getProcessor();
-	if(!setup.contains(p)) {
-	    p.setUp();
-	    setup.add(p);
-	}
-	return true;
+        Processor p = node.getProcessor();
+        if (!setup.contains(p)) {
+            p.setUp();
+            setup.add(p);
+        }
+        return true;
     }
 
     @Override
     public boolean visitCompositeNode(CompositeNode node) {
-	// TODO Auto-generated method stub
-	return false;
+        // TODO Auto-generated method stub
+        return false;
     }
 
 }

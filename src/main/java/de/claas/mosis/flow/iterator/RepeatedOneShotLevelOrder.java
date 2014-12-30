@@ -1,13 +1,9 @@
 package de.claas.mosis.flow.iterator;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.Vector;
-
 import de.claas.mosis.flow.Graph;
 import de.claas.mosis.flow.Node;
+
+import java.util.*;
 
 /**
  * The class {@link RepeatedOneShotLevelOrder}. It is intended to provide
@@ -15,7 +11,7 @@ import de.claas.mosis.flow.Node;
  * {@link Iterator} is meant for a repeated iteration across all objects in a
  * {@link Graph}. In contrast to {@link OneShotLevelOrder}, where a single
  * iteration across all {@link Node}s is performed, this process is repeated.
- * 
+ * <p/>
  * <ol>
  * <li>iteration: level 0 (data sources)</li>
  * <li>iteration: level 1</li>
@@ -30,9 +26,8 @@ import de.claas.mosis.flow.Node;
  * <li>iteration: level 2</li>
  * <li>...</li>
  * </ol>
- * 
+ *
  * @author Claas Ahlrichs (c.ahlrichs@neusta.de)
- * 
  */
 public class RepeatedOneShotLevelOrder implements Iterator<Node> {
 
@@ -42,50 +37,49 @@ public class RepeatedOneShotLevelOrder implements Iterator<Node> {
 
     /**
      * Initializes the class with the given parameter.
-     * 
-     * @param sources
-     *            the data sources to start with
+     *
+     * @param sources the data sources to start with
      */
     public RepeatedOneShotLevelOrder(Set<Node> sources) {
-	_Visited = new HashSet<>(sources);
-	_Nodes = new Vector<>();
-	_Index = 0;
-	for (Node src : sources) {
-	    _Nodes.add(src);
-	}
-	populate(0);
+        _Visited = new HashSet<>(sources);
+        _Nodes = new Vector<>();
+        _Index = 0;
+        for (Node src : sources) {
+            _Nodes.add(src);
+        }
+        populate(0);
     }
 
     @Override
     public boolean hasNext() {
-	return true;
+        return true;
     }
 
     @Override
     public Node next() {
-	if (_Index >= _Nodes.size()) {
-	    _Index = 0;
-	}
-	return _Nodes.get(_Index++);
+        if (_Index >= _Nodes.size()) {
+            _Index = 0;
+        }
+        return _Nodes.get(_Index++);
     }
 
     @Override
     public void remove() {
-	throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException();
     }
 
     private void populate(int index) {
-	if (index < 0 || index >= _Nodes.size()) {
-	    return;
-	}
+        if (index < 0 || index >= _Nodes.size()) {
+            return;
+        }
 
-	for (Node succ : _Nodes.get(index).getSuccessors()) {
-	    if (!_Visited.contains(succ)) {
-		_Visited.add(succ);
-		_Nodes.add(succ);
-	    }
-	}
-	populate(index + 1);
+        for (Node succ : _Nodes.get(index).getSuccessors()) {
+            if (!_Visited.contains(succ)) {
+                _Visited.add(succ);
+                _Nodes.add(succ);
+            }
+        }
+        populate(index + 1);
     }
 
 }

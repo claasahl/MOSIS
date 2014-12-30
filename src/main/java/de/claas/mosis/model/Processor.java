@@ -1,8 +1,8 @@
 package de.claas.mosis.model;
 
-import java.util.List;
-
 import de.claas.mosis.annotation.Documentation;
+
+import java.util.List;
 
 /**
  * The interface {@link Processor}. It is intended to provide a unified way for
@@ -11,24 +11,21 @@ import de.claas.mosis.annotation.Documentation;
  * of these modules can be linked together in order to perform more complex
  * tasks (e.g. transform data from one format to another, inspect network
  * traffic or analyze OpenStreetMap data, etc.).
- * 
+ * <p/>
  * The life-cycle is such that {@link #setUp()} is called first. Then
  * {@link #process(List, List)} is invoked as often as required and finally the
  * module is dismantled with {@link #dismantle()}. At this point, the set-up
  * method may be invoked again. Thus starting the cycle over again.
- * 
+ *
+ * @param <I> type of incoming data (e.g. {@link Integer})
+ * @param <O> type of outgoing data (e.g. {@link Double})
  * @author Claas Ahlrichs (claasahl@tzi.de)
- * 
- * @param <I>
- *            type of incoming data (e.g. {@link Integer})
- * @param <O>
- *            type of outgoing data (e.g. {@link Double})
  */
 @Documentation(
-	purpose = "It is intended to provide a unified interface for processing time series data as well as getting and setting parameters.",
-	description = "This represents the interface that all modules within the framework adhere. Here all basic functionalities that a module must implement are listed and described. Most notably, it provides a common iterface for processing time series data as well as handling of parameters. When adding (new) modules to the framework, this interface must be implemented directly or indirectly by another (partial) implementation (e.g. ProcessorAdapter, BufferingProcessor, ComparingProcessor, etc.).",
-	author = "Claas Ahlrichs",
-	noOutputData = "Refer to concrete implementations.")
+        purpose = "It is intended to provide a unified interface for processing time series data as well as getting and setting parameters.",
+        description = "This represents the interface that all modules within the framework adhere. Here all basic functionalities that a module must implement are listed and described. Most notably, it provides a common iterface for processing time series data as well as handling of parameters. When adding (new) modules to the framework, this interface must be implemented directly or indirectly by another (partial) implementation (e.g. ProcessorAdapter, BufferingProcessor, ComparingProcessor, etc.).",
+        author = "Claas Ahlrichs",
+        noOutputData = "Refer to concrete implementations.")
 public interface Processor<I, O> extends Configurable {
 
     /**
@@ -39,14 +36,12 @@ public interface Processor<I, O> extends Configurable {
      * to provide any output values nor is it required to interpret incoming
      * data. However, at least one of the two should be done. It can be safely
      * assumed that all parameters will never be <code>null</code>.
-     * 
-     * @param in
-     *            inbound data. This data may stem from (multiple) time series.
+     *
+     * @param in  inbound data. This data may stem from (multiple) time series.
      *            When multiple input values are received, then multiple
      *            processing modules provided data. Multiple input values do not
      *            reflect a bulk of data from a single processing module.
-     * @param out
-     *            outbound data. The amount of output values does not affect how
+     * @param out outbound data. The amount of output values does not affect how
      *            the data is being processing by succeeding modules. Multiple
      *            output values are not processed in a bulk.
      */

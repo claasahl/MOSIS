@@ -1,5 +1,8 @@
 package de.claas.mosis.io;
 
+import de.claas.mosis.annotation.Parameter;
+import de.claas.mosis.model.Condition;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -7,16 +10,12 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import de.claas.mosis.annotation.Parameter;
-import de.claas.mosis.model.Condition;
-
 /**
  * The class {@link TransmissionControlProtocolHandler}. It is intended to
  * provide access to TCP enabled services and data sources, such that
  * {@link StreamHandler} implementations can process them.
- * 
+ *
  * @author Claas Ahlrichs (claasahl@tzi.de)
- * 
  */
 public class TransmissionControlProtocolHandler extends StreamHandlerImpl {
 
@@ -35,78 +34,77 @@ public class TransmissionControlProtocolHandler extends StreamHandlerImpl {
      * Initializes the class with default values.
      */
     public TransmissionControlProtocolHandler() {
-	addCondition(HOST, new Condition.IsNotNull());
-	setParameter(HOST, "localhost");
-	addCondition(PORT, new Condition.IsInteger());
-	addCondition(PORT, new Condition.IsGreaterOrEqual(0d));
-	addCondition(PORT, new Condition.IsLessThan(Math.pow(2, 16)));
-	setParameter(PORT, 12345);
-	addCondition(AWAIT_CONNECTION, new Condition.IsBoolean());
-	setParameter(AWAIT_CONNECTION, false);
+        addCondition(HOST, new Condition.IsNotNull());
+        setParameter(HOST, "localhost");
+        addCondition(PORT, new Condition.IsInteger());
+        addCondition(PORT, new Condition.IsGreaterOrEqual(0d));
+        addCondition(PORT, new Condition.IsLessThan(Math.pow(2, 16)));
+        setParameter(PORT, 12345);
+        addCondition(AWAIT_CONNECTION, new Condition.IsBoolean());
+        setParameter(AWAIT_CONNECTION, false);
     }
 
     @Override
     public InputStream getInputStream() throws IOException {
-	if (_SocketIn == null) {
-	    createSocket();
-	    _SocketOut = _Socket.getOutputStream();
-	    return _Socket.getInputStream();
-	} else {
-	    InputStream socketIn = _SocketIn;
-	    _SocketIn = null;
-	    return socketIn;
-	}
+        if (_SocketIn == null) {
+            createSocket();
+            _SocketOut = _Socket.getOutputStream();
+            return _Socket.getInputStream();
+        } else {
+            InputStream socketIn = _SocketIn;
+            _SocketIn = null;
+            return socketIn;
+        }
     }
 
     @Override
     public OutputStream getOutputStream() throws IOException {
-	if (_SocketOut == null) {
-	    createSocket();
-	    _SocketIn = _Socket.getInputStream();
-	    return _Socket.getOutputStream();
-	} else {
-	    OutputStream socketOut = _SocketOut;
-	    _SocketOut = null;
-	    return socketOut;
-	}
+        if (_SocketOut == null) {
+            createSocket();
+            _SocketIn = _Socket.getInputStream();
+            return _Socket.getOutputStream();
+        } else {
+            OutputStream socketOut = _SocketOut;
+            _SocketOut = null;
+            return socketOut;
+        }
     }
 
     /**
      * Creates a new {@link Socket} that can be exploited by
      * {@link #getInputStream()} and {@link #getOutputStream()}. Any previously
      * opened socket is closed.
-     * 
-     * @throws IOException
-     *             if {@link Socket} cannot be closed or opened
+     *
+     * @throws IOException if {@link Socket} cannot be closed or opened
      */
     protected void createSocket() throws IOException {
-	// Close existing sockets / connections
-	if (_Socket != null) {
-	    _Socket.close();
-	}
-	if(_ServerSocket != null) {
-	    _ServerSocket.close();
-	}
+        // Close existing sockets / connections
+        if (_Socket != null) {
+            _Socket.close();
+        }
+        if (_ServerSocket != null) {
+            _ServerSocket.close();
+        }
 
-	if(getParameterAsBoolean(AWAIT_CONNECTION)) {
-	    String host = getParameter(HOST);
-	    Integer port = getParameterAsInteger(PORT);
-	    if (host != null && port != null) {
-		_ServerSocket = new ServerSocket(port, 1, InetAddress.getByName(host));
-		_Socket = _ServerSocket.accept();
-	    } else {
-		_ServerSocket = null;
-		_Socket = null;
-	    }
-	} else {
-	    String host = getParameter(HOST);
-	    Integer port = getParameterAsInteger(PORT);
-	    if (host != null && port != null) {
-		_Socket = new Socket(host, port);
-	    } else {
-		_Socket = null;
-	    }
-	}
+        if (getParameterAsBoolean(AWAIT_CONNECTION)) {
+            String host = getParameter(HOST);
+            Integer port = getParameterAsInteger(PORT);
+            if (host != null && port != null) {
+                _ServerSocket = new ServerSocket(port, 1, InetAddress.getByName(host));
+                _Socket = _ServerSocket.accept();
+            } else {
+                _ServerSocket = null;
+                _Socket = null;
+            }
+        } else {
+            String host = getParameter(HOST);
+            Integer port = getParameterAsInteger(PORT);
+            if (host != null && port != null) {
+                _Socket = new Socket(host, port);
+            } else {
+                _Socket = null;
+            }
+        }
     }
 
 }
