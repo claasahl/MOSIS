@@ -110,7 +110,7 @@ public class JavaScriptObjectNotationTest extends
     @Test
     public void shouldReadArray() throws Exception {
         Data data = read("{\"arr\":[\"abc\", -2.3, 12]}\r\n");
-        List<Object> array = data.<List<Object>>getAs("arr");
+        List<Object> array = data.getAs("arr");
         assertEquals(3, array.size());
         assertEquals("abc", array.get(0));
         assertEquals(-2.3, ((BigDecimal) array.get(1)).doubleValue(), 0.0001);

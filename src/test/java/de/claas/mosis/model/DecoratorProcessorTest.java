@@ -168,7 +168,7 @@ public class DecoratorProcessorTest {
                 Null.class.getName());
         assertNull(((BreakOut) _P1.getProcessor()).getLastInput());
         Utils.process(_P1, 1, null, 3);
-        assertEquals(Arrays.asList(1, null, 3),
+        assertEquals(Arrays.<Object>asList(1, null, 3),
                 ((BreakOut) _P1.getProcessor()).getLastInput());
     }
 

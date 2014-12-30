@@ -104,9 +104,9 @@ public class ComparingProcessorTest {
 
     @Test
     public void shouldBufferLastSample() throws Exception {
-        assertNull(_P.replace(new Integer(23)));
-        assertEquals(new Integer(23), _P.replace(new Integer(42)));
-        assertEquals(new Integer(42), _P.replace(null));
+        assertNull(_P.replace(23));
+        assertEquals(23, _P.replace(42));
+        assertEquals(42, _P.replace(null));
         assertNull(_P.replace(null));
     }
 

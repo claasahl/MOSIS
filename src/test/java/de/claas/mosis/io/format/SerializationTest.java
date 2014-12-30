@@ -65,8 +65,8 @@ public class SerializationTest extends StreamHandlerTest<Object, Serialization<O
         o.writeObject(23L);
         o.writeObject(42L);
         o.flush();
-        assertEquals(new Long(23), Utils.process(_H, (Object) null));
-        assertEquals(new Long(42), Utils.process(_H, 1, 2));
+        assertEquals(23L, Utils.process(_H, (Object) null));
+        assertEquals(42L, Utils.process(_H, 1, 2));
     }
 
     @Override
@@ -77,10 +77,10 @@ public class SerializationTest extends StreamHandlerTest<Object, Serialization<O
         ObjectInputStream i = _H.getInputStream();
         assertEquals(0, i.available());
         assertNull(i.readObject());
-        assertEquals(new Long(23), Utils.process(_H, 23L, 1));
-        assertEquals(new Long(23), i.readObject());
-        assertEquals(new Long(42), Utils.process(_H, 42L, 444));
-        assertEquals(new Integer(1), i.readObject());
+        assertEquals(23L, Utils.process(_H, 23L, 1));
+        assertEquals(23L, i.readObject());
+        assertEquals(42L, Utils.process(_H, 42L, 444));
+        assertEquals(1, i.readObject());
         assertEquals(0, i.available());
     }
 
@@ -92,9 +92,9 @@ public class SerializationTest extends StreamHandlerTest<Object, Serialization<O
         o.writeObject(10L);
         o.flush();
         ObjectInputStream i = _H.getInputStream();
-        assertEquals(new Long(10), Utils.process(_H));
-        assertEquals(new Long(20), Utils.process(_H, 20L, 6454));
-        assertEquals(new Long(20), i.readObject());
+        assertEquals(10L, Utils.process(_H));
+        assertEquals(20L, Utils.process(_H, 20L, 6454));
+        assertEquals(20L, i.readObject());
         assertEquals(0, i.available());
     }
 

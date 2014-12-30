@@ -129,11 +129,11 @@ public class BufferingProcessorTest {
 
     @Test
     public void shouldNotBuffer() throws Exception {
-        assertEquals(Arrays.asList(1.0),
+        assertEquals(Arrays.<Object>asList(1.0),
                 _P.appendAndRemove(Arrays.<Object>asList(1.0)));
-        assertEquals(Arrays.asList(5.0),
+        assertEquals(Arrays.<Object>asList(5.0),
                 _P.appendAndRemove(Arrays.<Object>asList(5.0)));
-        assertEquals(Arrays.asList(1.3),
+        assertEquals(Arrays.<Object>asList(1.3),
                 _P.appendAndRemove(Arrays.<Object>asList(1.3)));
     }
 
@@ -157,17 +157,17 @@ public class BufferingProcessorTest {
         assertNull(_P.appendAndRemove(Arrays.<Object>asList(3.0)));
         assertNull(_P.appendAndRemove(Arrays.<Object>asList(4.0)));
         assertNull(_P.appendAndRemove(Arrays.<Object>asList(5.0)));
-        assertEquals(Arrays.asList(1.0),
+        assertEquals(Arrays.<Object>asList(1.0),
                 _P.appendAndRemove(Arrays.<Object>asList(6.0)));
-        assertEquals(Arrays.asList(2.0),
+        assertEquals(Arrays.<Object>asList(2.0),
                 _P.appendAndRemove(Arrays.<Object>asList(7.0)));
-        assertEquals(Arrays.asList(3.0),
+        assertEquals(Arrays.<Object>asList(3.0),
                 _P.appendAndRemove(Arrays.<Object>asList(8.0)));
-        assertEquals(Arrays.asList(4.0),
+        assertEquals(Arrays.<Object>asList(4.0),
                 _P.appendAndRemove(Arrays.<Object>asList(9.0)));
-        assertEquals(Arrays.asList(5.0),
+        assertEquals(Arrays.<Object>asList(5.0),
                 _P.appendAndRemove(Arrays.<Object>asList(10.0)));
-        assertEquals(Arrays.asList(6.0),
+        assertEquals(Arrays.<Object>asList(6.0),
                 _P.appendAndRemove(Arrays.<Object>asList(11.0)));
     }
 
@@ -175,14 +175,14 @@ public class BufferingProcessorTest {
     public void shouldHandleNullValues() throws Exception {
         _P.setParameter(BufferingProcessor.WINDOW_SIZE, "5");
         assertNull(_P.appendAndRemove(Arrays.<Object>asList(1.0)));
-        assertNull(_P.appendAndRemove(Arrays.<Object>asList(null, null)));
-        assertNull(_P.appendAndRemove(Arrays.<Object>asList(null, null)));
-        assertNull(_P.appendAndRemove(Arrays.<Object>asList(null, null)));
-        assertNull(_P.appendAndRemove(Arrays.<Object>asList(null, null)));
-        assertEquals(Arrays.asList(1.0),
+        assertNull(_P.appendAndRemove(Arrays.asList(null, null)));
+        assertNull(_P.appendAndRemove(Arrays.asList(null, null)));
+        assertNull(_P.appendAndRemove(Arrays.asList(null, null)));
+        assertNull(_P.appendAndRemove(Arrays.asList(null, null)));
+        assertEquals(Arrays.<Object>asList(1.0),
                 _P.appendAndRemove(Arrays.<Object>asList(6.0)));
         assertEquals(Arrays.asList(null, null),
-                _P.appendAndRemove(Arrays.<Object>asList(null, null)));
+                _P.appendAndRemove(Arrays.asList(null, null)));
     }
 
     @Test
@@ -204,9 +204,9 @@ public class BufferingProcessorTest {
         _P.appendAndRemove(Arrays.<Object>asList(2, 3));
         _P.appendAndRemove(Arrays.<Object>asList(3, 4, 5));
 
-        assertEquals(Arrays.asList(1), _P.getBuffer().get(0));
-        assertEquals(Arrays.asList(2, 3), _P.getBuffer().get(1));
-        assertEquals(Arrays.asList(3, 4, 5), _P.getBuffer().get(2));
+        assertEquals(Arrays.<Object>asList(1), _P.getBuffer().get(0));
+        assertEquals(Arrays.<Object>asList(2, 3), _P.getBuffer().get(1));
+        assertEquals(Arrays.<Object>asList(3, 4, 5), _P.getBuffer().get(2));
     }
 
 }

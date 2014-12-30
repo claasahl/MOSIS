@@ -31,9 +31,9 @@ public class LinkAdapterTest {
         assertTrue(_L.push(Arrays.<Object>asList(1)));
         assertTrue(_L.push(Arrays.<Object>asList(42.3)));
         assertTrue(_L.push(Arrays.<Object>asList("hello world")));
-        assertTrue(_L.push(Arrays.<Object>asList((Object) null)));
+        assertTrue(_L.push(Arrays.asList((Object) null)));
         assertTrue(_L.push(Arrays.<Object>asList(-17L)));
-        assertTrue(_L.push(Arrays.<Object>asList(new Object())));
+        assertTrue(_L.push(Arrays.asList(new Object())));
     }
 
     @Test

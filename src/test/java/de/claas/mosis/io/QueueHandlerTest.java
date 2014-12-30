@@ -28,7 +28,7 @@ public class QueueHandlerTest extends DataHandlerTest<Long, QueueHandler<Long>> 
         _H.getQueue().offer(23L);
         _H.getQueue().offer(42L);
         assertEquals((Long) 23L, Utils.process(_H, 1L, 2L));
-        assertEquals((Long) 42L, Utils.process(_H, 23L, (Long) null));
+        assertEquals((Long) 42L, Utils.process(_H, 23L, null));
         assertNull(Utils.process(_H));
         _H.getQueue().offer(9L);
         assertEquals((Long) 9L, Utils.process(_H));

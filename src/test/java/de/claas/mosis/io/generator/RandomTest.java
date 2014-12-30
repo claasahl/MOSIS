@@ -130,10 +130,10 @@ public class RandomTest {
 
     @Test
     public void shouldReturnPredictableRandomNumbers() {
-        assertEquals(0.7309677, Utils.process(_R).doubleValue(), 0.0001);
-        assertEquals(0.2405364, Utils.process(_R).doubleValue(), 0.0001);
-        assertEquals(0.6374174, Utils.process(_R).doubleValue(), 0.0001);
-        assertEquals(0.5504300, Utils.process(_R).doubleValue(), 0.0001);
+        assertEquals(0.7309677, Utils.process(_R), 0.0001);
+        assertEquals(0.2405364, Utils.process(_R), 0.0001);
+        assertEquals(0.6374174, Utils.process(_R), 0.0001);
+        assertEquals(0.5504300, Utils.process(_R), 0.0001);
     }
 
     @Test
@@ -142,8 +142,8 @@ public class RandomTest {
         _R.setParameter(Random.LOWER, "0.5");
         _R.setParameter(Random.UPPER, "0.7");
         for (int i = 0; i < 1000; i++) {
-            assertTrue(Utils.process(_R).doubleValue() >= 0.5);
-            assertTrue(Utils.process(_R).doubleValue() <= 0.7);
+            assertTrue(Utils.process(_R) >= 0.5);
+            assertTrue(Utils.process(_R) <= 0.7);
         }
     }
 

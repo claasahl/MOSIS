@@ -48,7 +48,7 @@ public class DataTest {
         assertNull(d.getAs(KeyNull));
         assertEquals(ValueDouble, d.<Double>getAs(KeyDouble), 0.0001);
         assertEquals(ValueEnum, d.getAs(KeyEnum));
-        assertEquals((Long) ValueLong, d.getAs(KeyLong));
+        assertEquals(ValueLong, d.getAs(KeyLong));
         assertEquals(ValueString, d.getAs(KeyString));
 
     }
@@ -57,7 +57,7 @@ public class DataTest {
     public void shouldNotCastValue() {
         Data d = build();
         @SuppressWarnings("unused")
-        String tmp = d.<String>getAs(KeyDouble);
+        String tmp = d.getAs(KeyDouble);
     }
 
     @Test

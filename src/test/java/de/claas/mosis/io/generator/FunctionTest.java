@@ -175,21 +175,21 @@ public class FunctionTest {
     public void shouldBeSin() {
         double delta = 0.00001;
         _F.setParameter(Function.FUNCTION, "sin(x)");
-        assertEquals(new Double(0), Utils.process(_F, 0.0), delta);
-        assertEquals(new Double(1), Utils.process(_F, Math.PI * 0.5), delta);
-        assertEquals(new Double(0), Utils.process(_F, Math.PI), delta);
-        assertEquals(new Double(-1), Utils.process(_F, Math.PI * 1.5), delta);
-        assertEquals(new Double(0), Utils.process(_F, Math.PI * 2), delta);
+        assertEquals(0d, Utils.process(_F, 0.0), delta);
+        assertEquals(1d, Utils.process(_F, Math.PI * 0.5), delta);
+        assertEquals(0d, Utils.process(_F, Math.PI), delta);
+        assertEquals(-1d, Utils.process(_F, Math.PI * 1.5), delta);
+        assertEquals(0d, Utils.process(_F, Math.PI * 2), delta);
     }
 
     @Test
     public void shouldBeCos() {
         double delta = 0.00001;
         _F.setParameter(Function.FUNCTION, "cos(x)");
-        assertEquals(new Double(1), Utils.process(_F, 0.0), delta);
-        assertEquals(new Double(0), Utils.process(_F, Math.PI * 0.5), delta);
-        assertEquals(new Double(-1), Utils.process(_F, Math.PI), delta);
-        assertEquals(new Double(0), Utils.process(_F, Math.PI * 1.5), delta);
-        assertEquals(new Double(1), Utils.process(_F, Math.PI * 2), delta);
+        assertEquals(1d, Utils.process(_F, 0.0), delta);
+        assertEquals(0d, Utils.process(_F, Math.PI * 0.5), delta);
+        assertEquals(-1d, Utils.process(_F, Math.PI), delta);
+        assertEquals(0d, Utils.process(_F, Math.PI * 1.5), delta);
+        assertEquals(1d, Utils.process(_F, Math.PI * 2), delta);
     }
 }
