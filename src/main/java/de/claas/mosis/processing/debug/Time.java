@@ -20,9 +20,9 @@ import java.util.List;
  */
 public class Time extends DecoratorProcessor<Object, Object> {
 
-    @Parameter("Number of miliseconds the last invocation of the process-method took.")
+    @Parameter("Number of milliseconds the last invocation of the process-method took.")
     public static final String TIME = "time";
-    @Parameter("Total number of miliseconds spend in process-method (since first call of process-method and not just last invocation).")
+    @Parameter("Total number of milliseconds spend in process-method (since first call of process-method and not just last invocation).")
     public static final String TOTAL_TIME = "total time";
     @Parameter("Timestamp of first invocation of process-method.")
     public static final String FIRST_CALL = "first call";

@@ -47,7 +47,7 @@ public abstract class StreamHandlerImplTest {
     }
 
     @Test
-    public void shouldReturnNewOuputStream() throws Exception {
+    public void shouldReturnNewOutputStream() throws Exception {
         OutputStream s1 = _I.getOutputStream();
         OutputStream s2 = _I.getOutputStream();
         assertNotNull(s1);

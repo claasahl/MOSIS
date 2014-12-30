@@ -43,9 +43,9 @@ public class Function extends ProcessorAdapter<Double, Double> {
      * Initializes the class with default values.
      */
     public Function() {
-        _Token = new LinkedList<String>();
-        _Result = new Stack<Double>();
-        _Variables = new Vector<Double>();
+        _Token = new LinkedList<>();
+        _Result = new Stack<>();
+        _Variables = new Vector<>();
 
         addCondition(FUNCTION, new IsValidExpression());
         setParameter(FUNCTION, "1");
@@ -63,7 +63,7 @@ public class Function extends ProcessorAdapter<Double, Double> {
     public void process(List<Double> in, List<Double> out) {
         String expression = getParameter(FUNCTION);
         in = in == null ? new Vector<Double>() : in;
-        out.add(interprete(expression, in));
+        out.add(interpret(expression, in));
     }
 
     /**
@@ -75,7 +75,7 @@ public class Function extends ProcessorAdapter<Double, Double> {
      * @param data       the data for variables
      * @return the result after interpreting a mathematical expression
      */
-    public double interprete(String expression, List<Double> data) {
+    public double interpret(String expression, List<Double> data) {
         _Token.clear();
         _Token.addAll(tokenize(expression));
         _Result.clear();
@@ -100,7 +100,7 @@ public class Function extends ProcessorAdapter<Double, Double> {
     private List<String> tokenize(String expression) {
         expression = expression.replaceAll("\\s", "");
         String regex = "[()*/+\\-x^0-9\\.]|cos|sin";
-        Stack<String> token = new Stack<String>();
+        Stack<String> token = new Stack<>();
         token.add(expression);
         while (token.peek().length() > 1) {
             String tmp = token.pop();
@@ -252,7 +252,7 @@ public class Function extends ProcessorAdapter<Double, Double> {
         @Override
         public boolean complies(String parameter, String value) {
             try {
-                interprete(value, new Vector<Double>());
+                interpret(value, new Vector<Double>());
                 return true;
             } catch (Exception e) {
                 return false;

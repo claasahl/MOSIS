@@ -73,12 +73,7 @@ public class CommaSeparatedValuesTest extends
     @Override
     @Test
     public void shouldRead() throws Exception {
-        StringBuilder sb = new StringBuilder();
-        sb.append("\"attr1\",\"attr2\"\r\n");
-        sb.append("\"test1\",\"world1\"\r\n");
-        sb.append("\"test2\",\"world2\"\r\n");
-
-        Data data = read(sb.toString());
+        Data data = read("\"attr1\",\"attr2\"\r\n" + "\"test1\",\"world1\"\r\n" + "\"test2\",\"world2\"\r\n");
         assertEquals("test1", data.get("attr1"));
         assertEquals("world1", data.get("attr2"));
         data = Utils.process(_H);
@@ -179,7 +174,7 @@ public class CommaSeparatedValuesTest extends
     }
 
     @Test
-    public void shouldReadWithDifferentSeperator() throws Exception {
+    public void shouldReadWithDifferentSeparator() throws Exception {
         _H.setParameter(CommaSeparatedValues.SEPARATOR, "|");
         Data data = read("attr1|attr2\n\"hello\"|world\n");
         assertEquals("hello", data.get("attr1"));
@@ -187,7 +182,7 @@ public class CommaSeparatedValuesTest extends
     }
 
     @Test
-    public void shouldWriteWithDifferentSeperator() throws Exception {
+    public void shouldWriteWithDifferentSeparator() throws Exception {
         _H.setParameter(CommaSeparatedValues.SEPARATOR, ";");
         Data data = new Data();
         data.put("attr1", "hello");

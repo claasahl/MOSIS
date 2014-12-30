@@ -27,7 +27,7 @@ public class SerializationTest extends StreamHandlerTest<Object, Serialization<O
 
     @Override
     protected Serialization<Object> build() throws Exception {
-        return new Serialization<Object>();
+        return new Serialization<>();
     }
 
     @Before

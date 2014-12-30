@@ -40,7 +40,7 @@ public class RelationTest {
 
     @Parameters
     public static Collection<?> implementations() {
-        List<Object> impl = new Vector<Object>();
+        List<Object> impl = new Vector<>();
         impl.add(new Object[]{Relation.LastChanged.class, new Object[]{}});
         impl.add(new Object[]{Relation.ParameterHistory.class,
                 new Object[]{}});

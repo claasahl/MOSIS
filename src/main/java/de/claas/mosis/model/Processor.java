@@ -23,7 +23,7 @@ import java.util.List;
  */
 @Documentation(
         purpose = "It is intended to provide a unified interface for processing time series data as well as getting and setting parameters.",
-        description = "This represents the interface that all modules within the framework adhere. Here all basic functionalities that a module must implement are listed and described. Most notably, it provides a common iterface for processing time series data as well as handling of parameters. When adding (new) modules to the framework, this interface must be implemented directly or indirectly by another (partial) implementation (e.g. ProcessorAdapter, BufferingProcessor, ComparingProcessor, etc.).",
+        description = "This represents the interface that all modules within the framework adhere. Here all basic functionalities that a module must implement are listed and described. Most notably, it provides a common interface for processing time series data as well as handling of parameters. When adding (new) modules to the framework, this interface must be implemented directly or indirectly by another (partial) implementation (e.g. ProcessorAdapter, BufferingProcessor, ComparingProcessor, etc.).",
         author = "Claas Ahlrichs",
         noOutputData = "Refer to concrete implementations.")
 public interface Processor<I, O> extends Configurable {

@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
  * checking the validity of configuration parameters and their corresponding
  * values. Implementing classes may want to verify that the parameter, value and
  * / or both satisfy certain criteria (e.g. such as a value being numeric or a
- * parameter being properly formated).
+ * parameter being properly formatted).
  * <p/>
  * <b>Note:</b> It is highly recommended to override {@link #equals(Object)},
  * {@link #hashCode()} and {@link #toString()}. They are used for management
@@ -66,16 +66,7 @@ public interface Condition {
 
         @Override
         public boolean complies(String parameter, String value) {
-            if (_RegExParameter != null
-                    && (parameter == null || !parameter
-                    .matches(_RegExParameter))) {
-                return false;
-            }
-            if (_RegExValue != null
-                    && (value == null || !value.matches(_RegExValue))) {
-                return false;
-            }
-            return true;
+            return !(_RegExParameter != null && (parameter == null || !parameter.matches(_RegExParameter))) && !(_RegExValue != null && (value == null || !value.matches(_RegExValue)));
         }
 
         @Override
@@ -174,8 +165,7 @@ public interface Condition {
 
         @Override
         public boolean complies(String parameter, String value) {
-            return value == null ? false
-                    : Double.parseDouble(value) > _Threshold;
+            return value != null && Double.parseDouble(value) > _Threshold;
         }
 
         @Override
@@ -220,8 +210,7 @@ public interface Condition {
 
         @Override
         public boolean complies(String parameter, String value) {
-            return value == null ? false
-                    : Double.parseDouble(value) >= _Threshold;
+            return value != null && Double.parseDouble(value) >= _Threshold;
         }
 
         @Override
@@ -266,8 +255,7 @@ public interface Condition {
 
         @Override
         public boolean complies(String parameter, String value) {
-            return value == null ? false
-                    : Double.parseDouble(value) < _Threshold;
+            return value != null && Double.parseDouble(value) < _Threshold;
         }
 
         @Override
@@ -312,8 +300,7 @@ public interface Condition {
 
         @Override
         public boolean complies(String parameter, String value) {
-            return value == null ? false
-                    : Double.parseDouble(value) <= _Threshold;
+            return value != null && Double.parseDouble(value) <= _Threshold;
         }
 
         @Override
@@ -455,7 +442,7 @@ public interface Condition {
 
         @Override
         public boolean complies(String parameter, String value) {
-            return value == null ? false : new File(value).exists();
+            return value != null && new File(value).exists();
         }
 
         @Override

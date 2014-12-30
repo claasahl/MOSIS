@@ -44,7 +44,7 @@ public class ParameterHistoryTest {
     public void shouldAddParameter() {
         Relation r = build();
         assertFalse(_Dummy.getParameters().contains(H));
-        r.compute(_Dummy, P, "eins");
+        r.compute(_Dummy, P, "tree");
         assertTrue(_Dummy.getParameters().contains(H));
     }
 

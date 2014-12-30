@@ -73,10 +73,10 @@ public class RepeatedOneShotLevelOrder implements Iterator<Node> {
             return;
         }
 
-        for (Node succ : _Nodes.get(index).getSuccessors()) {
-            if (!_Visited.contains(succ)) {
-                _Visited.add(succ);
-                _Nodes.add(succ);
+        for (Node successor : _Nodes.get(index).getSuccessors()) {
+            if (!_Visited.contains(successor)) {
+                _Visited.add(successor);
+                _Nodes.add(successor);
             }
         }
         populate(index + 1);

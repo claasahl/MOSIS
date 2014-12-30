@@ -44,7 +44,7 @@ public class ConfigurableAdapterTest {
 
     @Parameters
     public static Collection<?> implementations() {
-        List<Object> impl = new Vector<Object>();
+        List<Object> impl = new Vector<>();
         impl.add(new Object[]{ConfigurableAdapter.class});
         impl.add(new Object[]{LinkAdapter.class});
         impl.add(new Object[]{UnbiasedLink.class});

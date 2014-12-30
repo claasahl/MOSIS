@@ -24,13 +24,13 @@ import java.util.Vector;
 public class ConfigurableAdapter extends ObservableAdapter implements
         Configurable, Observable {
 
-    private final Map<String, String> _Parameters = new HashMap<String, String>();
-    private final Map<String, List<Condition>> _Conditions = new HashMap<String, List<Condition>>();
-    private final List<Relation> _Relations = new Vector<Relation>();
+    private final Map<String, String> _Parameters = new HashMap<>();
+    private final Map<String, List<Condition>> _Conditions = new HashMap<>();
+    private final List<Relation> _Relations = new Vector<>();
 
     @Override
     public List<String> getParameters() {
-        return new Vector<String>(_Parameters.keySet());
+        return new Vector<>(_Parameters.keySet());
     }
 
     @Override
@@ -152,7 +152,7 @@ public class ConfigurableAdapter extends ObservableAdapter implements
     protected void addCondition(String parameter, Condition condition) {
         List<Condition> conditions = _Conditions.get(parameter);
         if (conditions == null) {
-            conditions = new Vector<Condition>();
+            conditions = new Vector<>();
             _Conditions.put(parameter, conditions);
         }
         conditions.add(condition);

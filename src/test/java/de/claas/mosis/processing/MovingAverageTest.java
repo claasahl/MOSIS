@@ -53,7 +53,7 @@ public class MovingAverageTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void parameterModeMustInWhitelist() throws Exception {
+    public void parameterModeMustInWhiteList() throws Exception {
         try {
             _P.setParameter(MovingAverage.MODE,
                     MovingAverage.MODE_USE_ACTUAL_SIZE);

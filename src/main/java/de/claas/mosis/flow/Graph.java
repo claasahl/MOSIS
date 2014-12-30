@@ -29,8 +29,8 @@ public class Graph {
      * Initializes the class with default values.
      */
     public Graph() {
-        _Nodes = new HashMap<Processor<?, ?>, Node>();
-        _Sources = new HashSet<Node>();
+        _Nodes = new HashMap<>();
+        _Sources = new HashSet<>();
     }
 
     /**

@@ -88,7 +88,7 @@ public abstract class AbstractTextFormatTest<S, T extends AbstractTextFormat<S>>
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void parameterBufferSizeMustBePostive() throws Exception {
+    public void parameterBufferSizeMustBePositive() throws Exception {
         try {
             _H.setParameter(AbstractTextFormat.BUFFER_SIZE, "1");
             _H.setParameter(AbstractTextFormat.BUFFER_SIZE, "12");
@@ -166,13 +166,13 @@ public abstract class AbstractTextFormatTest<S, T extends AbstractTextFormat<S>>
     public void shouldHandleInsufficientBufferSizeAndPreserveEndOfLine() throws Exception {
         _H.setParameter(AbstractTextFormat.BUFFER_SIZE, "10");
         BufferedOutputStream sO = _H.getOutputStream();
-        sO.write("abc\r\ndef\nghijkl\n\rmnop".getBytes());
+        sO.write("abc\r\ndef\nlaptop\n\rtree".getBytes());
         sO.close();
 
         assertEquals("abc\r\n", _H.readLine(true));
         assertEquals("def\n", _H.readLine(true));
-        assertEquals("ghijkl\n\r", _H.readLine(true));
-        assertEquals("mnop", _H.readLine(true));
+        assertEquals("laptop\n\r", _H.readLine(true));
+        assertEquals("tree", _H.readLine(true));
         assertNull(_H.readLine(true));
     }
 
@@ -180,13 +180,13 @@ public abstract class AbstractTextFormatTest<S, T extends AbstractTextFormat<S>>
     public void shouldHandleInsufficientBufferSize() throws Exception {
         _H.setParameter(AbstractTextFormat.BUFFER_SIZE, "10");
         BufferedOutputStream sO = _H.getOutputStream();
-        sO.write("abc\r\ndef\nghijkl\n\rmnop".getBytes());
+        sO.write("abc\r\ndef\nlaptop\n\rtree".getBytes());
         sO.close();
 
         assertEquals("abc", _H.readLine(false));
         assertEquals("def", _H.readLine(false));
-        assertEquals("ghijkl", _H.readLine(false));
-        assertEquals("mnop", _H.readLine(false));
+        assertEquals("laptop", _H.readLine(false));
+        assertEquals("tree", _H.readLine(false));
         assertNull(_H.readLine(false));
     }
 
@@ -195,13 +195,13 @@ public abstract class AbstractTextFormatTest<S, T extends AbstractTextFormat<S>>
     public void shouldHandleIncompleteEndOfLineAndPreserveEndOfLine() throws Exception {
         _H.setParameter(AbstractTextFormat.BUFFER_SIZE, "4");
         BufferedOutputStream sO = _H.getOutputStream();
-        sO.write("abc\r\ndef\nghijkl\n\rmnop".getBytes());
+        sO.write("abc\r\ndef\nlaptop\n\rtree".getBytes());
         sO.close();
 
         assertEquals("abc\r\n", _H.readLine(true));
         assertEquals("def\n", _H.readLine(true));
-        assertEquals("ghijkl\n\r", _H.readLine(true));
-        assertEquals("mnop", _H.readLine(true));
+        assertEquals("laptop\n\r", _H.readLine(true));
+        assertEquals("tree", _H.readLine(true));
         assertNull(_H.readLine(true));
     }
 
@@ -209,13 +209,13 @@ public abstract class AbstractTextFormatTest<S, T extends AbstractTextFormat<S>>
     public void shouldHandleIncompleteEndOfLine() throws Exception {
         _H.setParameter(AbstractTextFormat.BUFFER_SIZE, "4");
         BufferedOutputStream sO = _H.getOutputStream();
-        sO.write("abc\r\ndef\nghijkl\n\rmnop".getBytes());
+        sO.write("abc\r\ndef\nlaptop\n\rtree".getBytes());
         sO.close();
 
         assertEquals("abc", _H.readLine(false));
         assertEquals("def", _H.readLine(false));
-        assertEquals("ghijkl", _H.readLine(false));
-        assertEquals("mnop", _H.readLine(false));
+        assertEquals("laptop", _H.readLine(false));
+        assertEquals("tree", _H.readLine(false));
         assertNull(_H.readLine(false));
     }
 

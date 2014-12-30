@@ -25,10 +25,10 @@ public abstract class Node {
      * Initializes the class with default values.
      */
     public Node() {
-        _Predecessors = new HashMap<Node, Link>();
-        _Successors = new HashMap<Node, Link>();
-        _P = new Vector<Node>();
-        _S = new Vector<Node>();
+        _Predecessors = new HashMap<>();
+        _Successors = new HashMap<>();
+        _P = new Vector<>();
+        _S = new Vector<>();
     }
 
     /**

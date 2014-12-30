@@ -28,7 +28,7 @@ public class ForwardTest {
 
     @Before
     public void before() throws Exception {
-        _P = new Forward<Object>();
+        _P = new Forward<>();
         _P.setUp();
     }
 

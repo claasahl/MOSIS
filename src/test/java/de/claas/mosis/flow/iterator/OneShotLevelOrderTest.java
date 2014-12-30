@@ -26,8 +26,8 @@ public class OneShotLevelOrderTest extends IteratorTest {
         _N4.addSuccessor(_N1, new UnbiasedLink());
 
         List<List<Node>> level = new Vector<>();
-        level.add(new Vector<Node>(Arrays.asList(_N2, _N3, _N4)));
-        level.add(new Vector<Node>(Arrays.asList(_N1)));
+        level.add(new Vector<>(Arrays.asList(_N2, _N3, _N4)));
+        level.add(new Vector<>(Arrays.asList(_N1)));
         compare(build(Arrays.asList(_N2, _N3, _N4)), level, false);
     }
 
@@ -38,8 +38,8 @@ public class OneShotLevelOrderTest extends IteratorTest {
         _N1.addSuccessor(_N4, new UnbiasedLink());
 
         List<List<Node>> level = new Vector<>();
-        level.add(new Vector<Node>(Arrays.asList(_N1)));
-        level.add(new Vector<Node>(Arrays.asList(_N2, _N3, _N4)));
+        level.add(new Vector<>(Arrays.asList(_N1)));
+        level.add(new Vector<>(Arrays.asList(_N2, _N3, _N4)));
         compare(build(Arrays.asList(_N1)), level, false);
     }
 
@@ -49,8 +49,8 @@ public class OneShotLevelOrderTest extends IteratorTest {
         _N2.addSuccessor(_N1, new UnbiasedLink());
 
         List<List<Node>> level = new Vector<>();
-        level.add(new Vector<Node>(Arrays.asList(_N1)));
-        level.add(new Vector<Node>(Arrays.asList(_N2)));
+        level.add(new Vector<>(Arrays.asList(_N1)));
+        level.add(new Vector<>(Arrays.asList(_N2)));
         compare(build(Arrays.asList(_N1)), level, false);
     }
 
@@ -62,9 +62,9 @@ public class OneShotLevelOrderTest extends IteratorTest {
         _N3.addSuccessor(_N4, new UnbiasedLink());
 
         List<List<Node>> level = new Vector<>();
-        level.add(new Vector<Node>(Arrays.asList(_N1)));
-        level.add(new Vector<Node>(Arrays.asList(_N2, _N3)));
-        level.add(new Vector<Node>(Arrays.asList(_N4)));
+        level.add(new Vector<>(Arrays.asList(_N1)));
+        level.add(new Vector<>(Arrays.asList(_N2, _N3)));
+        level.add(new Vector<>(Arrays.asList(_N4)));
         compare(build(Arrays.asList(_N1)), level, false);
     }
 

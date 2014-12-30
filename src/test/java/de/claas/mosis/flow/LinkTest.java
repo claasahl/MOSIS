@@ -42,7 +42,7 @@ public class LinkTest {
 
     @Parameters
     public static Collection<?> implementations() {
-        List<Object> impl = new Vector<Object>();
+        List<Object> impl = new Vector<>();
         impl.add(new Object[]{
                 LinkAdapter.class,
                 new Object[]{null, -23, 1L, 42.3, "hello world", new Object()}});
@@ -63,7 +63,7 @@ public class LinkTest {
     @Test
     public void shouldBeEmpty() throws Exception {
         assertTrue(_L.isEmpty());
-        _L.push(new Vector<Object>());
+        _L.push(new Vector<>());
         assertTrue(_L.isEmpty());
     }
 

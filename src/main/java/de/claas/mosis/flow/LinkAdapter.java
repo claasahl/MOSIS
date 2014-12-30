@@ -23,7 +23,7 @@ public class LinkAdapter extends ConfigurableAdapter implements Link {
      * Initializes the class with default values.
      */
     public LinkAdapter() {
-        _Buffer = new LinkedList<Object>();
+        _Buffer = new LinkedList<>();
     }
 
     @Override

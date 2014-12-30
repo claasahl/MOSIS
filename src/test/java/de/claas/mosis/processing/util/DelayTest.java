@@ -25,7 +25,7 @@ public class DelayTest {
 
     @Before
     public void before() throws Exception {
-        _P = new Delay<Object>();
+        _P = new Delay<>();
         _P.setParameter(Delay.WINDOW_SIZE, "2");
         _P.setUp();
     }
@@ -62,7 +62,7 @@ public class DelayTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void parameterPortToUseMustBePostive() {
+    public void parameterPortToUseMustBePositive() {
         try {
             _P.setParameter(Distance.PORT_TO_USE, "0");
             _P.setParameter(Distance.PORT_TO_USE, "12");

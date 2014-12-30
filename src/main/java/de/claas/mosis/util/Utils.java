@@ -32,7 +32,7 @@ public abstract class Utils {
     @SafeVarargs
     public static <I, O> O process(Processor<I, O> p, I... in) {
         @SuppressWarnings("unchecked")
-        List<O> out = (List<O>) new Vector<Object>();
+        List<O> out = (List<O>) new Vector<>();
         p.process(in == null ? null : Arrays.asList(in), out);
         return (out.isEmpty() ? null : out.get(0));
     }
@@ -50,7 +50,7 @@ public abstract class Utils {
     @SafeVarargs
     public static <I, O> List<O> processAll(Processor<I, O> p, I... in) {
         @SuppressWarnings("unchecked")
-        List<O> out = (List<O>) new Vector<Object>();
+        List<O> out = (List<O>) new Vector<>();
         p.process(in == null ? null : Arrays.asList(in), out);
         return out;
     }

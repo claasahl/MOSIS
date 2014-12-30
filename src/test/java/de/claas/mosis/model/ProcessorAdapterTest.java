@@ -53,7 +53,7 @@ public class ProcessorAdapterTest {
 
     @Parameters
     public static Collection<?> implementations() {
-        List<Object> impl = new Vector<Object>();
+        List<Object> impl = new Vector<>();
         impl.add(new Object[]{Null.class});
         impl.add(new Object[]{SystemOut.class});
         impl.add(new Object[]{Time.class});

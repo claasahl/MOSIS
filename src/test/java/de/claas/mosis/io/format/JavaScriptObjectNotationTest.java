@@ -119,7 +119,7 @@ public class JavaScriptObjectNotationTest extends
 
     @Test
     public void shouldWriteArray() throws Exception {
-        List<Object> array = new Vector<Object>();
+        List<Object> array = new Vector<>();
         array.add("abc");
         array.add(-2.3);
         array.add(12);
@@ -173,19 +173,19 @@ public class JavaScriptObjectNotationTest extends
 
     @Test
     public void shouldReadNestedObject() throws Exception {
-        Data data = read("{\"temp\":{\"string\":\"moin\"}}\r\n");
+        Data data = read("{\"temp\":{\"string\":\"tree\"}}\r\n");
         assertTrue(data.containsKey("temp"));
         Data temp = data.getAs("temp");
-        assertEquals("moin", temp.get("string"));
+        assertEquals("tree", temp.get("string"));
     }
 
     @Test
     public void shouldWriteNestedObject() throws Exception {
         Data temp = new Data();
-        temp.put("string", "moin");
+        temp.put("string", "tree");
         Data data = new Data();
         data.put("temp", temp);
-        assertEquals("{\"temp\":{\"string\":\"moin\"}}", write(data));
+        assertEquals("{\"temp\":{\"string\":\"tree\"}}", write(data));
     }
 
     /**

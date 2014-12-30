@@ -18,7 +18,7 @@ import java.util.Queue;
 /**
  * The class {@link AbstractTextFormat}. It is intended to provide a common
  * (partial) implementation of the {@link StreamHandler} interface for
- * line-based data formated (e.g. CSV, ARFF, JSON, etc.). This
+ * line-based data formatted (e.g. CSV, ARFF, JSON, etc.). This
  * {@link StreamHandler} allows to read and write lines of text (i.e.
  * {@link String}) from any of the {@link StreamHandlerImpl} implementations
  * (e.g. {@link FileImpl} or {@link UrlImpl}).

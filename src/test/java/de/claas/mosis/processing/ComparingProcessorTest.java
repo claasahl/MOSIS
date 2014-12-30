@@ -47,7 +47,7 @@ public class ComparingProcessorTest {
 
     @Parameters
     public static Collection<?> implementations() {
-        List<Object> impl = new Vector<Object>();
+        List<Object> impl = new Vector<>();
         impl.add(new Object[]{Distance.class});
         return impl;
     }
@@ -85,7 +85,7 @@ public class ComparingProcessorTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void parameterPortToUseMustBePostive() throws Exception {
+    public void parameterPortToUseMustBePositive() throws Exception {
         try {
             _P.setParameter(ComparingProcessor.PORT_TO_USE, "0");
             _P.setParameter(ComparingProcessor.PORT_TO_USE, "12");

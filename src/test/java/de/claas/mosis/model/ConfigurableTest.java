@@ -39,7 +39,7 @@ public class ConfigurableTest {
 
     @Parameters
     public static Collection<?> implementations() {
-        List<Object> impl = new Vector<Object>();
+        List<Object> impl = new Vector<>();
         impl.addAll(ConfigurableAdapterTest.implementations());
         return impl;
     }

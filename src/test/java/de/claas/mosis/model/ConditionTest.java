@@ -40,10 +40,10 @@ public class ConditionTest {
 
     @Parameters
     public static Collection<?> implementations() {
-        List<String> list = new Vector<String>();
+        List<String> list = new Vector<>();
         list.add("a");
         list.add("c");
-        List<Object> impl = new Vector<Object>();
+        List<Object> impl = new Vector<>();
         impl.add(new Object[]{Condition.ClassExists.class, new Object[0]});
         impl.add(new Object[]{Condition.FileExists.class, new Object[0]});
         impl.add(new Object[]{Condition.IsBoolean.class, new Object[0]});

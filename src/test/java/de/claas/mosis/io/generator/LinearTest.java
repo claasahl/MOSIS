@@ -64,7 +64,7 @@ public class LinearTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void parameterMMustBeNummeric() throws Exception {
+    public void parameterMMustBeNumeric() throws Exception {
         try {
             _L.setParameter(Linear.M, "0.0");
             _L.setParameter(Linear.M, "-23");
@@ -81,7 +81,7 @@ public class LinearTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void parameterXMustBeNummeric() throws Exception {
+    public void parameterXMustBeNumeric() throws Exception {
         try {
             _L.setParameter(Linear.X, "0.0");
             _L.setParameter(Linear.X, "-23");
@@ -98,7 +98,7 @@ public class LinearTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void parameterBMustBeNummeric() throws Exception {
+    public void parameterBMustBeNumeric() throws Exception {
         try {
             _L.setParameter(Linear.B, "0.0");
             _L.setParameter(Linear.B, "-23");
@@ -115,7 +115,7 @@ public class LinearTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void parameterStepMustBeNummeric() throws Exception {
+    public void parameterStepMustBeNumeric() throws Exception {
         try {
             _L.setParameter(Linear.STEP, "0.0");
             _L.setParameter(Linear.STEP, "-23");

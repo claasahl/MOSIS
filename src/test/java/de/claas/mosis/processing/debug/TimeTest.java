@@ -80,7 +80,7 @@ public class TimeTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void parameterTimeMustBePostive() throws Exception {
+    public void parameterTimeMustBePositive() throws Exception {
         try {
             _P.setParameter(Time.TIME, "0");
             _P.setParameter(Time.TIME, "12");
@@ -107,7 +107,7 @@ public class TimeTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void parameterFirstCallMustBePostive() throws Exception {
+    public void parameterFirstCallMustBePositive() throws Exception {
         try {
             _P.setParameter(Time.FIRST_CALL, "0");
             _P.setParameter(Time.FIRST_CALL, "12");
@@ -134,7 +134,7 @@ public class TimeTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void parameterLastCallMustBePostive() throws Exception {
+    public void parameterLastCallMustBePositive() throws Exception {
         try {
             _P.setParameter(Time.LAST_CALL, "0");
             _P.setParameter(Time.LAST_CALL, "12");

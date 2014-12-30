@@ -102,7 +102,7 @@ public class FunctionTest {
     }
 
     @Test
-    public void shouldAddAndSubtrack() {
+    public void shouldAddAndSubtract() {
         _F.setParameter(Function.FUNCTION, "0.5+3.5-4");
         assertEquals(new Double(0), Utils.process(_F));
         _F.setParameter(Function.FUNCTION, "3.33++6.67");

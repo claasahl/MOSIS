@@ -27,7 +27,7 @@ public class CompositeNodeTest extends NodeTest {
         _Source = new PlainNode(new Null());
         _Sink = new PlainNode(new NoOperation());
         _Source.addSuccessor(_Sink, new UnbiasedLink());
-        HashSet<Node> sources = new HashSet<Node>();
+        HashSet<Node> sources = new HashSet<>();
         sources.add(_Source);
         return new CompositeNode(sources, _Sink);
     }

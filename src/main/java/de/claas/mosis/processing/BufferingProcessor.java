@@ -20,7 +20,7 @@ import java.util.Vector;
         purpose = "It is intended to buffer incoming data (in an ordered fashion) and provide access to it.",
         description = "It is a partial implementation of a module which provides a sliding window. It is intended to buffer incoming data (in an ordered fashion) and provide access to it.",
         author = "Claas Ahlrichs",
-        noOutputData = "Depends on actual implemtation (this is a partial implementation).")
+        noOutputData = "Depends on actual implementation (this is a partial implementation).")
 public abstract class BufferingProcessor<I, O> extends ProcessorAdapter<I, O> {
 
     @Parameter("Number of samples being buffered.")
@@ -50,7 +50,7 @@ public abstract class BufferingProcessor<I, O> extends ProcessorAdapter<I, O> {
      */
     protected List<List<I>> getBuffer() {
         if (_Window == null) {
-            _Window = new Vector<List<I>>();
+            _Window = new Vector<>();
         }
         return _Window;
     }
@@ -82,7 +82,7 @@ public abstract class BufferingProcessor<I, O> extends ProcessorAdapter<I, O> {
             if (isBufferFull()) {
                 removed = getBuffer().remove(0);
             }
-            getBuffer().add(new Vector<I>(data));
+            getBuffer().add(new Vector<>(data));
             return removed;
         }
     }

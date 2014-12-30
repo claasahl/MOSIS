@@ -35,7 +35,7 @@ public class StandardInputOutputImplTest extends StreamHandlerImplTest {
 
     @Override
     @Test
-    public void shouldReturnNewOuputStream() throws Exception {
+    public void shouldReturnNewOutputStream() throws Exception {
         // INFO: System.out-stream does not change
         OutputStream s1 = _I.getOutputStream();
         OutputStream s2 = _I.getOutputStream();

@@ -54,10 +54,10 @@ public class OneShotLevelOrder implements Iterator<Node> {
     @Override
     public Node next() {
         Node next = _Nodes.poll();
-        for (Node succ : next.getSuccessors()) {
-            if (!_Visited.contains(succ)) {
-                _Visited.add(succ);
-                _Nodes.add(succ);
+        for (Node successor : next.getSuccessors()) {
+            if (!_Visited.contains(successor)) {
+                _Visited.add(successor);
+                _Nodes.add(successor);
             }
         }
         return next;

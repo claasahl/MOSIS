@@ -84,7 +84,7 @@ public abstract class StreamHandlerTest<S, T extends StreamHandler<S>> extends
     }
 
     @Test
-    public void shouldCacheOuputStream() throws Exception {
+    public void shouldCacheOutputStream() throws Exception {
         OutputStream s1 = _H.getOutputStream();
         OutputStream s2 = _H.getOutputStream();
         assertNotNull(s1);

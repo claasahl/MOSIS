@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class MovingAverage extends BufferingProcessor<Double, Double> {
 
-    @Parameter("Mode of operation. Defines how the moving average is calculated (if at all) when the buffer is not entirly filled.")
+    @Parameter("Mode of operation. Defines how the moving average is calculated (if at all) when the buffer is not entirely filled.")
     public static final String MODE = "mode";
     public static final String MODE_USE_ACTUAL_SIZE = "use actual size";
     public static final String MODE_USE_BUFFER_SIZE = "use buffer size";

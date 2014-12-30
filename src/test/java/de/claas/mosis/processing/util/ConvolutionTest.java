@@ -100,7 +100,7 @@ public class ConvolutionTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void parameterPortToUseMustBePostive() throws Exception {
+    public void parameterPortToUseMustBePositive() throws Exception {
         try {
             _P.setParameter(Convolution.PORT_TO_USE, "0");
             _P.setParameter(Convolution.PORT_TO_USE, "12");
@@ -126,7 +126,7 @@ public class ConvolutionTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void parameterDefaultValueMustBeNummeric() throws Exception {
+    public void parameterDefaultValueMustBeNumeric() throws Exception {
         try {
             _P.setParameter(Convolution.DEFAULT_VALUE, "0.0");
             _P.setParameter(Convolution.DEFAULT_VALUE, "-23");

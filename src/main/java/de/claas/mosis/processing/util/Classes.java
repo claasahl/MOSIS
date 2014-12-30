@@ -38,7 +38,7 @@ public class Classes extends ProcessorAdapter<Object, String> {
      * Initializes the class with default values.
      */
     public Classes() {
-        packages = new HashSet<String>();
+        packages = new HashSet<>();
         addCondition(CLASSPATH, new Condition.IsNotNull());
         setParameter(CLASSPATH, System.getProperty("java.class.path"));
         addCondition(SEPARATOR, new Condition.IsNotNull());
@@ -61,7 +61,7 @@ public class Classes extends ProcessorAdapter<Object, String> {
         if (file.isDirectory()) {
             // "root" is a regular directory
             for (File f : file.listFiles()) {
-                if (isClassfile(f.getName())) {
+                if (isClassFile(f.getName())) {
                     String name = packageName + sep + f.getName();
                     name = name.substring(0, name.length() - 6);
                     name = name.replace(sep, ".");
@@ -83,7 +83,7 @@ public class Classes extends ProcessorAdapter<Object, String> {
                         file));
                 JarEntry entry;
                 while ((entry = jar.getNextJarEntry()) != null) {
-                    if (isClassfile(entry.getName())) {
+                    if (isClassFile(entry.getName())) {
                         String name = entry.getName();
                         name = name.substring(0, name.length() - 6);
                         name = name.replace(sep, ".");
@@ -104,7 +104,7 @@ public class Classes extends ProcessorAdapter<Object, String> {
      * @param name the (presumably) class-file
      * @return {@code true} if it is a class-file
      */
-    private boolean isClassfile(String name) {
+    private boolean isClassFile(String name) {
         return name.toLowerCase().endsWith(".class");
     }
 

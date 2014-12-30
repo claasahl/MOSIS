@@ -17,7 +17,7 @@ public class QueueHandlerTest extends DataHandlerTest<Long, QueueHandler<Long>> 
 
     @Override
     protected QueueHandler<Long> build() throws Exception {
-        return new QueueHandler<Long>();
+        return new QueueHandler<>();
     }
 
     @Override

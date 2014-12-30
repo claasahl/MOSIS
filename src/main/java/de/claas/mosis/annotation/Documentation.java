@@ -46,7 +46,7 @@ public @interface Documentation {
     public String[] keywords() default {};
 
     /**
-     * Returns the author(s) of the annotated class. The author's fullname and
+     * Returns the author(s) of the annotated class. The author's full name and
      * e-mail address will typically contained within this field.
      *
      * @return the author(s) of the annotated class

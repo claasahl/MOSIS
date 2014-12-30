@@ -56,9 +56,9 @@ public class BreakOut extends DecoratorProcessor<Object, Object> {
     @Override
     public void process(List<Object> in, List<Object> out) {
         _Calls++;
-        _Input = in == null ? null : new Vector<Object>(in);
+        _Input = in == null ? null : new Vector<>(in);
         super.process(in, out);
-        _Output = out == null ? null : new Vector<Object>(out);
+        _Output = out == null ? null : new Vector<>(out);
     }
 
 }

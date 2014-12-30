@@ -45,7 +45,7 @@ public class ProcessorTest {
 
     @Parameters
     public static Collection<?> implementations() {
-        List<Object> impl = new Vector<Object>();
+        List<Object> impl = new Vector<>();
         impl.addAll(ProcessorAdapterTest.implementations());
         return impl;
     }

@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class Sleep extends DecoratorProcessor<Object, Object> {
 
-    @Parameter("Number of miliseconds that the invocation of the process-method is delayed.")
+    @Parameter("Number of milliseconds that the invocation of the process-method is delayed.")
     public static final String DELAY = "delay";
 
     /**

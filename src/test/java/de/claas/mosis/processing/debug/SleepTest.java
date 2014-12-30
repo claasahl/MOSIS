@@ -69,7 +69,7 @@ public class SleepTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void parameterDelayMustBePostive() throws Exception {
+    public void parameterDelayMustBePositive() throws Exception {
         try {
             _P.setParameter(Sleep.DELAY, "0");
             _P.setParameter(Sleep.DELAY, "12");

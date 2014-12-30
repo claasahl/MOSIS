@@ -78,7 +78,7 @@ public class RandomTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void parameterLowerMustBeNummeric() throws Exception {
+    public void parameterLowerMustBeNumeric() throws Exception {
         _R.setParameter(Random.SEED, Long.toString(System.currentTimeMillis()));
         _R.setParameter(Random.UPPER, Double.toString(Double.MAX_VALUE));
         try {
@@ -98,7 +98,7 @@ public class RandomTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void parameterUpperMustBeNummeric() throws Exception {
+    public void parameterUpperMustBeNumeric() throws Exception {
         _R.setParameter(Random.SEED, Long.toString(System.currentTimeMillis()));
         _R.setParameter(Random.LOWER, Double.toString(Double.MIN_VALUE));
         try {

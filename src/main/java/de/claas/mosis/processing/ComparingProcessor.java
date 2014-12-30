@@ -18,7 +18,7 @@ import de.claas.mosis.processing.util.Delay;
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
 @Documentation(
-        purpose = "It provides the ability to compare incoming data samples to previos ones.",
+        purpose = "It provides the ability to compare incoming data samples to previous ones.",
         description = "It is a partial implementation of the main interface (i.e. Processor) which buffers a single sample. The idea is to provide the ability to compare an incoming sample to the previous sample without having to use a BufferingProcessor module.",
         author = "Claas Ahlrichs",
         noOutputData = "Refer to concrete implementations.")

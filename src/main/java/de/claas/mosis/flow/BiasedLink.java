@@ -63,7 +63,7 @@ public class BiasedLink extends LinkAdapter {
 
         @Override
         public boolean equals(Object obj) {
-            return obj == null ? false : getClass().equals(obj.getClass());
+            return obj != null && getClass().equals(obj.getClass());
         }
     }
 

@@ -32,8 +32,7 @@ public class PipedImpl extends StreamHandlerImpl {
     public OutputStream getOutputStream() throws IOException {
         if (_PipeOut == null) {
             _PipeIn = new PipedInputStream();
-            PipedOutputStream pipe = new PipedOutputStream(_PipeIn);
-            return pipe;
+            return new PipedOutputStream(_PipeIn);
         } else {
             PipedOutputStream pipe = _PipeOut;
             _PipeOut = null;

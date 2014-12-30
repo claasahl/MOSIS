@@ -49,7 +49,7 @@ public class BufferingProcessorTest {
 
     @Parameters
     public static Collection<?> implementations() {
-        List<Object> impl = new Vector<Object>();
+        List<Object> impl = new Vector<>();
         impl.add(new Object[]{Convolution.class});
         impl.add(new Object[]{Delay.class});
         impl.add(new Object[]{MovingAverage.class});
@@ -89,7 +89,7 @@ public class BufferingProcessorTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void parameterWindowSizeMustBePostive() throws Exception {
+    public void parameterWindowSizeMustBePositive() throws Exception {
         try {
             _P.setParameter(BufferingProcessor.WINDOW_SIZE, "0");
             _P.setParameter(BufferingProcessor.WINDOW_SIZE, "12");
@@ -187,7 +187,7 @@ public class BufferingProcessorTest {
 
     @Test
     public void shouldCopyInputs() throws Exception {
-        List<Object> in = new Vector<Object>();
+        List<Object> in = new Vector<>();
         _P.setParameter(BufferingProcessor.WINDOW_SIZE, "5");
         in.add(23);
         _P.appendAndRemove(in);

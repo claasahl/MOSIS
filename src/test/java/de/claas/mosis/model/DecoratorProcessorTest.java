@@ -49,7 +49,7 @@ public class DecoratorProcessorTest {
 
     @Parameters
     public static Collection<?> implementations() {
-        List<Object> impl = new Vector<Object>();
+        List<Object> impl = new Vector<>();
         impl.add(new Object[]{DecoratorProcessor.class});
         impl.add(new Object[]{BreakOut.class});
         impl.add(new Object[]{Counter.class});
@@ -85,7 +85,7 @@ public class DecoratorProcessorTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void parameteClassMustBeValidClass() throws Exception {
+    public void parameterClassMustBeValidClass() throws Exception {
         try {
             _P1.setParameter(DecoratorProcessor.CLASS, Null.class.getName());
             _P1.setParameter(DecoratorProcessor.CLASS, Forward.class.getName());
@@ -139,7 +139,7 @@ public class DecoratorProcessorTest {
     }
 
     @Test
-    public void shouldFowardNonLocalParameter() throws Exception {
+    public void shouldForwardNonLocalParameter() throws Exception {
         _P1.setParameter(DecoratorProcessor.CLASS, Function.class.getName());
         assertNotNull(_P1.getParameter(Function.FUNCTION));
         _P1.setParameter(Function.FUNCTION, "x^3");
