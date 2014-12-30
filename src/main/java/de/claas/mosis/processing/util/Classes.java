@@ -59,6 +59,9 @@ public class Classes extends ProcessorAdapter<Object, String> {
         File file = new File(root
                 + (packageName.isEmpty() ? "" : sep + packageName));
         if (file.isDirectory()) {
+            if (file.listFiles() == null)
+                return;
+
             // "root" is a regular directory
             for (File f : file.listFiles()) {
                 if (isClassFile(f.getName())) {
@@ -67,7 +70,7 @@ public class Classes extends ProcessorAdapter<Object, String> {
                     name = name.replace(sep, ".");
                     classes.add(name);
                 } else if (f.isDirectory()) {
-                    String pckg = null;
+                    String pckg;
                     if (packageName.isEmpty()) {
                         pckg = f.getName();
                     } else {

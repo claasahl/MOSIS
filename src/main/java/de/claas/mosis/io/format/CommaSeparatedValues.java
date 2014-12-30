@@ -11,6 +11,7 @@ import de.claas.mosis.model.Data;
 import de.claas.mosis.model.Relation;
 import de.claas.mosis.util.Parser;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 import java.util.regex.Pattern;
@@ -168,14 +169,12 @@ public class CommaSeparatedValues extends AbstractTextFormat<Data> {
                 }
                 if (_Attributes.isEmpty() && !getParameter(HEADER).isEmpty()) {
                     // TODO Replace by CSV parser (i.e. not just split)
-                    for (String header : getParameter(HEADER).split(getParameter(SEPARATOR))) {
-                        _Attributes.add(header);
-                    }
+                    Collections.addAll(_Attributes, getParameter(HEADER).split(getParameter(SEPARATOR)));
                 }
                 for (Data datum : in) {
                     writeLine(toCSV(datum, _Attributes), true);
                 }
-                if (shouldFoward()) {
+                if (shouldForward()) {
                     out.addAll(in);
                 }
             }

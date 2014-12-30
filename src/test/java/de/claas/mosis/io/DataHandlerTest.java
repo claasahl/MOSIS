@@ -68,7 +68,7 @@ public abstract class DataHandlerTest<S, T extends DataHandler<S>> {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void parameterCounterMustBeInWhitelist() throws Exception {
+    public void parameterCounterMustBeInWhiteList() throws Exception {
         try {
             _H.setParameter(DataHandler.MODE, DataHandler.MODE_AUTO);
             _H.setParameter(DataHandler.MODE, DataHandler.MODE_READ);
@@ -80,7 +80,7 @@ public abstract class DataHandlerTest<S, T extends DataHandler<S>> {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void parameterForawrdInputsMayNotBeNull() throws Exception {
+    public void parameterForwardInputsMayNotBeNull() throws Exception {
         _H.setParameter(DataHandler.FORWARD_INPUTS, null);
     }
 

@@ -78,7 +78,7 @@ public class UserDatagramProtocolHandler extends DataHandler<DatagramPacket> {
                 for (DatagramPacket p : in) {
                     _Socket.send(p);
                 }
-                if (shouldFoward()) {
+                if (shouldForward()) {
                     out.addAll(in);
                 }
             }

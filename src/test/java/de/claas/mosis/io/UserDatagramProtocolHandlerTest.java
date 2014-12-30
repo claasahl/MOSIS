@@ -35,15 +35,15 @@ public class UserDatagramProtocolHandlerTest extends
         for (int i = 0; i < buf.length; i++) {
             buf[i] = (byte) (Math.random() * 255);
         }
-        DatagramPacket paket = new DatagramPacket(buf, buf.length);
+        DatagramPacket packet = new DatagramPacket(buf, buf.length);
         if (s != null) {
-            paket.setSocketAddress(s.getLocalSocketAddress());
+            packet.setSocketAddress(s.getLocalSocketAddress());
         } else {
-            paket.setSocketAddress(new InetSocketAddress(h
+            packet.setSocketAddress(new InetSocketAddress(h
                     .getParameter(UserDatagramProtocolHandler.HOST), Integer
                     .parseInt(h.getParameter(UserDatagramProtocolHandler.PORT))));
         }
-        return paket;
+        return packet;
     }
 
     /**
@@ -135,7 +135,7 @@ public class UserDatagramProtocolHandlerTest extends
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void parameterBufferMustBePostive() throws Exception {
+    public void parameterBufferMustBePositive() throws Exception {
         try {
             _H.setParameter(UserDatagramProtocolHandler.BUFFER, "0");
             _H.setParameter(UserDatagramProtocolHandler.BUFFER, "12");

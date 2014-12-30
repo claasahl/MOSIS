@@ -83,7 +83,7 @@ public class BlockingQueueHandler<T> extends DataHandler<T> {
                     e.printStackTrace();
                 }
             }
-            if (shouldFoward()) {
+            if (shouldForward()) {
                 out.addAll(in);
             }
         }
@@ -114,7 +114,7 @@ public class BlockingQueueHandler<T> extends DataHandler<T> {
 
         @Override
         public boolean equals(Object obj) {
-            return obj == null ? false : getClass().equals(obj.getClass());
+            return obj != null && getClass().equals(obj.getClass());
         }
 
     }

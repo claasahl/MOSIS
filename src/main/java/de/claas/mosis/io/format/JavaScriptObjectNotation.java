@@ -168,7 +168,7 @@ public class JavaScriptObjectNotation extends AbstractTextFormat<Data> {
                 for (Data datum : in) {
                     writeLine(toJSON(datum), true);
                 }
-                if (shouldFoward()) {
+                if (shouldForward()) {
                     out.addAll(in);
                 }
             }

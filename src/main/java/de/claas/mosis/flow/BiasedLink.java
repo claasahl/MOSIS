@@ -38,7 +38,7 @@ public class BiasedLink extends LinkAdapter {
                 _Accepted.add(o);
             }
         }
-        return super.push(in);
+        return super.push(_Accepted);
     }
 
     /**

@@ -82,7 +82,7 @@ public abstract class DataHandler<T> extends ProcessorAdapter<T, T> {
      * @return <code>true</code>, if the input data should be forwarded (as
      * output data)
      */
-    protected boolean shouldFoward() {
+    protected boolean shouldForward() {
         return getParameterAsBoolean(FORWARD_INPUTS);
     }
 

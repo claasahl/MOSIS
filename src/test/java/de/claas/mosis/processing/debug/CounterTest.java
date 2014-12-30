@@ -64,7 +64,7 @@ public class CounterTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void parameterCounterMustBePostive() throws Exception {
+    public void parameterCounterMustBePositive() throws Exception {
         try {
             _P.setParameter(Counter.COUNTER, "0");
             _P.setParameter(Counter.COUNTER, "12");

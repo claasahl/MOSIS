@@ -56,8 +56,7 @@ public class DataTest {
     @Test(expected = ClassCastException.class)
     public void shouldNotCastValue() {
         Data d = build();
-        @SuppressWarnings("unused")
-        String tmp = d.getAs(KeyDouble);
+        assertEquals(Double.toString(ValueDouble), d.getAs(KeyDouble));
     }
 
     @Test

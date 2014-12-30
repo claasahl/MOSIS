@@ -79,7 +79,7 @@ public class Serialization<T> extends StreamHandler<T> {
                     getOutputStream().writeObject(obj);
                     getOutputStream().flush();
                 }
-                if (shouldFoward()) {
+                if (shouldForward()) {
                     out.addAll(in);
                 }
             }

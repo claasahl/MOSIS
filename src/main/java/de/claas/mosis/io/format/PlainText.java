@@ -47,7 +47,7 @@ public class PlainText extends AbstractTextFormat<String> {
                     writeLine(getParameter(PREFIX), false);
                     writeLine(line, getParameterAsBoolean(APPEND_NEWLINE));
                 }
-                if (shouldFoward()) {
+                if (shouldForward()) {
                     out.addAll(in);
                 }
             }

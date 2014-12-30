@@ -75,7 +75,7 @@ public class QueueHandler<T> extends DataHandler<T> {
             for (T obj : in) {
                 getQueue().offer(obj);
             }
-            if (shouldFoward()) {
+            if (shouldForward()) {
                 out.addAll(in);
             }
         }
@@ -104,7 +104,7 @@ public class QueueHandler<T> extends DataHandler<T> {
 
         @Override
         public boolean equals(Object obj) {
-            return obj == null ? false : getClass().equals(obj.getClass());
+            return obj != null && getClass().equals(obj.getClass());
         }
 
     }
