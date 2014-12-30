@@ -30,7 +30,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(Parameterized.class)
 public class ProcessorTest {
 
-    private Class<Processor<?, ?>> _Clazz;
+    private final Class<Processor<?, ?>> _Clazz;
     private Processor<?, ?> _P;
 
     /**

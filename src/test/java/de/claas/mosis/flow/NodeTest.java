@@ -114,7 +114,7 @@ public abstract class NodeTest {
         assertFalse(n3.hasSuccessors());
         assertTrue(n3.getPredecessors().contains(n1));
 
-        n1.removeSuccessor(n2);
+        assertTrue(n1.removeSuccessor(n2));
         assertFalse(n1.hasPredecessors());
         assertTrue(n1.hasSuccessors());
         assertTrue(n1.getSuccessors().contains(n3));
@@ -124,7 +124,7 @@ public abstract class NodeTest {
         assertFalse(n3.hasSuccessors());
         assertTrue(n3.getPredecessors().contains(n1));
 
-        n1.removeSuccessor(n3);
+        assertTrue(n1.removeSuccessor(n3));
         assertFalse(n1.hasPredecessors());
         assertFalse(n1.hasSuccessors());
         assertFalse(n2.hasPredecessors());

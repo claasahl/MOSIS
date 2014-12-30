@@ -17,7 +17,7 @@ import java.util.Set;
  */
 public class DismantlingVisitor implements Visitor {
 
-    private Set<Processor> dismantled = new HashSet<>();
+    private final Set<Processor> dismantled = new HashSet<>();
 
     @Override
     public boolean visitPlainNode(PlainNode node) {

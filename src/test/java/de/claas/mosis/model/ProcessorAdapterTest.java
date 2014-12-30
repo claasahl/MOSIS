@@ -38,7 +38,7 @@ import static org.junit.Assert.*;
 @RunWith(Parameterized.class)
 public class ProcessorAdapterTest {
 
-    private Class<ProcessorAdapter<?, ?>> _Clazz;
+    private final Class<ProcessorAdapter<?, ?>> _Clazz;
     private ProcessorAdapter<?, ?> _P;
 
     /**

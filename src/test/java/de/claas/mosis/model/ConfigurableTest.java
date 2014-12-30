@@ -24,7 +24,7 @@ import static org.junit.Assert.*;
 @RunWith(Parameterized.class)
 public class ConfigurableTest {
 
-    private Class<Configurable> _Clazz;
+    private final Class<Configurable> _Clazz;
     private Configurable _C;
 
     /**

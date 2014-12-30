@@ -33,7 +33,7 @@ import static org.junit.Assert.*;
 @RunWith(Parameterized.class)
 public class BufferingProcessorTest {
 
-    private Class<BufferingProcessor<Object, Object>> _Clazz;
+    private final Class<BufferingProcessor<Object, Object>> _Clazz;
     private BufferingProcessor<Object, Object> _P;
 
     /**

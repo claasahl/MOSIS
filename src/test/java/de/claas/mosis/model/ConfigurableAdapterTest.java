@@ -29,7 +29,7 @@ import static org.junit.Assert.*;
 @RunWith(Parameterized.class)
 public class ConfigurableAdapterTest {
 
-    private Class<ConfigurableAdapter> _Clazz;
+    private final Class<ConfigurableAdapter> _Clazz;
     private ConfigurableAdapter _C;
 
     /**

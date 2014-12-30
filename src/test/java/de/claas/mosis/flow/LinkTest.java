@@ -24,8 +24,8 @@ import static org.junit.Assert.*;
 @RunWith(Parameterized.class)
 public class LinkTest {
 
-    private Class<Link> _Clazz;
-    private Object[] _Args;
+    private final Class<Link> _Clazz;
+    private final Object[] _Args;
     private Link _L;
 
     /**

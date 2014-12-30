@@ -31,7 +31,7 @@ import static org.junit.Assert.*;
 @RunWith(Parameterized.class)
 public class ComparingProcessorTest {
 
-    private Class<ComparingProcessor<Object, Object>> _Clazz;
+    private final Class<ComparingProcessor<Object, Object>> _Clazz;
     private ComparingProcessor<Object, Object> _P;
 
     /**

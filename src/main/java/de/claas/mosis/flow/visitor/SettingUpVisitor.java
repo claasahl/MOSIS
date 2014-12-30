@@ -17,7 +17,7 @@ import java.util.Set;
  */
 public class SettingUpVisitor implements Visitor {
 
-    private Set<Processor> setup = new HashSet<>();
+    private final Set<Processor> setup = new HashSet<>();
 
     @Override
     public boolean visitPlainNode(PlainNode node) {

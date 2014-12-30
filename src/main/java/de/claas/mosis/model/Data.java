@@ -19,7 +19,7 @@ public class Data extends LinkedHashMap<String, Object> {
      * Returns the key's value and casts it to a proper type. Any object is
      * (dynamically) casted to the stated type {@code T}.
      *
-     * @param key the key, which's value it to be returned
+     * @param key the key, which value it to be returned
      * @return the key's value
      */
     @SuppressWarnings("unchecked")
@@ -32,7 +32,7 @@ public class Data extends LinkedHashMap<String, Object> {
      * {@link String} using the {@link #toString()} method. If the value is
      * {@code null}, then "null" (as a string) is returned.
      *
-     * @param key the key, which's value it to be returned
+     * @param key the key, which value it to be returned
      * @return the key's value as {@link String}
      */
     public String getAsString(String key) {
@@ -47,16 +47,16 @@ public class Data extends LinkedHashMap<String, Object> {
      * {@code null} is returned. If the value could not be interpreted as
      * number, then a {@link NumberFormatException} is thrown.
      *
-     * @param key the key, which's value it to be returned
+     * @param key the key, which value it to be returned
      * @return the key's value as {@link Double}
      */
     public Number getAsNumber(String key) {
         Object value = get(key);
         if (value == null) {
             return null;
-        } else if (value != null && value instanceof Number) {
+        } else if (value instanceof Number) {
             return (Number) value;
-        } else if (value != null && value instanceof String) {
+        } else if (value instanceof String) {
             return new BigDecimal(value.toString());
         } else {
             throw new NumberFormatException();
@@ -71,25 +71,25 @@ public class Data extends LinkedHashMap<String, Object> {
      * enumeration's name and the corresponding {@link Enum} is returned. If the
      * value equals {@code null}, then {@code null} is returned.
      *
-     * @param key the key, which's value it to be returned
+     * @param key the key, which value it to be returned
      * @return the key's value as {@link Enum}
      */
     @SuppressWarnings("unchecked")
-    public <T extends Enum<?>> T getAsNominal(String key, Class<T> nomimal) {
+    public <T extends Enum<?>> T getAsNominal(String key, Class<T> nominal) {
         Object value = get(key);
-        if (value != null && nomimal.isAssignableFrom(value.getClass())) {
+        if (value != null && nominal.isAssignableFrom(value.getClass())) {
             return (T) value;
         } else if (value != null && value instanceof Number) {
             int index = ((Number) value).intValue();
-            return nomimal.getEnumConstants()[index];
+            return nominal.getEnumConstants()[index];
         } else if (value != null && value instanceof String) {
-            for (T constant : nomimal.getEnumConstants()) {
+            for (T constant : nominal.getEnumConstants()) {
                 if (value.toString().equals(constant.name())) {
                     return constant;
                 }
             }
             int index = new BigDecimal(value.toString()).intValue();
-            return nomimal.getEnumConstants()[index];
+            return nominal.getEnumConstants()[index];
         } else {
             return null;
         }

@@ -23,8 +23,8 @@ import static org.junit.Assert.*;
 @RunWith(Parameterized.class)
 public class RelationTest {
 
-    private Class<Relation> _Clazz;
-    private Object[] _Args;
+    private final Class<Relation> _Clazz;
+    private final Object[] _Args;
 
     /**
      * Initializes this JUnit test for an implementation of the {@link Relation}
@@ -81,7 +81,7 @@ public class RelationTest {
         assertTrue(r1.equals(r1));
         assertTrue(r1.equals(r2));
         assertTrue(r2.equals(r1));
-        assertFalse(r1.equals(null));
+        assertFalse(r1 == null);
         assertFalse(r1.equals(new Object()));
     }
 

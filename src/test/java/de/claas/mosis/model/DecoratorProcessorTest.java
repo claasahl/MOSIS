@@ -32,7 +32,7 @@ import static org.junit.Assert.*;
 @RunWith(Parameterized.class)
 public class DecoratorProcessorTest {
 
-    private Class<DecoratorProcessor<Object, Object>> _Clazz;
+    private final Class<DecoratorProcessor<Object, Object>> _Clazz;
     private DecoratorProcessor<Object, Object> _P1;
     private Processor<Object, Object> _P2;
 

@@ -23,8 +23,8 @@ import static org.junit.Assert.*;
 @RunWith(Parameterized.class)
 public class ConditionTest {
 
-    private Class<Condition> _Clazz;
-    private Object[] _Args;
+    private final Class<Condition> _Clazz;
+    private final Object[] _Args;
 
     /**
      * Initializes this JUnit test for an implementation of the
@@ -93,7 +93,7 @@ public class ConditionTest {
         assertTrue(c1.equals(c1));
         assertTrue(c1.equals(c2));
         assertTrue(c2.equals(c1));
-        assertFalse(c1.equals(null));
+        assertFalse(c1 == null);
         assertFalse(c1.equals(new Object()));
     }
 
