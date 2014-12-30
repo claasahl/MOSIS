@@ -11,5 +11,5 @@ import de.claas.mosis.model.Processor;
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
 public enum Category {
-    InputOutput, DataFormat, Classification, Clustering, Mining, Other;
+    InputOutput, DataFormat, Classification, Clustering, Mining, Other
 }

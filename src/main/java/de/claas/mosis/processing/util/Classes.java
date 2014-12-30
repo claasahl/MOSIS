@@ -28,11 +28,11 @@ import java.util.jar.JarInputStream;
         outputData = String.class)
 public class Classes extends ProcessorAdapter<Object, String> {
 
-    private final Set<String> packages;
     @Parameter("JAVA class path")
     public static final String CLASSPATH = "classpath";
     @Parameter("Separates class path entries")
     public static final String SEPARATOR = "separator";
+    private final Set<String> packages;
 
     /**
      * Initializes the class with default values.

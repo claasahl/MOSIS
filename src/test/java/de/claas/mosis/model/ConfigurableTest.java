@@ -37,6 +37,13 @@ public class ConfigurableTest {
         _Clazz = clazz;
     }
 
+    @Parameters
+    public static Collection<?> implementations() {
+        List<Object> impl = new Vector<Object>();
+        impl.addAll(ConfigurableAdapterTest.implementations());
+        return impl;
+    }
+
     @Before
     public void before() throws Exception {
         _C = Utils.instance(_Clazz);
@@ -75,13 +82,6 @@ public class ConfigurableTest {
         assertEquals("hello", _C.getParameter(parameter));
         _C.setParameter(parameter, "hello world");
         assertEquals("hello world", _C.getParameter(parameter));
-    }
-
-    @Parameters
-    public static Collection<?> implementations() {
-        List<Object> impl = new Vector<Object>();
-        impl.addAll(ConfigurableAdapterTest.implementations());
-        return impl;
     }
 
 }

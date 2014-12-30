@@ -51,6 +51,30 @@ public class ProcessorAdapterTest {
         _Clazz = clazz;
     }
 
+    @Parameters
+    public static Collection<?> implementations() {
+        List<Object> impl = new Vector<Object>();
+        impl.add(new Object[]{Null.class});
+        impl.add(new Object[]{SystemOut.class});
+        impl.add(new Object[]{Time.class});
+        impl.add(new Object[]{NoOperation.class});
+        impl.add(new Object[]{BreakOut.class});
+        impl.add(new Object[]{Forward.class});
+        impl.add(new Object[]{Delay.class});
+        impl.add(new Object[]{Distance.class});
+        impl.add(new Object[]{Linear.class});
+        impl.add(new Object[]{Function.class});
+        impl.add(new Object[]{Serialization.class});
+        impl.add(new Object[]{UserDatagramProtocolHandler.class});
+        impl.add(new Object[]{QueueHandler.class});
+        impl.add(new Object[]{DecoratorProcessor.class});
+        impl.add(new Object[]{MovingAverage.class});
+        impl.add(new Object[]{Random.class});
+        impl.add(new Object[]{de.claas.mosis.io.generator.Time.class});
+        impl.add(new Object[]{ToString.class});
+        return impl;
+    }
+
     @Before
     public void before() throws Exception {
         _P = Utils.instance(_Clazz);
@@ -310,30 +334,6 @@ public class ProcessorAdapterTest {
             }
         }
 
-    }
-
-    @Parameters
-    public static Collection<?> implementations() {
-        List<Object> impl = new Vector<Object>();
-        impl.add(new Object[]{Null.class});
-        impl.add(new Object[]{SystemOut.class});
-        impl.add(new Object[]{Time.class});
-        impl.add(new Object[]{NoOperation.class});
-        impl.add(new Object[]{BreakOut.class});
-        impl.add(new Object[]{Forward.class});
-        impl.add(new Object[]{Delay.class});
-        impl.add(new Object[]{Distance.class});
-        impl.add(new Object[]{Linear.class});
-        impl.add(new Object[]{Function.class});
-        impl.add(new Object[]{Serialization.class});
-        impl.add(new Object[]{UserDatagramProtocolHandler.class});
-        impl.add(new Object[]{QueueHandler.class});
-        impl.add(new Object[]{DecoratorProcessor.class});
-        impl.add(new Object[]{MovingAverage.class});
-        impl.add(new Object[]{Random.class});
-        impl.add(new Object[]{de.claas.mosis.io.generator.Time.class});
-        impl.add(new Object[]{ToString.class});
-        return impl;
     }
 
 }

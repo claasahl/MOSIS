@@ -6,7 +6,6 @@ import java.util.Vector;
 public class ObservableAdapter implements Observable {
 
     private final List<Observer> _Observers = new Vector<Observer>();
-    ;
 
     @Override
     public void addObserver(Observer observer) {

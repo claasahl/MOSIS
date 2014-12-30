@@ -19,6 +19,51 @@ import static org.junit.Assert.*;
 public class UserDatagramProtocolHandlerTest extends
         DataHandlerTest<DatagramPacket, UserDatagramProtocolHandler> {
 
+    /**
+     * A helper method to avoid code duplicates. Returns a datagram with random
+     * content. The datagram is either addressed to the given socket (as if it
+     * is being send there) or it is addressed according to the parameters of
+     * the given handler.
+     *
+     * @param s the socket
+     * @param h the handler
+     * @return a datagram with random content
+     */
+    private static DatagramPacket createDatagram(DatagramSocket s,
+                                                 UserDatagramProtocolHandler h) {
+        byte[] buf = new byte[100];
+        for (int i = 0; i < buf.length; i++) {
+            buf[i] = (byte) (Math.random() * 255);
+        }
+        DatagramPacket paket = new DatagramPacket(buf, buf.length);
+        if (s != null) {
+            paket.setSocketAddress(s.getLocalSocketAddress());
+        } else {
+            paket.setSocketAddress(new InetSocketAddress(h
+                    .getParameter(UserDatagramProtocolHandler.HOST), Integer
+                    .parseInt(h.getParameter(UserDatagramProtocolHandler.PORT))));
+        }
+        return paket;
+    }
+
+    /**
+     * A helper method to avoid code duplicates. It is intended to ensure the
+     * equality of two datagrams.
+     *
+     * @param expected the expected datagram
+     * @param actual   the actual datagram
+     */
+    private static void assertDatagramEquals(DatagramPacket expected,
+                                             DatagramPacket actual) {
+        assertNotNull(expected);
+        assertNotNull(actual);
+        assertEquals(expected.getLength(), actual.getLength());
+        for (int i = 0; i < expected.getLength(); i++) {
+            assertEquals(expected.getData()[expected.getOffset() + i],
+                    actual.getData()[actual.getOffset() + i]);
+        }
+    }
+
     @Override
     protected UserDatagramProtocolHandler build() throws Exception {
         return new UserDatagramProtocolHandler();
@@ -152,51 +197,6 @@ public class UserDatagramProtocolHandlerTest extends
         s.send(p);
         assertDatagramEquals(p, Utils.process(_H));
         s.close();
-    }
-
-    /**
-     * A helper method to avoid code duplicates. Returns a datagram with random
-     * content. The datagram is either addressed to the given socket (as if it
-     * is being send there) or it is addressed according to the parameters of
-     * the given handler.
-     *
-     * @param s the socket
-     * @param h the handler
-     * @return a datagram with random content
-     */
-    private static DatagramPacket createDatagram(DatagramSocket s,
-                                                 UserDatagramProtocolHandler h) {
-        byte[] buf = new byte[100];
-        for (int i = 0; i < buf.length; i++) {
-            buf[i] = (byte) (Math.random() * 255);
-        }
-        DatagramPacket paket = new DatagramPacket(buf, buf.length);
-        if (s != null) {
-            paket.setSocketAddress(s.getLocalSocketAddress());
-        } else {
-            paket.setSocketAddress(new InetSocketAddress(h
-                    .getParameter(UserDatagramProtocolHandler.HOST), Integer
-                    .parseInt(h.getParameter(UserDatagramProtocolHandler.PORT))));
-        }
-        return paket;
-    }
-
-    /**
-     * A helper method to avoid code duplicates. It is intended to ensure the
-     * equality of two datagrams.
-     *
-     * @param expected the expected datagram
-     * @param actual   the actual datagram
-     */
-    private static void assertDatagramEquals(DatagramPacket expected,
-                                             DatagramPacket actual) {
-        assertNotNull(expected);
-        assertNotNull(actual);
-        assertEquals(expected.getLength(), actual.getLength());
-        for (int i = 0; i < expected.getLength(); i++) {
-            assertEquals(expected.getData()[expected.getOffset() + i],
-                    actual.getData()[actual.getOffset() + i]);
-        }
     }
 
 }

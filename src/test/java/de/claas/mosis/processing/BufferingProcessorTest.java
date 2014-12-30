@@ -47,6 +47,15 @@ public class BufferingProcessorTest {
         _Clazz = clazz;
     }
 
+    @Parameters
+    public static Collection<?> implementations() {
+        List<Object> impl = new Vector<Object>();
+        impl.add(new Object[]{Convolution.class});
+        impl.add(new Object[]{Delay.class});
+        impl.add(new Object[]{MovingAverage.class});
+        return impl;
+    }
+
     @Before
     public void before() throws Exception {
         _P = Utils.instance(_Clazz);
@@ -198,15 +207,6 @@ public class BufferingProcessorTest {
         assertEquals(Arrays.asList(1), _P.getBuffer().get(0));
         assertEquals(Arrays.asList(2, 3), _P.getBuffer().get(1));
         assertEquals(Arrays.asList(3, 4, 5), _P.getBuffer().get(2));
-    }
-
-    @Parameters
-    public static Collection<?> implementations() {
-        List<Object> impl = new Vector<Object>();
-        impl.add(new Object[]{Convolution.class});
-        impl.add(new Object[]{Delay.class});
-        impl.add(new Object[]{MovingAverage.class});
-        return impl;
     }
 
 }

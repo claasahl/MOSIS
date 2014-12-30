@@ -38,6 +38,36 @@ public class ConditionTest {
         _Args = args;
     }
 
+    @Parameters
+    public static Collection<?> implementations() {
+        List<String> list = new Vector<String>();
+        list.add("a");
+        list.add("c");
+        List<Object> impl = new Vector<Object>();
+        impl.add(new Object[]{Condition.ClassExists.class, new Object[0]});
+        impl.add(new Object[]{Condition.FileExists.class, new Object[0]});
+        impl.add(new Object[]{Condition.IsBoolean.class, new Object[0]});
+        impl.add(new Object[]{Condition.IsGreaterOrEqual.class,
+                new Object[]{42.0}});
+        impl.add(new Object[]{Condition.IsGreaterThan.class,
+                new Object[]{23.0}});
+        impl.add(new Object[]{Condition.IsInList.class, new Object[]{list}});
+        impl.add(new Object[]{Condition.IsInteger.class, new Object[0]});
+        impl.add(new Object[]{Condition.IsLessOrEqual.class,
+                new Object[]{23.0}});
+        impl.add(new Object[]{Condition.IsLessThan.class,
+                new Object[]{42.0}});
+        impl.add(new Object[]{Condition.IsNotNull.class, new Object[0]});
+        impl.add(new Object[]{Condition.IsNot.class,
+                new Object[]{new Condition.IsNumeric()}});
+        impl.add(new Object[]{Condition.IsNumeric.class, new Object[0]});
+        impl.add(new Object[]{Condition.ReadOnly.class, new Object[0]});
+        impl.add(new Object[]{Condition.RegularExpression.class,
+                new Object[]{"abc", "abc"}});
+        impl.add(new Object[]{Condition.WriteOnce.class, new Object[0]});
+        return impl;
+    }
+
     /**
      * Returns an instantiated {@link Condition} class. The concrete class of
      * the instantiated object and its arguments are provided by the
@@ -108,35 +138,5 @@ public class ConditionTest {
     public void shouldHandleNullValues() throws Exception {
         Condition c = build();
         c.complies(null, null);
-    }
-
-    @Parameters
-    public static Collection<?> implementations() {
-        List<String> list = new Vector<String>();
-        list.add("a");
-        list.add("c");
-        List<Object> impl = new Vector<Object>();
-        impl.add(new Object[]{Condition.ClassExists.class, new Object[0]});
-        impl.add(new Object[]{Condition.FileExists.class, new Object[0]});
-        impl.add(new Object[]{Condition.IsBoolean.class, new Object[0]});
-        impl.add(new Object[]{Condition.IsGreaterOrEqual.class,
-                new Object[]{42.0}});
-        impl.add(new Object[]{Condition.IsGreaterThan.class,
-                new Object[]{23.0}});
-        impl.add(new Object[]{Condition.IsInList.class, new Object[]{list}});
-        impl.add(new Object[]{Condition.IsInteger.class, new Object[0]});
-        impl.add(new Object[]{Condition.IsLessOrEqual.class,
-                new Object[]{23.0}});
-        impl.add(new Object[]{Condition.IsLessThan.class,
-                new Object[]{42.0}});
-        impl.add(new Object[]{Condition.IsNotNull.class, new Object[0]});
-        impl.add(new Object[]{Condition.IsNot.class,
-                new Object[]{new Condition.IsNumeric()}});
-        impl.add(new Object[]{Condition.IsNumeric.class, new Object[0]});
-        impl.add(new Object[]{Condition.ReadOnly.class, new Object[0]});
-        impl.add(new Object[]{Condition.RegularExpression.class,
-                new Object[]{"abc", "abc"}});
-        impl.add(new Object[]{Condition.WriteOnce.class, new Object[0]});
-        return impl;
     }
 }

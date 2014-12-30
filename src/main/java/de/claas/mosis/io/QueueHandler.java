@@ -1,15 +1,15 @@
 package de.claas.mosis.io;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
 import de.claas.mosis.model.Configurable;
 import de.claas.mosis.model.Processor;
 import de.claas.mosis.model.Relation;
 import de.claas.mosis.util.Utils;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 /**
  * The class {@link QueueHandler}. It is intended to enable communication with
@@ -18,12 +18,10 @@ import de.claas.mosis.util.Utils;
  * will typically be utilized in scenarios where an external entity needs to
  * push {@link Object}s directly into the framework (and not through other means
  * such as files or databases).
- * 
- * @author Claas Ahlrichs (claasahl@tzi.de)
- * 
- * @param <T>
- *            type of (incoming and outgoing) data. See {@link Processor} for
+ *
+ * @param <T> type of (incoming and outgoing) data. See {@link Processor} for
  *            details.
+ * @author Claas Ahlrichs (claasahl@tzi.de)
  */
 public class QueueHandler<T> extends DataHandler<T> {
 
@@ -35,80 +33,79 @@ public class QueueHandler<T> extends DataHandler<T> {
      * Initializes the class with default values.
      */
     public QueueHandler() {
-	addCondition(CLASS, new Condition.ClassExists());
-	setParameter(CLASS, LinkedList.class.getName());
+        addCondition(CLASS, new Condition.ClassExists());
+        setParameter(CLASS, LinkedList.class.getName());
     }
 
     /**
      * Returns the (input / output) {@link Queue}. When in "reading" mode (see
      * {@link #isReadOnly(List)}), then the head of the queue is removed and
-     * returned every time {@link #process(List)} is called. When in "writing"
+     * returned every time {@link #process(java.util.List, java.util.List)} is called. When in "writing"
      * mode (see {@link #isWriteOnly(List)}), then all incoming elements are
-     * appended to the queue every time {@link #process(List)} is called.
-     * 
+     * appended to the queue every time {@link #process(java.util.List, java.util.List)} is called.
+     *
      * @return the (input / output) {@link Queue}
      */
     public Queue<T> getQueue() {
-	return _Queue;
+        return _Queue;
     }
 
     @Override
     public void setUp() {
-	super.setUp();
-	Relation r = new ImplCreator();
-	addRelation(r);
-	r.compute(this, CLASS, getParameter(CLASS));
+        super.setUp();
+        Relation r = new ImplCreator();
+        addRelation(r);
+        r.compute(this, CLASS, getParameter(CLASS));
     }
 
     @Override
     public void dismantle() {
-	super.dismantle();
-	removeRelation(new ImplCreator());
-	_Queue = null;
+        super.dismantle();
+        removeRelation(new ImplCreator());
+        _Queue = null;
     }
 
     @Override
     public void process(List<T> in, List<T> out) {
-	if (isReadOnly(in)) {
-	    if (!getQueue().isEmpty()) {
-		out.add(getQueue().poll());
-	    }
-	} else {
-	    for (T obj : in) {
-		getQueue().offer(obj);
-	    }
-	    if (shouldFoward()) {
-		out.addAll(in);
-	    }
-	}
+        if (isReadOnly(in)) {
+            if (!getQueue().isEmpty()) {
+                out.add(getQueue().poll());
+            }
+        } else {
+            for (T obj : in) {
+                getQueue().offer(obj);
+            }
+            if (shouldFoward()) {
+                out.addAll(in);
+            }
+        }
     }
 
     /**
      * The class {@link ImplCreator}. It is intended to create {@link Queue}
      * objects whenever the {@link QueueHandler#CLASS} parameter is changed.
-     * 
+     *
      * @author Claas Ahlrichs (claasahl@tzi.de)
-     * 
      */
     private class ImplCreator implements Relation {
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public void compute(Configurable configurable, String parameter,
-		String value) {
-	    if (CLASS.equals(parameter)) {
-		try {
-		    _Queue = (Queue<T>) Utils.instance(Class.forName(value));
-		} catch (Exception e) {
-		    e.printStackTrace();
-		}
-	    }
-	}
+        @SuppressWarnings("unchecked")
+        @Override
+        public void compute(Configurable configurable, String parameter,
+                            String value) {
+            if (CLASS.equals(parameter)) {
+                try {
+                    _Queue = (Queue<T>) Utils.instance(Class.forName(value));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
-	@Override
-	public boolean equals(Object obj) {
-	    return obj == null ? false : getClass().equals(obj.getClass());
-	}
+        @Override
+        public boolean equals(Object obj) {
+            return obj == null ? false : getClass().equals(obj.getClass());
+        }
 
     }
 

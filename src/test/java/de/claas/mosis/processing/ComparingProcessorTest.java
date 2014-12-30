@@ -45,6 +45,13 @@ public class ComparingProcessorTest {
         _Clazz = clazz;
     }
 
+    @Parameters
+    public static Collection<?> implementations() {
+        List<Object> impl = new Vector<Object>();
+        impl.add(new Object[]{Distance.class});
+        return impl;
+    }
+
     @Before
     public void before() throws Exception {
         _P = Utils.instance(_Clazz);
@@ -101,13 +108,6 @@ public class ComparingProcessorTest {
         assertEquals(new Integer(23), _P.replace(new Integer(42)));
         assertEquals(new Integer(42), _P.replace(null));
         assertNull(_P.replace(null));
-    }
-
-    @Parameters
-    public static Collection<?> implementations() {
-        List<Object> impl = new Vector<Object>();
-        impl.add(new Object[]{Distance.class});
-        return impl;
     }
 
 }

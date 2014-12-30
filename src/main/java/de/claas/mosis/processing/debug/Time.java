@@ -1,23 +1,22 @@
 package de.claas.mosis.processing.debug;
 
-import java.util.List;
-
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
 import de.claas.mosis.model.DecoratorProcessor;
 import de.claas.mosis.model.Processor;
 
+import java.util.List;
+
 /**
  * The class {@link Time}. It is intended for debugging purposes. This
  * {@link DecoratorProcessor} implementation measures the time (measured in
- * milliseconds) required to execute {@link Processor#process(List)} of the
+ * milliseconds) required to execute {@link Processor#process(java.util.List, java.util.List)} of the
  * wrapped {@link Processor} object. Furthermore it provides the time that the
  * wrapped {@link Processor} object was first called and the time it was last
  * called (measured in milliseconds, between the current time and midnight,
  * January 1, 1970 UTC).
- * 
+ *
  * @author Claas Ahlrichs (claasahl@tzi.de)
- * 
  */
 public class Time extends DecoratorProcessor<Object, Object> {
 
@@ -34,32 +33,32 @@ public class Time extends DecoratorProcessor<Object, Object> {
      * Initializes the class with default values.
      */
     public Time() {
-	setParameter(TIME, "");
-	addCondition(TIME, new Condition.IsInteger());
-	addCondition(TIME, new Condition.IsGreaterOrEqual(0d));
-	setParameter(TOTAL_TIME, 0);
-	addCondition(TOTAL_TIME, new Condition.IsInteger());
-	addCondition(TOTAL_TIME, new Condition.IsGreaterOrEqual(0d));
-	setParameter(FIRST_CALL, "");
-	addCondition(FIRST_CALL, new Condition.IsInteger());
-	addCondition(FIRST_CALL, new Condition.IsGreaterOrEqual(0d));
-	setParameter(LAST_CALL, "");
-	addCondition(LAST_CALL, new Condition.IsInteger());
-	addCondition(LAST_CALL, new Condition.IsGreaterOrEqual(0d));
+        setParameter(TIME, "");
+        addCondition(TIME, new Condition.IsInteger());
+        addCondition(TIME, new Condition.IsGreaterOrEqual(0d));
+        setParameter(TOTAL_TIME, 0);
+        addCondition(TOTAL_TIME, new Condition.IsInteger());
+        addCondition(TOTAL_TIME, new Condition.IsGreaterOrEqual(0d));
+        setParameter(FIRST_CALL, "");
+        addCondition(FIRST_CALL, new Condition.IsInteger());
+        addCondition(FIRST_CALL, new Condition.IsGreaterOrEqual(0d));
+        setParameter(LAST_CALL, "");
+        addCondition(LAST_CALL, new Condition.IsInteger());
+        addCondition(LAST_CALL, new Condition.IsGreaterOrEqual(0d));
     }
 
     @Override
     public void process(List<Object> in, List<Object> out) {
-	long started = System.currentTimeMillis();
-	super.process(in, out);
-	long ended = System.currentTimeMillis();
-	long total = getParameterAsLong(TOTAL_TIME);
-	if (getParameter(FIRST_CALL).isEmpty()) {
-	    setParameter(FIRST_CALL, started);
-	}
-	setParameter(LAST_CALL, started);
-	setParameter(TIME, ended - started);
-	setParameter(TOTAL_TIME, total + ended - started);
+        long started = System.currentTimeMillis();
+        super.process(in, out);
+        long ended = System.currentTimeMillis();
+        long total = getParameterAsLong(TOTAL_TIME);
+        if (getParameter(FIRST_CALL).isEmpty()) {
+            setParameter(FIRST_CALL, started);
+        }
+        setParameter(LAST_CALL, started);
+        setParameter(TIME, ended - started);
+        setParameter(TOTAL_TIME, total + ended - started);
     }
 
 }

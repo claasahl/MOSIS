@@ -40,6 +40,21 @@ public class LinkTest {
         _Args = args;
     }
 
+    @Parameters
+    public static Collection<?> implementations() {
+        List<Object> impl = new Vector<Object>();
+        impl.add(new Object[]{
+                LinkAdapter.class,
+                new Object[]{null, -23, 1L, 42.3, "hello world", new Object()}});
+        impl.add(new Object[]{
+                UnbiasedLink.class,
+                new Object[]{null, -23, 1L, 42.3, "hello world", new Object()}});
+        impl.add(new Object[]{
+                BiasedLink.class,
+                new Object[]{-23, 1L, 42.3, "hello world", new Object()}});
+        return impl;
+    }
+
     @Before
     public void before() throws Exception {
         _L = Utils.instance(_Clazz);
@@ -81,21 +96,6 @@ public class LinkTest {
             assertEquals(arg, _L.poll());
         }
         assertTrue(_L.isEmpty());
-    }
-
-    @Parameters
-    public static Collection<?> implementations() {
-        List<Object> impl = new Vector<Object>();
-        impl.add(new Object[]{
-                LinkAdapter.class,
-                new Object[]{null, -23, 1L, 42.3, "hello world", new Object()}});
-        impl.add(new Object[]{
-                UnbiasedLink.class,
-                new Object[]{null, -23, 1L, 42.3, "hello world", new Object()}});
-        impl.add(new Object[]{
-                BiasedLink.class,
-                new Object[]{-23, 1L, 42.3, "hello world", new Object()}});
-        return impl;
     }
 
 }

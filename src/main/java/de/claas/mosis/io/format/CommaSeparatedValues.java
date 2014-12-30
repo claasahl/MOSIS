@@ -60,9 +60,9 @@ public class CommaSeparatedValues extends AbstractTextFormat<Data> {
     private final Pattern TwoDQuotes;
     private final Pattern LF;
     private final Pattern NEWLINE;
-    private Pattern Textdata;
     private final StringBuilder _CSV;
     private final List<String> _Attributes;
+    private Pattern Textdata;
     private Pattern Separator;
     private boolean _HeaderRead;
     private boolean _HeaderWritten;
@@ -182,28 +182,6 @@ public class CommaSeparatedValues extends AbstractTextFormat<Data> {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * The class {@link ChangeSeparator}. It is intended to (re-)set the
-     * separator character of the {@link CommaSeparatedValues} object whenever
-     * the {@link CommaSeparatedValues#SEPARATOR} parameter is changed.
-     *
-     * @author Claas Ahlrichs (claasahl@tzi.de)
-     */
-    private class ChangeSeparator implements Relation {
-
-        @Override
-        public void compute(Configurable configurable, String parameter,
-                            String value) {
-            if (SEPARATOR.equals(parameter)) {
-                // TODO Avoid hard coded patterns
-                Separator = Pattern.compile(Pattern.quote(value));
-                int sep = value.charAt(0);
-                Textdata = Pattern.compile(String.format("[^\\x00-\\x1F\\x22\\x%02X]", sep));
-            }
-        }
-
     }
 
     /**
@@ -516,5 +494,27 @@ public class CommaSeparatedValues extends AbstractTextFormat<Data> {
 
         }
         return processed.toString();
+    }
+
+    /**
+     * The class {@link ChangeSeparator}. It is intended to (re-)set the
+     * separator character of the {@link CommaSeparatedValues} object whenever
+     * the {@link CommaSeparatedValues#SEPARATOR} parameter is changed.
+     *
+     * @author Claas Ahlrichs (claasahl@tzi.de)
+     */
+    private class ChangeSeparator implements Relation {
+
+        @Override
+        public void compute(Configurable configurable, String parameter,
+                            String value) {
+            if (SEPARATOR.equals(parameter)) {
+                // TODO Avoid hard coded patterns
+                Separator = Pattern.compile(Pattern.quote(value));
+                int sep = value.charAt(0);
+                Textdata = Pattern.compile(String.format("[^\\x00-\\x1F\\x22\\x%02X]", sep));
+            }
+        }
+
     }
 }

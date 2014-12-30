@@ -42,6 +42,17 @@ public class ConfigurableAdapterTest {
         _Clazz = clazz;
     }
 
+    @Parameters
+    public static Collection<?> implementations() {
+        List<Object> impl = new Vector<Object>();
+        impl.add(new Object[]{ConfigurableAdapter.class});
+        impl.add(new Object[]{LinkAdapter.class});
+        impl.add(new Object[]{UnbiasedLink.class});
+        impl.add(new Object[]{BiasedLink.class});
+        impl.addAll(ProcessorAdapterTest.implementations());
+        return impl;
+    }
+
     @Before
     public void before() throws Exception {
         _C = Utils.instance(_Clazz);
@@ -146,17 +157,6 @@ public class ConfigurableAdapterTest {
         assertEquals(Double.toString(Double.MIN_VALUE), _C.getParameter(param));
         _C.setParameter(param, "42.3");
         assertEquals(42.3, _C.getParameterAsDouble(param), 0.0001);
-    }
-
-    @Parameters
-    public static Collection<?> implementations() {
-        List<Object> impl = new Vector<Object>();
-        impl.add(new Object[]{ConfigurableAdapter.class});
-        impl.add(new Object[]{LinkAdapter.class});
-        impl.add(new Object[]{UnbiasedLink.class});
-        impl.add(new Object[]{BiasedLink.class});
-        impl.addAll(ProcessorAdapterTest.implementations());
-        return impl;
     }
 
 }

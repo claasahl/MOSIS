@@ -47,6 +47,19 @@ public class DecoratorProcessorTest {
         _Clazz = clazz;
     }
 
+    @Parameters
+    public static Collection<?> implementations() {
+        List<Object> impl = new Vector<Object>();
+        impl.add(new Object[]{DecoratorProcessor.class});
+        impl.add(new Object[]{BreakOut.class});
+        impl.add(new Object[]{Counter.class});
+        impl.add(new Object[]{Sleep.class});
+        impl.add(new Object[]{SystemOut.class});
+        impl.add(new Object[]{Time.class});
+        impl.add(new Object[]{Logger.class});
+        return impl;
+    }
+
     @Before
     public void before() throws Exception {
         _P1 = Utils.instance(_Clazz);
@@ -260,19 +273,6 @@ public class DecoratorProcessorTest {
         _P1.setParameter(DecoratorProcessor.CLASS, Null.class.getName());
         _P1.setParameter(param, "abc");
         assertEquals("7", _P1.getParameter(Relation.UpdateVersion.Version));
-    }
-
-    @Parameters
-    public static Collection<?> implementations() {
-        List<Object> impl = new Vector<Object>();
-        impl.add(new Object[]{DecoratorProcessor.class});
-        impl.add(new Object[]{BreakOut.class});
-        impl.add(new Object[]{Counter.class});
-        impl.add(new Object[]{Sleep.class});
-        impl.add(new Object[]{SystemOut.class});
-        impl.add(new Object[]{Time.class});
-        impl.add(new Object[]{Logger.class});
-        return impl;
     }
 
 }

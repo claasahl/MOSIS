@@ -43,6 +43,13 @@ public class ProcessorTest {
         _Clazz = clazz;
     }
 
+    @Parameters
+    public static Collection<?> implementations() {
+        List<Object> impl = new Vector<Object>();
+        impl.addAll(ProcessorAdapterTest.implementations());
+        return impl;
+    }
+
     @Before
     public void before() throws Exception {
         _P = Utils.instance(_Clazz);
@@ -81,13 +88,6 @@ public class ProcessorTest {
             }
             assertTrue("Parameter (" + param + ") is not annotated.", found);
         }
-    }
-
-    @Parameters
-    public static Collection<?> implementations() {
-        List<Object> impl = new Vector<Object>();
-        impl.addAll(ProcessorAdapterTest.implementations());
-        return impl;
     }
 
 }

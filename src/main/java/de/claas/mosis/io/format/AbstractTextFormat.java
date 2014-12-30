@@ -55,6 +55,25 @@ public abstract class AbstractTextFormat<T> extends StreamHandler<T> {
         addCondition(CHARSET_NAME, new Condition.IsNotNull());
     }
 
+    /**
+     * Returns the length (in bytes) if an <code>end of line</code> was found.
+     * Otherwise, zero is returned. The combinations 0x0a0d, 0x0d0a, 0x0a and
+     * 0x0d are accepted are <code>end of line</code> symbols.
+     *
+     * @param prev the previous byte
+     * @param curr the current byte
+     * @return the length (in bytes) if an <code>end of line</code> was found
+     */
+    private static int endOfLine(int prev, int curr) {
+        if (prev == 0x0A && curr == 0x0D || prev == 0x0D && curr == 0x0A) {
+            return 2;
+        } else if (prev == 0x0A || prev == 0x0D) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
     @Override
     protected BufferedInputStream getInputStream() throws IOException {
         if (_Input == null) {
@@ -190,25 +209,6 @@ public abstract class AbstractTextFormat<T> extends StreamHandler<T> {
                 .getBytes() : line.getBytes();
         getOutputStream().write(data);
         getOutputStream().flush();
-    }
-
-    /**
-     * Returns the length (in bytes) if an <code>end of line</code> was found.
-     * Otherwise, zero is returned. The combinations 0x0a0d, 0x0d0a, 0x0a and
-     * 0x0d are accepted are <code>end of line</code> symbols.
-     *
-     * @param prev the previous byte
-     * @param curr the current byte
-     * @return the length (in bytes) if an <code>end of line</code> was found
-     */
-    private static int endOfLine(int prev, int curr) {
-        if (prev == 0x0A && curr == 0x0D || prev == 0x0D && curr == 0x0A) {
-            return 2;
-        } else if (prev == 0x0A || prev == 0x0D) {
-            return 1;
-        } else {
-            return 0;
-        }
     }
 
     private class bla implements Relation {
