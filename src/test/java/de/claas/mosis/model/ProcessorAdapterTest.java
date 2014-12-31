@@ -8,6 +8,7 @@ import de.claas.mosis.io.generator.Linear;
 import de.claas.mosis.io.generator.Random;
 import de.claas.mosis.processing.MovingAverage;
 import de.claas.mosis.processing.debug.*;
+import de.claas.mosis.processing.util.CommandLine;
 import de.claas.mosis.processing.util.Delay;
 import de.claas.mosis.processing.util.Distance;
 import de.claas.mosis.util.Utils;
@@ -72,6 +73,7 @@ public class ProcessorAdapterTest {
         impl.add(new Object[]{Random.class});
         impl.add(new Object[]{de.claas.mosis.io.generator.Time.class});
         impl.add(new Object[]{ToString.class});
+        impl.add(new Object[]{CommandLine.class});
         return impl;
     }
 
