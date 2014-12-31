@@ -62,7 +62,7 @@ public class InfiniteLevelOrder implements Iterator<Node> {
 
     private Queue<Node> getNodes(int level) {
         if (level >= _Levels.size()) {
-            _Levels.add(level, new LinkedList<Node>());
+            _Levels.add(level, new LinkedList<>());
         }
         return _Levels.get(level);
     }

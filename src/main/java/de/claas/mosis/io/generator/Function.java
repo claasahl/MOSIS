@@ -35,9 +35,9 @@ public class Function extends ProcessorAdapter<Double, Double> {
 
     @Parameter("Mathematical function / expression used to generate output values.")
     public static final String FUNCTION = "function";
-    private Queue<String> _Token;
-    private Stack<Double> _Result;
-    private List<Double> _Variables;
+    private final Queue<String> _Token;
+    private final Stack<Double> _Result;
+    private final List<Double> _Variables;
 
     /**
      * Initializes the class with default values.
@@ -62,7 +62,7 @@ public class Function extends ProcessorAdapter<Double, Double> {
     @Override
     public void process(List<Double> in, List<Double> out) {
         String expression = getParameter(FUNCTION);
-        in = in == null ? new Vector<Double>() : in;
+        in = in == null ? new Vector<>() : in;
         out.add(interpret(expression, in));
     }
 
@@ -252,7 +252,7 @@ public class Function extends ProcessorAdapter<Double, Double> {
         @Override
         public boolean complies(String parameter, String value) {
             try {
-                interpret(value, new Vector<Double>());
+                interpret(value, new Vector<>());
                 return true;
             } catch (Exception e) {
                 return false;
