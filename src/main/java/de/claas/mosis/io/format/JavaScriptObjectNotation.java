@@ -1,10 +1,5 @@
 package de.claas.mosis.io.format;
 
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.Vector;
-import java.util.regex.Pattern;
-
 import de.claas.mosis.io.FileImpl;
 import de.claas.mosis.io.StreamHandler;
 import de.claas.mosis.io.StreamHandlerImpl;
@@ -12,17 +7,22 @@ import de.claas.mosis.io.UrlImpl;
 import de.claas.mosis.model.Data;
 import de.claas.mosis.util.Parser;
 
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Vector;
+import java.util.regex.Pattern;
+
 /**
  * The class {@link JavaScriptObjectNotation}. It is intended to read and write
  * JSON data (JavaScript Object Notation). This {@link StreamHandler} allows to
  * read and write JSON data from any of the {@link StreamHandlerImpl}
  * implementations (e.g. {@link FileImpl} or {@link UrlImpl}).
- * 
+ * <p/>
  * This implementation is based on the definitions given in RFC 4627, which is
  * publicly available at http://www.ietf.org/rfc/rfc4180.txt. The therein
  * contained EBNF grammar was slightly modified and the final result is listed
  * below:
- * 
+ * <p/>
  * Terminal symbols:
  * <ol>
  * <li>JSON-text = object / array</li>
@@ -87,9 +87,8 @@ import de.claas.mosis.util.Parser;
  * <li>quotation-mark = %x22 ; "</li>
  * <li>unescaped = %x20-21 / %x23-5B / %x5D-10FFFF</li>
  * </ol>
- * 
+ *
  * @author Claas Ahlrichs (claasahl@tzi.de)
- * 
  */
 public class JavaScriptObjectNotation extends AbstractTextFormat<Data> {
 
@@ -118,582 +117,561 @@ public class JavaScriptObjectNotation extends AbstractTextFormat<Data> {
      * Initializes the class with default values.
      */
     public JavaScriptObjectNotation() {
-	BeginArray = Pattern.compile("\\s*\\x5B\\s*");
-	BeginObject = Pattern.compile("\\s*\\x7B\\s*");
-	EndArray = Pattern.compile("\\s*\\x5D\\s*");
-	EndObject = Pattern.compile("\\s*\\x7D\\s*");
-	NameSeparator = Pattern.compile("\\s*\\x3A\\s*");
-	ValueSeparator = Pattern.compile("\\s*\\x2C\\s*");
-	False = Pattern.compile("\\x66\\x61\\x6c\\x73\\x65");
-	Null = Pattern.compile("\\x6e\\x75\\x6c\\x6c");
-	True = Pattern.compile("\\x74\\x72\\x75\\x65");
-	DecimalPoint = Pattern.compile("\\x2E");
-	Digit1To9 = Pattern.compile("[\\x31-\\x39]");
-	Digit = Pattern.compile("[\\x30-\\x39]");
-	E = Pattern.compile("[\\x65\\x45]");
-	Minus = Pattern.compile("\\x2D");
-	Plus = Pattern.compile("\\x2B");
-	Zero = Pattern.compile("\\x30");
-	QuotationMark = Pattern.compile("\\x22");
-	Unescaped = Pattern
-		.compile("[\\x20-\\x21\\x23-\\x5B\\x5D-\\x{10FFFF}]");
-	Escaped = Pattern
-		.compile("\\x5C([\\x22\\x5C\\x2F\\x62\\x66\\x6E\\x72\\x74]|\\x75[0-9a-f]{4})");
-	_JSON = new StringBuilder();
+        BeginArray = Pattern.compile("\\s*\\x5B\\s*");
+        BeginObject = Pattern.compile("\\s*\\x7B\\s*");
+        EndArray = Pattern.compile("\\s*\\x5D\\s*");
+        EndObject = Pattern.compile("\\s*\\x7D\\s*");
+        NameSeparator = Pattern.compile("\\s*\\x3A\\s*");
+        ValueSeparator = Pattern.compile("\\s*\\x2C\\s*");
+        False = Pattern.compile("\\x66\\x61\\x6c\\x73\\x65");
+        Null = Pattern.compile("\\x6e\\x75\\x6c\\x6c");
+        True = Pattern.compile("\\x74\\x72\\x75\\x65");
+        DecimalPoint = Pattern.compile("\\x2E");
+        Digit1To9 = Pattern.compile("[\\x31-\\x39]");
+        Digit = Pattern.compile("[\\x30-\\x39]");
+        E = Pattern.compile("[\\x65\\x45]");
+        Minus = Pattern.compile("\\x2D");
+        Plus = Pattern.compile("\\x2B");
+        Zero = Pattern.compile("\\x30");
+        QuotationMark = Pattern.compile("\\x22");
+        Unescaped = Pattern
+                .compile("[\\x20-\\x21\\x23-\\x5B\\x5D-\\x{10FFFF}]");
+        Escaped = Pattern
+                .compile("\\x5C([\\x22\\x5C\\x2F\\x62\\x66\\x6E\\x72\\x74]|\\x75[0-9a-f]{4})");
+        _JSON = new StringBuilder();
     }
 
     @Override
     public void process(List<Data> in, List<Data> out) {
-	try {
-	    if (isReadOnly(in)) {
-		// Keep buffer updated
-		String line = readLine(true);
-		if (line != null) {
-		    _JSON.append(line);
-		}
+        try {
+            if (isReadOnly(in)) {
+                // Keep buffer updated
+                String line = readLine(true);
+                if (line != null) {
+                    _JSON.append(line);
+                }
 
-		// Parse JSON
-		if (_JSON.length() > 0) {
-		    Data data = new Data();
-		    List<Object> values = new Vector<>();
-		    String processed = jsonText(new StringBuilder(_JSON), data,
-			    values);
-		    if (processed != null) {
-			_JSON.replace(0, processed.length(), "");
-			out.add(data);
-			// TODO How to differentiate between arrays and objects?
-			// TODO How should arrays be handled at all?
-		    }
-		}
-	    } else {
-		for (Data datum : in) {
-		    writeLine(toJSON(datum), true);
-		}
-		if (shouldFoward()) {
-		    out.addAll(in);
-		}
-	    }
-	} catch (Exception e) {
-	    e.printStackTrace();
-	}
+                // Parse JSON
+                if (_JSON.length() > 0) {
+                    Data data = new Data();
+                    List<Object> values = new Vector<>();
+                    String processed = jsonText(new StringBuilder(_JSON), data,
+                            values);
+                    if (processed != null) {
+                        _JSON.replace(0, processed.length(), "");
+                        out.add(data);
+                        // TODO How to differentiate between arrays and objects?
+                        // TODO How should arrays be handled at all?
+                    }
+                }
+            } else {
+                for (Data datum : in) {
+                    writeLine(toJSON(datum), true);
+                }
+                if (shouldForward()) {
+                    out.addAll(in);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Returns the JSON data that was processed by this call. If no data was
      * processed (e.g. incomplete or invalid JSON data), then <code>null</code>
      * is returned. The data is processed as defined in rule:
-     * 
+     * <p/>
      * <b>JSON-text = object / array</b>
-     * 
-     * @param json
-     *            the JSON data that is being processed
-     * @param data
-     *            if data was successfully processed and it was a JSON object,
-     *            then the {@link Data} instance will be updated to represent
-     *            the processed JSON object
-     * @param values
-     *            if data was successfully processed and it was a JSON array,
-     *            then the list will be updated to represent the processed JSON
-     *            array
+     *
+     * @param json   the JSON data that is being processed
+     * @param data   if data was successfully processed and it was a JSON object,
+     *               then the {@link Data} instance will be updated to represent
+     *               the processed JSON object
+     * @param values if data was successfully processed and it was a JSON array,
+     *               then the list will be updated to represent the processed JSON
+     *               array
      * @return the JSON data that was processed by this call
      */
     private String jsonText(StringBuilder json, Data data, List<Object> values) {
-	String jsonText;
+        String jsonText;
 
-	// object
-	if ((jsonText = object(json, data)) != null) {
-	    return jsonText;
-	}
+        // object
+        if ((jsonText = object(json, data)) != null) {
+            return jsonText;
+        }
 
-	// array
-	if ((jsonText = array(json, values)) != null) {
-	    return jsonText;
-	}
-	return null;
+        // array
+        if ((jsonText = array(json, values)) != null) {
+            return jsonText;
+        }
+        return null;
     }
 
     /**
      * Returns the JSON data that was processed by this call. If no data was
      * processed (e.g. incomplete or invalid JSON data), then <code>null</code>
      * is returned. The data is processed as defined in rule:
-     * 
+     * <p/>
      * <b>object = begin-object [ member *( value-separator member ) ]
      * end-object</b>
-     * 
-     * @param json
-     *            the JSON data that is being processed
-     * @param data
-     *            if data was successfully processed, then the {@link Data}
-     *            instance will be updated to represent the processed JSON
-     *            object
+     *
+     * @param json the JSON data that is being processed
+     * @param data if data was successfully processed, then the {@link Data}
+     *             instance will be updated to represent the processed JSON
+     *             object
      * @return the JSON data that was processed by this call
      */
     private String object(StringBuilder json, Data data) {
-	StringBuilder processed = new StringBuilder();
-	String object;
+        StringBuilder processed = new StringBuilder();
+        String object;
 
-	// begin-object
-	if ((object = Parser.startsWith(json, BeginObject)) == null) {
-	    return null;
-	}
-	processed.append(object);
+        // begin-object
+        if ((object = Parser.startsWith(json, BeginObject)) == null) {
+            return null;
+        }
+        processed.append(object);
 
-	// [ member *( value-separator member ) ]
-	if ((object = member(json, data)) != null) {
-	    processed.append(object);
-	    while ((object = Parser.startsWith(json, ValueSeparator)) != null) {
-		processed.append(object);
-		if ((object = member(json, data)) == null) {
-		    Parser.unprocess(json, processed);
-		    return null;
-		}
-		processed.append(object);
-	    }
-	}
+        // [ member *( value-separator member ) ]
+        if ((object = member(json, data)) != null) {
+            processed.append(object);
+            while ((object = Parser.startsWith(json, ValueSeparator)) != null) {
+                processed.append(object);
+                if ((object = member(json, data)) == null) {
+                    Parser.unprocess(json, processed);
+                    return null;
+                }
+                processed.append(object);
+            }
+        }
 
-	// end-object
-	if ((object = Parser.startsWith(json, EndObject)) == null) {
-	    Parser.unprocess(json, processed);
-	    return null;
-	}
-	processed.append(object);
-	return processed.toString();
+        // end-object
+        if ((object = Parser.startsWith(json, EndObject)) == null) {
+            Parser.unprocess(json, processed);
+            return null;
+        }
+        processed.append(object);
+        return processed.toString();
     }
 
     /**
      * Returns the JSON data that was processed by this call. If no data was
      * processed (e.g. incomplete or invalid JSON data), then <code>null</code>
      * is returned. The data is processed as defined in rule:
-     * 
+     * <p/>
      * <b>array = begin-array [ value *( value-separator value ) ] end-array</b>
-     * 
-     * @param json
-     *            the JSON data that is being processed
-     * @param values
-     *            if data was successfully processed, then the list will be
-     *            updated to represent the processed JSON array
+     *
+     * @param json   the JSON data that is being processed
+     * @param values if data was successfully processed, then the list will be
+     *               updated to represent the processed JSON array
      * @return the JSON data that was processed by this call
      */
     private String array(StringBuilder json, List<Object> values) {
-	StringBuilder processed = new StringBuilder();
-	String array;
+        StringBuilder processed = new StringBuilder();
+        String array;
 
-	// begin-array
-	if ((array = Parser.startsWith(json, BeginArray)) == null) {
-	    return null;
-	}
-	processed.append(array);
+        // begin-array
+        if ((array = Parser.startsWith(json, BeginArray)) == null) {
+            return null;
+        }
+        processed.append(array);
 
-	// [ value *( value-separator value ) ]
-	if ((array = value(json, values)) != null) {
-	    processed.append(array);
-	    while ((array = Parser.startsWith(json, ValueSeparator)) != null) {
-		processed.append(array);
-		if ((array = value(json, values)) == null) {
-		    Parser.unprocess(json, processed);
-		    return null;
-		}
-		processed.append(array);
-	    }
-	}
+        // [ value *( value-separator value ) ]
+        if ((array = value(json, values)) != null) {
+            processed.append(array);
+            while ((array = Parser.startsWith(json, ValueSeparator)) != null) {
+                processed.append(array);
+                if ((array = value(json, values)) == null) {
+                    Parser.unprocess(json, processed);
+                    return null;
+                }
+                processed.append(array);
+            }
+        }
 
-	// end-array
-	if ((array = Parser.startsWith(json, EndArray)) == null) {
-	    Parser.unprocess(json, processed);
-	    return null;
-	}
-	processed.append(array);
-	return processed.toString();
+        // end-array
+        if ((array = Parser.startsWith(json, EndArray)) == null) {
+            Parser.unprocess(json, processed);
+            return null;
+        }
+        processed.append(array);
+        return processed.toString();
     }
 
     /**
      * Returns the JSON data that was processed by this call. If no data was
      * processed (e.g. incomplete or invalid JSON data), then <code>null</code>
      * is returned. The data is processed as defined in rule:
-     * 
+     * <p/>
      * <b>member = string name-separator value</b>
-     * 
-     * @param json
-     *            the JSON data that is being processed
-     * @param data
-     *            if data was successfully processed, then the {@link Data}
-     *            instance will be updated with the processed member / field
+     *
+     * @param json the JSON data that is being processed
+     * @param data if data was successfully processed, then the {@link Data}
+     *             instance will be updated with the processed member / field
      * @return the JSON data that was processed by this call
      */
     private String member(StringBuilder json, Data data) {
-	StringBuilder processed = new StringBuilder();
-	List<Object> values = new Vector<>();
-	StringBuilder name = new StringBuilder();
-	String member;
+        StringBuilder processed = new StringBuilder();
+        List<Object> values = new Vector<>();
+        StringBuilder name = new StringBuilder();
+        String member;
 
-	// string
-	if ((member = string(json, name)) == null) {
-	    return null;
-	}
-	processed.append(member);
+        // string
+        if ((member = string(json, name)) == null) {
+            return null;
+        }
+        processed.append(member);
 
-	// name-separator
-	if ((member = Parser.startsWith(json, NameSeparator)) == null) {
-	    Parser.unprocess(json, processed);
-	    return null;
-	}
-	processed.append(member);
+        // name-separator
+        if ((member = Parser.startsWith(json, NameSeparator)) == null) {
+            Parser.unprocess(json, processed);
+            return null;
+        }
+        processed.append(member);
 
-	// value
-	if ((member = value(json, values)) == null) {
-	    Parser.unprocess(json, processed);
-	    return null;
-	}
-	data.put(name.toString(), values.get(0));
-	processed.append(member);
-	return processed.toString();
+        // value
+        if ((member = value(json, values)) == null) {
+            Parser.unprocess(json, processed);
+            return null;
+        }
+        data.put(name.toString(), values.get(0));
+        processed.append(member);
+        return processed.toString();
     }
 
     /**
      * Returns the JSON data that was processed by this call. If no data was
      * processed (e.g. incomplete or invalid JSON data), then <code>null</code>
      * is returned. The data is processed as defined in rule:
-     * 
+     * <p/>
      * <b>string = quotation-mark *character quotation-mark</b>
-     * 
-     * @param json
-     *            the JSON data that is being processed
-     * @param text
-     *            if data was successfully processed, then the
-     *            {@link StringBuilder} instance will be updated with the text
-     *            in between the quotes
+     *
+     * @param json the JSON data that is being processed
+     * @param text if data was successfully processed, then the
+     *             {@link StringBuilder} instance will be updated with the text
+     *             in between the quotes
      * @return the JSON data that was processed by this call
      */
     private String string(StringBuilder json, StringBuilder text) {
-	StringBuilder processed = new StringBuilder();
-	String string;
+        StringBuilder processed = new StringBuilder();
+        String string;
 
-	// quotation-mark
-	if ((string = Parser.startsWith(json, QuotationMark)) == null) {
-	    return null;
-	}
-	processed.append(string);
+        // quotation-mark
+        if ((string = Parser.startsWith(json, QuotationMark)) == null) {
+            return null;
+        }
+        processed.append(string);
 
-	// *char
-	while ((string = character(json, text)) != null) {
-	    processed.append(string);
-	}
+        // *char
+        while ((string = character(json, text)) != null) {
+            processed.append(string);
+        }
 
-	// quotation-mark
-	if ((string = Parser.startsWith(json, QuotationMark)) == null) {
-	    Parser.unprocess(json, processed);
-	    return null;
-	}
-	processed.append(string);
-	return processed.toString();
+        // quotation-mark
+        if ((string = Parser.startsWith(json, QuotationMark)) == null) {
+            Parser.unprocess(json, processed);
+            return null;
+        }
+        processed.append(string);
+        return processed.toString();
     }
 
     /**
      * Returns the JSON data that was processed by this call. If no data was
      * processed (e.g. incomplete or invalid JSON data), then <code>null</code>
      * is returned. The data is processed as defined in rule:
-     * 
+     * <p/>
      * <b>character = unescaped / escaped</b>
-     * 
-     * @param json
-     *            the JSON data that is being processed * @param text if data
-     *            was successfully processed, then the {@link StringBuilder}
-     *            instance will be updated with the text in between the quotes
+     *
+     * @param json the JSON data that is being processed * @param text if data
+     *             was successfully processed, then the {@link StringBuilder}
+     *             instance will be updated with the text in between the quotes
      * @return the JSON data that was processed by this call
      */
     private String character(StringBuilder json, StringBuilder text) {
-	String character;
+        String character;
 
-	// unescaped
-	if ((character = Parser.startsWith(json, Unescaped)) != null) {
-	    text.append(character);
-	    return character;
-	}
+        // unescaped
+        if ((character = Parser.startsWith(json, Unescaped)) != null) {
+            text.append(character);
+            return character;
+        }
 
-	// escaped
-	if ((character = Parser.startsWith(json, Escaped)) != null) {
-	    // TODO Handle escaped characters.
-	    text.append(character);
-	    return character;
-	}
-	return null;
+        // escaped
+        if ((character = Parser.startsWith(json, Escaped)) != null) {
+            // TODO Handle escaped characters.
+            text.append(character);
+            return character;
+        }
+        return null;
     }
 
     /**
      * Returns the JSON data that was processed by this call. If no data was
      * processed (e.g. incomplete or invalid JSON data), then <code>null</code>
      * is returned. The data is processed as defined in rule:
-     * 
+     * <p/>
      * <b>value = false / null / true / object / array / number / string</b>
-     * 
-     * @param json
-     *            the JSON data that is being processed
-     * @param values
-     *            if data was successfully processed, then the list will be
-     *            updated the processed value
+     *
+     * @param json   the JSON data that is being processed
+     * @param values if data was successfully processed, then the list will be
+     *               updated the processed value
      * @return the JSON data that was processed by this call
      */
     private String value(StringBuilder json, List<Object> values) {
-	String value;
+        String value;
 
-	// false
-	if ((value = Parser.startsWith(json, False)) != null) {
-	    values.add(Boolean.FALSE);
-	    return value;
-	}
+        // false
+        if ((value = Parser.startsWith(json, False)) != null) {
+            values.add(Boolean.FALSE);
+            return value;
+        }
 
-	// null
-	if ((value = Parser.startsWith(json, Null)) != null) {
-	    values.add(null);
-	    return value;
-	}
+        // null
+        if ((value = Parser.startsWith(json, Null)) != null) {
+            values.add(null);
+            return value;
+        }
 
-	// true
-	if ((value = Parser.startsWith(json, True)) != null) {
-	    values.add(Boolean.TRUE);
-	    return value;
-	}
+        // true
+        if ((value = Parser.startsWith(json, True)) != null) {
+            values.add(Boolean.TRUE);
+            return value;
+        }
 
-	// object
-	Data data = new Data();
-	if ((value = object(json, data)) != null) {
-	    values.add(data);
-	    return value;
-	}
+        // object
+        Data data = new Data();
+        if ((value = object(json, data)) != null) {
+            values.add(data);
+            return value;
+        }
 
-	// array
-	List<Object> array = new Vector<>();
-	if ((value = array(json, array)) != null) {
-	    values.add(array);
-	    return value;
-	}
+        // array
+        List<Object> array = new Vector<>();
+        if ((value = array(json, array)) != null) {
+            values.add(array);
+            return value;
+        }
 
-	// number
-	if ((value = number(json)) != null) {
-	    values.add(new BigDecimal(value));
-	    return value;
-	}
+        // number
+        if ((value = number(json)) != null) {
+            values.add(new BigDecimal(value));
+            return value;
+        }
 
-	// string
-	StringBuilder text = new StringBuilder();
-	if ((value = string(json, text)) != null) {
-	    values.add(text.toString());
-	    return value;
-	}
-	return null;
+        // string
+        StringBuilder text = new StringBuilder();
+        if ((value = string(json, text)) != null) {
+            values.add(text.toString());
+            return value;
+        }
+        return null;
     }
 
     /**
      * Returns the JSON data that was processed by this call. If no data was
      * processed (e.g. incomplete or invalid JSON data), then <code>null</code>
      * is returned. The data is processed as defined in rule:
-     * 
+     * <p/>
      * <b>number = [ minus ] integer [ frac ] [ exp ]</b>
-     * 
-     * @param json
-     *            the JSON data that is being processed
+     *
+     * @param json the JSON data that is being processed
      * @return the JSON data that was processed by this call
      */
     private String number(StringBuilder json) {
-	StringBuilder processed = new StringBuilder();
-	String number;
+        StringBuilder processed = new StringBuilder();
+        String number;
 
-	// [ minus ]
-	if ((number = Parser.startsWith(json, Minus)) != null) {
-	    processed.append(number);
-	}
+        // [ minus ]
+        if ((number = Parser.startsWith(json, Minus)) != null) {
+            processed.append(number);
+        }
 
-	// integer
-	if ((number = integer(json)) == null) {
-	    Parser.unprocess(json, processed);
-	    return null;
-	}
-	processed.append(number);
+        // integer
+        if ((number = integer(json)) == null) {
+            Parser.unprocess(json, processed);
+            return null;
+        }
+        processed.append(number);
 
-	// [ frac ]
-	if ((number = frac(json)) != null) {
-	    processed.append(number);
-	}
+        // [ frac ]
+        if ((number = frac(json)) != null) {
+            processed.append(number);
+        }
 
-	// [ exp ]
-	if ((number = exp(json)) != null) {
-	    processed.append(number);
-	}
-	return processed.toString();
+        // [ exp ]
+        if ((number = exp(json)) != null) {
+            processed.append(number);
+        }
+        return processed.toString();
     }
 
     /**
      * Returns the JSON data that was processed by this call. If no data was
      * processed (e.g. incomplete or invalid JSON data), then <code>null</code>
      * is returned. The data is processed as defined in rule:
-     * 
+     * <p/>
      * <b>integer = zero / ( DIGIT1-9 *DIGIT )</b>
-     * 
-     * @param json
-     *            the JSON data that is being processed
+     *
+     * @param json the JSON data that is being processed
      * @return the JSON data that was processed by this call
      */
     private String integer(StringBuilder json) {
-	StringBuilder processed = new StringBuilder();
-	String integer;
+        StringBuilder processed = new StringBuilder();
+        String integer;
 
-	// zero
-	if ((integer = Parser.startsWith(json, Zero)) != null) {
-	    return integer;
-	}
+        // zero
+        if ((integer = Parser.startsWith(json, Zero)) != null) {
+            return integer;
+        }
 
-	// ( DIGIT1-9 *DIGIT )
-	if ((integer = Parser.startsWith(json, Digit1To9)) == null) {
-	    return null;
-	}
-	do {
-	    processed.append(integer);
-	} while ((integer = Parser.startsWith(json, Digit)) != null);
-	return processed.toString();
+        // ( DIGIT1-9 *DIGIT )
+        if ((integer = Parser.startsWith(json, Digit1To9)) == null) {
+            return null;
+        }
+        do {
+            processed.append(integer);
+        } while ((integer = Parser.startsWith(json, Digit)) != null);
+        return processed.toString();
     }
 
     /**
      * Returns the JSON data that was processed by this call. If no data was
      * processed (e.g. incomplete or invalid JSON data), then <code>null</code>
      * is returned. The data is processed as defined in rule:
-     * 
+     * <p/>
      * <b>frac = decimal-point +DIGIT</b>
-     * 
-     * @param json
-     *            the JSON data that is being processed
+     *
+     * @param json the JSON data that is being processed
      * @return the JSON data that was processed by this call
      */
     private String frac(StringBuilder json) {
-	StringBuilder processed = new StringBuilder();
-	String frac;
+        StringBuilder processed = new StringBuilder();
+        String frac;
 
-	// decimal-point
-	if ((frac = Parser.startsWith(json, DecimalPoint)) == null) {
-	    return null;
-	}
-	processed.append(frac);
+        // decimal-point
+        if ((frac = Parser.startsWith(json, DecimalPoint)) == null) {
+            return null;
+        }
+        processed.append(frac);
 
-	// +DIGIT
-	if ((frac = Parser.startsWith(json, Digit)) == null) {
-	    Parser.unprocess(json, processed);
-	    return null;
-	}
-	do {
-	    processed.append(frac);
-	} while ((frac = Parser.startsWith(json, Digit)) != null);
-	return processed.toString();
+        // +DIGIT
+        if ((frac = Parser.startsWith(json, Digit)) == null) {
+            Parser.unprocess(json, processed);
+            return null;
+        }
+        do {
+            processed.append(frac);
+        } while ((frac = Parser.startsWith(json, Digit)) != null);
+        return processed.toString();
     }
 
     /**
      * Returns the JSON data that was processed by this call. If no data was
      * processed (e.g. incomplete or invalid JSON data), then <code>null</code>
      * is returned. The data is processed as defined in rule:
-     * 
+     * <p/>
      * <b>exp = e [ minus / plus ] +DIGIT</b>
-     * 
-     * @param json
-     *            the JSON data that is being processed
+     *
+     * @param json the JSON data that is being processed
      * @return the JSON data that was processed by this call
      */
     private String exp(StringBuilder json) {
-	StringBuilder processed = new StringBuilder();
-	String exp;
+        StringBuilder processed = new StringBuilder();
+        String exp;
 
-	// e
-	if ((exp = Parser.startsWith(json, E)) == null) {
-	    return null;
-	}
-	processed.append(exp);
+        // e
+        if ((exp = Parser.startsWith(json, E)) == null) {
+            return null;
+        }
+        processed.append(exp);
 
-	// [ minus / plus ]
-	if ((exp = Parser.startsWith(json, Minus)) != null) {
-	    processed.append(exp);
-	} else if ((exp = Parser.startsWith(json, Plus)) != null) {
-	    processed.append(exp);
-	}
+        // [ minus / plus ]
+        if ((exp = Parser.startsWith(json, Minus)) != null) {
+            processed.append(exp);
+        } else if ((exp = Parser.startsWith(json, Plus)) != null) {
+            processed.append(exp);
+        }
 
-	// +DIGIT
-	if ((exp = Parser.startsWith(json, Digit)) == null) {
-	    Parser.unprocess(json, processed);
-	    return null;
-	}
-	do {
-	    processed.append(exp);
-	} while ((exp = Parser.startsWith(json, Digit)) != null);
-	return processed.toString();
+        // +DIGIT
+        if ((exp = Parser.startsWith(json, Digit)) == null) {
+            Parser.unprocess(json, processed);
+            return null;
+        }
+        do {
+            processed.append(exp);
+        } while ((exp = Parser.startsWith(json, Digit)) != null);
+        return processed.toString();
     }
 
     /**
      * Returns JSON data that represents a JSON object.
-     * 
-     * @param data
-     *            the JSON object that should be returned as JSON data
+     *
+     * @param data the JSON object that should be returned as JSON data
      * @return JSON data that represents a JSON object
      */
     private String toJSON(Data data) {
-	// TODO Avoid hard-coded terminals
-	boolean first = true;
-	StringBuilder processed = new StringBuilder();
-	processed.append("{");
-	for (String member : data.keySet()) {
-	    if (first) {
-		first = false;
-	    } else {
-		processed.append(",");
-	    }
-	    processed.append(toJSON(member));
-	    processed.append(":");
-	    processed.append(toJSON(data.get(member)));
-	}
-	processed.append("}");
-	return processed.toString();
+        // TODO Avoid hard-coded terminals
+        boolean first = true;
+        StringBuilder processed = new StringBuilder();
+        processed.append("{");
+        for (String member : data.keySet()) {
+            if (first) {
+                first = false;
+            } else {
+                processed.append(",");
+            }
+            processed.append(toJSON(member));
+            processed.append(":");
+            processed.append(toJSON(data.get(member)));
+        }
+        processed.append("}");
+        return processed.toString();
     }
 
     /**
      * Returns JSON data that represents a JSON array.
-     * 
-     * @param values
-     *            the JSON array that should be returned as JSON data
+     *
+     * @param values the JSON array that should be returned as JSON data
      * @return JSON data that represents a JSON array
      */
     private String toJSON(List<Object> values) {
-	boolean first = true;
-	StringBuilder processed = new StringBuilder();
-	processed.append("[");
-	for (Object value : values) {
-	    if (first) {
-		first = false;
-	    } else {
-		processed.append(",");
-	    }
-	    processed.append(toJSON(value));
-	}
-	processed.append("]");
-	return processed.toString();
+        boolean first = true;
+        StringBuilder processed = new StringBuilder();
+        processed.append("[");
+        for (Object value : values) {
+            if (first) {
+                first = false;
+            } else {
+                processed.append(",");
+            }
+            processed.append(toJSON(value));
+        }
+        processed.append("]");
+        return processed.toString();
     }
 
     /**
      * Returns JSON data that corresponds to the given object (e.g. JSON object,
      * JSON array, true, false, etc.).
-     * 
-     * @param o
-     *            the object that should be returned as JSON data
+     *
+     * @param o the object that should be returned as JSON data
      * @return JSON data that corresponds to the given object
      */
     @SuppressWarnings("unchecked")
     private String toJSON(Object o) {
-	if (o == null) {
-	    return null;
-	} else if (o instanceof String) {
-	    // TODO Escape characters
-	    return String.format("%s%s%s", '"', o.toString(), '"');
-	} else if (o instanceof Data) {
-	    return toJSON((Data) o);
-	} else if (o instanceof List) {
-	    return toJSON((List<Object>) o);
-	} else {
-	    return o.toString();
-	}
+        if (o == null) {
+            return null;
+        } else if (o instanceof String) {
+            // TODO Escape characters
+            return String.format("%s%s%s", '"', o.toString(), '"');
+        } else if (o instanceof Data) {
+            return toJSON((Data) o);
+        } else if (o instanceof List) {
+            return toJSON((List<Object>) o);
+        } else {
+            return o.toString();
+        }
     }
 
 }

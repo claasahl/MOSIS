@@ -7,10 +7,9 @@ import de.claas.mosis.model.Processor;
  * list of categories to which {@link Processor} classes may belong. This
  * information can later be used to group related {@link Processor} modules at
  * runtime and in written documentation.
- * 
+ *
  * @author Claas Ahlrichs (claasahl@tzi.de)
- * 
  */
 public enum Category {
-    InputOutput, DataFormat, Classification, Clustering, Mining, Other;
+    InputOutput, DataFormat, Classification, Clustering, Mining, Other
 }

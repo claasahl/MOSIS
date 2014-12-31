@@ -13,9 +13,8 @@ import de.claas.mosis.processing.debug.ToString;
  * show the use of a (simple) sequential information flow, in which a loop
  * exist. Here the basic sequence is based on only two {@link Processor} objects
  * (i.e. a source and a sink).
- * 
+ *
  * @author Claas Ahlrichs (claasahl@tzi.de)
- * 
  */
 public class LoopedSequence {
 
@@ -24,27 +23,26 @@ public class LoopedSequence {
      * one module and displayed by another. The latter module's results are fed
      * into itself again. The function's slope and intercept can be varied by
      * changing the method's arguments.
-     * 
-     * @param args
-     *            the arguments, namely slope (i.e. {@link Linear#M}) and
-     *            intercept (i.e. {@link Linear#B}).
+     *
+     * @param args the arguments, namely slope (i.e. {@link Linear#M}) and
+     *             intercept (i.e. {@link Linear#B}).
      */
     public static void main(String[] args) throws Exception {
-	// Prepare processing modules
-	Linear src = new Linear();
-	src.setParameter(Linear.M, args.length >= 1 ? args[0] : "1");
-	src.setParameter(Linear.B, args.length >= 2 ? args[1] : "0");
-	ToString toString = new ToString();
-	PlainText dst = new PlainText();
-	dst.setParameter(PlainText.IMPL,
-		StandardInputOutputImpl.class.getName());
+        // Prepare processing modules
+        Linear src = new Linear();
+        src.setParameter(Linear.M, args.length >= 1 ? args[0] : "1");
+        src.setParameter(Linear.B, args.length >= 2 ? args[1] : "0");
+        ToString toString = new ToString();
+        PlainText dst = new PlainText();
+        dst.setParameter(PlainText.IMPL,
+                StandardInputOutputImpl.class.getName());
 
-	// Construct graph and initiate processing
-	Graph graph = new Graph();
-	graph.addLink(src, toString);
-	graph.addLink(toString, dst);
-	graph.addLink(dst, dst);
-	graph.process(InfiniteLevelOrder.class);
+        // Construct graph and initiate processing
+        Graph graph = new Graph();
+        graph.addLink(src, toString);
+        graph.addLink(toString, dst);
+        graph.addLink(dst, dst);
+        graph.process(InfiniteLevelOrder.class);
     }
 
 }

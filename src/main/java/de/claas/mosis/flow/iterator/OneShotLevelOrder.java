@@ -1,13 +1,9 @@
 package de.claas.mosis.flow.iterator;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Set;
-
 import de.claas.mosis.flow.Graph;
 import de.claas.mosis.flow.Node;
+
+import java.util.*;
 
 
 /**
@@ -21,7 +17,7 @@ import de.claas.mosis.flow.Node;
  * {@link Node} ({@link Node} with longest distance to a root) was returned.
  * There are no ordering constraints for {@link Node} objects that have the same
  * depth. They are essentially randomly returned.
- * 
+ * <p/>
  * <ol>
  * <li>iteration: level 0 (data sources)</li>
  * <li>iteration: level 1</li>
@@ -29,9 +25,8 @@ import de.claas.mosis.flow.Node;
  * <li>iteration: level 3</li>
  * <li>...</li>
  * </ol>
- * 
+ *
  * @author Claas Ahlrichs (c.ahlrichs@neusta.de)
- * 
  */
 public class OneShotLevelOrder implements Iterator<Node> {
 
@@ -40,38 +35,37 @@ public class OneShotLevelOrder implements Iterator<Node> {
 
     /**
      * Initializes the class with the given parameter.
-     * 
-     * @param sources
-     *            the data sources to start with
+     *
+     * @param sources the data sources to start with
      */
     public OneShotLevelOrder(Set<Node> sources) {
-	_Visited = new HashSet<>(sources);
-	_Nodes = new LinkedList<>();
-	for (Node src : sources) {
-	    _Nodes.add(src);
-	}
+        _Visited = new HashSet<>(sources);
+        _Nodes = new LinkedList<>();
+        for (Node src : sources) {
+            _Nodes.add(src);
+        }
     }
 
     @Override
     public boolean hasNext() {
-	return !_Nodes.isEmpty();
+        return !_Nodes.isEmpty();
     }
 
     @Override
     public Node next() {
-	Node next = _Nodes.poll();
-	for (Node succ : next.getSuccessors()) {
-	    if (!_Visited.contains(succ)) {
-		_Visited.add(succ);
-		_Nodes.add(succ);
-	    }
-	}
-	return next;
+        Node next = _Nodes.poll();
+        for (Node successor : next.getSuccessors()) {
+            if (!_Visited.contains(successor)) {
+                _Visited.add(successor);
+                _Nodes.add(successor);
+            }
+        }
+        return next;
     }
 
     @Override
     public void remove() {
-	throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException();
     }
 
 }

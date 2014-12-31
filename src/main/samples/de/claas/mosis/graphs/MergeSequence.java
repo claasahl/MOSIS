@@ -15,9 +15,8 @@ import de.claas.mosis.processing.debug.ToString;
  * two independent {@link Processor} objects are merged. Here the basic sequence
  * is based on three {@link Processor} objects only (i.e. two sources and a
  * sink).
- * 
+ *
  * @author Claas Ahlrichs (claasahl@tzi.de)
- * 
  */
 public class MergeSequence {
 
@@ -27,28 +26,27 @@ public class MergeSequence {
      * displayed by another. The results of both generator are fed into the
      * sink. The function's slope and intercept can be varied by changing the
      * method's arguments.
-     * 
-     * @param args
-     *            the arguments, namely slope (i.e. {@link Linear#M}) and
-     *            intercept (i.e. {@link Linear#B}).
+     *
+     * @param args the arguments, namely slope (i.e. {@link Linear#M}) and
+     *             intercept (i.e. {@link Linear#B}).
      */
     public static void main(String[] args) throws Exception {
-	// Prepare processing modules
-	Random src1 = new Random();
-	Linear src2 = new Linear();
-	src2.setParameter(Linear.M, args.length >= 1 ? args[0] : "1");
-	src2.setParameter(Linear.B, args.length >= 2 ? args[1] : "0");
-	ToString toString = new ToString();
-	PlainText dst = new PlainText();
-	dst.setParameter(PlainText.IMPL,
-		StandardInputOutputImpl.class.getName());
+        // Prepare processing modules
+        Random src1 = new Random();
+        Linear src2 = new Linear();
+        src2.setParameter(Linear.M, args.length >= 1 ? args[0] : "1");
+        src2.setParameter(Linear.B, args.length >= 2 ? args[1] : "0");
+        ToString toString = new ToString();
+        PlainText dst = new PlainText();
+        dst.setParameter(PlainText.IMPL,
+                StandardInputOutputImpl.class.getName());
 
-	// Construct graph and initiate processing
-	Graph graph = new Graph();
-	graph.addLink(src1, toString);
-	graph.addLink(src2, toString);
-	graph.addLink(toString, dst);
-	graph.process(InfiniteLevelOrder.class);
+        // Construct graph and initiate processing
+        Graph graph = new Graph();
+        graph.addLink(src1, toString);
+        graph.addLink(src2, toString);
+        graph.addLink(toString, dst);
+        graph.process(InfiniteLevelOrder.class);
     }
 
 }
