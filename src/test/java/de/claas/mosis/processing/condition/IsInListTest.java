@@ -61,7 +61,7 @@ public class IsInListTest {
 
     @Test
     public void shouldHandleExtremes() {
-        Condition c = build(new Vector<>());
+        Condition c = build(new Vector<String>());
         assertFalse(c.complies(null, "a"));
         assertFalse(c.complies(null, "0"));
         assertFalse(c.complies(null, ""));
