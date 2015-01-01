@@ -1,5 +1,6 @@
 package de.claas.mosis.io;
 
+import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
 
 import java.io.*;
@@ -12,6 +13,7 @@ import java.io.*;
  */
 public class FileImpl extends StreamHandlerImpl {
 
+    @Parameter("The file that is to be accessed / processed.")
     public static final String FILE = "filename";
     public static final String APPEND = "append to file";
 
