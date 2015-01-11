@@ -132,8 +132,8 @@ public abstract class StreamHandler<T> extends DataHandler<T> {
      * {@link java.io.DataInputStream} or {@link java.util.zip.ZipInputStream}).
      *
      * @return the {@link java.io.InputStream}
-     * @throws IOException See {@link de.claas.mosis.io.StreamHandlerImpl#getInputStream()}
-     *                     for details.
+     * @throws java.io.IOException See {@link de.claas.mosis.io.StreamHandlerImpl#getInputStream()}
+     *                             for details.
      */
     protected InputStream getInputStream() throws IOException {
         if (_Input == null) {
@@ -152,8 +152,8 @@ public abstract class StreamHandler<T> extends DataHandler<T> {
      * {@link java.io.DataOutputStream} or {@link java.util.zip.ZipOutputStream}).
      *
      * @return the {@link java.io.OutputStream}
-     * @throws IOException See {@link de.claas.mosis.io.StreamHandlerImpl#getInputStream()}
-     *                     for details.
+     * @throws java.io.IOException See {@link de.claas.mosis.io.StreamHandlerImpl#getInputStream()}
+     *                             for details.
      */
     protected OutputStream getOutputStream() throws IOException {
         if (_Output == null) {

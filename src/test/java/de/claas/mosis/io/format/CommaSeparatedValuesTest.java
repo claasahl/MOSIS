@@ -208,7 +208,7 @@ public class CommaSeparatedValuesTest extends
      * @param csv the CSV data (for input)
      * @return the first data object that was read by the {@link
      * de.claas.mosis.io.DataHandler}
-     * @throws Exception when an error occurs while writing
+     * @throws java.lang.Exception when an error occurs while writing
      */
     private Data read(String csv) throws Exception {
         _H.setParameter(DataHandler.MODE, DataHandler.MODE_READ);
@@ -227,7 +227,7 @@ public class CommaSeparatedValuesTest extends
      * @param data the data object (for output)
      * @return the first CSV line that was written by the {@link
      * de.claas.mosis.io.DataHandler}
-     * @throws Exception when an error occurs while reading
+     * @throws java.lang.Exception when an error occurs while reading
      */
     private String write(Data... data) throws Exception {
         _H.setParameter(DataHandler.MODE, DataHandler.MODE_WRITE);

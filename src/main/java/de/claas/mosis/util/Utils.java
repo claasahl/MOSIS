@@ -95,8 +95,8 @@ public abstract class Utils {
      * @param clazz the {@link java.lang.Class} that the instance will have
      * @param args  the arguments that are used to create the
      * @return an instance of a class
-     * @throws Exception if the class could not be instantiated (e.g. not
-     *                   matching constructor was found)
+     * @throws java.lang.Exception if the class could not be instantiated (e.g.
+     *                             not matching constructor was found)
      */
     @SuppressWarnings("unchecked")
     public static <T> T instance(Class<T> clazz, Object... args)

@@ -37,7 +37,7 @@ public abstract class StreamHandlerImpl extends ConfigurableAdapter {
      *
      * @return the {@link java.io.OutputStream}. <code>null</code> if stream
      * cannot be created.
-     * @throws IOException if something unexpected happens
+     * @throws java.io.IOException if something unexpected happens
      */
     public abstract OutputStream getOutputStream() throws IOException;
 

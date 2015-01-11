@@ -134,9 +134,9 @@ public class Graph {
      *              instantiated
      * @return an instantiated {@link java.util.Iterator} object of the given
      * {@link java.lang.Class} for this graph
-     * @throws ReflectiveOperationException If the {@link java.util.Iterator}
-     *                                      class could not be properly
-     *                                      instantiated.
+     * @throws java.lang.ReflectiveOperationException If the {@link java.util.Iterator}
+     *                                                class could not be
+     *                                                properly instantiated.
      */
     public Iterator<Node> iterator(Class<? extends Iterator<Node>> clazz)
             throws ReflectiveOperationException {
