@@ -11,9 +11,9 @@ import java.io.BufferedOutputStream;
 import static org.junit.Assert.*;
 
 /**
- * The JUnit test for class {@link PlainText}. It is intended to collect and
- * document a set of test cases for the tested class. Please refer to the
- * individual tests for more detailed information.
+ * The JUnit test for class {@link de.claas.mosis.io.format.PlainText}. It is
+ * intended to collect and document a set of test cases for the tested class.
+ * Please refer to the individual tests for more detailed information.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -118,13 +118,14 @@ public class PlainTextTest extends AbstractTextFormatTest<String, PlainText> {
     }
 
     /**
-     * A helper method to avoid code duplicates. The method sets up the
-     * {@link DataHandler} for reading. It returns the first data object that
-     * was read by the {@link DataHandler}. The given (plain) text data input is
-     * used as input.
+     * A helper method to avoid code duplicates. The method sets up the {@link
+     * de.claas.mosis.io.DataHandler} for reading. It returns the first data
+     * object that was read by the {@link de.claas.mosis.io.DataHandler}. The
+     * given (plain) text data input is used as input.
      *
      * @param text the (plain) text data (for input)
-     * @return the first data object that was read by the {@link DataHandler}
+     * @return the first data object that was read by the {@link
+     * de.claas.mosis.io.DataHandler}
      * @throws Exception when an error occurs while writing
      */
     private String read(String text) throws Exception {
@@ -136,14 +137,14 @@ public class PlainTextTest extends AbstractTextFormatTest<String, PlainText> {
     }
 
     /**
-     * A helper method to avoid code duplicates. The method sets up the
-     * {@link DataHandler} for writing. It returns the first (plain) text line
-     * that was written by the {@link DataHandler}. The given data object is
-     * used as output.
+     * A helper method to avoid code duplicates. The method sets up the {@link
+     * de.claas.mosis.io.DataHandler} for writing. It returns the first (plain)
+     * text line that was written by the {@link de.claas.mosis.io.DataHandler}.
+     * The given data object is used as output.
      *
      * @param text the data object (for output)
-     * @return the first (plain) text line that was written by the
-     * {@link DataHandler}
+     * @return the first (plain) text line that was written by the {@link
+     * de.claas.mosis.io.DataHandler}
      * @throws Exception when an error occurs while reading
      */
     private String write(String... text) throws Exception {

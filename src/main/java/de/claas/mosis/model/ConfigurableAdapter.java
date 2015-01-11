@@ -8,11 +8,11 @@ import java.util.Map;
 import java.util.Vector;
 
 /**
- * The class {@link ConfigurableAdapter}. It is intended to provide a common
- * implementation of the {@link Configurable} interface. It tracks and manages
+ * The class {@link de.claas.mosis.model.ConfigurableAdapter}. It is intended to provide a common
+ * implementation of the {@link de.claas.mosis.model.Configurable} interface. It tracks and manages
  * configuration related parameters as well as their corresponding values.
  * Furthermore, it provides the option to get and set parameters of varying data
- * types (e.g. {@link Boolean}, {@link Integer}, etc.).
+ * types (e.g. {@link java.lang.Boolean}, {@link java.lang.Integer}, etc.).
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -143,11 +143,11 @@ public class ConfigurableAdapter extends ObservableAdapter implements
     }
 
     /**
-     * Adds a {@link Condition} to a parameter. This {@link Condition} is
+     * Adds a {@link de.claas.mosis.model.Condition} to a parameter. This {@link de.claas.mosis.model.Condition} is
      * evaluated every time the parameter is modified.
      *
      * @param parameter the parameter
-     * @param condition the {@link Condition}
+     * @param condition the {@link de.claas.mosis.model.Condition}
      */
     protected void addCondition(String parameter, Condition condition) {
         List<Condition> conditions = _Conditions.get(parameter);
@@ -159,10 +159,10 @@ public class ConfigurableAdapter extends ObservableAdapter implements
     }
 
     /**
-     * Removes a {@link Condition} from a parameter.
+     * Removes a {@link de.claas.mosis.model.Condition} from a parameter.
      *
      * @param parameter the parameter
-     * @param condition the {@link Condition}
+     * @param condition the {@link de.claas.mosis.model.Condition}
      */
     protected void removeCondition(String parameter, Condition condition) {
         List<Condition> conditions = _Conditions.get(parameter);
@@ -172,19 +172,19 @@ public class ConfigurableAdapter extends ObservableAdapter implements
     }
 
     /**
-     * Adds a {@link Relation} to a parameter. This {@link Relation} is
+     * Adds a {@link de.claas.mosis.model.Relation} to a parameter. This {@link de.claas.mosis.model.Relation} is
      * evaluated every time the parameter is modified.
      *
-     * @param relation the {@link Relation}
+     * @param relation the {@link de.claas.mosis.model.Relation}
      */
     protected void addRelation(Relation relation) {
         _Relations.add(relation);
     }
 
     /**
-     * Removes a {@link Relation} from a parameter.
+     * Removes a {@link de.claas.mosis.model.Relation} from a parameter.
      *
-     * @param relation the {@link Relation}
+     * @param relation the {@link de.claas.mosis.model.Relation}
      */
     protected void removeRelation(Relation relation) {
         _Relations.remove(relation);

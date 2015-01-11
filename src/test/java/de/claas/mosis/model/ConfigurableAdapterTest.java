@@ -17,12 +17,12 @@ import java.util.Vector;
 import static org.junit.Assert.*;
 
 /**
- * The JUnit test for {@link ConfigurableAdapter} classes. It is intended to
- * collect and document a set of test cases that are applicable to all
- * {@link ConfigurableAdapter} classes. Please refer to the individual tests for
- * more detailed information.
+ * The JUnit test for {@link de.claas.mosis.model.ConfigurableAdapter} classes.
+ * It is intended to collect and document a set of test cases that are
+ * applicable to all {@link de.claas.mosis.model.ConfigurableAdapter} classes.
+ * Please refer to the individual tests for more detailed information.
  * <p/>
- * Additional test cases can be found in {@link ConfigurableTest}.
+ * Additional test cases can be found in {@link de.claas.mosis.model.ConfigurableTest}.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -33,10 +33,11 @@ public class ConfigurableAdapterTest {
     private ConfigurableAdapter _C;
 
     /**
-     * Initializes this JUnit test for an implementation of the
-     * {@link ConfigurableAdapter} class.
+     * Initializes this JUnit test for an implementation of the {@link
+     * de.claas.mosis.model.ConfigurableAdapter} class.
      *
-     * @param clazz implementation of {@link ConfigurableAdapter} class
+     * @param clazz implementation of {@link de.claas.mosis.model.ConfigurableAdapter}
+     *              class
      */
     public ConfigurableAdapterTest(Class<ConfigurableAdapter> clazz) {
         _Clazz = clazz;

@@ -7,23 +7,19 @@ import de.claas.mosis.model.ProcessorAdapter;
 import java.util.*;
 
 /**
- * The class {@link Function}. It is intended to generate values of arbitrary
- * arithmetic expressions. The idea is to provide a text-based expression, which
- * is then parsed and interpreted. This class is mainly intended for debugging
- * purposes.
+ * The class {@link de.claas.mosis.io.generator.Function}. It is intended to
+ * generate values of arbitrary arithmetic expressions. The idea is to provide a
+ * text-based expression, which is then parsed and interpreted. This class is
+ * mainly intended for debugging purposes.
  * <p/>
  * Valid arithmetic expressions are of the form:</br>
  * <p/>
- * <ol>
- * <li>expression = term { ("+" | "-") term }.</li>
- * <li>term = factor { ("*" | "/") factor }.</li>
- * <li>factor = value | ["cos" | "sin"] "(" expression ")" | factor "^"
- * expression.</li>
- * <li>value = number | variable.</li>
- * <li>number = ["+" | "-"] digit { digit } ["." digit { digit }].</li>
- * <li>digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9".</li>
- * <li>variable = "x" { digit }.</li>
- * </ol>
+ * <ol> <li>expression = term { ("+" | "-") term }.</li> <li>term = factor {
+ * ("*" | "/") factor }.</li> <li>factor = value | ["cos" | "sin"] "("
+ * expression ")" | factor "^" expression.</li> <li>value = number |
+ * variable.</li> <li>number = ["+" | "-"] digit { digit } ["." digit { digit
+ * }].</li> <li>digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" |
+ * "9".</li> <li>variable = "x" { digit }.</li> </ol>
  * <p/>
  * TODO There seems to be a difference between the grammar above and the impl.
  * <p/>
@@ -91,8 +87,8 @@ public class Function extends ProcessorAdapter<Double, Double> {
 
     /**
      * Returns the set of tokens that make up the given mathematical expression.
-     * These tokens are interpreted by methods {@link #expression()},
-     * {@link #term()} and so on.
+     * These tokens are interpreted by methods {@link #expression()}, {@link
+     * #term()} and so on.
      *
      * @param expression the mathematical expression
      * @return the set of tokens that make up the given mathematical expression
@@ -241,9 +237,10 @@ public class Function extends ProcessorAdapter<Double, Double> {
     }
 
     /**
-     * The class {@link IsValidExpression}. It is intended to ensure the
-     * validity of mathematical expressions (as defined in {@link Function})
-     * whenever the {@link Function#FUNCTION} parameter is changed.
+     * The class {@link de.claas.mosis.io.generator.Function.IsValidExpression}.
+     * It is intended to ensure the validity of mathematical expressions (as
+     * defined in {@link de.claas.mosis.io.generator.Function}) whenever the
+     * {@link #FUNCTION} parameter is changed.
      *
      * @author Claas Ahlrichs (claasahl@tzi.de)
      */

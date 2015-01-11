@@ -1,19 +1,17 @@
 package de.claas.mosis.io.format;
 
 import de.claas.mosis.annotation.Parameter;
-import de.claas.mosis.io.FileImpl;
-import de.claas.mosis.io.StreamHandler;
-import de.claas.mosis.io.StreamHandlerImpl;
-import de.claas.mosis.io.UrlImpl;
 import de.claas.mosis.model.Condition;
 
 import java.util.List;
 
 /**
- * The class {@link PlainText}. It is intended to read and write {@link String}
- * objects. This {@link StreamHandler} allows to read and write plain text (i.e.
- * {@link String}) from any of the {@link StreamHandlerImpl} implementations
- * (e.g. {@link FileImpl} or {@link UrlImpl}).
+ * The class {@link de.claas.mosis.io.format.PlainText}. It is intended to read
+ * and write {@link java.lang.String} objects. This {@link
+ * de.claas.mosis.io.StreamHandler} allows to read and write plain text (i.e.
+ * {@link java.lang.String}) from any of the {@link de.claas.mosis.io.StreamHandlerImpl}
+ * implementations (e.g. {@link de.claas.mosis.io.FileImpl} or {@link
+ * de.claas.mosis.io.UrlImpl}).
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */

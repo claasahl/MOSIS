@@ -1,14 +1,12 @@
 package de.claas.mosis.model;
 
-import de.claas.mosis.flow.Link;
-
 import java.util.List;
 
 /**
- * The interface {@link Configurable}. It is intended to provide a unified
+ * The interface {@link de.claas.mosis.model.Configurable}. It is intended to provide a unified
  * interface for configuration purposes. The interface allows to get, set and
  * enumerate parameters of any object that wishes to expose such configuration
- * options (e.g. {@link Processor} and {@link Link}).
+ * options (e.g. {@link de.claas.mosis.model.Processor} and {@link de.claas.mosis.flow.Link}).
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */

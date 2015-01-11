@@ -10,8 +10,9 @@ import java.net.URL;
 import java.net.URLConnection;
 
 /**
- * The class {@link UrlImpl}. It is intended to provide access to {@link URL}s,
- * such that {@link StreamHandler} implementations can process them.
+ * The class {@link de.claas.mosis.io.UrlImpl}. It is intended to provide access
+ * to {@link java.net.URL}s, such that {@link de.claas.mosis.io.StreamHandler}
+ * implementations can process them.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */

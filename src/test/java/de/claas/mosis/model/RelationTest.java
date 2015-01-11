@@ -14,9 +14,10 @@ import java.util.Vector;
 import static org.junit.Assert.*;
 
 /**
- * The JUnit test for {@link Relation} classes. It is intended to collect and
- * document a set of test cases that are applicable to all {@link Relation}
- * classes. Please refer to the individual tests for more detailed information.
+ * The JUnit test for {@link de.claas.mosis.model.Relation} classes. It is
+ * intended to collect and document a set of test cases that are applicable to
+ * all {@link de.claas.mosis.model.Relation} classes. Please refer to the
+ * individual tests for more detailed information.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -27,10 +28,11 @@ public class RelationTest {
     private final Object[] _Args;
 
     /**
-     * Initializes this JUnit test for an implementation of the {@link Relation}
-     * class.
+     * Initializes this JUnit test for an implementation of the {@link
+     * de.claas.mosis.model.Relation} class.
      *
-     * @param clazz implementation of {@link Relation} class
+     * @param clazz implementation of {@link de.claas.mosis.model.Relation}
+     *              class
      * @param args  arguments for instantiating the implementing class
      */
     public RelationTest(Class<Relation> clazz, Object[] args) {
@@ -49,12 +51,12 @@ public class RelationTest {
     }
 
     /**
-     * Returns an instantiated {@link Relation} class. The concrete class of the
-     * instantiated object and its arguments are provided by the {@link #_Clazz}
-     * field and {@link #_Args} field, respectively.
+     * Returns an instantiated {@link de.claas.mosis.model.Relation} class. The
+     * concrete class of the instantiated object and its arguments are provided
+     * by the {@link #_Clazz} field and {@link #_Args} field, respectively.
      *
-     * @return an instantiated {@link Relation} class
-     * @see Utils#instance(Class, Object...)
+     * @return an instantiated {@link de.claas.mosis.model.Relation} class
+     * @see de.claas.mosis.util.Utils#instance(Class, Object...)
      */
     private Relation build() throws Exception {
         return Utils.instance(_Clazz, _Args);

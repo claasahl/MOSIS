@@ -8,14 +8,14 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
- * The class {@link DecoratorProcessor}. It is an implementation of the
- * {@link Processor} interface. This {@link Processor} is intended to wrap
- * another {@link Processor} object and meant forward all method calls to the
+ * The class {@link de.claas.mosis.model.DecoratorProcessor}. It is an implementation of the
+ * {@link de.claas.mosis.model.Processor} interface. This {@link de.claas.mosis.model.Processor} is intended to wrap
+ * another {@link de.claas.mosis.model.Processor} object and meant forward all method calls to the
  * wrapped object. Subclasses may want to override some (or all methods), thus
- * extending the original {@link Processor}'s functionality and responsibility.
+ * extending the original {@link de.claas.mosis.model.Processor}'s functionality and responsibility.
  *
- * @param <I> type of incoming data. See {@link Processor} for details.
- * @param <O> type of outgoing data. See {@link Processor} for details.
+ * @param <I> type of incoming data. See {@link de.claas.mosis.model.Processor} for details.
+ * @param <O> type of outgoing data. See {@link de.claas.mosis.model.Processor} for details.
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
 @Documentation(
@@ -127,9 +127,9 @@ public class DecoratorProcessor<I, O> extends ProcessorAdapter<I, O> {
     }
 
     /**
-     * Returns the wrapped / decorated {@link Processor}.
+     * Returns the wrapped / decorated {@link de.claas.mosis.model.Processor}.
      *
-     * @return the wrapped / decorated {@link Processor}
+     * @return the wrapped / decorated {@link de.claas.mosis.model.Processor}
      */
     protected ProcessorAdapter<I, O> getProcessor() {
         return _Processor;
@@ -149,8 +149,8 @@ public class DecoratorProcessor<I, O> extends ProcessorAdapter<I, O> {
     }
 
     /**
-     * The class {@link ProcessorCreator}. It is intended to create
-     * {@link Processor} objects whenever the {@link DecoratorProcessor#CLASS}
+     * The class {@link de.claas.mosis.model.DecoratorProcessor.ProcessorCreator}. It is intended to create
+     * {@link de.claas.mosis.model.Processor} objects whenever the {@link de.claas.mosis.model.DecoratorProcessor#CLASS}
      * parameter is changed.
      *
      * @author Claas Ahlrichs (claasahl@tzi.de)

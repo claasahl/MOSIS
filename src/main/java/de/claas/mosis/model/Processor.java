@@ -5,7 +5,7 @@ import de.claas.mosis.annotation.Documentation;
 import java.util.List;
 
 /**
- * The interface {@link Processor}. It is intended to provide a unified way for
+ * The interface {@link de.claas.mosis.model.Processor}. It is intended to provide a unified way for
  * processing time series data. This represents a generic module that can be
  * utilized to perform an arbitrary computations, transformations, etc. Multiple
  * of these modules can be linked together in order to perform more complex
@@ -13,12 +13,12 @@ import java.util.List;
  * traffic or analyze OpenStreetMap data, etc.).
  * <p/>
  * The life-cycle is such that {@link #setUp()} is called first. Then
- * {@link #process(List, List)} is invoked as often as required and finally the
+ * {@link #process(java.util.List, java.util.List)} is invoked as often as required and finally the
  * module is dismantled with {@link #dismantle()}. At this point, the set-up
  * method may be invoked again. Thus starting the cycle over again.
  *
- * @param <I> type of incoming data (e.g. {@link Integer})
- * @param <O> type of outgoing data (e.g. {@link Double})
+ * @param <I> type of incoming data (e.g. {@link java.lang.Integer})
+ * @param <O> type of outgoing data (e.g. {@link java.lang.Double})
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
 @Documentation(
@@ -52,7 +52,7 @@ public interface Processor<I, O> extends Configurable {
      * initialization (e.g. based on configuration parameters) that may the
      * required for the module to properly work. It can be safely assumed that
      * this method is invoked before any processing is done (i.e. call of
-     * {@link #process(List, List)}).
+     * {@link #process(java.util.List, java.util.List)}).
      */
     public void setUp();
 

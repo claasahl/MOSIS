@@ -9,9 +9,10 @@ import de.claas.mosis.model.Relation;
 import java.util.List;
 
 /**
- * The class {@link Random}. It is intended to generate random values based on a
- * {@link java.util.Random} object. The returned random numbers are within the
- * range defined by {@link #LOWER} (inclusive) and {@link #UPPER} (exclusive).
+ * The class {@link de.claas.mosis.io.generator.Random}. It is intended to
+ * generate random values based on a {@link java.util.Random} object. The
+ * returned random numbers are within the range defined by {@link #LOWER}
+ * (inclusive) and {@link #UPPER} (exclusive).
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -62,8 +63,8 @@ public class Random extends ProcessorAdapter<Double, Double> {
 
     /**
      * The class {@link ChangeSeed}. It is intended to (re-)set the seed of the
-     * {@link java.util.Random} generator object whenever the
-     * {@link Random#SEED} parameter is changed.
+     * {@link java.util.Random} generator object whenever the {@link
+     * Random#SEED} parameter is changed.
      *
      * @author Claas Ahlrichs (claasahl@tzi.de)
      */

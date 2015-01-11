@@ -26,12 +26,12 @@ import java.util.Vector;
 import static org.junit.Assert.*;
 
 /**
- * The JUnit test for {@link ProcessorAdapter} classes. It is intended to
- * collect and document a set of test cases that are applicable to all
- * {@link ProcessorAdapter} classes. Please refer to the individual tests for
- * more detailed information.
+ * The JUnit test for {@link de.claas.mosis.model.ProcessorAdapter} classes. It
+ * is intended to collect and document a set of test cases that are applicable
+ * to all {@link de.claas.mosis.model.ProcessorAdapter} classes. Please refer to
+ * the individual tests for more detailed information.
  * <p/>
- * Additional test cases can be found in {@link ProcessorTest}.
+ * Additional test cases can be found in {@link de.claas.mosis.model.ProcessorTest}.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -42,10 +42,11 @@ public class ProcessorAdapterTest {
     private ProcessorAdapter<?, ?> _P;
 
     /**
-     * Initializes this JUnit test for an implementation of the
-     * {@link ProcessorAdapter} class.
+     * Initializes this JUnit test for an implementation of the {@link
+     * de.claas.mosis.model.ProcessorAdapter} class.
      *
-     * @param clazz implementation of {@link ProcessorAdapter} class
+     * @param clazz implementation of {@link de.claas.mosis.model.ProcessorAdapter}
+     *              class
      */
     public ProcessorAdapterTest(Class<ProcessorAdapter<?, ?>> clazz) {
         _Clazz = clazz;
@@ -72,6 +73,7 @@ public class ProcessorAdapterTest {
         impl.add(new Object[]{Random.class});
         impl.add(new Object[]{de.claas.mosis.io.generator.Time.class});
         impl.add(new Object[]{ToString.class});
+        impl.add(new Object[]{Logger.class});
         return impl;
     }
 
@@ -316,8 +318,9 @@ public class ProcessorAdapterTest {
     }
 
     /**
-     * The class {@link Dummy}. It is intended to verify how often a
-     * {@link Relation} is accessed and when it is accessed.
+     * The class {@link de.claas.mosis.model.ProcessorAdapterTest.Dummy}. It is
+     * intended to verify how often a {@link de.claas.mosis.model.Relation} is
+     * accessed and when it is accessed.
      *
      * @author Claas Ahlrichs (claasahl@tzi.de)
      */

@@ -14,9 +14,10 @@ import java.util.Vector;
 import static org.junit.Assert.*;
 
 /**
- * The JUnit test for {@link Condition} classes. It is intended to collect and
- * document a set of test cases that are applicable to all {@link Condition}
- * classes. Please refer to the individual tests for more detailed information.
+ * The JUnit test for {@link de.claas.mosis.model.Condition} classes. It is
+ * intended to collect and document a set of test cases that are applicable to
+ * all {@link de.claas.mosis.model.Condition} classes. Please refer to the
+ * individual tests for more detailed information.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -27,10 +28,11 @@ public class ConditionTest {
     private final Object[] _Args;
 
     /**
-     * Initializes this JUnit test for an implementation of the
-     * {@link Condition} class.
+     * Initializes this JUnit test for an implementation of the {@link
+     * de.claas.mosis.model.Condition} class.
      *
-     * @param clazz implementation of {@link Condition} class
+     * @param clazz implementation of {@link de.claas.mosis.model.Condition}
+     *              class
      * @param args  arguments for instantiating the implementing class
      */
     public ConditionTest(Class<Condition> clazz, Object[] args) {
@@ -69,12 +71,12 @@ public class ConditionTest {
     }
 
     /**
-     * Returns an instantiated {@link Condition} class. The concrete class of
-     * the instantiated object and its arguments are provided by the
-     * {@link #_Clazz} field and {@link #_Args} field, respectively.
+     * Returns an instantiated {@link de.claas.mosis.model.Condition} class. The
+     * concrete class of the instantiated object and its arguments are provided
+     * by the {@link #_Clazz} field and {@link #_Args} field, respectively.
      *
-     * @return an instantiated {@link Condition} class
-     * @see Utils#instance(Class, Object...)
+     * @return an instantiated {@link de.claas.mosis.model.Condition} class
+     * @see de.claas.mosis.util.Utils#instance(Class, Object...)
      */
     private Condition build() throws Exception {
         return Utils.instance(_Clazz, _Args);

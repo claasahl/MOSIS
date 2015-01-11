@@ -1,9 +1,6 @@
 package de.claas.mosis.processing.debug;
 
 import de.claas.mosis.model.DecoratorProcessor;
-import de.claas.mosis.model.DecoratorProcessorTest;
-import de.claas.mosis.model.ProcessorAdapterTest;
-import de.claas.mosis.model.ProcessorTest;
 import de.claas.mosis.util.Utils;
 import org.junit.After;
 import org.junit.Before;
@@ -12,12 +9,13 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * The JUnit test for class {@link Sleep}. It is intended to collect and
- * document a set of test cases for the tested class. Please refer to the
- * individual tests for more detailed information.
+ * The JUnit test for class {@link de.claas.mosis.processing.debug.Sleep}. It is
+ * intended to collect and document a set of test cases for the tested class.
+ * Please refer to the individual tests for more detailed information.
  * <p/>
- * Additional test cases can be found in {@link ProcessorTest},
- * {@link ProcessorAdapterTest} and {@link DecoratorProcessorTest}.
+ * Additional test cases can be found in {@link de.claas.mosis.model.ProcessorTest},
+ * {@link de.claas.mosis.model.ProcessorAdapterTest} and {@link
+ * de.claas.mosis.model.DecoratorProcessorTest}.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */

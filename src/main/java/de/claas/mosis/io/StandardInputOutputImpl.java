@@ -5,9 +5,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
- * The class {@link StandardInputOutputImpl}. It is intended to provide access
- * the operating system's standard input and output streams, such that
- * {@link StreamHandler} implementations can process them.
+ * The class {@link de.claas.mosis.io.StandardInputOutputImpl}. It is intended
+ * to provide access the operating system's standard input and output streams,
+ * such that {@link de.claas.mosis.io.StreamHandler} implementations can process
+ * them.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */

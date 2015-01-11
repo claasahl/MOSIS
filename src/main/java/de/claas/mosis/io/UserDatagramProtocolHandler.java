@@ -3,7 +3,6 @@ package de.claas.mosis.io;
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
 import de.claas.mosis.model.Configurable;
-import de.claas.mosis.model.Processor;
 import de.claas.mosis.model.Relation;
 
 import java.io.IOException;
@@ -13,12 +12,13 @@ import java.net.InetSocketAddress;
 import java.util.List;
 
 /**
- * The class {@link UserDatagramProtocolHandler}. It is intended to enable
- * communication with external entities through a {@link DatagramSocket} (UDP
- * connection). This {@link DataHandler} provide an alternative to the otherwise
+ * The class {@link de.claas.mosis.io.UserDatagramProtocolHandler}. It is
+ * intended to enable communication with external entities through a {@link
+ * java.net.DatagramSocket} (UDP connection). This {@link
+ * de.claas.mosis.io.DataHandler} provide an alternative to the otherwise
  * (mostly) stream-based communication. This implementation allows the use of
- * UDP connections, such that {@link Processor} modules can process
- * {@link DatagramPacket} objects.
+ * UDP connections, such that {@link de.claas.mosis.model.Processor} modules can
+ * process {@link java.net.DatagramPacket} objects.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -88,10 +88,10 @@ public class UserDatagramProtocolHandler extends DataHandler<DatagramPacket> {
     }
 
     /**
-     * The class {@link ChangeHostAndPort}. It is intended to (re-)set the
-     * {@link DatagramSocket} of the {@link UserDatagramProtocolHandler} object
-     * whenever the {@link UserDatagramProtocolHandler#HOST} parameter or
-     * {@link UserDatagramProtocolHandler#PORT} is changed.
+     * The class {@link de.claas.mosis.io.UserDatagramProtocolHandler.ChangeHostAndPort}.
+     * It is intended to (re-)set the {@link java.net.DatagramSocket} of the
+     * {@link de.claas.mosis.io.UserDatagramProtocolHandler} object whenever the
+     * {@link #HOST} parameter or {@link #PORT} is changed.
      *
      * @author Claas Ahlrichs (claasahl@tzi.de)
      */

@@ -6,8 +6,9 @@ import de.claas.mosis.model.Condition;
 import java.io.*;
 
 /**
- * The class {@link FileImpl}. It is intended to provide access to files, such
- * that {@link StreamHandler} implementations can process them.
+ * The class {@link de.claas.mosis.io.FileImpl}. It is intended to provide
+ * access to files, such that {@link de.claas.mosis.io.StreamHandler}
+ * implementations can process them.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */

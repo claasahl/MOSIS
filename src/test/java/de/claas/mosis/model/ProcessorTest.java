@@ -21,9 +21,10 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
- * The JUnit test for {@link Processor} classes. It is intended to collect and
- * document a set of test cases that are applicable to all {@link Processor}
- * classes. Please refer to the individual tests for more detailed information.
+ * The JUnit test for {@link de.claas.mosis.model.Processor} classes. It is
+ * intended to collect and document a set of test cases that are applicable to
+ * all {@link de.claas.mosis.model.Processor} classes. Please refer to the
+ * individual tests for more detailed information.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -34,8 +35,8 @@ public class ProcessorTest {
     private Processor<?, ?> _P;
 
     /**
-     * Initializes this JUnit test for an implementation of the
-     * {@link Processor} class.
+     * Initializes this JUnit test for an implementation of the {@link
+     * de.claas.mosis.model.Processor} class.
      *
      * @param clazz implementation of {@link Processor} class
      */

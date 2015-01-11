@@ -1,14 +1,14 @@
 package de.claas.mosis.processing.debug;
 
-import de.claas.mosis.model.Processor;
 import de.claas.mosis.model.ProcessorAdapter;
 
 import java.util.List;
 
 /**
- * The class {@link ToString}. It is intended for debugging purposes. This
- * {@link Processor} implementation returns the input values as {@link String}
- * values. It performs no operation other than calling {@link Object#toString()}
+ * The class {@link de.claas.mosis.processing.debug.ToString}. It is intended
+ * for debugging purposes. This {@link de.claas.mosis.model.Processor}
+ * implementation returns the input values as {@link java.lang.String} values.
+ * It performs no operation other than calling {@link java.lang.Object#toString()}
  * on objects.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)

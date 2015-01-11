@@ -13,9 +13,9 @@ import java.io.BufferedOutputStream;
 import static org.junit.Assert.*;
 
 /**
- * The JUnit test for class {@link CommaSeparatedValues}. It is intended to
- * collect and document a set of test cases for the tested class. Please refer
- * to the individual tests for more detailed information.
+ * The JUnit test for class {@link de.claas.mosis.io.format.CommaSeparatedValues}.
+ * It is intended to collect and document a set of test cases for the tested
+ * class. Please refer to the individual tests for more detailed information.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -200,13 +200,14 @@ public class CommaSeparatedValuesTest extends
     }
 
     /**
-     * A helper method to avoid code duplicates. The method sets up the
-     * {@link DataHandler} for reading. It returns the first data object that
-     * was read by the {@link DataHandler}. The given CSV data input is used as
-     * input.
+     * A helper method to avoid code duplicates. The method sets up the {@link
+     * de.claas.mosis.io.DataHandler} for reading. It returns the first data
+     * object that was read by the {@link de.claas.mosis.io.DataHandler}. The
+     * given CSV data input is used as input.
      *
      * @param csv the CSV data (for input)
-     * @return the first data object that was read by the {@link DataHandler}
+     * @return the first data object that was read by the {@link
+     * de.claas.mosis.io.DataHandler}
      * @throws Exception when an error occurs while writing
      */
     private Data read(String csv) throws Exception {
@@ -218,13 +219,14 @@ public class CommaSeparatedValuesTest extends
     }
 
     /**
-     * A helper method to avoid code duplicates. The method sets up the
-     * {@link DataHandler} for writing. It returns the first CSV line that was
-     * written by the {@link DataHandler}. The given data object is used as
-     * output.
+     * A helper method to avoid code duplicates. The method sets up the {@link
+     * de.claas.mosis.io.DataHandler} for writing. It returns the first CSV line
+     * that was written by the {@link de.claas.mosis.io.DataHandler}. The given
+     * data object is used as output.
      *
      * @param data the data object (for output)
-     * @return the first CSV line that was written by the {@link DataHandler}
+     * @return the first CSV line that was written by the {@link
+     * de.claas.mosis.io.DataHandler}
      * @throws Exception when an error occurs while reading
      */
     private String write(Data... data) throws Exception {

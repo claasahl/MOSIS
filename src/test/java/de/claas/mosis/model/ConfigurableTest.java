@@ -14,10 +14,10 @@ import java.util.Vector;
 import static org.junit.Assert.*;
 
 /**
- * The JUnit test for {@link Configurable} classes. It is intended to collect
- * and document a set of test cases that are applicable to all
- * {@link Configurable} classes. Please refer to the individual tests for more
- * detailed information.
+ * The JUnit test for {@link de.claas.mosis.model.Configurable} classes. It is
+ * intended to collect and document a set of test cases that are applicable to
+ * all {@link de.claas.mosis.model.Configurable} classes. Please refer to the
+ * individual tests for more detailed information.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -28,10 +28,11 @@ public class ConfigurableTest {
     private Configurable _C;
 
     /**
-     * Initializes this JUnit test for an implementation of the
-     * {@link Configurable} class.
+     * Initializes this JUnit test for an implementation of the {@link
+     * de.claas.mosis.model.Configurable} class.
      *
-     * @param clazz implementation of {@link Configurable} class
+     * @param clazz implementation of {@link de.claas.mosis.model.Configurable}
+     *              class
      */
     public ConfigurableTest(Class<Configurable> clazz) {
         _Clazz = clazz;

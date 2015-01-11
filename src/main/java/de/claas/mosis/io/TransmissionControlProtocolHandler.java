@@ -11,9 +11,10 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
- * The class {@link TransmissionControlProtocolHandler}. It is intended to
- * provide access to TCP enabled services and data sources, such that
- * {@link StreamHandler} implementations can process them.
+ * The class {@link de.claas.mosis.io.TransmissionControlProtocolHandler}. It is
+ * intended to provide access to TCP enabled services and data sources, such
+ * that {@link de.claas.mosis.io.StreamHandler} implementations can process
+ * them.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -71,11 +72,12 @@ public class TransmissionControlProtocolHandler extends StreamHandlerImpl {
     }
 
     /**
-     * Creates a new {@link Socket} that can be exploited by
-     * {@link #getInputStream()} and {@link #getOutputStream()}. Any previously
-     * opened socket is closed.
+     * Creates a new {@link java.net.Socket} that can be exploited by {@link
+     * #getInputStream()} and {@link #getOutputStream()}. Any previously opened
+     * socket is closed.
      *
-     * @throws IOException if {@link Socket} cannot be closed or opened
+     * @throws java.io.IOException if {@link java.net.Socket} cannot be closed
+     *                             or opened
      */
     protected void createSocket() throws IOException {
         // Close existing sockets / connections

@@ -7,9 +7,9 @@ import java.util.Arrays;
 import static org.junit.Assert.*;
 
 /**
- * The JUnit test for class {@link QueueHandler}. It is intended to collect and
- * document a set of test cases for the tested class. Please refer to the
- * individual tests for more detailed information.
+ * The JUnit test for class {@link de.claas.mosis.io.QueueHandler}. It is
+ * intended to collect and document a set of test cases for the tested class.
+ * Please refer to the individual tests for more detailed information.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */

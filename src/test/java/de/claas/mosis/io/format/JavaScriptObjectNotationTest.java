@@ -16,9 +16,9 @@ import java.util.Vector;
 import static org.junit.Assert.*;
 
 /**
- * The JUnit test for class {@link JavaScriptObjectNotation}. It is intended to
- * collect and document a set of test cases for the tested class. Please refer
- * to the individual tests for more detailed information.
+ * The JUnit test for class {@link de.claas.mosis.io.format.JavaScriptObjectNotation}.
+ * It is intended to collect and document a set of test cases for the tested
+ * class. Please refer to the individual tests for more detailed information.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -189,14 +189,15 @@ public class JavaScriptObjectNotationTest extends
     }
 
     /**
-     * A helper method to avoid code duplicates. The method sets up the
-     * {@link DataHandler} for reading. It returns the first data object that
-     * was read by the {@link DataHandler}. The given JSON data input is used as
-     * input.
+     * A helper method to avoid code duplicates. The method sets up the {@link
+     * de.claas.mosis.io.DataHandler} for reading. It returns the first data
+     * object that was read by the {@link de.claas.mosis.io.DataHandler}. The
+     * given JSON data input is used as input.
      *
      * @param json the JSON data (for input)
-     * @return the first data object that was read by the {@link DataHandler}
-     * @throws Exception when an error occurs while writing
+     * @return the first data object that was read by the {@link
+     * de.claas.mosis.io.DataHandler}
+     * @throws java.lang.Exception when an error occurs while writing
      */
     private Data read(String json) throws Exception {
         _H.setParameter(DataHandler.MODE, DataHandler.MODE_READ);
@@ -207,14 +208,15 @@ public class JavaScriptObjectNotationTest extends
     }
 
     /**
-     * A helper method to avoid code duplicates. The method sets up the
-     * {@link DataHandler} for writing. It returns the first JSON line that was
-     * written by the {@link DataHandler}. The given data object is used as
-     * output.
+     * A helper method to avoid code duplicates. The method sets up the {@link
+     * de.claas.mosis.io.DataHandler} for writing. It returns the first JSON
+     * line that was written by the {@link de.claas.mosis.io.DataHandler}. The
+     * given data object is used as output.
      *
      * @param data the data object (for output)
-     * @return the first JSON line that was written by the {@link DataHandler}
-     * @throws Exception when an error occurs while reading
+     * @return the first JSON line that was written by the {@link
+     * de.claas.mosis.io.DataHandler}
+     * @throws java.lang.Exception when an error occurs while reading
      */
     private String write(Data... data) throws Exception {
         _H.setParameter(DataHandler.MODE, DataHandler.MODE_WRITE);

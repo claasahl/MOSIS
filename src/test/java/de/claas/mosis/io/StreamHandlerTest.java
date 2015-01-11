@@ -8,10 +8,10 @@ import java.io.OutputStream;
 import static org.junit.Assert.*;
 
 /**
- * The JUnit test for {@link StreamHandler} classes. It is intended to collect
- * and document a set of test cases that are applicable to all
- * {@link StreamHandler} classes. Please refer to the individual tests for more
- * detailed information.
+ * The JUnit test for {@link de.claas.mosis.io.StreamHandler} classes. It is
+ * intended to collect and document a set of test cases that are applicable to
+ * all {@link de.claas.mosis.io.StreamHandler} classes. Please refer to the
+ * individual tests for more detailed information.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */

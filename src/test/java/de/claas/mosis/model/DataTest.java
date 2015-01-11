@@ -7,9 +7,9 @@ import java.lang.annotation.ElementType;
 import static org.junit.Assert.*;
 
 /**
- * The JUnit test for class {@link Data}. It is intended to collect and document
- * a set of test cases for the tested class. Please refer to the individual
- * tests for more detailed information.
+ * The JUnit test for class {@link de.claas.mosis.model.Data}. It is intended to
+ * collect and document a set of test cases for the tested class. Please refer
+ * to the individual tests for more detailed information.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -27,10 +27,10 @@ public class DataTest {
     private final static String KeyNull = "keyNull";
 
     /**
-     * Returns an instantiated {@link Data} class. If appropriate, the instance
-     * is configured with default values.
+     * Returns an instantiated {@link de.claas.mosis.model.Data} class. If
+     * appropriate, the instance is configured with default values.
      *
-     * @return an instantiated {@link Data} class
+     * @return an instantiated {@link de.claas.mosis.model.Data} class
      */
     private Data build() {
         Data d = new Data();

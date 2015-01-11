@@ -19,13 +19,13 @@ import java.util.Vector;
 import static org.junit.Assert.*;
 
 /**
- * The JUnit test for {@link DecoratorProcessor} classes. It is intended to
- * collect and document a set of test cases that are applicable to all
- * {@link DecoratorProcessor} classes. Please refer to the individual tests for
- * more detailed information.
+ * The JUnit test for {@link de.claas.mosis.model.DecoratorProcessor} classes.
+ * It is intended to collect and document a set of test cases that are
+ * applicable to all {@link de.claas.mosis.model.DecoratorProcessor} classes.
+ * Please refer to the individual tests for more detailed information.
  * <p/>
- * Additional test cases can be found in {@link ProcessorTest} and
- * {@link ProcessorAdapterTest}.
+ * Additional test cases can be found in {@link de.claas.mosis.model.ProcessorTest}
+ * and {@link de.claas.mosis.model.ProcessorAdapterTest}.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -37,10 +37,11 @@ public class DecoratorProcessorTest {
     private Processor<Object, Object> _P2;
 
     /**
-     * Initializes this JUnit test for an implementation of the
-     * {@link DecoratorProcessor} class.
+     * Initializes this JUnit test for an implementation of the {@link
+     * de.claas.mosis.model.DecoratorProcessor} class.
      *
-     * @param clazz implementation of {@link DecoratorProcessor} class
+     * @param clazz implementation of {@link de.claas.mosis.model.DecoratorProcessor}
+     *              class
      */
     public DecoratorProcessorTest(
             Class<DecoratorProcessor<Object, Object>> clazz) {

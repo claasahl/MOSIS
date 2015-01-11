@@ -7,9 +7,10 @@ import de.claas.mosis.model.ProcessorAdapter;
 import java.util.List;
 
 /**
- * The class {@link Linear}. It is intended to generate values of a linear
- * function. The function has the form <code>y = m * x + b</code>, where
- * <code>y</code> corresponds to the value that is returned.
+ * The class {@link de.claas.mosis.io.generator.Linear}. It is intended to
+ * generate values of a linear function. The function has the form <code>y = m *
+ * x + b</code>, where <code>y</code> corresponds to the value that is
+ * returned.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */

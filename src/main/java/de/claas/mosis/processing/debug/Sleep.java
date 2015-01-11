@@ -3,14 +3,14 @@ package de.claas.mosis.processing.debug;
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
 import de.claas.mosis.model.DecoratorProcessor;
-import de.claas.mosis.model.Processor;
 
 import java.util.List;
 
 /**
- * The class {@link Sleep}. It is intended for debugging purposes. This
- * {@link DecoratorProcessor} implementation will delay the execution of its
- * wrapped {@link Processor} object..
+ * The class {@link de.claas.mosis.processing.debug.Sleep}. It is intended for
+ * debugging purposes. This {@link de.claas.mosis.model.DecoratorProcessor}
+ * implementation will delay the execution of its wrapped {@link
+ * de.claas.mosis.model.Processor} object.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */

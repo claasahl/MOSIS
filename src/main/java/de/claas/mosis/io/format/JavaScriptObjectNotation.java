@@ -1,9 +1,5 @@
 package de.claas.mosis.io.format;
 
-import de.claas.mosis.io.FileImpl;
-import de.claas.mosis.io.StreamHandler;
-import de.claas.mosis.io.StreamHandlerImpl;
-import de.claas.mosis.io.UrlImpl;
 import de.claas.mosis.model.Data;
 import de.claas.mosis.util.Parser;
 
@@ -13,80 +9,44 @@ import java.util.Vector;
 import java.util.regex.Pattern;
 
 /**
- * The class {@link JavaScriptObjectNotation}. It is intended to read and write
- * JSON data (JavaScript Object Notation). This {@link StreamHandler} allows to
- * read and write JSON data from any of the {@link StreamHandlerImpl}
- * implementations (e.g. {@link FileImpl} or {@link UrlImpl}).
+ * The class {@link de.claas.mosis.io.format.JavaScriptObjectNotation}. It is
+ * intended to read and write JSON data (JavaScript Object Notation). This
+ * {@link de.claas.mosis.io.StreamHandler} allows to read and write JSON data
+ * from any of the {@link de.claas.mosis.io.StreamHandlerImpl} implementations
+ * (e.g. {@link de.claas.mosis.io.FileImpl} or {@link de.claas.mosis.io.UrlImpl}).
  * <p/>
  * This implementation is based on the definitions given in RFC 4627, which is
  * publicly available at http://www.ietf.org/rfc/rfc4180.txt. The therein
  * contained EBNF grammar was slightly modified and the final result is listed
  * below:
  * <p/>
- * Terminal symbols:
- * <ol>
- * <li>JSON-text = object / array</li>
- * </ol>
- * <ol>
- * <li>begin-array = ws %x5B ws ; [ left square bracket</li>
- * <li>begin-object = ws %x7B ws ; { left curly bracket</li>
- * <li>end-array = ws %x5D ws ; ] right square bracket</li>
- * <li>end-object = ws %x7D ws ; } right curly bracket</li>
- * <li>name-separator = ws %x3A ws ; : colon</li>
- * <li>value-separator = ws %x2C ws ; , comma</li>
- * <li>ws = *(</li>
- * </ol>
- * <ol>
- * <li>%x20 / ; Space</li>
- * <li>%x09 / ; Horizontal tab</li>
- * <li>%x0A / ; Line feed or New line</li>
- * <li>%x0D ; Carriage return</li>
- * <li>)</li>
- * </ol>
- * <ol>
- * <li>value = false / null / true / object / array / number / string</li>
- * <li>false = %x66.61.6c.73.65 ; false</li>
- * <li>null = %x6e.75.6c.6c ; null</li>
- * <li>true = %x74.72.75.65 ; true</li>
- * </ol>
- * <ol>
- * <li>object = begin-object [ member *( value-separator member ) ] end-object</li>
- * <li>member = string name-separator value</li>
- * <li>array = begin-array [ value *( value-separator value ) ] end-array</li>
- * </ol>
- * <ol>
- * <li>number = [ minus ] integer [ frac ] [ exp ]</li>
- * <li>decimal-point = %x2E ; .</li>
- * <li>DIGIT1-9 = %x31-39 ; 1-9</li>
- * <li>DIGIT = %x30-39 ; 0-9</li>
- * <li>e = %x65 / %x45 ; e E</li>
- * <li>exp = e [ minus / plus ] +DIGIT</li>
- * <li>frac = decimal-point +DIGIT</li>
- * <li>integer = zero / ( DIGIT1-9 *DIGIT )</li>
- * <li>minus = %x2D ; -</li>
- * <li>plus = %x2B ; +</li>
- * <li>zero = %x30 ; 0</li>
- * <li></li>
- * <li>string = quotation-mark *character quotation-mark</li>
- * <li>character = unescaped / escaped</li>
- * <li>escaped = %x5C (</li>
- * </ol>
- * <ol>
- * <li>%x22 / ; " quotation mark U+0022</li>
- * <li>%x5C / ; \ reverse solidus U+005C</li>
- * <li>%x2F / ; / solidus U+002F</li>
- * <li>%x62 / ; b backspace U+0008</li>
- * <li>%x66 / ; f form feed U+000C</li>
- * <li>%x6E / ; n line feed U+000A</li>
- * <li>%x72 / ; r carriage return U+000D</li>
- * <li>%x74 / ; t tab U+0009</li>
- * <li>%x75 4HEXDIG ; uXXXX U+XXXX</li>
- * <li>)</li>
- * </ol>
- * <ol>
- * <li>quotation-mark = %x22 ; "</li>
- * <li>unescaped = %x20-21 / %x23-5B / %x5D-10FFFF</li>
- * </ol>
+ * Terminal symbols: <ol> <li>JSON-text = object / array</li> </ol> <ol>
+ * <li>begin-array = ws %x5B ws ; [ left square bracket</li> <li>begin-object =
+ * ws %x7B ws ; { left curly bracket</li> <li>end-array = ws %x5D ws ; ] right
+ * square bracket</li> <li>end-object = ws %x7D ws ; } right curly bracket</li>
+ * <li>name-separator = ws %x3A ws ; : colon</li> <li>value-separator = ws %x2C
+ * ws ; , comma</li> <li>ws = *(</li> </ol> <ol> <li>%x20 / ; Space</li>
+ * <li>%x09 / ; Horizontal tab</li> <li>%x0A / ; Line feed or New line</li>
+ * <li>%x0D ; Carriage return</li> <li>)</li> </ol> <ol> <li>value = false /
+ * null / true / object / array / number / string</li> <li>false =
+ * %x66.61.6c.73.65 ; false</li> <li>null = %x6e.75.6c.6c ; null</li> <li>true =
+ * %x74.72.75.65 ; true</li> </ol> <ol> <li>object = begin-object [ member *(
+ * value-separator member ) ] end-object</li> <li>member = string name-separator
+ * value</li> <li>array = begin-array [ value *( value-separator value ) ]
+ * end-array</li> </ol> <ol> <li>number = [ minus ] integer [ frac ] [ exp
+ * ]</li> <li>decimal-point = %x2E ; .</li> <li>DIGIT1-9 = %x31-39 ; 1-9</li>
+ * <li>DIGIT = %x30-39 ; 0-9</li> <li>e = %x65 / %x45 ; e E</li> <li>exp = e [
+ * minus / plus ] +DIGIT</li> <li>frac = decimal-point +DIGIT</li> <li>integer =
+ * zero / ( DIGIT1-9 *DIGIT )</li> <li>minus = %x2D ; -</li> <li>plus = %x2B ;
+ * +</li> <li>zero = %x30 ; 0</li> <li></li> <li>string = quotation-mark
+ * *character quotation-mark</li> <li>character = unescaped / escaped</li>
+ * <li>escaped = %x5C (</li> </ol> <ol> <li>%x22 / ; " quotation mark
+ * U+0022</li> <li>%x5C / ; \ reverse solidus U+005C</li> <li>%x2F / ; / solidus
+ * U+002F</li> <li>%x62 / ; b backspace U+0008</li> <li>%x66 / ; f form feed
+ * U+000C</li> <li>%x6E / ; n line feed U+000A</li> <li>%x72 / ; r carriage
+ * return U+000D</li> <li>%x74 / ; t tab U+0009</li> <li>%x75 4HEXDIG ; uXXXX
+ * U+XXXX</li> <li>)</li> </ol> <ol> <li>quotation-mark = %x22 ; "</li>
+ * <li>unescaped = %x20-21 / %x23-5B / %x5D-10FFFF</li> </ol>
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -185,12 +145,12 @@ public class JavaScriptObjectNotation extends AbstractTextFormat<Data> {
      * <b>JSON-text = object / array</b>
      *
      * @param json   the JSON data that is being processed
-     * @param data   if data was successfully processed and it was a JSON object,
-     *               then the {@link Data} instance will be updated to represent
-     *               the processed JSON object
+     * @param data   if data was successfully processed and it was a JSON
+     *               object, then the {@link de.claas.mosis.model.Data} instance
+     *               will be updated to represent the processed JSON object
      * @param values if data was successfully processed and it was a JSON array,
-     *               then the list will be updated to represent the processed JSON
-     *               array
+     *               then the list will be updated to represent the processed
+     *               JSON array
      * @return the JSON data that was processed by this call
      */
     private String jsonText(StringBuilder json, Data data, List<Object> values) {
@@ -217,9 +177,9 @@ public class JavaScriptObjectNotation extends AbstractTextFormat<Data> {
      * end-object</b>
      *
      * @param json the JSON data that is being processed
-     * @param data if data was successfully processed, then the {@link Data}
-     *             instance will be updated to represent the processed JSON
-     *             object
+     * @param data if data was successfully processed, then the {@link
+     *             de.claas.mosis.model.Data} instance will be updated to
+     *             represent the processed JSON object
      * @return the JSON data that was processed by this call
      */
     private String object(StringBuilder json, Data data) {
@@ -259,7 +219,8 @@ public class JavaScriptObjectNotation extends AbstractTextFormat<Data> {
      * processed (e.g. incomplete or invalid JSON data), then <code>null</code>
      * is returned. The data is processed as defined in rule:
      * <p/>
-     * <b>array = begin-array [ value *( value-separator value ) ] end-array</b>
+     * <b>array = begin-array [ value *( value-separator value ) ]
+     * end-array</b>
      *
      * @param json   the JSON data that is being processed
      * @param values if data was successfully processed, then the list will be
@@ -306,8 +267,9 @@ public class JavaScriptObjectNotation extends AbstractTextFormat<Data> {
      * <b>member = string name-separator value</b>
      *
      * @param json the JSON data that is being processed
-     * @param data if data was successfully processed, then the {@link Data}
-     *             instance will be updated with the processed member / field
+     * @param data if data was successfully processed, then the {@link
+     *             de.claas.mosis.model.Data} instance will be updated with the
+     *             processed member / field
      * @return the JSON data that was processed by this call
      */
     private String member(StringBuilder json, Data data) {
@@ -347,9 +309,9 @@ public class JavaScriptObjectNotation extends AbstractTextFormat<Data> {
      * <b>string = quotation-mark *character quotation-mark</b>
      *
      * @param json the JSON data that is being processed
-     * @param text if data was successfully processed, then the
-     *             {@link StringBuilder} instance will be updated with the text
-     *             in between the quotes
+     * @param text if data was successfully processed, then the {@link
+     *             java.lang.StringBuilder} instance will be updated with the
+     *             text in between the quotes
      * @return the JSON data that was processed by this call
      */
     private String string(StringBuilder json, StringBuilder text) {
@@ -384,8 +346,9 @@ public class JavaScriptObjectNotation extends AbstractTextFormat<Data> {
      * <b>character = unescaped / escaped</b>
      *
      * @param json the JSON data that is being processed * @param text if data
-     *             was successfully processed, then the {@link StringBuilder}
-     *             instance will be updated with the text in between the quotes
+     *             was successfully processed, then the {@link
+     *             java.lang.StringBuilder} instance will be updated with the
+     *             text in between the quotes
      * @return the JSON data that was processed by this call
      */
     private String character(StringBuilder json, StringBuilder text) {
