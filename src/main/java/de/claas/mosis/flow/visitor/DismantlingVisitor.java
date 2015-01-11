@@ -3,6 +3,7 @@ package de.claas.mosis.flow.visitor;
 import de.claas.mosis.flow.CompositeNode;
 import de.claas.mosis.flow.PlainNode;
 import de.claas.mosis.flow.Visitor;
+import de.claas.mosis.flow.iterator.OneShotLevelOrder;
 import de.claas.mosis.model.Processor;
 
 import java.util.HashSet;
@@ -31,8 +32,13 @@ public class DismantlingVisitor implements Visitor {
 
     @Override
     public boolean visitCompositeNode(CompositeNode node) {
-        // TODO Auto-generated method stub
-        return false;
+        OneShotLevelOrder levelOrder = new OneShotLevelOrder(node.getSources());
+        while (levelOrder.hasNext()) {
+            if (!levelOrder.next().visit(this)) {
+                break;
+            }
+        }
+        return true;
     }
 
 }
