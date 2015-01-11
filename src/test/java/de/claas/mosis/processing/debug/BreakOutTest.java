@@ -43,7 +43,7 @@ public class BreakOutTest {
 
     @Test
     public void assumeZeroCalls() {
-        assertEquals(0, _P.getCalls());
+        assertEquals(0, _P.getCallsToProcess());
         assertNull(_P.getLastInput());
         assertNull(_P.getLastInput());
     }
@@ -51,11 +51,11 @@ public class BreakOutTest {
     @Test
     public void shouldCountCalls() {
         Utils.process(_P);
-        assertEquals(1, _P.getCalls());
+        assertEquals(1, _P.getCallsToProcess());
         Utils.process(_P, (Object) null);
         Utils.process(_P, 23, 42);
         Utils.process(_P);
-        assertEquals(4, _P.getCalls());
+        assertEquals(4, _P.getCallsToProcess());
     }
 
     @Test

@@ -17,7 +17,9 @@ public class BreakOut extends DecoratorProcessor<Object, Object> {
 
     private List<Object> _Input;
     private List<Object> _Output;
-    private int _Calls;
+    private int _CallsToSetup;
+    private int _CallsToDismantle;
+    private int _CallsToProcess;
 
     /**
      * Returns the latest input values.
@@ -38,24 +40,49 @@ public class BreakOut extends DecoratorProcessor<Object, Object> {
     }
 
     /**
+     * Returns the number of calls of {@link #setUp()}.
+     *
+     * @return the number of calls of {@link #setUp()}
+     */
+    public int getCallsToSetUp() {
+        return _CallsToSetup;
+    }
+
+    /**
+     * Returns the number of calls of {@link #dismantle()}.
+     *
+     * @return the number of calls of {@link #dismantle()}
+     */
+    public int getCallsToDismantle() {
+        return _CallsToDismantle;
+    }
+
+    /**
      * Returns the number of calls of {@link #process(List, List)}.
      *
      * @return the number of calls of {@link #process(List, List)}
      */
-    public int getCalls() {
-        return _Calls;
+    public int getCallsToProcess() {
+        return _CallsToProcess;
+    }
+
+    @Override
+    public void setUp() {
+        super.setUp();
+        _CallsToSetup++;
     }
 
     @Override
     public void dismantle() {
         super.dismantle();
+        _CallsToDismantle++;
         _Input = null;
         _Output = null;
     }
 
     @Override
     public void process(List<Object> in, List<Object> out) {
-        _Calls++;
+        _CallsToProcess++;
         _Input = in == null ? null : new Vector<>(in);
         super.process(in, out);
         _Output = out == null ? null : new Vector<>(out);

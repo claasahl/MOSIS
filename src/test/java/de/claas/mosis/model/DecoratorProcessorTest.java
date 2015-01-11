@@ -153,12 +153,12 @@ public class DecoratorProcessorTest {
         _P1.setParameter(DecoratorProcessor.CLASS, BreakOut.class.getName());
         _P1.setParameter(DecoratorProcessor.SHADOWED + BreakOut.CLASS,
                 Null.class.getName());
-        assertEquals(0, ((BreakOut) _P1.getProcessor()).getCalls());
+        assertEquals(0, ((BreakOut) _P1.getProcessor()).getCallsToProcess());
         Utils.process(_P1);
-        assertEquals(1, ((BreakOut) _P1.getProcessor()).getCalls());
+        assertEquals(1, ((BreakOut) _P1.getProcessor()).getCallsToProcess());
         Utils.process(_P1);
         Utils.process(_P1);
-        assertEquals(3, ((BreakOut) _P1.getProcessor()).getCalls());
+        assertEquals(3, ((BreakOut) _P1.getProcessor()).getCallsToProcess());
     }
 
     @Test

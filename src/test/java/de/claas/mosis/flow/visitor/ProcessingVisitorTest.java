@@ -23,7 +23,7 @@ import static org.junit.Assert.*;
  */
 public class ProcessingVisitorTest {
 
-    private ProcessingVisitor _V;
+    private Visitor _V;
     private PlainNode _P1, _P2;
     private CompositeNode _C;
     private BreakOut _B1, _B21, _B22, _B3;
@@ -54,10 +54,10 @@ public class ProcessingVisitorTest {
 
     @Test
     public void shouldNotHaveBeenCalled() {
-        assertEquals(0, _B1.getCalls());
-        assertEquals(0, _B21.getCalls());
-        assertEquals(0, _B22.getCalls());
-        assertEquals(0, _B3.getCalls());
+        assertEquals(0, _B1.getCallsToProcess());
+        assertEquals(0, _B21.getCallsToProcess());
+        assertEquals(0, _B22.getCallsToProcess());
+        assertEquals(0, _B3.getCallsToProcess());
     }
 
     @Test
@@ -75,10 +75,10 @@ public class ProcessingVisitorTest {
         _V.visitCompositeNode(_C);
         _V.visitPlainNode(_P2);
 
-        assertEquals(1, _B1.getCalls());
-        assertEquals(1, _B21.getCalls());
-        assertEquals(1, _B22.getCalls());
-        assertEquals(1, _B3.getCalls());
+        assertEquals(1, _B1.getCallsToProcess());
+        assertEquals(1, _B21.getCallsToProcess());
+        assertEquals(1, _B22.getCallsToProcess());
+        assertEquals(1, _B3.getCallsToProcess());
     }
 
     @Test
@@ -109,7 +109,7 @@ public class ProcessingVisitorTest {
         _C.getOutboundLink(_P2).push(Arrays.<Object>asList(23L));
         _P1.getOutboundLink(_P2).push(Arrays.<Object>asList("hello"));
         _V.visitPlainNode(_P2);
-        assertEquals(Arrays.asList(23L, "hello"), _B3.getLastInput());
+        assertEquals(Arrays.<Object>asList(23L, "hello"), _B3.getLastInput());
 
         _P1.removeSuccessor(_P2);
         _C.removeSuccessor(_P2);
@@ -117,7 +117,7 @@ public class ProcessingVisitorTest {
         _P1.getOutboundLink(_C).push(Arrays.<Object>asList("world"));
         _P2.getOutboundLink(_C).push(Arrays.<Object>asList(42.0));
         _V.visitCompositeNode(_C);
-        assertEquals(Arrays.asList("world", 42.0), _B21.getLastInput());
+        assertEquals(Arrays.<Object>asList("world", 42.0), _B21.getLastInput());
     }
 
     @Test
@@ -150,18 +150,18 @@ public class ProcessingVisitorTest {
         // Regular modules should only be called when input values are present.
         // Data sources (no preceding modules) may always be called.
         _V.visitPlainNode(_P2);
-        assertEquals(0, _B3.getCalls());
+        assertEquals(0, _B3.getCallsToProcess());
         _C.removeSuccessor(_P2);
         _V.visitPlainNode(_P2);
-        assertEquals(1, _B3.getCalls());
+        assertEquals(1, _B3.getCallsToProcess());
 
         _V.visitCompositeNode(_C);
-        assertEquals(0, _B21.getCalls());
-        assertEquals(0, _B22.getCalls());
+        assertEquals(0, _B21.getCallsToProcess());
+        assertEquals(0, _B22.getCallsToProcess());
         _P1.removeSuccessor(_C);
         _V.visitCompositeNode(_C);
-        assertEquals(1, _B21.getCalls());
-        assertEquals(1, _B22.getCalls());
+        assertEquals(1, _B21.getCallsToProcess());
+        assertEquals(1, _B22.getCallsToProcess());
     }
 
 }
