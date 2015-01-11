@@ -31,7 +31,7 @@ public class FileHandler extends DataHandler<File> {
     public FileHandler() {
         addCondition(ROOT, new Condition.IsNotNull());
         setParameter(ROOT, File.listRoots()[0].getAbsolutePath());
-        addCondition(MODE, new Condition.WriteOnce());
+        addCondition(MODE, new Condition.IsInList(Arrays.asList(MODE_READ)));
         setParameter(MODE, MODE_READ);
     }
 

@@ -35,7 +35,7 @@ public class ProcessingVisitor implements Visitor {
             distributeOutputs(node, _Out);
             in.clear();
         }
-        return (!node.hasPredecessors() && !_Out.isEmpty()) || node.hasPredecessors();
+        return true;
     }
 
     @Override

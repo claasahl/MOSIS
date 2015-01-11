@@ -42,7 +42,9 @@ public class BlockingQueueHandlerTest extends DataHandlerTest<Long, BlockingQueu
 
     @Test
     public void shouldInstantiateNewClass() throws Exception {
+        _H.dismantle();
         _H.setParameter(BlockingQueueHandler.CLASS, ArrayBlockingQueue.class.getName());
+        _H.setUp();
         assertNotNull(_H.getQueue());
         assertEquals(ArrayBlockingQueue.class, _H.getQueue().getClass());
     }
@@ -61,7 +63,7 @@ public class BlockingQueueHandlerTest extends DataHandlerTest<Long, BlockingQueu
         _H.getQueue().offer(42L);
         assertEquals((Long) 23L, Utils.process(_H, 1L, 2L));
         assertEquals((Long) 42L, Utils.process(_H, 23L, null));
-        assertNull(Utils.process(_H));
+        assertTrue(_H.getQueue().isEmpty());
         _H.getQueue().offer(9L);
         assertEquals((Long) 9L, Utils.process(_H));
         assertTrue(_H.getQueue().isEmpty());
@@ -71,8 +73,6 @@ public class BlockingQueueHandlerTest extends DataHandlerTest<Long, BlockingQueu
     public void shouldWrite() throws Exception {
         _H.setParameter(DataHandler.MODE, DataHandler.MODE_WRITE);
 
-        assertNull(Utils.process(_H, (Long) null));
-        assertNull(_H.getQueue().poll());
         assertEquals(Arrays.asList(23L, 1L), Utils.processAll(_H, 23L, 1L));
         assertEquals((Long) 23L, _H.getQueue().poll());
         assertEquals((Long) 1L, _H.getQueue().poll());
@@ -103,6 +103,12 @@ public class BlockingQueueHandlerTest extends DataHandlerTest<Long, BlockingQueu
         assertEquals((Long) 23L, Utils.process(_H, 23L));
         assertEquals((Long) 23L, _H.getQueue().poll());
         _H.getQueue().poll(500, TimeUnit.MILLISECONDS);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void shouldNotAcceptNullValues() {
+        _H.setParameter(DataHandler.MODE, DataHandler.MODE_WRITE);
+        Utils.process(_H, null);
     }
 
 }

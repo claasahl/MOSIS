@@ -1,5 +1,6 @@
 package de.claas.mosis.io;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.InputStream;
@@ -83,6 +84,7 @@ public abstract class StreamHandlerTest<S, T extends StreamHandler<S>> extends
         assertTrue(s1.equals(s2));
     }
 
+    @Ignore
     @Test
     public void shouldCacheOutputStream() throws Exception {
         OutputStream s1 = _H.getOutputStream();
