@@ -62,7 +62,7 @@ public class Function extends ProcessorAdapter<Double, Double> {
     @Override
     public void process(List<Double> in, List<Double> out) {
         String expression = getParameter(FUNCTION);
-        in = in == null ? new Vector<>() : in;
+        in = in == null ? new Vector<Double>() : in;
         out.add(interpret(expression, in));
     }
 
@@ -252,7 +252,7 @@ public class Function extends ProcessorAdapter<Double, Double> {
         @Override
         public boolean complies(String parameter, String value) {
             try {
-                interpret(value, new Vector<>());
+                interpret(value, new Vector<Double>());
                 return true;
             } catch (Exception e) {
                 return false;

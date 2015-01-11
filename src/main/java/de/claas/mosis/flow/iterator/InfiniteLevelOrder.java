@@ -33,9 +33,10 @@ import java.util.*;
 public class InfiniteLevelOrder implements Iterator<Node> {
 
     private final Set<Node> _Visited;
-    private final Queue<Node> _Nodes;
-    private final List<Queue<Node>> _Levels;
+    private final List<Node> _Nodes;
+    private final List<List<Node>> _Levels;
     private int _Level;
+    private int _Index;
 
     /**
      * Initializes the class with the given parameter.
@@ -47,6 +48,7 @@ public class InfiniteLevelOrder implements Iterator<Node> {
         _Nodes = new LinkedList<>();
         _Levels = new LinkedList<>();
         _Level = 0;
+        _Index = 0;
         initLevels(0, sources);
     }
 
@@ -60,9 +62,9 @@ public class InfiniteLevelOrder implements Iterator<Node> {
         }
     }
 
-    private Queue<Node> getNodes(int level) {
+    private List<Node> getNodes(int level) {
         if (level >= _Levels.size()) {
-            _Levels.add(level, new LinkedList<>());
+            _Levels.add(level, new LinkedList<Node>());
         }
         return _Levels.get(level);
     }
@@ -74,15 +76,13 @@ public class InfiniteLevelOrder implements Iterator<Node> {
 
     @Override
     public Node next() {
-        if (_Nodes.isEmpty()) {
-            for (int l = _Level; l >= 0; l--) {
-                _Nodes.addAll(getNodes(l));
-            }
+        if (_Index >= _Nodes.size()) {
+            _Index = 0;
             if (_Level < _Levels.size()) {
-                _Level++;
+                _Nodes.addAll(0, getNodes(_Level++));
             }
         }
-        return _Nodes.poll();
+        return _Nodes.get(_Index++);
     }
 
     @Override

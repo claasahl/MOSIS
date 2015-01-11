@@ -32,7 +32,7 @@ public class UtilsTest {
     @Test
     public void shouldReturnAllResults() {
         String[] tmp = new String[]{"hello", "world"};
-        List<String> outputs = Utils.processAll(new Forward<>(), tmp);
+        List<String> outputs = Utils.processAll(new Forward<String>(), tmp);
         assertEquals(2, outputs.size());
         assertTrue(outputs.contains("hello"));
         assertTrue(outputs.contains("world"));
