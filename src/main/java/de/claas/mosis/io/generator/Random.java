@@ -62,9 +62,9 @@ public class Random extends ProcessorAdapter<Double, Double> {
     }
 
     /**
-     * The class {@link ChangeSeed}. It is intended to (re-)set the seed of the
-     * {@link java.util.Random} generator object whenever the {@link
-     * Random#SEED} parameter is changed.
+     * The class {@link de.claas.mosis.io.generator.Random.ChangeSeed}. It is
+     * intended to (re-)set the seed of the {@link java.util.Random} generator
+     * object whenever the {@link #SEED} parameter is changed.
      *
      * @author Claas Ahlrichs (claasahl@tzi.de)
      */

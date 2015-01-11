@@ -74,7 +74,8 @@ public class Graph {
     }
 
     /**
-     * Returns the corresponding {@link Node} for this {@link Processor}.
+     * Returns the corresponding {@link de.claas.mosis.flow.Node} for this
+     * {@link de.claas.mosis.model.Processor}.
      *
      * @param p the {@link de.claas.mosis.model.Processor}
      * @return the {@link de.claas.mosis.flow.Node}
@@ -106,7 +107,7 @@ public class Graph {
      * @param clazz the {@link java.lang.Iterable} class that should be
      *              instantiated
      * @return an instantiated {@link java.lang.Iterable} object of the given
-     * {@link Class} for this graph
+     * {@link java.lang.Class} for this graph
      * @throws java.lang.ReflectiveOperationException See {@link #iterator(Class)}
      *                                                for details.
      * @see #iterator(Class)

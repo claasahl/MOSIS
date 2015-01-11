@@ -38,14 +38,15 @@ public class QueueHandler<T> extends DataHandler<T> {
     }
 
     /**
-     * Returns the (input / output) {@link Queue}. When in "reading" mode (see
-     * {@link #isReadOnly(List)}), then the head of the queue is removed and
-     * returned every time {@link #process(java.util.List, java.util.List)} is
-     * called. When in "writing" mode (see {@link #isWriteOnly(List)}), then all
-     * incoming elements are appended to the queue every time {@link
-     * #process(java.util.List, java.util.List)} is called.
+     * Returns the (input / output) {@link java.util.Queue}. When in "reading"
+     * mode (see {@link #isReadOnly(List)}), then the head of the queue is
+     * removed and returned every time {@link #process(java.util.List,
+     * java.util.List)} is called. When in "writing" mode (see {@link
+     * #isWriteOnly(List)}), then all incoming elements are appended to the
+     * queue every time {@link #process(java.util.List, java.util.List)} is
+     * called.
      *
-     * @return the (input / output) {@link Queue}
+     * @return the (input / output) {@link java.util.Queue}
      */
     public Queue<T> getQueue() {
         return _Queue;
@@ -83,8 +84,9 @@ public class QueueHandler<T> extends DataHandler<T> {
     }
 
     /**
-     * The class {@link ImplCreator}. It is intended to create {@link Queue}
-     * objects whenever the {@link QueueHandler#CLASS} parameter is changed.
+     * The class {@link de.claas.mosis.io.QueueHandler.ImplCreator}. It is
+     * intended to create {@link java.util.Queue} objects whenever the {@link
+     * #CLASS} parameter is changed.
      *
      * @author Claas Ahlrichs (claasahl@tzi.de)
      */

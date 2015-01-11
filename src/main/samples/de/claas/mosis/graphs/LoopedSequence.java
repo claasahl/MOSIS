@@ -5,14 +5,14 @@ import de.claas.mosis.flow.iterator.InfiniteLevelOrder;
 import de.claas.mosis.io.StandardInputOutputImpl;
 import de.claas.mosis.io.format.PlainText;
 import de.claas.mosis.io.generator.Linear;
-import de.claas.mosis.model.Processor;
 import de.claas.mosis.processing.debug.ToString;
 
 /**
- * The class {@link LoopedSequence} is a sample demonstrator. It is intended to
- * show the use of a (simple) sequential information flow, in which a loop
- * exist. Here the basic sequence is based on only two {@link Processor} objects
- * (i.e. a source and a sink).
+ * The class {@link de.claas.mosis.graphs.LoopedSequence} is a sample
+ * demonstrator. It is intended to show the use of a (simple) sequential
+ * information flow, in which a loop exist. Here the basic sequence is based on
+ * only two {@link de.claas.mosis.model.Processor} objects (i.e. a source and a
+ * sink).
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -24,8 +24,8 @@ public class LoopedSequence {
      * into itself again. The function's slope and intercept can be varied by
      * changing the method's arguments.
      *
-     * @param args the arguments, namely slope (i.e. {@link Linear#M}) and
-     *             intercept (i.e. {@link Linear#B}).
+     * @param args the arguments, namely slope (i.e. {@link de.claas.mosis.io.generator.Linear#M})
+     *             and intercept (i.e. {@link de.claas.mosis.io.generator.Linear#B}).
      */
     public static void main(String[] args) throws Exception {
         // Prepare processing modules

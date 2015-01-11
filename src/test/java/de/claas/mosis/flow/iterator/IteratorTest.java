@@ -30,12 +30,12 @@ public abstract class IteratorTest {
     protected Node _N4;
 
     /**
-     * Returns an instantiated {@link Iterator} class. If appropriate, the
-     * instance is configured with default values as well as the given
+     * Returns an instantiated {@link java.util.Iterator} class. If appropriate,
+     * the instance is configured with default values as well as the given
      * parameters.
      *
      * @param sources the sources
-     * @return an instantiated {@link Iterator} class
+     * @return an instantiated {@link java.util.Iterator} class
      */
     public abstract Iterator<Node> build(Collection<Node> sources);
 
@@ -61,13 +61,13 @@ public abstract class IteratorTest {
 
     /**
      * A helper method to avoid code duplicates. The method iterates as long as
-     * possible and compare the returned {@link Node} instances to those
-     * instances that are expected in the particular level / at a particular
-     * depth from the root {@link Node}.
+     * possible and compare the returned {@link de.claas.mosis.flow.Node}
+     * instances to those instances that are expected in the particular level /
+     * at a particular depth from the root {@link de.claas.mosis.flow.Node}.
      *
-     * @param iterator the {@link Iterator}
-     * @param level    the levels in which the {@link Node}s are expected to be
-     *                 iterated over
+     * @param iterator the {@link java.util.Iterator}
+     * @param level    the levels in which the {@link de.claas.mosis.flow.Node}s
+     *                 are expected to be iterated over
      * @param hasNext  whether the iterator is expected to return more values
      *                 than listed in the levels
      */

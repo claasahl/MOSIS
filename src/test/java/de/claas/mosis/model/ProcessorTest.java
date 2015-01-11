@@ -38,7 +38,8 @@ public class ProcessorTest {
      * Initializes this JUnit test for an implementation of the {@link
      * de.claas.mosis.model.Processor} class.
      *
-     * @param clazz implementation of {@link Processor} class
+     * @param clazz implementation of {@link de.claas.mosis.model.Processor}
+     *              class
      */
     public ProcessorTest(Class<Processor<?, ?>> clazz) {
         _Clazz = clazz;

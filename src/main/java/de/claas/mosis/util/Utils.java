@@ -42,9 +42,9 @@ public abstract class Utils {
     /**
      * Returns all output values of the {@link de.claas.mosis.model.Processor}
      * or an empty {@link java.util.List} if no output was generated. The input
-     * values are directly passed into {@link Processor#process(List,
-     * List)de.claas.mosis.model.Processor}. This method greatly simplifies
-     * testing as well as rapid prototyping.
+     * values are directly passed into {@link de.claas.mosis.model.Processor#process(java.util.List,
+     * java.util.List)}. This method greatly simplifies testing as well as rapid
+     * prototyping.
      *
      * @param p  the {@link de.claas.mosis.model.Processor}
      * @param in the input data

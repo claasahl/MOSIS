@@ -1,7 +1,6 @@
 package de.claas.mosis.processing.debug;
 
 import de.claas.mosis.model.DecoratorProcessor;
-import de.claas.mosis.model.ProcessorAdapterTest;
 import de.claas.mosis.util.Utils;
 import org.junit.After;
 import org.junit.Before;
@@ -15,7 +14,8 @@ import static org.junit.Assert.*;
  * Please refer to the individual tests for more detailed information.
  * <p/>
  * Additional test cases can be found in {@link de.claas.mosis.model.ProcessorTest},
- * {@link ProcessorAdapterTest} and {@link de.claas.mosis.model.DecoratorProcessorTest}.
+ * {@link de.claas.mosis.model.ProcessorAdapterTest} and {@link
+ * de.claas.mosis.model.DecoratorProcessorTest}.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
