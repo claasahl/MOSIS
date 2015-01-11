@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The class {@link BiasedLink}. It is intended to act as a link between two
- * {@link Node} objects that only allows objects of a certain type to pass
- * through. Other objects are discarded.
+ * The class {@link de.claas.mosis.flow.BiasedLink}. It is intended to act as a
+ * link between two {@link de.claas.mosis.flow.Node} objects that only allows
+ * objects of a certain type to pass through. Other objects are discarded.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -42,8 +42,9 @@ public class BiasedLink extends LinkAdapter {
     }
 
     /**
-     * The class {@link ClassCreator}. It is intended to create {@link Class}
-     * objects whenever the {@link BiasedLink#CLASS} parameter is changed.
+     * The class {@link de.claas.mosis.flow.BiasedLink.ClassCreator}. It is
+     * intended to create {@link java.lang.Class} objects whenever the {@link
+     * #CLASS} parameter is changed.
      *
      * @author Claas Ahlrichs (claasahl@tzi.de)
      */

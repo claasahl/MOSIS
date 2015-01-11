@@ -1,17 +1,16 @@
 package de.claas.mosis.flow;
 
-import de.claas.mosis.model.Processor;
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
 /**
- * The class {@link Node}. It is intended to represent the general concept of a
- * node within a {@link Graph}. This class manages all inbound and outbound
- * links to / from other nodes. Concrete realizations may choose to represent
- * either a single or multiple {@link Processor} objects.
+ * The class {@link de.claas.mosis.flow.Node}. It is intended to represent the
+ * general concept of a node within a {@link de.claas.mosis.flow.Graph}. This
+ * class manages all inbound and outbound links to / from other nodes. Concrete
+ * realizations may choose to represent either a single or multiple {@link
+ * de.claas.mosis.model.Processor} objects.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -32,8 +31,9 @@ public abstract class Node {
     }
 
     /**
-     * Adds a successor to this node with the given type of {@link Link}. This
-     * also updates the predecessor list of the given node.
+     * Adds a successor to this node with the given type of {@link
+     * de.claas.mosis.flow.Link}. This also updates the predecessor list of the
+     * given node.
      *
      * @param successor successor to add
      * @param link      link to use
@@ -129,33 +129,39 @@ public abstract class Node {
     }
 
     /**
-     * Returns the corresponding {@link Link} for given {@link Node}. The
-     * returned link serves input data, if present.
+     * Returns the corresponding {@link de.claas.mosis.flow.Link} for given
+     * {@link de.claas.mosis.flow.Node}. The returned link serves input data, if
+     * present.
      *
      * @param node the node
-     * @return the corresponding {@link Link} for given {@link Node}
+     * @return the corresponding {@link de.claas.mosis.flow.Link} for given
+     * {@link de.claas.mosis.flow.Node}
      */
     public Link getInboundLink(Node node) {
         return _Predecessors.get(node);
     }
 
     /**
-     * Return the corresponding {@link Link} for given {@link Node}. The
-     * returned link receives output data, if present.
+     * Return the corresponding {@link de.claas.mosis.flow.Link} for given
+     * {@link de.claas.mosis.flow.Node}. The returned link receives output data,
+     * if present.
      *
      * @param node the node
-     * @return the corresponding {@link Link} for given {@link Node}
+     * @return the corresponding {@link de.claas.mosis.flow.Link} for given
+     * {@link de.claas.mosis.flow.Node}
      */
     public Link getOutboundLink(Node node) {
         return _Successors.get(node);
     }
 
     /**
-     * Returns <code>true</code>, if the next {@link Node} may be visited (by
-     * the given {@link Visitor}). Otherwise <code>false</code> is returned.
+     * Returns <code>true</code>, if the next {@link de.claas.mosis.flow.Node}
+     * may be visited (by the given {@link de.claas.mosis.flow.Visitor}).
+     * Otherwise <code>false</code> is returned.
      *
      * @param visitor the visitor
-     * @return <code>true</code>, if the next {@link Node} may be visited
+     * @return <code>true</code>, if the next {@link de.claas.mosis.flow.Node}
+     * may be visited
      */
     public abstract boolean visit(Visitor visitor);
 

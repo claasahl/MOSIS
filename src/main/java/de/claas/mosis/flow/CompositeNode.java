@@ -1,17 +1,17 @@
 package de.claas.mosis.flow;
 
-import de.claas.mosis.model.Processor;
-
 import java.util.Collections;
 import java.util.Set;
 
 /**
- * The class {@link CompositeNode}. It is an implementation of the {@link Node}
- * class. This class is intended to represent a node that is based around a set
- * of {@link Processor} instances. The content of this node basically represents
- * an entire graph on its own. The only limitation is that there may be only a
- * single data sink. This stands in contrast to the {@link PlainNode}, which
- * represents a single {@link Processor} instance.
+ * The class {@link de.claas.mosis.flow.CompositeNode}. It is an implementation
+ * of the {@link de.claas.mosis.flow.Node} class. This class is intended to
+ * represent a node that is based around a set of {@link
+ * de.claas.mosis.model.Processor} instances. The content of this node basically
+ * represents an entire graph on its own. The only limitation is that there may
+ * be only a single data sink. This stands in contrast to the {@link
+ * de.claas.mosis.flow.PlainNode}, which represents a single {@link
+ * de.claas.mosis.model.Processor} instance.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */

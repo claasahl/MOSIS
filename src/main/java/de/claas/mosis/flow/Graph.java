@@ -10,10 +10,11 @@ import java.lang.reflect.Constructor;
 import java.util.*;
 
 /**
- * The class {@link Graph}. It is intended to provide a simple way of managing
- * and arranging {@link Processor} modules within a graph. This class's main
- * functionalities are to link {@link Processor} modules together and provide
- * access to the data sources (i.e. roots) of the graph.
+ * The class {@link de.claas.mosis.flow.Graph}. It is intended to provide a
+ * simple way of managing and arranging {@link de.claas.mosis.model.Processor}
+ * modules within a graph. This class's main functionalities are to link {@link
+ * de.claas.mosis.model.Processor} modules together and provide access to the
+ * data sources (i.e. roots) of the graph.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -75,8 +76,8 @@ public class Graph {
     /**
      * Returns the corresponding {@link Node} for this {@link Processor}.
      *
-     * @param p the {@link Processor}
-     * @return the {@link Node}
+     * @param p the {@link de.claas.mosis.model.Processor}
+     * @return the {@link de.claas.mosis.flow.Node}
      */
     protected Node getNode(Processor<?, ?> p) {
         Node n = _Nodes.get(p);
@@ -97,14 +98,17 @@ public class Graph {
     }
 
     /**
-     * Returns an instantiated {@link Iterable} object of the given
-     * {@link Class} for this graph. This is a convenience method and turns the
-     * {@link Iterator} object into an {@link Iterable} object.
+     * Returns an instantiated {@link java.lang.Iterable} object of the given
+     * {@link java.lang.Class} for this graph. This is a convenience method and
+     * turns the {@link java.util.Iterator} object into an {@link
+     * java.lang.Iterable} object.
      *
-     * @param clazz the {@link Iterable} class that should be instantiated
-     * @return an instantiated {@link Iterable} object of the given
+     * @param clazz the {@link java.lang.Iterable} class that should be
+     *              instantiated
+     * @return an instantiated {@link java.lang.Iterable} object of the given
      * {@link Class} for this graph
-     * @throws ReflectiveOperationException See {@link #iterator(Class)} for details.
+     * @throws java.lang.ReflectiveOperationException See {@link #iterator(Class)}
+     *                                                for details.
      * @see #iterator(Class)
      */
     public Iterable<Node> iterable(Class<? extends Iterator<Node>> clazz)
@@ -120,15 +124,17 @@ public class Graph {
     }
 
     /**
-     * Returns an instantiated {@link Iterator} object of the given
-     * {@link Class} for this graph. It is assumed that the {@link Iterator}
-     * class has a constructor that accepts a {@link Set} of {@link Node}
-     * objects.
+     * Returns an instantiated {@link java.util.Iterator} object of the given
+     * {@link java.lang.Class} for this graph. It is assumed that the {@link
+     * java.util.Iterator} class has a constructor that accepts a {@link
+     * java.util.Set} of {@link de.claas.mosis.flow.Node} objects.
      *
-     * @param clazz the {@link Iterator} class that should be instantiated
-     * @return an instantiated {@link Iterator} object of the given
-     * {@link Class} for this graph
-     * @throws ReflectiveOperationException If the {@link Iterator} class could not be properly
+     * @param clazz the {@link java.util.Iterator} class that should be
+     *              instantiated
+     * @return an instantiated {@link java.util.Iterator} object of the given
+     * {@link java.lang.Class} for this graph
+     * @throws ReflectiveOperationException If the {@link java.util.Iterator}
+     *                                      class could not be properly
      *                                      instantiated.
      */
     public Iterator<Node> iterator(Class<? extends Iterator<Node>> clazz)
@@ -140,13 +146,15 @@ public class Graph {
 
     /**
      * Initializes processing modules and starts data processing. The order of
-     * processing modules is determined by the given {@link Iterator} class. If
-     * the data source is no longer providing data or there are no more
-     * processing modules that need processing, then processing modules are also
-     * dismantled.
+     * processing modules is determined by the given {@link java.util.Iterator}
+     * class. If the data source is no longer providing data or there are no
+     * more processing modules that need processing, then processing modules are
+     * also dismantled.
      *
-     * @param clazz the {@link Iterator} class
-     * @throws ReflectiveOperationException
+     * @param clazz the {@link java.util.Iterator} class
+     * @throws java.lang.ReflectiveOperationException See {@link #iterator(Class)}
+     *                                                for details.
+     * @see #iterator(Class)
      */
     public void process(Class<? extends Iterator<Node>> clazz)
             throws ReflectiveOperationException {

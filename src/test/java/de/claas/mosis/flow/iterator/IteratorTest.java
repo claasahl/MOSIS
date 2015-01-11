@@ -15,10 +15,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * The (abstract) JUnit test for class {@link Iterator} implementation within
- * the framework. It is intended to collect and document a set of test cases for
- * the tested class. Please refer to the individual tests for more detailed
- * information.
+ * The (abstract) JUnit test for class {@link java.util.Iterator} implementation
+ * within the framework. It is intended to collect and document a set of test
+ * cases for the tested class. Please refer to the individual tests for more
+ * detailed information.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -68,8 +68,8 @@ public abstract class IteratorTest {
      * @param iterator the {@link Iterator}
      * @param level    the levels in which the {@link Node}s are expected to be
      *                 iterated over
-     * @param hasNext  whether the iterator is expected to return more values than
-     *                 listed in the levels
+     * @param hasNext  whether the iterator is expected to return more values
+     *                 than listed in the levels
      */
     protected void compare(Iterator<Node> iterator, List<List<Node>> level,
                            boolean hasNext) {

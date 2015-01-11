@@ -1,14 +1,14 @@
 package de.claas.mosis.flow;
 
 import de.claas.mosis.model.Configurable;
-import de.claas.mosis.model.Processor;
 
 import java.util.List;
 
 /**
- * The interface {@link Link}. It is intended to represent a connection between
- * two {@link Processor} modules. Their purpose is to buffer and monitor the
- * flow of information from one {@link Processor} to the next {@link Processor}.
+ * The interface {@link de.claas.mosis.flow.Link}. It is intended to represent a
+ * connection between two {@link de.claas.mosis.model.Processor} modules. Their
+ * purpose is to buffer and monitor the flow of information from one {@link
+ * de.claas.mosis.model.Processor} to the next {@link de.claas.mosis.model.Processor}.
  * Concrete implementations may be configurable and may choose which data they
  * accept (i.e. want to forward / buffer).
  *

@@ -1,17 +1,16 @@
 package de.claas.mosis.flow;
 
 import de.claas.mosis.model.ConfigurableAdapter;
-import de.claas.mosis.model.Processor;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
 /**
- * The class {@link LinkAdapter}. It is intended to provide a common
- * implementation of the {@link Link} interface. It acts as a link between two
- * {@link Processor} objects and accepts all objects (i.e. no objects are
- * discarded).
+ * The class {@link de.claas.mosis.flow.LinkAdapter}. It is intended to provide
+ * a common implementation of the {@link de.claas.mosis.flow.Link} interface. It
+ * acts as a link between two {@link de.claas.mosis.model.Processor} objects and
+ * accepts all objects (i.e. no objects are discarded).
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */

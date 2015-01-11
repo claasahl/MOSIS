@@ -10,9 +10,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * The class {@link DismantlingVisitor}. It is an implementation of the
- * {@link Visitor} interface. It is intended to shutdown / clean up all
- * processing modules within a graph.
+ * The class {@link de.claas.mosis.flow.visitor.DismantlingVisitor}. It is an
+ * implementation of the {@link de.claas.mosis.flow.Visitor} interface. It is
+ * intended to shutdown / clean up all processing modules within a graph.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
