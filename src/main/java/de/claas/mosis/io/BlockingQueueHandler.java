@@ -25,7 +25,6 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public class BlockingQueueHandler<T> extends DataHandler<T> {
 
-    // TODO Add to test(s)
     @Parameter("Name of class from queue. An instance of this class backs this handler. Any class, implementing java.util.concurrent.BlockingQueue, can be used.")
     public static final String CLASS = "class (queue)";
     private BlockingQueue<T> _Queue;
