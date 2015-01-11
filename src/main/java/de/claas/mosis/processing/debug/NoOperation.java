@@ -1,14 +1,13 @@
 package de.claas.mosis.processing.debug;
 
-import de.claas.mosis.model.Processor;
 import de.claas.mosis.model.ProcessorAdapter;
 
 import java.util.List;
 
 /**
- * The class {@link NoOperation}. It is intended for debugging purposes. This
- * {@link Processor} implementation will never return values, regardless of the
- * input.
+ * The class {@link de.claas.mosis.processing.debug.NoOperation}. It is intended
+ * for debugging purposes. This {@link de.claas.mosis.model.Processor}
+ * implementation will never return values, regardless of the input.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */

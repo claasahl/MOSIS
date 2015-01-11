@@ -3,18 +3,20 @@ package de.claas.mosis.processing;
 import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
-import de.claas.mosis.model.Processor;
 import de.claas.mosis.model.ProcessorAdapter;
 import de.claas.mosis.processing.util.Delay;
 
 /**
- * The class {@link ComparingProcessor}. It is a partial implementation of the
- * {@link Processor} interface which is buffers a single sample. The idea is to
- * provide the ability to compare an incoming sample to the previous sample
- * without having to use {@link BufferingProcessor}.
+ * The class {@link de.claas.mosis.processing.ComparingProcessor}. It is a
+ * partial implementation of the {@link de.claas.mosis.model.Processor}
+ * interface which is buffers a single sample. The idea is to provide the
+ * ability to compare an incoming sample to the previous sample without having
+ * to use {@link de.claas.mosis.processing.BufferingProcessor}.
  *
- * @param <I> type of incoming data. See {@link Processor} for details.
- * @param <O> type of outgoing data. See {@link Processor} for details.
+ * @param <I> type of incoming data. See {@link de.claas.mosis.model.Processor}
+ *            for details.
+ * @param <O> type of outgoing data. See {@link de.claas.mosis.model.Processor}
+ *            for details.
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
 @Documentation(

@@ -3,17 +3,18 @@ package de.claas.mosis.processing.debug;
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
 import de.claas.mosis.model.DecoratorProcessor;
-import de.claas.mosis.model.Processor;
 
 import java.util.List;
 
 /**
- * The class {@link Time}. It is intended for debugging purposes. This
- * {@link DecoratorProcessor} implementation measures the time (measured in
- * milliseconds) required to execute {@link Processor#process(java.util.List, java.util.List)} of the
- * wrapped {@link Processor} object. Furthermore it provides the time that the
- * wrapped {@link Processor} object was first called and the time it was last
- * called (measured in milliseconds, between the current time and midnight,
+ * The class {@link de.claas.mosis.processing.debug.Time}. It is intended for
+ * debugging purposes. This {@link de.claas.mosis.model.DecoratorProcessor}
+ * implementation measures the time (measured in milliseconds) required to
+ * execute {@link de.claas.mosis.model.Processor#process(java.util.List,
+ * java.util.List)} of the wrapped {@link de.claas.mosis.model.Processor}
+ * object. Furthermore it provides the time that the wrapped {@link
+ * de.claas.mosis.model.Processor} object was first called and the time it was
+ * last called (measured in milliseconds, between the current time and midnight,
  * January 1, 1970 UTC).
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)

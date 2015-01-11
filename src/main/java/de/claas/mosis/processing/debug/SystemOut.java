@@ -3,15 +3,15 @@ package de.claas.mosis.processing.debug;
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
 import de.claas.mosis.model.DecoratorProcessor;
-import de.claas.mosis.model.Processor;
 
 import java.util.List;
 
 /**
- * The class {@link SystemOut}. It is intended for debugging purposes. This
- * {@link DecoratorProcessor} implementation will print it's name to
- * {@link System#out} as well as the input and output values of the
- * {@link Processor#process(List, List)} method.
+ * The class {@link de.claas.mosis.processing.debug.SystemOut}. It is intended
+ * for debugging purposes. This {@link de.claas.mosis.model.DecoratorProcessor}
+ * implementation will print it's name to {@link java.lang.System#out} as well
+ * as the input and output values of the {@link de.claas.mosis.model.Processor#process(java.util.List,
+ * java.util.List)} method.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */

@@ -1,15 +1,13 @@
 package de.claas.mosis.util;
 
-import de.claas.mosis.io.format.CommaSeparatedValues;
-import de.claas.mosis.io.format.JavaScriptObjectNotation;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * The class {@link Parser}. It is intended to provide a set of convenience
- * methods for parsing text based data formats (e.g.
- * {@link JavaScriptObjectNotation}, {@link CommaSeparatedValues}, etc.).
+ * The class {@link de.claas.mosis.util.Parser}. It is intended to provide a set
+ * of convenience methods for parsing text based data formats (e.g. {@link
+ * de.claas.mosis.io.format.JavaScriptObjectNotation}, {@link
+ * de.claas.mosis.io.format.CommaSeparatedValues}, etc.).
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */

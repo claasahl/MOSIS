@@ -2,18 +2,24 @@ package de.claas.mosis.processing;
 
 import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.annotation.Parameter;
-import de.claas.mosis.model.*;
+import de.claas.mosis.model.Condition;
+import de.claas.mosis.model.Configurable;
+import de.claas.mosis.model.ProcessorAdapter;
+import de.claas.mosis.model.Relation;
 
 import java.util.List;
 import java.util.Vector;
 
 /**
- * The class {@link BufferingProcessor}. It is a partial implementation of the
- * {@link Processor} interface which provides a sliding window. It is intended
- * to buffer input values (in an ordered fashion) and provide access to it.
+ * The class {@link de.claas.mosis.processing.BufferingProcessor}. It is a
+ * partial implementation of the {@link de.claas.mosis.model.Processor}
+ * interface which provides a sliding window. It is intended to buffer input
+ * values (in an ordered fashion) and provide access to it.
  *
- * @param <I> type of incoming data. See {@link Processor} for details.
- * @param <O> type of outgoing data. See {@link Processor} for details.
+ * @param <I> type of incoming data. See {@link de.claas.mosis.model.Processor}
+ *            for details.
+ * @param <O> type of outgoing data. See {@link de.claas.mosis.model.Processor}
+ *            for details.
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
 @Documentation(
@@ -69,7 +75,8 @@ public abstract class BufferingProcessor<I, O> extends ProcessorAdapter<I, O> {
      * Returns the removed data from the buffer (if any) and appends new data.
      * If the buffer has reached its limit then the very first element is
      * removed and returned by this method. If no data needs to be removed (that
-     * is to say, if the buffer is not full) then <code>null</code> is returned.
+     * is to say, if the buffer is not full) then <code>null</code> is
+     * returned.
      *
      * @param data the new data
      * @return the removed data from the buffer (if any)
@@ -88,9 +95,9 @@ public abstract class BufferingProcessor<I, O> extends ProcessorAdapter<I, O> {
     }
 
     /**
-     * The class {@link UpdateWindow}. It is intended to update the
-     * {@link BufferingProcessor#_Window} list whenever the
-     * {@link BufferingProcessor#WINDOW_SIZE} parameter is changed.
+     * The class {@link de.claas.mosis.processing.BufferingProcessor.UpdateWindow}.
+     * It is intended to update the {@link #getBuffer()} list whenever the
+     * {@link #WINDOW_SIZE} parameter is changed.
      *
      * @author Claas Ahlrichs (claasahl@tzi.de)
      */

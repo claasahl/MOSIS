@@ -9,9 +9,10 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
- * The class {@link Convolution}. It is intended to provide the means to do a
- * one-dimensional convolution. This {@link BufferingProcessor} implementation
- * can be used to highlight (or suppress) certain features of input values.
+ * The class {@link de.claas.mosis.processing.util.Convolution}. It is intended
+ * to provide the means to do a one-dimensional convolution. This {@link
+ * de.claas.mosis.processing.BufferingProcessor} implementation can be used to
+ * highlight (or suppress) certain features of input values.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -76,10 +77,10 @@ public class Convolution extends BufferingProcessor<Double, Double> {
     }
 
     /**
-     * The class {@link UpdateFactors}. It is intended to update the
-     * {@link Convolution#_Factors} array whenever the
-     * {@link Convolution#WEIGHTS}, {@link Convolution#DEFAULT_VALUE} or
-     * {@link Convolution#WINDOW_SIZE} parameter is changed.
+     * The class {@link de.claas.mosis.processing.util.Convolution.UpdateFactors}.
+     * It is intended to update the {@link #_Factors} array whenever the {@link
+     * #WEIGHTS}, {@link #DEFAULT_VALUE} or {@link #WINDOW_SIZE} parameter is
+     * changed.
      *
      * @author Claas Ahlrichs (claasahl@tzi.de)
      */

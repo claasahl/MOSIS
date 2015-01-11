@@ -7,9 +7,10 @@ import de.claas.mosis.processing.BufferingProcessor;
 import java.util.List;
 
 /**
- * The class {@link Delay}. It is intended to delay and forward incoming data.
- * This {@link BufferingProcessor} implementation buffers input values for a
- * predefined time and releases them afterwards.
+ * The class {@link de.claas.mosis.processing.util.Delay}. It is intended to
+ * delay and forward incoming data. This {@link de.claas.mosis.processing.BufferingProcessor}
+ * implementation buffers input values for a predefined time and releases them
+ * afterwards.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */

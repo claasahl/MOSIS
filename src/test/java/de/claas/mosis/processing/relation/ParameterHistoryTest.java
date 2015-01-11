@@ -2,19 +2,17 @@ package de.claas.mosis.processing.relation;
 
 import de.claas.mosis.model.ConfigurableAdapter;
 import de.claas.mosis.model.Relation;
-import de.claas.mosis.model.Relation.ParameterHistory;
-import de.claas.mosis.model.RelationTest;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 /**
- * The JUnit test for class {@link ParameterHistory}. It is intended to collect
- * and document a set of test cases for the tested class. Please refer to the
- * individual tests for more detailed information.
+ * The JUnit test for class {@link de.claas.mosis.model.Relation.ParameterHistory}.
+ * It is intended to collect and document a set of test cases for the tested
+ * class. Please refer to the individual tests for more detailed information.
  * <p/>
- * Additional test cases can be found in {@link RelationTest}.
+ * Additional test cases can be found in {@link de.claas.mosis.model.RelationTest}.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -26,10 +24,11 @@ public class ParameterHistoryTest {
     private ConfigurableAdapter _Dummy;
 
     /**
-     * Returns an instantiated {@link ParameterHistory} class. If appropriate,
-     * the instance is configured with default values.
+     * Returns an instantiated {@link de.claas.mosis.model.Relation.ParameterHistory}
+     * class. If appropriate, the instance is configured with default values.
      *
-     * @return an instantiated {@link ParameterHistory} class
+     * @return an instantiated {@link de.claas.mosis.model.Relation.ParameterHistory}
+     * class
      */
     private Relation build() {
         return new Relation.ParameterHistory();

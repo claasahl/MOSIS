@@ -72,6 +72,7 @@ public class ProcessorAdapterTest {
         impl.add(new Object[]{Random.class});
         impl.add(new Object[]{de.claas.mosis.io.generator.Time.class});
         impl.add(new Object[]{ToString.class});
+        impl.add(new Object[]{Logger.class});
         return impl;
     }
 

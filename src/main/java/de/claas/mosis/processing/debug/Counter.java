@@ -3,15 +3,15 @@ package de.claas.mosis.processing.debug;
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
 import de.claas.mosis.model.DecoratorProcessor;
-import de.claas.mosis.model.Processor;
 
 import java.util.List;
 
 /**
- * The class {@link Counter}. It is intended for debugging purposes. This
- * {@link DecoratorProcessor} implementation counts the number of times that
- * {@link Processor#process(java.util.List, java.util.List)} of its wrapped {@link Processor} object was
- * called.
+ * The class {@link de.claas.mosis.processing.debug.Counter}. It is intended for
+ * debugging purposes. This {@link de.claas.mosis.model.DecoratorProcessor}
+ * implementation counts the number of times that {@link
+ * de.claas.mosis.model.Processor#process(java.util.List, java.util.List)} of
+ * its wrapped {@link de.claas.mosis.model.Processor} object was called.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
