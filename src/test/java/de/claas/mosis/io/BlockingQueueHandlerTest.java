@@ -4,8 +4,8 @@ import de.claas.mosis.util.Utils;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.LinkedTransferQueue;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
@@ -43,10 +43,10 @@ public class BlockingQueueHandlerTest extends DataHandlerTest<Long, BlockingQueu
     @Test
     public void shouldInstantiateNewClass() throws Exception {
         _H.dismantle();
-        _H.setParameter(BlockingQueueHandler.CLASS, ArrayBlockingQueue.class.getName());
+        _H.setParameter(BlockingQueueHandler.CLASS, LinkedTransferQueue.class.getName());
         _H.setUp();
         assertNotNull(_H.getQueue());
-        assertEquals(ArrayBlockingQueue.class, _H.getQueue().getClass());
+        assertEquals(LinkedTransferQueue.class, _H.getQueue().getClass());
     }
 
     @Test
@@ -96,13 +96,13 @@ public class BlockingQueueHandlerTest extends DataHandlerTest<Long, BlockingQueu
         assertTrue(_H.getQueue().isEmpty());
     }
 
-    @Test(expected = InterruptedException.class)
+    @Test
     public void shouldBlock() throws InterruptedException {
         _H.setParameter(DataHandler.MODE, DataHandler.MODE_WRITE);
 
         assertEquals((Long) 23L, Utils.process(_H, 23L));
         assertEquals((Long) 23L, _H.getQueue().poll());
-        _H.getQueue().poll(500, TimeUnit.MILLISECONDS);
+        assertNull(_H.getQueue().poll(500, TimeUnit.MILLISECONDS));
     }
 
     @Test(expected = NullPointerException.class)
