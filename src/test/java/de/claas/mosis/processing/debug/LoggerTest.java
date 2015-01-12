@@ -1,14 +1,10 @@
 package de.claas.mosis.processing.debug;
 
-import de.claas.mosis.util.Utils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.List;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 /**
  * The JUnit test for class {@link de.claas.mosis.processing.debug.Logger}. It
@@ -36,21 +32,8 @@ public class LoggerTest {
     }
 
     @Test
-    public void shouldForwardValues() {
-        assertEquals("hello world", Utils.process(_P, "hello world"));
-        List<Object> results = Utils.processAll(_P, 23.4, 42.0, 0.0);
-        assertTrue(results.containsAll(Arrays.asList(23.4, 42.0, 0.0)));
-        assertTrue(Arrays.asList(23.4, 42.0, 0.0).containsAll(results));
-    }
-
-    @Test
-    public void shouldForwardNullValues() {
-        assertNull(Utils.process(_P, (Object) null));
-        assertNull(Utils.process(_P, null, null));
-        List<Object> results = Utils.processAll(_P, null, null);
-        assertEquals(2, results.size());
-        assertNull(results.get(0));
-        assertNull(results.get(1));
+    public void dummy() {
+        fail();
     }
 
 }

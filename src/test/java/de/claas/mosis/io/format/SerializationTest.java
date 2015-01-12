@@ -5,8 +5,6 @@ import de.claas.mosis.io.PipedImpl;
 import de.claas.mosis.io.StreamHandler;
 import de.claas.mosis.io.StreamHandlerTest;
 import de.claas.mosis.util.Utils;
-import org.junit.After;
-import org.junit.Before;
 
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -27,21 +25,28 @@ public class SerializationTest extends StreamHandlerTest<Object, Serialization<O
 
     @Override
     protected Serialization<Object> build() throws Exception {
-        return new Serialization<>();
+        Serialization<Object> handler = new Serialization<>();
+        handler.setParameter(StreamHandler.IMPL, PipedImpl.class.getName());
+        return handler;
     }
 
-    @Before
+    @Override
     public void before() throws Exception {
         super.before();
         _H = build();
-        _H.setParameter(StreamHandler.IMPL, PipedImpl.class.getName());
         _H.setUp();
     }
 
-    @After
+    @Override
     public void after() {
         super.after();
         _H.dismantle();
+    }
+
+    @Override
+    public void assumptionsOnImpl() throws Exception {
+        assertEquals(PipedImpl.class.getName(),
+                _H.getParameter(StreamHandler.IMPL));
     }
 
     @Override
