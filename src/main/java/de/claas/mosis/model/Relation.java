@@ -1,17 +1,19 @@
 package de.claas.mosis.model;
 
 /**
- * The interface {@link de.claas.mosis.model.Relation}. It is intended to provide a unified way for
- * automatic computation of configuration parameters. Implementing classes may
- * want to automatically adjust one or more parameters depending on the value of
- * another parameter (e.g. adding a parameter containing the time and date of
- * the last change or calculating another parameter based on a new value). Thus,
- * related parameter are kept synchronized.
+ * The interface {@link de.claas.mosis.model.Relation}. It is intended to
+ * provide a unified way for automatic computation of configuration parameters.
+ * Implementing classes may want to automatically adjust one or more parameters
+ * depending on the value of another parameter (e.g. adding a parameter
+ * containing the time and date of the last change or calculating another
+ * parameter based on a new value). Thus, related parameter are kept
+ * synchronized.
  * <p/>
  * <b>Note:</b> It is highly recommended to override {@link #equals(Object)} and
- * {@link #hashCode()}. It is used for management purposes (see
- * {@link de.claas.mosis.model.ConfigurableAdapter#addRelation(Relation)} and
- * {@link de.claas.mosis.model.ConfigurableAdapter#removeRelation(Relation)} for details).
+ * {@link #hashCode()}. It is used for management purposes (see {@link
+ * de.claas.mosis.model.ConfigurableAdapter#addRelation(Relation)} and {@link
+ * de.claas.mosis.model.ConfigurableAdapter#removeRelation(Relation)} for
+ * details).
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  * @see de.claas.mosis.model.ConfigurableAdapter
@@ -31,8 +33,8 @@ public interface Relation {
                         String value);
 
     /**
-     * The class {@link de.claas.mosis.model.Relation.LastChanged}. It is intended to add/update a parameter
-     * with the current date and time.
+     * The class {@link de.claas.mosis.model.Relation.LastChanged}. It is
+     * intended to add/update a parameter with the current date and time.
      *
      * @author Claas Ahlrichs (claasahl@tzi.de)
      */
@@ -58,8 +60,9 @@ public interface Relation {
     }
 
     /**
-     * The class {@link de.claas.mosis.model.Relation.UpdateVersion}. It is intended to add/update a parameter
-     * with the version (i.e. total number of changes that have been made).
+     * The class {@link de.claas.mosis.model.Relation.UpdateVersion}. It is
+     * intended to add/update a parameter with the version (i.e. total number of
+     * changes that have been made).
      *
      * @author Claas Ahlrichs (claasahl@tzi.de)
      */
@@ -86,9 +89,9 @@ public interface Relation {
     }
 
     /**
-     * The class {@link de.claas.mosis.model.Relation.ParameterHistory}. It is intended to track changes of
-     * parameters. The parameter history is stored in the form
-     * "history-<parameter's name>".
+     * The class {@link de.claas.mosis.model.Relation.ParameterHistory}. It is
+     * intended to track changes of parameters. The parameter history is stored
+     * in the form "history-<parameter's name>".
      *
      * @author Claas Ahlrichs (claasahl@tzi.de)
      */

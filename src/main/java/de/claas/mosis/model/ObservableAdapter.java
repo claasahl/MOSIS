@@ -5,11 +5,8 @@ import java.util.Vector;
 
 /**
  * The class {@link de.claas.mosis.model.ObservableAdapter}. It is intended to
- * provide a common implementation of the {@link de.claas.mosis.model.Configurable}
- * interface. It tracks and manages configuration related parameters as well as
- * their corresponding values. Furthermore, it provides the option to get and
- * set parameters of varying data types (e.g. {@link java.lang.Boolean}, {@link
- * java.lang.Integer}, etc.).
+ * provide a common implementation of the {@link de.claas.mosis.model.Observable}
+ * interface. It tracks changes of configuration related parameters.
  * <p/>
  * TODO
  *
