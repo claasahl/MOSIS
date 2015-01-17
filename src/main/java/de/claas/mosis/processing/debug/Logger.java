@@ -12,7 +12,15 @@ import java.util.List;
  * The class {@link de.claas.mosis.processing.debug.Logger}. It is intended for
  * debugging purposes. This {@link de.claas.mosis.model.DecoratorProcessor}
  * implementation will log calls to all methods of the the execution of its
- * wrapped {@link de.claas.mosis.model.Processor} object..
+ * wrapped {@link de.claas.mosis.model.Processor} object. The actual logging is
+ * based on Java's logging implementation (see {@link java.util.logging.Logger}
+ * and related classes / interfaces).
+ * <p/>
+ * The {@link java.util.logging.Logger}, that is being utilized by this module,
+ * must have been registered by the {@link java.util.logging.LogManager}. The
+ * {@link java.util.logging.Level} of the {@link java.util.logging.Logger} and
+ * {@link java.util.logging.Handler} must be at least {@link
+ * java.util.logging.Level#FINER}.
  *
  * @param <I> type of incoming data. See {@link de.claas.mosis.model.Processor}
  *            for details.
@@ -22,18 +30,19 @@ import java.util.List;
  */
 public class Logger<I, O> extends DecoratorProcessor<I, O> {
 
-    @Parameter("A name for the logger. Find or create a logger for a named subsystem. This should be a dot-separated name and should normally be based on the package name or class name of the subsystem, such as de.class.mosis")
+    @Parameter("Name of the logger, that was previous registered and configured by a java.util.logging.LogManager.")
     public static final String NAME = "name";
+    private String className = null;
     private java.util.logging.Logger logger;
 
     public Logger() {
-        setParameter(NAME, "de.class.mosis");
+        setParameter(NAME, "de.claas.mosis");
         addCondition(NAME, new Condition.IsNotNull());
     }
 
     @Override
     public List<String> getParameters() {
-        entering("getParameters");
+        entering("getParameters", null);
         List<String> parameters = super.getParameters();
         exiting("getParameters", parameters);
         return parameters;
@@ -49,83 +58,100 @@ public class Logger<I, O> extends DecoratorProcessor<I, O> {
 
     @Override
     public void setParameter(String parameter, String value) {
-        entering("setParameter", parameter, value);
+        entering("setParameter", String.format("parameter:%s, value:%s", parameter, value));
         super.setParameter(parameter, value);
-        exiting("setParameter");
+        exiting("setParameter", null);
     }
 
     @Override
     protected void addCondition(String parameter, Condition condition) {
-        entering("addCondition", parameter, condition);
+        entering("addCondition", String.format("parameter:%s, condition:%s", parameter, condition));
         super.addCondition(parameter, condition);
-        exiting("addCondition");
+        exiting("addCondition", null);
     }
 
     @Override
     protected void removeCondition(String parameter, Condition condition) {
-        entering("removeCondition", parameter, condition);
+        entering("removeCondition", String.format("parameter:%s, condition:%s", parameter, condition));
         super.removeCondition(parameter, condition);
-        exiting("removeCondition");
+        exiting("removeCondition", null);
     }
 
     @Override
     protected void addRelation(Relation relation) {
         entering("addRelation", relation);
         super.addRelation(relation);
-        exiting("addRelation");
+        exiting("addRelation", null);
     }
 
     @Override
     protected void removeRelation(Relation relation) {
         entering("removeRelation", relation);
         super.removeRelation(relation);
-        exiting("removeRelation");
+        exiting("removeRelation", null);
     }
 
     @Override
     public void setUp() {
+        className = getParameter(CLASS);
         logger = java.util.logging.Logger.getLogger(getParameter(NAME));
 
-        entering("setUp");
+        entering("setUp", null);
         super.setUp();
-        exiting("setUp");
+        exiting("setUp", null);
     }
 
     @Override
     public void dismantle() {
-        entering("dismantle");
+        entering("dismantle", null);
         super.dismantle();
-        exiting("dismantle");
+        exiting("dismantle", null);
 
         logger = null;
     }
 
     @Override
     public void process(List<I> in, List<O> out) {
-        entering("process", in, out);
+        entering("process", in);
         super.process(in, out);
-        exiting("process", in, out);
+        exiting("process", out);
     }
 
     @Override
     protected ProcessorAdapter<I, O> getProcessor() {
-        entering("getProcessor");
+        entering("getProcessor", null);
         ProcessorAdapter<I, O> processor = super.getProcessor();
         exiting("getProcessor", processor);
         return processor;
     }
 
-    private void entering(String method, Object... params) {
-        if (logger != null && params.length > 0)
-            logger.entering(getParameter(CLASS), method, params);
+    /**
+     * A convenience method for logging the entry from a method. The level
+     * {@link java.util.logging.Level#FINER} is used. If a parameter is
+     * specified, then the parameter's value is logged as well.
+     *
+     * @param method    the method which is being entered
+     * @param parameter the method's parameter(s)
+     */
+    private void entering(String method, Object parameter) {
+        if (logger != null && parameter != null)
+            logger.entering(className, method, parameter);
         else if (logger != null)
-            logger.entering(getParameter(CLASS), method);
+            logger.entering(className, method);
     }
 
-    private void exiting(String method, Object... params) {
-        if (logger != null && params.length > 0)
-            logger.exiting(getParameter(CLASS), method, params);
+    /**
+     * A convenience method for logging the return from a method. The level
+     * {@link java.util.logging.Level#FINER} is used. If a return value is
+     * specified, then the return value is logged as well.
+     *
+     * @param method      the method which is being exited
+     * @param returnValue the method's return value
+     */
+    private void exiting(String method, Object returnValue) {
+        if (logger != null && returnValue != null)
+            logger.exiting(className, method, returnValue);
         else if (logger != null)
-            logger.exiting(getParameter(CLASS), method);
+            logger.exiting(className, method);
     }
 }
