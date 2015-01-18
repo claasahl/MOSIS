@@ -1,14 +1,14 @@
-- All "Configurable"-classes:
+- All [Configurable](https://github.com/claasahl/MOSIS/blob/develop/src/main/java/de/claas/mosis/model/Configurable.java)-classes:
 	- parameters are defined at the top of the classes
 	- the class constructor is used to initialize the parameters and setup their conditions
 	- the setUp method is used to initialize global state variables (based on parameter values)
 	- the dismantle method is used to cleanup global state variables
 	- any method, function, constructor or type is to be documented (exceptions: @Override, etc.)
-- All "Configurable"-class tests:
+- All [Configurable](https://github.com/claasahl/MOSIS/blob/develop/src/main/java/de/claas/mosis/model/Configurable.java)-class tests:
 	- implement a @Before and (optionally) a @After method (e.g. "public void before()" and "public void after()")
 	- the @Before method will initialize a new Configurable instance (i.e. with parameters and calling "setUp()")
 	- the @After method will dismantle the Configurable instance (if necessary)
 	- implement tests for all relevant parameters and assumptions on their values
 	- any method, function, constructor or type is to be documented (exceptions: @Test, @Overrider, etc.)
-- All non-"Configurable"-class tests:
+- All non-[Configurable](https://github.com/claasahl/MOSIS/blob/develop/src/main/java/de/claas/mosis/model/Configurable.java)-class tests:
 	- are implemented as seen fit (e.g. test instances are not instantiated in @Before method but rather through a build function)
