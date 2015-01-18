@@ -4,14 +4,18 @@ This is an open source framework for signal processing, stream analysis, machine
 
 Releases are also published on [mloss.org](http://mloss.org/software/view/497/). This includes releases that have been published prior to the intial import of MOSIS on GitHub (less or equal to V0.55).
 
+License
+=======
+See [license](https://github.com/claasahl/MOSIS/blob/develop/LICENSE)
+
 Examples
 ========
 A few rudimentary samples can be found in the directory below. The samples demonstrate the very basic usage of MOSIS as well as some of its functionality.
 
     ./src/main/samples/
 
-Further Links
-=============
+Further Resources
+=================
 * **Releases** can be found [here](https://github.com/claasahl/MOSIS/blob/develop/CHANGES.md) and [here](https://github.com/claasahl/MOSIS/releases).
 * **Documentation** can be found in the [sources](https://github.com/claasahl/MOSIS/tree/develop/src) or in the [Wiki](https://github.com/claasahl/MOSIS/wiki).
 * For any **issues or questions**, please refer to [link](https://github.com/claasahl/MOSIS/issues).
