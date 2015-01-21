@@ -8,11 +8,12 @@ import java.util.Map;
 import java.util.Vector;
 
 /**
- * The class {@link de.claas.mosis.model.ConfigurableAdapter}. It is intended to provide a common
- * implementation of the {@link de.claas.mosis.model.Configurable} interface. It tracks and manages
- * configuration related parameters as well as their corresponding values.
- * Furthermore, it provides the option to get and set parameters of varying data
- * types (e.g. {@link java.lang.Boolean}, {@link java.lang.Integer}, etc.).
+ * The class {@link de.claas.mosis.model.ConfigurableAdapter}. It is intended to
+ * provide a common implementation of the {@link de.claas.mosis.model.Configurable}
+ * interface. It tracks and manages configuration related parameters as well as
+ * their corresponding values. Furthermore, it provides the option to get and
+ * set parameters of varying data types (e.g. {@link java.lang.Boolean}, {@link
+ * java.lang.Integer}, etc.).
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -21,11 +22,11 @@ import java.util.Vector;
         description = "This is a partial implementation of the main interface (i.e. Processor). It is intended to provide a unified way for getting and setting parameters. One can use this as a basis for creating new modules.",
         author = "Claas Ahlrichs",
         noOutputData = "Refer to concrete implementations.")
-public class ConfigurableAdapter extends ObservableAdapter implements
-        Configurable, Observable {
+public class ConfigurableAdapter implements Configurable, Observable {
 
     private final Map<String, String> _Parameters = new HashMap<>();
     private final Map<String, List<Condition>> _Conditions = new HashMap<>();
+    private final List<Observer> _Observers = new Vector<>();
     private final List<Relation> _Relations = new Vector<>();
 
     @Override
@@ -143,8 +144,9 @@ public class ConfigurableAdapter extends ObservableAdapter implements
     }
 
     /**
-     * Adds a {@link de.claas.mosis.model.Condition} to a parameter. This {@link de.claas.mosis.model.Condition} is
-     * evaluated every time the parameter is modified.
+     * Adds a {@link de.claas.mosis.model.Condition} to a parameter. This {@link
+     * de.claas.mosis.model.Condition} is evaluated every time the parameter is
+     * modified.
      *
      * @param parameter the parameter
      * @param condition the {@link de.claas.mosis.model.Condition}
@@ -172,8 +174,9 @@ public class ConfigurableAdapter extends ObservableAdapter implements
     }
 
     /**
-     * Adds a {@link de.claas.mosis.model.Relation} to a parameter. This {@link de.claas.mosis.model.Relation} is
-     * evaluated every time the parameter is modified.
+     * Adds a {@link de.claas.mosis.model.Relation} to a parameter. This {@link
+     * de.claas.mosis.model.Relation} is evaluated every time the parameter is
+     * modified.
      *
      * @param relation the {@link de.claas.mosis.model.Relation}
      */
@@ -190,4 +193,20 @@ public class ConfigurableAdapter extends ObservableAdapter implements
         _Relations.remove(relation);
     }
 
+    @Override
+    public void addObserver(Observer observer) {
+        _Observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+        _Observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers(String parameter) {
+        for (Observer observer : _Observers) {
+            observer.update(this, parameter);
+        }
+    }
 }
