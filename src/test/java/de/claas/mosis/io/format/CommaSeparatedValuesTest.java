@@ -46,28 +46,28 @@ public class CommaSeparatedValuesTest extends
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterSeparatorMayNotBeNull() throws Exception {
-        _H.setParameter(CommaSeparatedValues.SEPARATOR, null);
+        Utils.updateParameter(_H, CommaSeparatedValues.SEPARATOR, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterHeaderMayNotBeNull() throws Exception {
-        _H.setParameter(CommaSeparatedValues.HEADER, null);
+        Utils.updateParameter(_H, CommaSeparatedValues.HEADER, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterHasHeaderMayNotBeNull() throws Exception {
-        _H.setParameter(CommaSeparatedValues.HAS_HEADER, null);
+        Utils.updateParameter(_H, CommaSeparatedValues.HAS_HEADER, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterHasHeaderMustBeBoolean() throws Exception {
         try {
-            _H.setParameter(CommaSeparatedValues.HAS_HEADER, "true");
-            _H.setParameter(CommaSeparatedValues.HAS_HEADER, "false");
+            Utils.updateParameter(_H, CommaSeparatedValues.HAS_HEADER, "true");
+            Utils.updateParameter(_H, CommaSeparatedValues.HAS_HEADER, "false");
         } catch (Exception e) {
             fail(e.toString());
         }
-        _H.setParameter(CommaSeparatedValues.HAS_HEADER, "maybe");
+        Utils.updateParameter(_H, CommaSeparatedValues.HAS_HEADER, "maybe");
     }
 
     @Override
@@ -96,7 +96,7 @@ public class CommaSeparatedValuesTest extends
     @Override
     @Test
     public void shouldDetermineMode() throws Exception {
-        _H.setParameter(DataHandler.MODE, DataHandler.MODE_AUTO);
+        Utils.updateParameter(_H, DataHandler.MODE, DataHandler.MODE_AUTO);
 
         BufferedOutputStream o = _H.getOutputStream();
         o.write("\"attr1\",\"attr2\"\r\n".getBytes());
@@ -123,8 +123,9 @@ public class CommaSeparatedValuesTest extends
     }
 
     @Ignore
+    // TODO Please don't ignore me :)
     public void shouldNotReadHeader() throws Exception {
-        _H.setParameter(CommaSeparatedValues.HAS_HEADER, "false");
+        Utils.updateParameter(_H, CommaSeparatedValues.HAS_HEADER, "false");
         Data data = read("attr1,attr2\n\"hello\",'world'\n");
         assertEquals("attr1", data.get("attribute-0"));
         assertEquals("attr2", data.get("attribute-1"));
@@ -135,7 +136,7 @@ public class CommaSeparatedValuesTest extends
 
     @Test
     public void shouldWriteGivenHeader() throws Exception {
-        _H.setParameter(CommaSeparatedValues.HEADER, "head1,head2");
+        Utils.updateParameter(_H, CommaSeparatedValues.HEADER, "head1,head2");
         Data data = new Data();
         data.put("attr1", "hello");
         data.put("attr2", "world");
@@ -147,6 +148,7 @@ public class CommaSeparatedValuesTest extends
     }
 
     @Ignore
+    // TODO Please don't ignore me :)
     public void shouldReadEscapedElement() throws Exception {
         Data data = read("attr1,attr2,attr3\n\"hello\",\"wo\"\"r\"\"ld\",'te\"\"st'\n");
         assertEquals("hello", data.get("attr1"));
@@ -155,6 +157,7 @@ public class CommaSeparatedValuesTest extends
     }
 
     @Ignore
+    // TODO Please don't ignore me :)
     public void shouldWriteEscapedElement() throws Exception {
         Data data = new Data();
         data.put("attr1", "hello, world #1");
@@ -175,7 +178,7 @@ public class CommaSeparatedValuesTest extends
 
     @Test
     public void shouldReadWithDifferentSeparator() throws Exception {
-        _H.setParameter(CommaSeparatedValues.SEPARATOR, "|");
+        Utils.updateParameter(_H, CommaSeparatedValues.SEPARATOR, "|");
         Data data = read("attr1|attr2\n\"hello\"|world\n");
         assertEquals("hello", data.get("attr1"));
         assertEquals("world", data.get("attr2"));
@@ -183,7 +186,7 @@ public class CommaSeparatedValuesTest extends
 
     @Test
     public void shouldWriteWithDifferentSeparator() throws Exception {
-        _H.setParameter(CommaSeparatedValues.SEPARATOR, ";");
+        Utils.updateParameter(_H, CommaSeparatedValues.SEPARATOR, ";");
         Data data = new Data();
         data.put("attr1", "hello");
         data.put("attr2", "world");
@@ -193,6 +196,7 @@ public class CommaSeparatedValuesTest extends
     }
 
     @Ignore
+    // TODO Please don't ignore me :)
     public void shouldAllowWhitespace() throws Exception {
         Data data = read("attr1 , attr2  \n \" hello\"  ,  world   \n");
         assertEquals(" hello", data.get("attr1"));
@@ -211,7 +215,7 @@ public class CommaSeparatedValuesTest extends
      * @throws java.lang.Exception when an error occurs while writing
      */
     private Data read(String csv) throws Exception {
-        _H.setParameter(DataHandler.MODE, DataHandler.MODE_READ);
+        Utils.updateParameter(_H, DataHandler.MODE, DataHandler.MODE_READ);
         BufferedOutputStream o = _H.getOutputStream();
         o.write(csv.getBytes());
         o.close();
@@ -230,7 +234,7 @@ public class CommaSeparatedValuesTest extends
      * @throws java.lang.Exception when an error occurs while reading
      */
     private String write(Data... data) throws Exception {
-        _H.setParameter(DataHandler.MODE, DataHandler.MODE_WRITE);
+        Utils.updateParameter(_H, DataHandler.MODE, DataHandler.MODE_WRITE);
         BufferedInputStream i = _H.getInputStream();
         assertEquals(0, i.available());
         Utils.process(_H, data);

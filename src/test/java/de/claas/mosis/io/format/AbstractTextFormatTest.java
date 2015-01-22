@@ -2,6 +2,7 @@ package de.claas.mosis.io.format;
 
 import de.claas.mosis.io.PipedImpl;
 import de.claas.mosis.io.StreamHandlerTest;
+import de.claas.mosis.util.Utils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -73,39 +74,39 @@ public abstract class AbstractTextFormatTest<S, T extends AbstractTextFormat<S>>
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterBufferSizeMayNotBeNull() throws Exception {
-        _H.setParameter(AbstractTextFormat.BUFFER_SIZE, null);
+        Utils.updateParameter(_H, AbstractTextFormat.BUFFER_SIZE, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterBufferSizeMustBeAnInteger() throws Exception {
         try {
-            _H.setParameter(AbstractTextFormat.BUFFER_SIZE, "1");
-            _H.setParameter(AbstractTextFormat.BUFFER_SIZE, "12");
+            Utils.updateParameter(_H, AbstractTextFormat.BUFFER_SIZE, "1");
+            Utils.updateParameter(_H, AbstractTextFormat.BUFFER_SIZE, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
-        _H.setParameter(AbstractTextFormat.BUFFER_SIZE, "1.2");
+        Utils.updateParameter(_H, AbstractTextFormat.BUFFER_SIZE, "1.2");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterBufferSizeMustBePositive() throws Exception {
         try {
-            _H.setParameter(AbstractTextFormat.BUFFER_SIZE, "1");
-            _H.setParameter(AbstractTextFormat.BUFFER_SIZE, "12");
+            Utils.updateParameter(_H, AbstractTextFormat.BUFFER_SIZE, "1");
+            Utils.updateParameter(_H, AbstractTextFormat.BUFFER_SIZE, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
-        _H.setParameter(AbstractTextFormat.BUFFER_SIZE, "0");
+        Utils.updateParameter(_H, AbstractTextFormat.BUFFER_SIZE, "0");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterLineSeparatorMayNotBeNull() throws Exception {
-        _H.setParameter(AbstractTextFormat.LINE_SEPARATOR, null);
+        Utils.updateParameter(_H, AbstractTextFormat.LINE_SEPARATOR, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterCharsetNameMayNotBeNull() throws Exception {
-        _H.setParameter(AbstractTextFormat.CHARSET_NAME, null);
+        Utils.updateParameter(_H, AbstractTextFormat.CHARSET_NAME, null);
     }
 
     @Test
@@ -164,7 +165,7 @@ public abstract class AbstractTextFormatTest<S, T extends AbstractTextFormat<S>>
 
     @Test
     public void shouldHandleInsufficientBufferSizeAndPreserveEndOfLine() throws Exception {
-        _H.setParameter(AbstractTextFormat.BUFFER_SIZE, "10");
+        Utils.updateParameter(_H, AbstractTextFormat.BUFFER_SIZE, "10");
         BufferedOutputStream sO = _H.getOutputStream();
         sO.write("abc\r\ndef\nlaptop\n\rtree".getBytes());
         sO.close();
@@ -178,7 +179,7 @@ public abstract class AbstractTextFormatTest<S, T extends AbstractTextFormat<S>>
 
     @Test
     public void shouldHandleInsufficientBufferSize() throws Exception {
-        _H.setParameter(AbstractTextFormat.BUFFER_SIZE, "10");
+        Utils.updateParameter(_H, AbstractTextFormat.BUFFER_SIZE, "10");
         BufferedOutputStream sO = _H.getOutputStream();
         sO.write("abc\r\ndef\nlaptop\n\rtree".getBytes());
         sO.close();
@@ -193,7 +194,7 @@ public abstract class AbstractTextFormatTest<S, T extends AbstractTextFormat<S>>
 
     @Test
     public void shouldHandleIncompleteEndOfLineAndPreserveEndOfLine() throws Exception {
-        _H.setParameter(AbstractTextFormat.BUFFER_SIZE, "4");
+        Utils.updateParameter(_H, AbstractTextFormat.BUFFER_SIZE, "4");
         BufferedOutputStream sO = _H.getOutputStream();
         sO.write("abc\r\ndef\nlaptop\n\rtree".getBytes());
         sO.close();
@@ -207,7 +208,7 @@ public abstract class AbstractTextFormatTest<S, T extends AbstractTextFormat<S>>
 
     @Test
     public void shouldHandleIncompleteEndOfLine() throws Exception {
-        _H.setParameter(AbstractTextFormat.BUFFER_SIZE, "4");
+        Utils.updateParameter(_H, AbstractTextFormat.BUFFER_SIZE, "4");
         BufferedOutputStream sO = _H.getOutputStream();
         sO.write("abc\r\ndef\nlaptop\n\rtree".getBytes());
         sO.close();
@@ -222,10 +223,9 @@ public abstract class AbstractTextFormatTest<S, T extends AbstractTextFormat<S>>
     @Test
     public void shouldChangeBufferSize() {
         assertEquals(4096, _H.getBuffer().length);
-        _H.setParameter(AbstractTextFormat.BUFFER_SIZE, "4");
+        Utils.updateParameter(_H, AbstractTextFormat.BUFFER_SIZE, "4");
         assertEquals(4, _H.getBuffer().length);
-        _H.setParameter(AbstractTextFormat.BUFFER_SIZE, "10");
+        Utils.updateParameter(_H, AbstractTextFormat.BUFFER_SIZE, "10");
         assertEquals(10, _H.getBuffer().length);
     }
-
 }
