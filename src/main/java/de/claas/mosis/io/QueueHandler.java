@@ -2,8 +2,6 @@ package de.claas.mosis.io;
 
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
-import de.claas.mosis.model.Configurable;
-import de.claas.mosis.model.Relation;
 import de.claas.mosis.util.Utils;
 
 import java.util.LinkedList;
@@ -52,18 +50,20 @@ public class QueueHandler<T> extends DataHandler<T> {
         return _Queue;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void setUp() {
         super.setUp();
-        Relation r = new ImplCreator();
-        addRelation(r);
-        r.compute(this, CLASS, getParameter(CLASS));
+        try {
+            _Queue = (Queue) Utils.instance(Class.forName(getParameter(CLASS)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void dismantle() {
         super.dismantle();
-        removeRelation(new ImplCreator());
         _Queue = null;
     }
 
@@ -82,34 +82,4 @@ public class QueueHandler<T> extends DataHandler<T> {
             }
         }
     }
-
-    /**
-     * The class {@link de.claas.mosis.io.QueueHandler.ImplCreator}. It is
-     * intended to create {@link java.util.Queue} objects whenever the {@link
-     * #CLASS} parameter is changed.
-     *
-     * @author Claas Ahlrichs (claasahl@tzi.de)
-     */
-    private class ImplCreator implements Relation {
-
-        @SuppressWarnings("unchecked")
-        @Override
-        public void compute(Configurable configurable, String parameter,
-                            String value) {
-            if (CLASS.equals(parameter)) {
-                try {
-                    _Queue = (Queue<T>) Utils.instance(Class.forName(value));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            return obj != null && getClass().equals(obj.getClass());
-        }
-
-    }
-
 }

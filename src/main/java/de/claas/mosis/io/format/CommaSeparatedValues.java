@@ -2,9 +2,7 @@ package de.claas.mosis.io.format;
 
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
-import de.claas.mosis.model.Configurable;
 import de.claas.mosis.model.Data;
-import de.claas.mosis.model.Relation;
 import de.claas.mosis.util.Parser;
 
 import java.util.Collections;
@@ -85,15 +83,15 @@ public class CommaSeparatedValues extends AbstractTextFormat<Data> {
     @Override
     public void setUp() {
         super.setUp();
-        Relation r = new ChangeSeparator();
-        addRelation(r);
-        r.compute(this, SEPARATOR, getParameter(SEPARATOR));
+        // TODO Avoid hard coded patterns
+        Separator = Pattern.compile(Pattern.quote(getParameter(SEPARATOR)));
+        int sep = getParameter(SEPARATOR).charAt(0);
+        Textdata = Pattern.compile(String.format("[^\\x00-\\x1F\\x22\\x%02X]", sep));
     }
 
     @Override
     public void dismantle() {
         super.dismantle();
-        removeRelation(new ChangeSeparator());
         Separator = null;
     }
 
@@ -484,28 +482,5 @@ public class CommaSeparatedValues extends AbstractTextFormat<Data> {
 
         }
         return processed.toString();
-    }
-
-    /**
-     * The class {@link de.claas.mosis.io.format.CommaSeparatedValues.ChangeSeparator}.
-     * It is intended to (re-)set the separator character of the {@link
-     * de.claas.mosis.io.format.CommaSeparatedValues} object whenever the {@link
-     * #SEPARATOR} parameter is changed.
-     *
-     * @author Claas Ahlrichs (claasahl@tzi.de)
-     */
-    private class ChangeSeparator implements Relation {
-
-        @Override
-        public void compute(Configurable configurable, String parameter,
-                            String value) {
-            if (SEPARATOR.equals(parameter)) {
-                // TODO Avoid hard coded patterns
-                Separator = Pattern.compile(Pattern.quote(value));
-                int sep = value.charAt(0);
-                Textdata = Pattern.compile(String.format("[^\\x00-\\x1F\\x22\\x%02X]", sep));
-            }
-        }
-
     }
 }

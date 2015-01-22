@@ -3,8 +3,6 @@ package de.claas.mosis.io.format;
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.io.StreamHandler;
 import de.claas.mosis.model.Condition;
-import de.claas.mosis.model.Configurable;
-import de.claas.mosis.model.Relation;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -100,15 +98,12 @@ public abstract class AbstractTextFormat<T> extends StreamHandler<T> {
     @Override
     public void setUp() {
         super.setUp();
-        Relation r = new bla();
-        r.compute(this, BUFFER_SIZE, getParameter(BUFFER_SIZE));
-        addRelation(r);
+        _Buffer = new byte[getParameterAsInteger(BUFFER_SIZE)];
     }
 
     @Override
     public void dismantle() {
         super.dismantle();
-        removeRelation(new bla());
         if (_Input != null) {
             try {
                 _Input.close();
@@ -209,17 +204,4 @@ public abstract class AbstractTextFormat<T> extends StreamHandler<T> {
         getOutputStream().write(data);
         getOutputStream().flush();
     }
-
-    private class bla implements Relation {
-
-        @Override
-        public void compute(Configurable configurable, String parameter,
-                            String value) {
-            if (BUFFER_SIZE.equals(parameter)) {
-                _Buffer = new byte[Integer.parseInt(value)];
-            }
-        }
-
-    }
-
 }
