@@ -187,6 +187,7 @@ public class ConvolutionTest {
         assertEquals(+0.0, Utils.process(_P, 4.0, 0.0), 0.0001);
 
         Utils.updateParameter(_P, Convolution.DEFAULT_VALUE, "0.5");
+        assertEquals(-2.0, Utils.process(_P, 4.0, 0.0), 0.0001);
         assertEquals(-2.0, Utils.process(_P, 8.0, 0.0), 0.0001);
         assertEquals(+1.0, Utils.process(_P, 6.0, 0.0), 0.0001);
         assertEquals(+2.0, Utils.process(_P, 2.0, 0.0), 0.0001);
