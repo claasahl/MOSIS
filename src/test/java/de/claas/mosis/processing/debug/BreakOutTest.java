@@ -70,7 +70,7 @@ public class BreakOutTest {
 
     @Test
     public void shouldReturnOutput() {
-        _P.setParameter(BreakOut.CLASS, Forward.class.getName());
+        Utils.updateParameter(_P, BreakOut.CLASS, Forward.class.getName());
         Utils.process(_P, "hello world");
         assertFalse(_P.getLastOutput().isEmpty());
         assertEquals(1, _P.getLastOutput().size());

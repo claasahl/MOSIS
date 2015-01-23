@@ -67,7 +67,7 @@ public class LoggerTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterNameMayNotBeNull() throws Exception {
-        _P.setParameter(Logger.NAME, null);
+        Utils.updateParameter(_P, Logger.NAME, null);
     }
 
     @Test

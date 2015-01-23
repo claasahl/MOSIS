@@ -47,27 +47,27 @@ public class MovingAverageTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterModeMayNotBeNull() throws Exception {
-        _P.setParameter(MovingAverage.MODE, null);
+        Utils.updateParameter(_P, MovingAverage.MODE, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterModeMustInWhiteList() throws Exception {
         try {
-            _P.setParameter(MovingAverage.MODE,
+            Utils.updateParameter(_P, MovingAverage.MODE,
                     MovingAverage.MODE_USE_ACTUAL_SIZE);
-            _P.setParameter(MovingAverage.MODE,
+            Utils.updateParameter(_P, MovingAverage.MODE,
                     MovingAverage.MODE_USE_BUFFER_SIZE);
-            _P.setParameter(MovingAverage.MODE,
+            Utils.updateParameter(_P, MovingAverage.MODE,
                     MovingAverage.MODE_WAIT_FOR_BUFFER);
         } catch (Exception e) {
             fail(e.toString());
         }
-        _P.setParameter(MovingAverage.MODE, "hello world");
+        Utils.updateParameter(_P, MovingAverage.MODE, "hello world");
     }
 
     @Test
     public void shouldWaitForBufferToFill() {
-        _P.setParameter(MovingAverage.MODE, MovingAverage.MODE_WAIT_FOR_BUFFER);
+        Utils.updateParameter(_P, MovingAverage.MODE, MovingAverage.MODE_WAIT_FOR_BUFFER);
         assertNull(Utils.process(_P, 23.0));
         assertNull(Utils.process(_P, 23.0));
         assertNull(Utils.process(_P, 23.0));
@@ -88,7 +88,7 @@ public class MovingAverageTest {
 
     @Test
     public void shouldUseBufferSize() {
-        _P.setParameter(MovingAverage.MODE, MovingAverage.MODE_USE_BUFFER_SIZE);
+        Utils.updateParameter(_P, MovingAverage.MODE, MovingAverage.MODE_USE_BUFFER_SIZE);
         assertEquals(new Double(4.6), Utils.process(_P, 23.0));
         assertEquals(new Double(0), Utils.process(_P, -23.0));
         assertEquals(new Double(2.4), Utils.process(_P, 12.0));

@@ -47,29 +47,29 @@ public class CounterTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterCounterMayNotBeNull() throws Exception {
-        _P.setParameter(Counter.COUNTER, null);
+        Utils.updateParameter(_P, Counter.COUNTER, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterCounterMustBeAnInteger() throws Exception {
         try {
-            _P.setParameter(Counter.COUNTER, "1");
-            _P.setParameter(Counter.COUNTER, "12");
+            Utils.updateParameter(_P, Counter.COUNTER, "1");
+            Utils.updateParameter(_P, Counter.COUNTER, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
-        _P.setParameter(Counter.COUNTER, "1.2");
+        Utils.updateParameter(_P, Counter.COUNTER, "1.2");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterCounterMustBePositive() throws Exception {
         try {
-            _P.setParameter(Counter.COUNTER, "0");
-            _P.setParameter(Counter.COUNTER, "12");
+            Utils.updateParameter(_P, Counter.COUNTER, "0");
+            Utils.updateParameter(_P, Counter.COUNTER, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
-        _P.setParameter(Counter.COUNTER, "-1");
+        Utils.updateParameter(_P, Counter.COUNTER, "-1");
     }
 
     @Test

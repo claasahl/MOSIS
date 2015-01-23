@@ -52,29 +52,29 @@ public class SleepTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterDelayMayNotBeNull() throws Exception {
-        _P.setParameter(Sleep.DELAY, null);
+        Utils.updateParameter(_P, Sleep.DELAY, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterDelayMustBeAnInteger() throws Exception {
         try {
-            _P.setParameter(Sleep.DELAY, "1");
-            _P.setParameter(Sleep.DELAY, "12");
+            Utils.updateParameter(_P, Sleep.DELAY, "1");
+            Utils.updateParameter(_P, Sleep.DELAY, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
-        _P.setParameter(Sleep.DELAY, "1.2");
+        Utils.updateParameter(_P, Sleep.DELAY, "1.2");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterDelayMustBePositive() throws Exception {
         try {
-            _P.setParameter(Sleep.DELAY, "0");
-            _P.setParameter(Sleep.DELAY, "12");
+            Utils.updateParameter(_P, Sleep.DELAY, "0");
+            Utils.updateParameter(_P, Sleep.DELAY, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
-        _P.setParameter(Sleep.DELAY, "-1");
+        Utils.updateParameter(_P, Sleep.DELAY, "-1");
     }
 
     @Test

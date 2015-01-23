@@ -32,19 +32,17 @@ public class BlockingQueueHandlerTest extends DataHandlerTest<Long, BlockingQueu
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterClassMayNotBeNull() throws Exception {
-        _H.setParameter(BlockingQueueHandler.CLASS, null);
+        Utils.updateParameter(_H, BlockingQueueHandler.CLASS, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterClassMustExist() throws Exception {
-        _H.setParameter(BlockingQueueHandler.CLASS, BlockingQueueHandler.class.getName() + "SomePostfix");
+        Utils.updateParameter(_H, BlockingQueueHandler.CLASS, BlockingQueueHandler.class.getName() + "SomePostfix");
     }
 
     @Test
     public void shouldInstantiateNewClass() throws Exception {
-        _H.dismantle();
-        _H.setParameter(BlockingQueueHandler.CLASS, LinkedTransferQueue.class.getName());
-        _H.setUp();
+        Utils.updateParameter(_H, BlockingQueueHandler.CLASS, LinkedTransferQueue.class.getName());
         assertNotNull(_H.getQueue());
         assertEquals(LinkedTransferQueue.class, _H.getQueue().getClass());
     }
@@ -56,7 +54,7 @@ public class BlockingQueueHandlerTest extends DataHandlerTest<Long, BlockingQueu
 
     @Override
     public void shouldRead() throws Exception {
-        _H.setParameter(DataHandler.MODE, DataHandler.MODE_READ);
+        Utils.updateParameter(_H, DataHandler.MODE, DataHandler.MODE_READ);
 
         assertTrue(_H.getQueue().isEmpty());
         _H.getQueue().offer(23L);
@@ -71,7 +69,7 @@ public class BlockingQueueHandlerTest extends DataHandlerTest<Long, BlockingQueu
 
     @Override
     public void shouldWrite() throws Exception {
-        _H.setParameter(DataHandler.MODE, DataHandler.MODE_WRITE);
+        Utils.updateParameter(_H, DataHandler.MODE, DataHandler.MODE_WRITE);
 
         assertEquals(Arrays.asList(23L, 1L), Utils.processAll(_H, 23L, 1L));
         assertEquals((Long) 23L, _H.getQueue().poll());
@@ -84,7 +82,7 @@ public class BlockingQueueHandlerTest extends DataHandlerTest<Long, BlockingQueu
 
     @Override
     public void shouldDetermineMode() throws Exception {
-        _H.setParameter(DataHandler.MODE, DataHandler.MODE_AUTO);
+        Utils.updateParameter(_H, DataHandler.MODE, DataHandler.MODE_AUTO);
 
         assertTrue(_H.getQueue().isEmpty());
         _H.getQueue().offer(10L);
@@ -98,7 +96,7 @@ public class BlockingQueueHandlerTest extends DataHandlerTest<Long, BlockingQueu
 
     @Test
     public void shouldBlock() throws InterruptedException {
-        _H.setParameter(DataHandler.MODE, DataHandler.MODE_WRITE);
+        Utils.updateParameter(_H, DataHandler.MODE, DataHandler.MODE_WRITE);
 
         assertEquals((Long) 23L, Utils.process(_H, 23L));
         assertEquals((Long) 23L, _H.getQueue().poll());
@@ -107,7 +105,7 @@ public class BlockingQueueHandlerTest extends DataHandlerTest<Long, BlockingQueu
 
     @Test(expected = NullPointerException.class)
     public void shouldNotAcceptNullValues() {
-        _H.setParameter(DataHandler.MODE, DataHandler.MODE_WRITE);
+        Utils.updateParameter(_H, DataHandler.MODE, DataHandler.MODE_WRITE);
         Utils.process(_H, null);
     }
 

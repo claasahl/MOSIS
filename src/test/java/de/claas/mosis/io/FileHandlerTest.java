@@ -43,7 +43,7 @@ public class FileHandlerTest extends DataHandlerTest<File, FileHandler> {
 
     @Override
     public void shouldRead() throws Exception {
-        _H.setParameter(DataHandler.MODE, DataHandler.MODE_READ);
+        Utils.updateParameter(_H, DataHandler.MODE, DataHandler.MODE_READ);
 
         assertNotNull(Utils.process(_H));
         assertNotNull(Utils.process(_H));
@@ -52,7 +52,7 @@ public class FileHandlerTest extends DataHandlerTest<File, FileHandler> {
 
     @Override
     public void shouldWrite() throws Exception {
-        _H.setParameter(DataHandler.MODE, DataHandler.MODE_WRITE);
+        Utils.updateParameter(_H, DataHandler.MODE, DataHandler.MODE_WRITE);
 
         assertNull(Utils.process(_H, (File) null));
         assertEquals(Arrays.asList(tmp1, tmp2), Utils.processAll(_H, tmp1, tmp2));
@@ -67,7 +67,7 @@ public class FileHandlerTest extends DataHandlerTest<File, FileHandler> {
 
     @Override
     public void shouldDetermineMode() throws Exception {
-        _H.setParameter(DataHandler.MODE, DataHandler.MODE_AUTO);
+        Utils.updateParameter(_H, DataHandler.MODE, DataHandler.MODE_AUTO);
 
         assertNull(Utils.process(_H, (File) null));
 

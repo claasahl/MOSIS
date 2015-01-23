@@ -1,5 +1,6 @@
 package de.claas.mosis.io;
 
+import de.claas.mosis.util.Utils;
 import org.junit.Test;
 
 import java.io.InputStream;
@@ -26,7 +27,7 @@ public abstract class StreamHandlerTest<S, T extends StreamHandler<S>> extends
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterImplMayNotBeNull() throws Exception {
-        _H.setParameter(StreamHandler.IMPL, null);
+        Utils.updateParameter(_H, StreamHandler.IMPL, null);
     }
 
     @Test
@@ -40,7 +41,7 @@ public abstract class StreamHandlerTest<S, T extends StreamHandler<S>> extends
 
     @Test
     public void shouldInstantiateNewClass() throws Exception {
-        _H.setParameter(StreamHandler.IMPL, FileImpl.class.getName());
+        Utils.updateParameter(_H, StreamHandler.IMPL, FileImpl.class.getName());
         assertNotNull(_H.getImpl());
         assertEquals(FileImpl.class, _H.getImpl().getClass());
     }
@@ -50,15 +51,15 @@ public abstract class StreamHandlerTest<S, T extends StreamHandler<S>> extends
         FileImpl dummy = new FileImpl();
         assertTrue(dummy.getParameters().size() > 0);
 
-        _H.setParameter(StreamHandler.IMPL, dummy.getClass().getName());
+        Utils.updateParameter(_H, StreamHandler.IMPL, dummy.getClass().getName());
         assertTrue(_H.getParameters().containsAll(dummy.getParameters()));
     }
 
     @Test
     public void shouldNotForwardLocalParameters() throws Exception {
-        _H.setParameter(DataHandler.MODE, DataHandler.MODE_READ);
+        Utils.updateParameter(_H, DataHandler.MODE, DataHandler.MODE_READ);
         assertEquals(DataHandler.MODE_READ, _H.getParameter(DataHandler.MODE));
-        _H.setParameter(StreamHandler.IMPL, FileImpl.class.getName());
+        Utils.updateParameter(_H, StreamHandler.IMPL, FileImpl.class.getName());
         assertEquals(DataHandler.MODE_READ, _H.getParameter(DataHandler.MODE));
     }
 
@@ -66,11 +67,12 @@ public abstract class StreamHandlerTest<S, T extends StreamHandler<S>> extends
     public void shouldForwardImplParameters() throws Exception {
         String file1 = "should be ignored";
         String file2 = "should not be ignored";
-        _H.setParameter(FileImpl.FILE, file1);
-        _H.setParameter(StreamHandler.IMPL, FileImpl.class.getName());
-        _H.setParameter(FileImpl.FILE, file2);
+        Utils.updateParameters(_H,
+                FileImpl.FILE, file1,
+                StreamHandler.IMPL, FileImpl.class.getName(),
+                FileImpl.FILE, file2);
         assertEquals(file2, _H.getParameter(FileImpl.FILE));
-        _H.setParameter(StreamHandler.IMPL, PipedImpl.class.getName());
+        Utils.updateParameter(_H, StreamHandler.IMPL, PipedImpl.class.getName());
         assertEquals(file1, _H.getParameter(FileImpl.FILE));
     }
 

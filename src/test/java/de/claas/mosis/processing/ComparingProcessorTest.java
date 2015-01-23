@@ -69,29 +69,29 @@ public class ComparingProcessorTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterPortToUseMayNotBeNull() throws Exception {
-        _P.setParameter(ComparingProcessor.PORT_TO_USE, null);
+        Utils.updateParameter(_P, ComparingProcessor.PORT_TO_USE, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterPortToUseMustBeAnInteger() throws Exception {
         try {
-            _P.setParameter(ComparingProcessor.PORT_TO_USE, "1");
-            _P.setParameter(ComparingProcessor.PORT_TO_USE, "12");
+            Utils.updateParameter(_P, ComparingProcessor.PORT_TO_USE, "1");
+            Utils.updateParameter(_P, ComparingProcessor.PORT_TO_USE, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
-        _P.setParameter(ComparingProcessor.PORT_TO_USE, "1.2");
+        Utils.updateParameter(_P, ComparingProcessor.PORT_TO_USE, "1.2");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterPortToUseMustBePositive() throws Exception {
         try {
-            _P.setParameter(ComparingProcessor.PORT_TO_USE, "0");
-            _P.setParameter(ComparingProcessor.PORT_TO_USE, "12");
+            Utils.updateParameter(_P, ComparingProcessor.PORT_TO_USE, "0");
+            Utils.updateParameter(_P, ComparingProcessor.PORT_TO_USE, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
-        _P.setParameter(ComparingProcessor.PORT_TO_USE, "-1");
+        Utils.updateParameter(_P, ComparingProcessor.PORT_TO_USE, "-1");
     }
 
     @Test

@@ -48,7 +48,7 @@ public class SystemOutTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterNameMayNotBeNull() throws Exception {
-        _P.setParameter(SystemOut.NAME, null);
+        Utils.updateParameter(_P, SystemOut.NAME, null);
     }
 
     @Test

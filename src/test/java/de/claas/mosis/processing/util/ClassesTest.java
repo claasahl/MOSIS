@@ -55,12 +55,12 @@ public class ClassesTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterClassPathMayNotBeNull() {
-        _P.setParameter(Classes.CLASSPATH, null);
+        Utils.updateParameter(_P, Classes.CLASSPATH, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterSeparatorMayNotBeNull() {
-        _P.setParameter(Classes.SEPARATOR, null);
+        Utils.updateParameter(_P, Classes.SEPARATOR, null);
     }
 
     @Test

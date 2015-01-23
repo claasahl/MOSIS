@@ -104,13 +104,13 @@ public class ProcessorAdapterTest {
         String[] value = new String[]{"true", "false"};
         Boolean[] exp = new Boolean[]{true, false};
         for (int i = 0; i < value.length; i++) {
-            _P.setParameter(parameter, value[i]);
+            Utils.updateParameter(_P, parameter, value[i]);
             assertEquals(exp[i], _P.getParameterAsBoolean(parameter));
             assertEquals(value[i], _P.getParameter(parameter));
         }
 
         for (int i = 0; i < value.length; i++) {
-            _P.setParameter(parameter, exp[i]);
+            Utils.updateParameter(_P, parameter, exp[i].toString());
             assertEquals(exp[i], _P.getParameterAsBoolean(parameter));
             assertEquals(value[i].toLowerCase(), _P.getParameter(parameter)
                     .toLowerCase());
@@ -125,13 +125,13 @@ public class ProcessorAdapterTest {
         String[] value = new String[]{"1", "0", "-23"};
         Integer[] exp = new Integer[]{1, 0, -23};
         for (int i = 0; i < value.length; i++) {
-            _P.setParameter(parameter, value[i]);
+            Utils.updateParameter(_P, parameter, value[i]);
             assertEquals(exp[i], _P.getParameterAsInteger(parameter));
             assertEquals(value[i], _P.getParameter(parameter));
         }
 
         for (int i = 0; i < value.length; i++) {
-            _P.setParameter(parameter, exp[i]);
+            Utils.updateParameter(_P, parameter, exp[i].toString());
             assertEquals(exp[i], _P.getParameterAsInteger(parameter));
             assertEquals(value[i], _P.getParameter(parameter));
         }
@@ -146,13 +146,13 @@ public class ProcessorAdapterTest {
         String[] value = new String[]{"1", "0", "-23", max};
         Long[] exp = new Long[]{1L, 0L, -23L, Long.MAX_VALUE};
         for (int i = 0; i < value.length; i++) {
-            _P.setParameter(parameter, value[i]);
+            Utils.updateParameter(_P, parameter, value[i]);
             assertEquals(exp[i], _P.getParameterAsLong(parameter));
             assertEquals(value[i], _P.getParameter(parameter));
         }
 
         for (int i = 0; i < value.length; i++) {
-            _P.setParameter(parameter, exp[i]);
+            Utils.updateParameter(_P, parameter, exp[i].toString());
             assertEquals(exp[i], _P.getParameterAsLong(parameter));
             assertEquals(value[i], _P.getParameter(parameter));
         }
@@ -166,13 +166,13 @@ public class ProcessorAdapterTest {
         String[] value = new String[]{"1.1", "0.5", "-23.04"};
         Double[] exp = new Double[]{1.1, 0.5, -23.04};
         for (int i = 0; i < value.length; i++) {
-            _P.setParameter(parameter, value[i]);
+            Utils.updateParameter(_P, parameter, value[i]);
             assertEquals(exp[i], _P.getParameterAsDouble(parameter));
             assertEquals(value[i], _P.getParameter(parameter));
         }
 
         for (int i = 0; i < value.length; i++) {
-            _P.setParameter(parameter, exp[i]);
+            Utils.updateParameter(_P, parameter, exp[i].toString());
             assertEquals(exp[i], _P.getParameterAsDouble(parameter));
             assertEquals(value[i], _P.getParameter(parameter));
         }
@@ -218,11 +218,11 @@ public class ProcessorAdapterTest {
 
         _P.addCondition(parameter, condition);
         _P.removeCondition(parameter, condition);
-        _P.setParameter(parameter, "no boolean");
+        Utils.updateParameter(_P, parameter, "no boolean");
 
         _P.addCondition(parameter, new Condition.IsBoolean());
         _P.removeCondition(parameter, new Condition.IsBoolean());
-        _P.setParameter(parameter, "non numeric");
+        Utils.updateParameter(_P, parameter, "non numeric");
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -230,15 +230,15 @@ public class ProcessorAdapterTest {
         String parameter = String.format("%s%d", getClass(),
                 System.currentTimeMillis());
 
-        _P.setParameter(parameter, "no boolean");
+        Utils.updateParameter(_P, parameter, "no boolean");
         assertEquals("no boolean", _P.getParameter(parameter));
         _P.addCondition(parameter, new Condition.IsBoolean());
         assertEquals("no boolean", _P.getParameter(parameter));
 
-        _P.setParameter(parameter, parameter);
+        Utils.updateParameter(_P, parameter, parameter);
         assertEquals(parameter, _P.getParameter(parameter));
 
-        _P.setParameter(parameter, "no boolean");
+        Utils.updateParameter(_P, parameter, "no boolean");
     }
 
     @Test
@@ -246,10 +246,10 @@ public class ProcessorAdapterTest {
         String parameter = String.format("%s%d", getClass(),
                 System.currentTimeMillis());
 
-        _P.setParameter(parameter, parameter);
+        Utils.updateParameter(_P, parameter, parameter);
         assertEquals(parameter, _P.getParameter(parameter));
         _P.addCondition(parameter, new Condition.IsBoolean());
-        _P.setParameter(parameter, parameter);
+        Utils.updateParameter(_P, parameter, parameter);
         assertEquals(parameter, _P.getParameter(parameter));
     }
 
@@ -259,20 +259,20 @@ public class ProcessorAdapterTest {
         assertNull(_P.getParameter(Relation.UpdateVersion.Version));
 
         _P.addRelation(relation);
-        _P.setParameter("some parameter 1", "some value 1");
+        Utils.updateParameter(_P, "some parameter 1", "some value 1");
         assertEquals((Integer) 1,
                 _P.getParameterAsInteger(Relation.UpdateVersion.Version));
         _P.removeRelation(relation);
-        _P.setParameter("some parameter 2", "some value 2");
+        Utils.updateParameter(_P, "some parameter 2", "some value 2");
         assertEquals((Integer) 1,
                 _P.getParameterAsInteger(Relation.UpdateVersion.Version));
 
         _P.addRelation(new Relation.UpdateVersion());
-        _P.setParameter("some parameter 3", "some value 3");
+        Utils.updateParameter(_P, "some parameter 3", "some value 3");
         assertEquals((Integer) 2,
                 _P.getParameterAsInteger(Relation.UpdateVersion.Version));
         _P.removeRelation(new Relation.UpdateVersion());
-        _P.setParameter("some parameter 4", "some value 4");
+        Utils.updateParameter(_P, "some parameter 4", "some value 4");
         assertEquals((Integer) 2,
                 _P.getParameterAsInteger(Relation.UpdateVersion.Version));
     }
@@ -284,10 +284,10 @@ public class ProcessorAdapterTest {
         Dummy dummy = new Dummy();
 
         assertEquals(0, dummy.AccessCount);
-        _P.setParameter(parameter, "a");
+        Utils.updateParameter(_P, parameter, "a");
         _P.addRelation(dummy);
         assertEquals("a", _P.getParameter(parameter));
-        _P.setParameter(parameter, "b");
+        Utils.updateParameter(_P, parameter, "b");
         assertEquals("b", _P.getParameter(parameter));
         assertEquals(1, dummy.AccessCount);
     }
@@ -299,10 +299,10 @@ public class ProcessorAdapterTest {
         Dummy dummy = new Dummy();
 
         assertEquals(0, dummy.AccessCount);
-        _P.setParameter(parameter, parameter);
+        Utils.updateParameter(_P, parameter, parameter);
         assertEquals(parameter, _P.getParameter(parameter));
         _P.addRelation(dummy);
-        _P.setParameter(parameter, parameter);
+        Utils.updateParameter(_P, parameter, parameter);
         assertEquals(parameter, _P.getParameter(parameter));
         assertEquals(0, dummy.AccessCount);
     }
@@ -314,7 +314,7 @@ public class ProcessorAdapterTest {
                 System.currentTimeMillis());
 
         _P.addCondition(parameter, condition);
-        _P.setParameter(parameter, "no boolean");
+        Utils.updateParameter(_P, parameter, "no boolean");
     }
 
     /**
