@@ -70,9 +70,10 @@ public abstract class DataHandlerTest<S, T extends DataHandler<S>> {
     @Test(expected = IllegalArgumentException.class)
     public void parameterCounterMustBeInWhiteList() throws Exception {
         try {
-            Utils.updateParameter(_H, DataHandler.MODE, DataHandler.MODE_AUTO);
-            Utils.updateParameter(_H, DataHandler.MODE, DataHandler.MODE_READ);
-            Utils.updateParameter(_H, DataHandler.MODE, DataHandler.MODE_WRITE);
+            Utils.updateParameters(_H,
+                    DataHandler.MODE, DataHandler.MODE_AUTO,
+                    DataHandler.MODE, DataHandler.MODE_READ,
+                    DataHandler.MODE, DataHandler.MODE_WRITE);
         } catch (Exception e) {
             fail(e.toString());
         }
@@ -87,8 +88,9 @@ public abstract class DataHandlerTest<S, T extends DataHandler<S>> {
     @Test(expected = IllegalArgumentException.class)
     public void parameterForwardInputsMustBeBoolean() throws Exception {
         try {
-            Utils.updateParameter(_H, DataHandler.FORWARD_INPUTS, "true");
-            Utils.updateParameter(_H, DataHandler.FORWARD_INPUTS, "false");
+            Utils.updateParameters(_H,
+                    DataHandler.FORWARD_INPUTS, "true",
+                    DataHandler.FORWARD_INPUTS, "false");
         } catch (Exception e) {
             fail(e.toString());
         }

@@ -71,20 +71,19 @@ public class FunctionTest {
 
     @Test
     public void shouldBeValidExpression() {
-        Utils.updateParameter(_F, Function.FUNCTION, "1");
-        Utils.updateParameter(_F, Function.FUNCTION, "+23.42");
-        Utils.updateParameter(_F, Function.FUNCTION, "-42");
-        Utils.updateParameter(_F, Function.FUNCTION, "x");
-        Utils.updateParameter(_F, Function.FUNCTION, "x0");
-        Utils.updateParameter(_F, Function.FUNCTION, "x23");
-        Utils.updateParameter(_F, Function.FUNCTION, "1+2-5");
-        Utils.updateParameter(_F, Function.FUNCTION, "3*5/3");
-
-        Utils.updateParameter(_F, Function.FUNCTION, "-1+-2-+5");
-        Utils.updateParameter(_F, Function.FUNCTION, "-3*-5/+3");
-
-        Utils.updateParameter(_F, Function.FUNCTION, "(1)");
-        Utils.updateParameter(_F, Function.FUNCTION, "(23+x)*x");
+        Utils.updateParameters(_F,
+                Function.FUNCTION, "1",
+                Function.FUNCTION, "+23.42",
+                Function.FUNCTION, "-42",
+                Function.FUNCTION, "x",
+                Function.FUNCTION, "x0",
+                Function.FUNCTION, "x23",
+                Function.FUNCTION, "1+2-5",
+                Function.FUNCTION, "3*5/3",
+                Function.FUNCTION, "-1+-2-+5",
+                Function.FUNCTION, "-3*-5/+3",
+                Function.FUNCTION, "(1)",
+                Function.FUNCTION, "(23+x)*x");
     }
 
     @Test

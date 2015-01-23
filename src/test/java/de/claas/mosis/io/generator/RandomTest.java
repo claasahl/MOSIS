@@ -53,16 +53,18 @@ public class RandomTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterSeedMayNotBeNull() throws Exception {
-        Utils.updateParameter(_R, Random.SEED, Long.toString(System.currentTimeMillis()));
-        Utils.updateParameter(_R, Random.SEED, null);
+        Utils.updateParameters(_R,
+                Random.SEED, Long.toString(System.currentTimeMillis()),
+                Random.SEED, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterSeedMustBeAnInteger() throws Exception {
         Utils.updateParameter(_R, Random.SEED, Long.toString(System.currentTimeMillis()));
         try {
-            Utils.updateParameter(_R, Random.SEED, "1");
-            Utils.updateParameter(_R, Random.SEED, "12");
+            Utils.updateParameters(_R,
+                    Random.SEED, "1",
+                    Random.SEED, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
@@ -82,9 +84,10 @@ public class RandomTest {
                 Random.SEED, Long.toString(System.currentTimeMillis()),
                 Random.UPPER, Double.toString(Double.MAX_VALUE));
         try {
-            Utils.updateParameter(_R, Random.LOWER, "0.0");
-            Utils.updateParameter(_R, Random.LOWER, "-23");
-            Utils.updateParameter(_R, Random.LOWER, "42");
+            Utils.updateParameters(_R,
+                    Random.LOWER, "0.0",
+                    Random.LOWER, "-23",
+                    Random.LOWER, "42");
         } catch (Exception e) {
             fail(e.toString());
         }
@@ -103,9 +106,10 @@ public class RandomTest {
         Utils.updateParameter(_R, Random.SEED, Long.toString(System.currentTimeMillis()));
         Utils.updateParameter(_R, Random.LOWER, Double.toString(Double.MIN_VALUE));
         try {
-            Utils.updateParameter(_R, Random.UPPER, "0.0");
-            Utils.updateParameter(_R, Random.UPPER, "-23");
-            Utils.updateParameter(_R, Random.UPPER, "42");
+            Utils.updateParameters(_R,
+                    Random.UPPER, "0.0",
+                    Random.UPPER, "-23",
+                    Random.UPPER, "42");
         } catch (Exception e) {
             fail(e.toString());
         }

@@ -69,8 +69,9 @@ public class TimeTest {
     @Test(expected = IllegalArgumentException.class)
     public void parameterTimeMustBeAnInteger() throws Exception {
         try {
-            Utils.updateParameter(_P, Time.TIME, "1");
-            Utils.updateParameter(_P, Time.TIME, "12");
+            Utils.updateParameters(_P,
+                    Time.TIME, "1",
+                    Time.TIME, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
@@ -80,8 +81,9 @@ public class TimeTest {
     @Test(expected = IllegalArgumentException.class)
     public void parameterTimeMustBePositive() throws Exception {
         try {
-            Utils.updateParameter(_P, Time.TIME, "0");
-            Utils.updateParameter(_P, Time.TIME, "12");
+            Utils.updateParameters(_P,
+                    Time.TIME, "0",
+                    Time.TIME, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
@@ -96,8 +98,9 @@ public class TimeTest {
     @Test(expected = IllegalArgumentException.class)
     public void parameterFirstCallMustBeAnInteger() throws Exception {
         try {
-            Utils.updateParameter(_P, Time.FIRST_CALL, "1");
-            Utils.updateParameter(_P, Time.FIRST_CALL, "12");
+            Utils.updateParameters(_P,
+                    Time.FIRST_CALL, "1",
+                    Time.FIRST_CALL, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
@@ -107,8 +110,9 @@ public class TimeTest {
     @Test(expected = IllegalArgumentException.class)
     public void parameterFirstCallMustBePositive() throws Exception {
         try {
-            Utils.updateParameter(_P, Time.FIRST_CALL, "0");
-            Utils.updateParameter(_P, Time.FIRST_CALL, "12");
+            Utils.updateParameters(_P,
+                    Time.FIRST_CALL, "0",
+                    Time.FIRST_CALL, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
@@ -123,8 +127,9 @@ public class TimeTest {
     @Test(expected = IllegalArgumentException.class)
     public void parameterLastCallMustBeAnInteger() throws Exception {
         try {
-            Utils.updateParameter(_P, Time.LAST_CALL, "1");
-            Utils.updateParameter(_P, Time.LAST_CALL, "12");
+            Utils.updateParameters(_P,
+                    Time.LAST_CALL, "1",
+                    Time.LAST_CALL, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
@@ -134,8 +139,9 @@ public class TimeTest {
     @Test(expected = IllegalArgumentException.class)
     public void parameterLastCallMustBePositive() throws Exception {
         try {
-            Utils.updateParameter(_P, Time.LAST_CALL, "0");
-            Utils.updateParameter(_P, Time.LAST_CALL, "12");
+            Utils.updateParameters(_P,
+                    Time.LAST_CALL, "0",
+                    Time.LAST_CALL, "12");
         } catch (Exception e) {
             fail(e.toString());
         }

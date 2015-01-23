@@ -79,8 +79,9 @@ public class BufferingProcessorTest {
     @Test(expected = IllegalArgumentException.class)
     public void parameterWindowSizeMustBeAnInteger() throws Exception {
         try {
-            Utils.updateParameter(_P, BufferingProcessor.WINDOW_SIZE, "1");
-            Utils.updateParameter(_P, BufferingProcessor.WINDOW_SIZE, "12");
+            Utils.updateParameters(_P,
+                    BufferingProcessor.WINDOW_SIZE, "1",
+                    BufferingProcessor.WINDOW_SIZE, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
@@ -90,8 +91,9 @@ public class BufferingProcessorTest {
     @Test(expected = IllegalArgumentException.class)
     public void parameterWindowSizeMustBePositive() throws Exception {
         try {
-            Utils.updateParameter(_P, BufferingProcessor.WINDOW_SIZE, "0");
-            Utils.updateParameter(_P, BufferingProcessor.WINDOW_SIZE, "12");
+            Utils.updateParameters(_P,
+                    BufferingProcessor.WINDOW_SIZE, "0",
+                    BufferingProcessor.WINDOW_SIZE, "12");
         } catch (Exception e) {
             fail(e.toString());
         }

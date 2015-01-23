@@ -99,8 +99,9 @@ public class UserDatagramProtocolHandlerTest extends
     @Test(expected = IllegalArgumentException.class)
     public void parameterPortMustBeAnInteger() throws Exception {
         try {
-            Utils.updateParameter(_H, UserDatagramProtocolHandler.PORT, "1");
-            Utils.updateParameter(_H, UserDatagramProtocolHandler.PORT, "12");
+            Utils.updateParameters(_H,
+                    UserDatagramProtocolHandler.PORT, "1",
+                    UserDatagramProtocolHandler.PORT, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
@@ -110,8 +111,9 @@ public class UserDatagramProtocolHandlerTest extends
     @Test(expected = IllegalArgumentException.class)
     public void parameterPortMustBeValidPort() throws Exception {
         try {
-            Utils.updateParameter(_H, UserDatagramProtocolHandler.PORT, "0");
-            Utils.updateParameter(_H, UserDatagramProtocolHandler.PORT, "65535");
+            Utils.updateParameters(_H,
+                    UserDatagramProtocolHandler.PORT, "0",
+                    UserDatagramProtocolHandler.PORT, "65535");
         } catch (Exception e) {
             fail(e.toString());
         }
@@ -126,8 +128,9 @@ public class UserDatagramProtocolHandlerTest extends
     @Test(expected = IllegalArgumentException.class)
     public void parameterBufferMustBeAnInteger() throws Exception {
         try {
-            Utils.updateParameter(_H, UserDatagramProtocolHandler.BUFFER, "1");
-            Utils.updateParameter(_H, UserDatagramProtocolHandler.BUFFER, "12");
+            Utils.updateParameters(_H,
+                    UserDatagramProtocolHandler.BUFFER, "1",
+                    UserDatagramProtocolHandler.BUFFER, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
@@ -137,8 +140,9 @@ public class UserDatagramProtocolHandlerTest extends
     @Test(expected = IllegalArgumentException.class)
     public void parameterBufferMustBePositive() throws Exception {
         try {
-            Utils.updateParameter(_H, UserDatagramProtocolHandler.BUFFER, "0");
-            Utils.updateParameter(_H, UserDatagramProtocolHandler.BUFFER, "12");
+            Utils.updateParameters(_H,
+                    UserDatagramProtocolHandler.BUFFER, "0",
+                    UserDatagramProtocolHandler.BUFFER, "12");
         } catch (Exception e) {
             fail(e.toString());
         }

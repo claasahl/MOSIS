@@ -53,8 +53,9 @@ public class CounterTest {
     @Test(expected = IllegalArgumentException.class)
     public void parameterCounterMustBeAnInteger() throws Exception {
         try {
-            Utils.updateParameter(_P, Counter.COUNTER, "1");
-            Utils.updateParameter(_P, Counter.COUNTER, "12");
+            Utils.updateParameters(_P,
+                    Counter.COUNTER, "1",
+                    Counter.COUNTER, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
@@ -64,8 +65,9 @@ public class CounterTest {
     @Test(expected = IllegalArgumentException.class)
     public void parameterCounterMustBePositive() throws Exception {
         try {
-            Utils.updateParameter(_P, Counter.COUNTER, "0");
-            Utils.updateParameter(_P, Counter.COUNTER, "12");
+            Utils.updateParameters(_P,
+                    Counter.COUNTER, "0",
+                    Counter.COUNTER, "12");
         } catch (Exception e) {
             fail(e.toString());
         }

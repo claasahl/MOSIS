@@ -53,12 +53,10 @@ public class MovingAverageTest {
     @Test(expected = IllegalArgumentException.class)
     public void parameterModeMustInWhiteList() throws Exception {
         try {
-            Utils.updateParameter(_P, MovingAverage.MODE,
-                    MovingAverage.MODE_USE_ACTUAL_SIZE);
-            Utils.updateParameter(_P, MovingAverage.MODE,
-                    MovingAverage.MODE_USE_BUFFER_SIZE);
-            Utils.updateParameter(_P, MovingAverage.MODE,
-                    MovingAverage.MODE_WAIT_FOR_BUFFER);
+            Utils.updateParameters(_P,
+                    MovingAverage.MODE, MovingAverage.MODE_USE_ACTUAL_SIZE,
+                    MovingAverage.MODE, MovingAverage.MODE_USE_BUFFER_SIZE,
+                    MovingAverage.MODE, MovingAverage.MODE_WAIT_FOR_BUFFER);
         } catch (Exception e) {
             fail(e.toString());
         }

@@ -80,8 +80,9 @@ public abstract class AbstractTextFormatTest<S, T extends AbstractTextFormat<S>>
     @Test(expected = IllegalArgumentException.class)
     public void parameterBufferSizeMustBeAnInteger() throws Exception {
         try {
-            Utils.updateParameter(_H, AbstractTextFormat.BUFFER_SIZE, "1");
-            Utils.updateParameter(_H, AbstractTextFormat.BUFFER_SIZE, "12");
+            Utils.updateParameters(_H,
+                    AbstractTextFormat.BUFFER_SIZE, "1",
+                    AbstractTextFormat.BUFFER_SIZE, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
@@ -91,8 +92,9 @@ public abstract class AbstractTextFormatTest<S, T extends AbstractTextFormat<S>>
     @Test(expected = IllegalArgumentException.class)
     public void parameterBufferSizeMustBePositive() throws Exception {
         try {
-            Utils.updateParameter(_H, AbstractTextFormat.BUFFER_SIZE, "1");
-            Utils.updateParameter(_H, AbstractTextFormat.BUFFER_SIZE, "12");
+            Utils.updateParameters(_H,
+                    AbstractTextFormat.BUFFER_SIZE, "1",
+                    AbstractTextFormat.BUFFER_SIZE, "12");
         } catch (Exception e) {
             fail(e.toString());
         }

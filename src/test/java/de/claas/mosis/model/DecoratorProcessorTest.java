@@ -82,14 +82,15 @@ public class DecoratorProcessorTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterClassMayNotBeNull() throws Exception {
-        Utils.updateParameter(_P1, DecoratorProcessor.CLASS, (String) null);
+        Utils.updateParameter(_P1, DecoratorProcessor.CLASS, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterClassMustBeValidClass() throws Exception {
         try {
-            Utils.updateParameter(_P1, DecoratorProcessor.CLASS, Null.class.getName());
-            Utils.updateParameter(_P1, DecoratorProcessor.CLASS, Forward.class.getName());
+            Utils.updateParameters(_P1,
+                    DecoratorProcessor.CLASS, Null.class.getName(),
+                    DecoratorProcessor.CLASS, Forward.class.getName());
         } catch (Exception e) {
             fail(e.toString());
         }

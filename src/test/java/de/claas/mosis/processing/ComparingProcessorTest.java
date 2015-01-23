@@ -75,8 +75,9 @@ public class ComparingProcessorTest {
     @Test(expected = IllegalArgumentException.class)
     public void parameterPortToUseMustBeAnInteger() throws Exception {
         try {
-            Utils.updateParameter(_P, ComparingProcessor.PORT_TO_USE, "1");
-            Utils.updateParameter(_P, ComparingProcessor.PORT_TO_USE, "12");
+            Utils.updateParameters(_P,
+                    ComparingProcessor.PORT_TO_USE, "1",
+                    ComparingProcessor.PORT_TO_USE, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
@@ -86,8 +87,9 @@ public class ComparingProcessorTest {
     @Test(expected = IllegalArgumentException.class)
     public void parameterPortToUseMustBePositive() throws Exception {
         try {
-            Utils.updateParameter(_P, ComparingProcessor.PORT_TO_USE, "0");
-            Utils.updateParameter(_P, ComparingProcessor.PORT_TO_USE, "12");
+            Utils.updateParameters(_P,
+                    ComparingProcessor.PORT_TO_USE, "0",
+                    ComparingProcessor.PORT_TO_USE, "12");
         } catch (Exception e) {
             fail(e.toString());
         }

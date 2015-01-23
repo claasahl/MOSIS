@@ -65,8 +65,9 @@ public class PlainTextTest extends AbstractTextFormatTest<String, PlainText> {
     @Test(expected = IllegalArgumentException.class)
     public void parameterHasHeaderMustBeBoolean() throws Exception {
         try {
-            Utils.updateParameter(_H, PlainText.APPEND_NEWLINE, "true");
-            Utils.updateParameter(_H, PlainText.APPEND_NEWLINE, "false");
+            Utils.updateParameters(_H,
+                    PlainText.APPEND_NEWLINE, "true",
+                    PlainText.APPEND_NEWLINE, "false");
         } catch (Exception e) {
             fail(e.toString());
         }

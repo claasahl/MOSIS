@@ -62,8 +62,9 @@ public class CommaSeparatedValuesTest extends
     @Test(expected = IllegalArgumentException.class)
     public void parameterHasHeaderMustBeBoolean() throws Exception {
         try {
-            Utils.updateParameter(_H, CommaSeparatedValues.HAS_HEADER, "true");
-            Utils.updateParameter(_H, CommaSeparatedValues.HAS_HEADER, "false");
+            Utils.updateParameters(_H,
+                    CommaSeparatedValues.HAS_HEADER, "true",
+                    CommaSeparatedValues.HAS_HEADER, "false");
         } catch (Exception e) {
             fail(e.toString());
         }

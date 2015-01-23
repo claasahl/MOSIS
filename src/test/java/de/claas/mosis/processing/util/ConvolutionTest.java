@@ -73,8 +73,9 @@ public class ConvolutionTest {
     @Test(expected = IllegalArgumentException.class)
     public void parameterRequiresFullBufferMustBeBoolean() throws Exception {
         try {
-            Utils.updateParameter(_P, Convolution.REQUIRES_FULL_BUFFER, "true");
-            Utils.updateParameter(_P, Convolution.REQUIRES_FULL_BUFFER, "false");
+            Utils.updateParameters(_P,
+                    Convolution.REQUIRES_FULL_BUFFER, "true",
+                    Convolution.REQUIRES_FULL_BUFFER, "false");
         } catch (Exception e) {
             fail(e.toString());
         }
@@ -89,8 +90,9 @@ public class ConvolutionTest {
     @Test(expected = IllegalArgumentException.class)
     public void parameterPortToUseMustBeAnInteger() throws Exception {
         try {
-            Utils.updateParameter(_P, Convolution.PORT_TO_USE, "1");
-            Utils.updateParameter(_P, Convolution.PORT_TO_USE, "12");
+            Utils.updateParameters(_P,
+                    Convolution.PORT_TO_USE, "1",
+                    Convolution.PORT_TO_USE, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
@@ -100,8 +102,9 @@ public class ConvolutionTest {
     @Test(expected = IllegalArgumentException.class)
     public void parameterPortToUseMustBePositive() throws Exception {
         try {
-            Utils.updateParameter(_P, Convolution.PORT_TO_USE, "0");
-            Utils.updateParameter(_P, Convolution.PORT_TO_USE, "12");
+            Utils.updateParameters(_P,
+                    Convolution.PORT_TO_USE, "0",
+                    Convolution.PORT_TO_USE, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
@@ -126,9 +129,10 @@ public class ConvolutionTest {
     @Test(expected = IllegalArgumentException.class)
     public void parameterDefaultValueMustBeNumeric() throws Exception {
         try {
-            Utils.updateParameter(_P, Convolution.DEFAULT_VALUE, "0.0");
-            Utils.updateParameter(_P, Convolution.DEFAULT_VALUE, "-23");
-            Utils.updateParameter(_P, Convolution.DEFAULT_VALUE, "42");
+            Utils.updateParameters(_P,
+                    Convolution.DEFAULT_VALUE, "0.0",
+                    Convolution.DEFAULT_VALUE, "-23",
+                    Convolution.DEFAULT_VALUE, "42");
         } catch (Exception e) {
             fail(e.toString());
         }
@@ -168,8 +172,9 @@ public class ConvolutionTest {
 
     @Test
     public void shouldUseCorrespondingWeights() {
-        Utils.updateParameter(_P, Convolution.WINDOW_SIZE, "4");
-        Utils.updateParameter(_P, Convolution.WEIGHTS, "0.25,0.25,0.25,0.25");
+        Utils.updateParameters(_P,
+                Convolution.WINDOW_SIZE, "4",
+                Convolution.WEIGHTS, "0.25,0.25,0.25,0.25");
         assertEquals(0.25, Utils.process(_P, 1.0, 0.0), 0.0001);
         assertEquals(0.75, Utils.process(_P, 2.0, 0.0), 0.0001);
         assertEquals(1.75, Utils.process(_P, 4.0, 0.0), 0.0001);

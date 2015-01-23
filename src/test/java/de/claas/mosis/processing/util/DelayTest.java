@@ -51,8 +51,9 @@ public class DelayTest {
     @Test(expected = IllegalArgumentException.class)
     public void parameterPortToUseMustBeAnInteger() {
         try {
-            Utils.updateParameter(_P, Distance.PORT_TO_USE, "1");
-            Utils.updateParameter(_P, Distance.PORT_TO_USE, "12");
+            Utils.updateParameters(_P,
+                    Distance.PORT_TO_USE, "1",
+                    Distance.PORT_TO_USE, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
@@ -62,8 +63,9 @@ public class DelayTest {
     @Test(expected = IllegalArgumentException.class)
     public void parameterPortToUseMustBePositive() {
         try {
-            Utils.updateParameter(_P, Distance.PORT_TO_USE, "0");
-            Utils.updateParameter(_P, Distance.PORT_TO_USE, "12");
+            Utils.updateParameters(_P,
+                    Distance.PORT_TO_USE, "0",
+                    Distance.PORT_TO_USE, "12");
         } catch (Exception e) {
             fail(e.toString());
         }

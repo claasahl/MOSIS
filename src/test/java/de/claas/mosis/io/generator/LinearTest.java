@@ -64,9 +64,10 @@ public class LinearTest {
     @Test(expected = IllegalArgumentException.class)
     public void parameterMMustBeNumeric() throws Exception {
         try {
-            Utils.updateParameter(_L, Linear.M, "0.0");
-            Utils.updateParameter(_L, Linear.M, "-23");
-            Utils.updateParameter(_L, Linear.M, "42");
+            Utils.updateParameters(_L,
+                    Linear.M, "0.0",
+                    Linear.M, "-23",
+                    Linear.M, "42");
         } catch (Exception e) {
             fail(e.toString());
         }
@@ -81,9 +82,10 @@ public class LinearTest {
     @Test(expected = IllegalArgumentException.class)
     public void parameterXMustBeNumeric() throws Exception {
         try {
-            Utils.updateParameter(_L, Linear.X, "0.0");
-            Utils.updateParameter(_L, Linear.X, "-23");
-            Utils.updateParameter(_L, Linear.X, "42");
+            Utils.updateParameters(_L,
+                    Linear.X, "0.0",
+                    Linear.X, "-23",
+                    Linear.X, "42");
         } catch (Exception e) {
             fail(e.toString());
         }
@@ -98,9 +100,10 @@ public class LinearTest {
     @Test(expected = IllegalArgumentException.class)
     public void parameterBMustBeNumeric() throws Exception {
         try {
-            Utils.updateParameter(_L, Linear.B, "0.0");
-            Utils.updateParameter(_L, Linear.B, "-23");
-            Utils.updateParameter(_L, Linear.B, "42");
+            Utils.updateParameters(_L,
+                    Linear.B, "0.0",
+                    Linear.B, "-23",
+                    Linear.B, "42");
         } catch (Exception e) {
             fail(e.toString());
         }
@@ -115,9 +118,10 @@ public class LinearTest {
     @Test(expected = IllegalArgumentException.class)
     public void parameterStepMustBeNumeric() throws Exception {
         try {
-            Utils.updateParameter(_L, Linear.STEP, "0.0");
-            Utils.updateParameter(_L, Linear.STEP, "-23");
-            Utils.updateParameter(_L, Linear.STEP, "42");
+            Utils.updateParameters(_L,
+                    Linear.STEP, "0.0",
+                    Linear.STEP, "-23",
+                    Linear.STEP, "42");
         } catch (Exception e) {
             fail(e.toString());
         }
