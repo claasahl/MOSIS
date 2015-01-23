@@ -35,115 +35,115 @@ public class FunctionTest {
 
     @Test
     public void assumptionsOnFunction() {
-        _F.setParameter(Function.FUNCTION, "1");
+        Utils.updateParameter(_F, Function.FUNCTION, "1");
         assertNotNull(_F.getParameter(Function.FUNCTION));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void invalidVariable1() {
-        _F.setParameter(Function.FUNCTION, "a");
+        Utils.updateParameter(_F, Function.FUNCTION, "a");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void invalidVariable2() {
-        _F.setParameter(Function.FUNCTION, "x1.2");
+        Utils.updateParameter(_F, Function.FUNCTION, "x1.2");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void invalidVariable3() {
-        _F.setParameter(Function.FUNCTION, "x.2");
+        Utils.updateParameter(_F, Function.FUNCTION, "x.2");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void invalidParenthesis() {
-        _F.setParameter(Function.FUNCTION, "((1)");
+        Utils.updateParameter(_F, Function.FUNCTION, "((1)");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void InvalidNumber1() {
-        _F.setParameter(Function.FUNCTION, "23,0");
+        Utils.updateParameter(_F, Function.FUNCTION, "23,0");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void InvalidNumber2() {
-        _F.setParameter(Function.FUNCTION, ".2");
+        Utils.updateParameter(_F, Function.FUNCTION, ".2");
     }
 
     @Test
     public void shouldBeValidExpression() {
-        _F.setParameter(Function.FUNCTION, "1");
-        _F.setParameter(Function.FUNCTION, "+23.42");
-        _F.setParameter(Function.FUNCTION, "-42");
-        _F.setParameter(Function.FUNCTION, "x");
-        _F.setParameter(Function.FUNCTION, "x0");
-        _F.setParameter(Function.FUNCTION, "x23");
-        _F.setParameter(Function.FUNCTION, "1+2-5");
-        _F.setParameter(Function.FUNCTION, "3*5/3");
+        Utils.updateParameter(_F, Function.FUNCTION, "1");
+        Utils.updateParameter(_F, Function.FUNCTION, "+23.42");
+        Utils.updateParameter(_F, Function.FUNCTION, "-42");
+        Utils.updateParameter(_F, Function.FUNCTION, "x");
+        Utils.updateParameter(_F, Function.FUNCTION, "x0");
+        Utils.updateParameter(_F, Function.FUNCTION, "x23");
+        Utils.updateParameter(_F, Function.FUNCTION, "1+2-5");
+        Utils.updateParameter(_F, Function.FUNCTION, "3*5/3");
 
-        _F.setParameter(Function.FUNCTION, "-1+-2-+5");
-        _F.setParameter(Function.FUNCTION, "-3*-5/+3");
+        Utils.updateParameter(_F, Function.FUNCTION, "-1+-2-+5");
+        Utils.updateParameter(_F, Function.FUNCTION, "-3*-5/+3");
 
-        _F.setParameter(Function.FUNCTION, "(1)");
-        _F.setParameter(Function.FUNCTION, "(23+x)*x");
+        Utils.updateParameter(_F, Function.FUNCTION, "(1)");
+        Utils.updateParameter(_F, Function.FUNCTION, "(23+x)*x");
     }
 
     @Test
     public void shouldBeConstant() {
-        _F.setParameter(Function.FUNCTION, "0");
+        Utils.updateParameter(_F, Function.FUNCTION, "0");
         assertEquals(new Double(0), Utils.process(_F));
-        _F.setParameter(Function.FUNCTION, "1");
+        Utils.updateParameter(_F, Function.FUNCTION, "1");
         assertEquals(new Double(1), Utils.process(_F));
-        _F.setParameter(Function.FUNCTION, "-1");
+        Utils.updateParameter(_F, Function.FUNCTION, "-1");
         assertEquals(new Double(-1), Utils.process(_F));
-        _F.setParameter(Function.FUNCTION, "(-1)");
+        Utils.updateParameter(_F, Function.FUNCTION, "(-1)");
         assertEquals(new Double(-1), Utils.process(_F));
     }
 
     @Test
     public void shouldAddAndSubtract() {
-        _F.setParameter(Function.FUNCTION, "0.5+3.5-4");
+        Utils.updateParameter(_F, Function.FUNCTION, "0.5+3.5-4");
         assertEquals(new Double(0), Utils.process(_F));
-        _F.setParameter(Function.FUNCTION, "3.33++6.67");
+        Utils.updateParameter(_F, Function.FUNCTION, "3.33++6.67");
         assertEquals(new Double(10), Utils.process(_F));
-        _F.setParameter(Function.FUNCTION, "2.5--2.5");
+        Utils.updateParameter(_F, Function.FUNCTION, "2.5--2.5");
         assertEquals(new Double(5), Utils.process(_F));
-        _F.setParameter(Function.FUNCTION, "((2.5)--2.5)");
+        Utils.updateParameter(_F, Function.FUNCTION, "((2.5)--2.5)");
         assertEquals(new Double(5), Utils.process(_F));
     }
 
     @Test
     public void shouldMultiplyAndDivide() {
-        _F.setParameter(Function.FUNCTION, "3*-0.5/0.1");
+        Utils.updateParameter(_F, Function.FUNCTION, "3*-0.5/0.1");
         assertEquals(new Double(-15), Utils.process(_F));
-        _F.setParameter(Function.FUNCTION, "-23/-10");
+        Utils.updateParameter(_F, Function.FUNCTION, "-23/-10");
         assertEquals(new Double(2.3), Utils.process(_F));
-        _F.setParameter(Function.FUNCTION, "(-23/(-10))");
+        Utils.updateParameter(_F, Function.FUNCTION, "(-23/(-10))");
         assertEquals(new Double(2.3), Utils.process(_F));
     }
 
     @Test
     public void shouldUseExponent() {
-        _F.setParameter(Function.FUNCTION, "0^4");
+        Utils.updateParameter(_F, Function.FUNCTION, "0^4");
         assertEquals(new Double(0), Utils.process(_F));
-        _F.setParameter(Function.FUNCTION, "-2^3");
+        Utils.updateParameter(_F, Function.FUNCTION, "-2^3");
         assertEquals(new Double(-8), Utils.process(_F));
-        _F.setParameter(Function.FUNCTION, "-2^2^2");
+        Utils.updateParameter(_F, Function.FUNCTION, "-2^2^2");
         assertEquals(new Double(16), Utils.process(_F));
-        _F.setParameter(Function.FUNCTION, "2^-2");
+        Utils.updateParameter(_F, Function.FUNCTION, "2^-2");
         assertEquals(new Double(0.25), Utils.process(_F));
-        _F.setParameter(Function.FUNCTION, "2^(2+3)");
+        Utils.updateParameter(_F, Function.FUNCTION, "2^(2+3)");
         assertEquals(new Double(32), Utils.process(_F));
     }
 
     @Test
     public void shouldBeLinear() {
-        _F.setParameter(Function.FUNCTION, "4+x*7");
+        Utils.updateParameter(_F, Function.FUNCTION, "4+x*7");
         assertEquals(new Double(-3), Utils.process(_F, -1.0));
         assertEquals(new Double(4), Utils.process(_F, 0.0));
         assertEquals(new Double(7.5), Utils.process(_F, 0.5));
         assertEquals(new Double(11), Utils.process(_F, 1.0));
 
-        _F.setParameter(Function.FUNCTION, "(4+x)*7");
+        Utils.updateParameter(_F, Function.FUNCTION, "(4+x)*7");
         assertEquals(new Double(28), Utils.process(_F, 0.0));
         assertEquals(new Double(31.5), Utils.process(_F, 0.5));
         assertEquals(new Double(35), Utils.process(_F, 1.0));
@@ -151,20 +151,20 @@ public class FunctionTest {
 
     @Test
     public void shouldBeExponential() {
-        _F.setParameter(Function.FUNCTION, "4+x^2");
+        Utils.updateParameter(_F, Function.FUNCTION, "4+x^2");
         assertEquals(new Double(4), Utils.process(_F, 0.0));
         assertEquals(new Double(4.25), Utils.process(_F, 0.5));
         assertEquals(new Double(13), Utils.process(_F, 3.0));
 
-        _F.setParameter(Function.FUNCTION, "(4+x)^2");
+        Utils.updateParameter(_F, Function.FUNCTION, "(4+x)^2");
         assertEquals(new Double(16), Utils.process(_F, 0.0));
         assertEquals(new Double(49), Utils.process(_F, 3.0));
 
-        _F.setParameter(Function.FUNCTION, "x^(2+1)");
+        Utils.updateParameter(_F, Function.FUNCTION, "x^(2+1)");
         assertEquals(new Double(0), Utils.process(_F, 0.0));
         assertEquals(new Double(27), Utils.process(_F, 3.0));
 
-        _F.setParameter(Function.FUNCTION, "x^x");
+        Utils.updateParameter(_F, Function.FUNCTION, "x^x");
         assertEquals(new Double(1), Utils.process(_F, 0.0));
         assertEquals(new Double(27), Utils.process(_F, 3.0));
     }
@@ -172,7 +172,7 @@ public class FunctionTest {
     @Test
     public void shouldBeSin() {
         double delta = 0.00001;
-        _F.setParameter(Function.FUNCTION, "sin(x)");
+        Utils.updateParameter(_F, Function.FUNCTION, "sin(x)");
         assertEquals(0d, Utils.process(_F, 0.0), delta);
         assertEquals(1d, Utils.process(_F, Math.PI * 0.5), delta);
         assertEquals(0d, Utils.process(_F, Math.PI), delta);
@@ -183,7 +183,7 @@ public class FunctionTest {
     @Test
     public void shouldBeCos() {
         double delta = 0.00001;
-        _F.setParameter(Function.FUNCTION, "cos(x)");
+        Utils.updateParameter(_F, Function.FUNCTION, "cos(x)");
         assertEquals(1d, Utils.process(_F, 0.0), delta);
         assertEquals(0d, Utils.process(_F, Math.PI * 0.5), delta);
         assertEquals(-1d, Utils.process(_F, Math.PI), delta);

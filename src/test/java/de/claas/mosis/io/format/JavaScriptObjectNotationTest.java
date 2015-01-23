@@ -58,8 +58,9 @@ public class JavaScriptObjectNotationTest extends
     @Override
     @Test
     public void shouldDetermineMode() throws Exception {
-        _H.setParameter(StreamHandler.IMPL, PipedImpl.class.getName());
-        _H.setParameter(DataHandler.MODE, DataHandler.MODE_AUTO);
+        Utils.updateParameters(_H,
+                StreamHandler.IMPL, PipedImpl.class.getName(),
+                DataHandler.MODE, DataHandler.MODE_AUTO);
 
         BufferedOutputStream o = _H.getOutputStream();
         o.write("{\"test\":\"testing\"}\r\n".getBytes());
@@ -200,7 +201,7 @@ public class JavaScriptObjectNotationTest extends
      * @throws java.lang.Exception when an error occurs while writing
      */
     private Data read(String json) throws Exception {
-        _H.setParameter(DataHandler.MODE, DataHandler.MODE_READ);
+        Utils.updateParameter(_H, DataHandler.MODE, DataHandler.MODE_READ);
         BufferedOutputStream o = _H.getOutputStream();
         o.write(json.getBytes());
         o.flush();
@@ -219,7 +220,7 @@ public class JavaScriptObjectNotationTest extends
      * @throws java.lang.Exception when an error occurs while reading
      */
     private String write(Data... data) throws Exception {
-        _H.setParameter(DataHandler.MODE, DataHandler.MODE_WRITE);
+        Utils.updateParameter(_H, DataHandler.MODE, DataHandler.MODE_WRITE);
         BufferedInputStream i = _H.getInputStream();
         assertEquals(0, i.available());
         Utils.process(_H, data);

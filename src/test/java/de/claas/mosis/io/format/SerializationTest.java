@@ -64,7 +64,7 @@ public class SerializationTest extends StreamHandlerTest<Object, Serialization<O
 
     @Override
     public void shouldRead() throws Exception {
-        _H.setParameter(DataHandler.MODE, DataHandler.MODE_READ);
+        Utils.updateParameter(_H, DataHandler.MODE, DataHandler.MODE_READ);
 
         ObjectOutputStream o = _H.getOutputStream();
         o.writeObject(23L);
@@ -76,7 +76,7 @@ public class SerializationTest extends StreamHandlerTest<Object, Serialization<O
 
     @Override
     public void shouldWrite() throws Exception {
-        _H.setParameter(DataHandler.MODE, DataHandler.MODE_WRITE);
+        Utils.updateParameter(_H, DataHandler.MODE, DataHandler.MODE_WRITE);
 
         assertNull(Utils.process(_H, (Object) null));
         ObjectInputStream i = _H.getInputStream();
@@ -91,7 +91,7 @@ public class SerializationTest extends StreamHandlerTest<Object, Serialization<O
 
     @Override
     public void shouldDetermineMode() throws Exception {
-        _H.setParameter(DataHandler.MODE, DataHandler.MODE_AUTO);
+        Utils.updateParameter(_H, DataHandler.MODE, DataHandler.MODE_AUTO);
 
         ObjectOutputStream o = _H.getOutputStream();
         o.writeObject(10L);
