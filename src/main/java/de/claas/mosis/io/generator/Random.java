@@ -63,8 +63,9 @@ public class Random extends ProcessorAdapter<Double, Double> implements Observer
             double upper = getParameterAsDouble(UPPER);
             double lower = getParameterAsDouble(LOWER);
             if (upper < lower) {
-                setParameter(LOWER, upper);
-                setParameter(UPPER, lower);
+                String msg = "General contract between LOWER (%f) and UPPER" +
+                        " (%f) boundary (LOWER < UPPER) must not be broken.";
+                throw new IllegalArgumentException(String.format(msg, lower, upper));
             }
         }
     }

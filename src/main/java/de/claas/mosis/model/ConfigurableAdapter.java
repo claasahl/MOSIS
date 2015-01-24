@@ -102,6 +102,7 @@ public class ConfigurableAdapter implements Configurable, Observable {
 
         // Set value and notify observers (if any)
         _Parameters.put(parameter, value);
+        notifyObservers(parameter);
         for (Relation relation : _Relations) {
             relation.compute(this, parameter, value);
         }
