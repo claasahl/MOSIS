@@ -5,11 +5,7 @@ import de.claas.mosis.flow.iterator.InfiniteLevelOrder;
 import de.claas.mosis.io.StandardInputOutputImpl;
 import de.claas.mosis.io.format.PlainText;
 import de.claas.mosis.io.generator.Linear;
-import de.claas.mosis.processing.debug.Logger;
 import de.claas.mosis.processing.debug.ToString;
-
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Level;
 
 /**
  * The class {@link de.claas.mosis.graphs.LinearSequence} is a sample
@@ -30,18 +26,10 @@ public class LinearSequence {
      *             and intercept (i.e. {@link de.claas.mosis.io.generator.Linear#B}).
      */
     public static void main(String[] args) throws Exception {
-        java.util.logging.Logger logger = java.util.logging.Logger.getLogger("de.claas.mosis");
-        ConsoleHandler handler = new ConsoleHandler();
-        handler.setLevel(Level.ALL);
-        logger.addHandler(handler);
-        logger.setLevel(Level.ALL);
-
         // Prepare processing modules
         Linear src = new Linear();
         src.setParameter(Linear.M, args.length >= 1 ? args[0] : "1");
         src.setParameter(Linear.B, args.length >= 2 ? args[1] : "0");
-        Logger log = new Logger();
-        log.setParameter(Logger.CLASS, ToString.class.getName());
         ToString toString = new ToString();
         PlainText dst = new PlainText();
         dst.setParameter(PlainText.IMPL,
@@ -49,8 +37,8 @@ public class LinearSequence {
 
         // Construct graph and initiate processing
         Graph graph = new Graph();
-        graph.addLink(src, log);
-        graph.addLink(log, dst);
+        graph.addLink(src, toString);
+        graph.addLink(toString, dst);
         graph.process(InfiniteLevelOrder.class);
     }
 
