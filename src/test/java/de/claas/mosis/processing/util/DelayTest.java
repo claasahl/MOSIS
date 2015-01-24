@@ -87,6 +87,7 @@ public class DelayTest {
         assertEquals(2, Utils.process(_P, 4));
 
         Utils.updateParameter(_P, Delay.WINDOW_SIZE, "1");
+        assertNull(Utils.process(_P, 4));
         assertEquals(4, Utils.process(_P, 5));
         assertEquals(5, Utils.process(_P, 6));
 
@@ -96,14 +97,16 @@ public class DelayTest {
 
     @Test
     public void shouldUseCorrespondingPort() {
+        Utils.updateParameter(_P, Delay.PORT_TO_USE, "1");
         assertNull(Utils.process(_P, 1, 100));
         assertNull(Utils.process(_P, 2, 200));
-        Utils.updateParameter(_P, Delay.PORT_TO_USE, "1");
         assertEquals(100, Utils.process(_P, null, 300));
         assertEquals(200, Utils.process(_P, 4, 400));
-        Utils.updateParameter(_P, Delay.PORT_TO_USE, "0");
+        Utils.updateParameters(_P,
+                Delay.PORT_TO_USE, "0",
+                Delay.WINDOW_SIZE, "1");
         assertNull(Utils.process(_P, 5, 500));
-        assertEquals(4, Utils.process(_P, 6, 600));
+        assertEquals(5, Utils.process(_P, 6, 600));
     }
 
 }
