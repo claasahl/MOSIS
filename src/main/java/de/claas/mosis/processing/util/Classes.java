@@ -3,9 +3,7 @@ package de.claas.mosis.processing.util;
 import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
-import de.claas.mosis.model.Configurable;
 import de.claas.mosis.model.ProcessorAdapter;
-import de.claas.mosis.model.Relation;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -47,7 +45,6 @@ public class Classes extends ProcessorAdapter<Object, String> {
         setParameter(CLASSPATH, System.getProperty("java.class.path"));
         addCondition(SEPARATOR, new Condition.IsNotNull());
         setParameter(SEPARATOR, System.getProperty("path.separator"));
-        addRelation(new ClearPackages());
     }
 
     /**
@@ -134,26 +131,4 @@ public class Classes extends ProcessorAdapter<Object, String> {
         }
         out.addAll(packages);
     }
-
-    /**
-     * The class {@link de.claas.mosis.processing.util.Classes.ClearPackages}.
-     * It is intended to clear the already processed {@link java.lang.Package}s
-     * whenever the {@link #CLASSPATH} or {@link #SEPARATOR} parameter is
-     * changed. This forces a (re-)processing of all {@link
-     * java.lang.Package}s.
-     *
-     * @author Claas Ahlrichs (claasahl@tzi.de)
-     */
-    private class ClearPackages implements Relation {
-
-        @Override
-        public void compute(Configurable configurable, String parameter,
-                            String value) {
-            if (CLASSPATH.equals(parameter) || SEPARATOR.equals(parameter)) {
-                packages.clear();
-            }
-        }
-
-    }
-
 }

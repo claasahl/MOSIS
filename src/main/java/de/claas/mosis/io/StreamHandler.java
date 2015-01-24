@@ -2,8 +2,8 @@ package de.claas.mosis.io;
 
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
-import de.claas.mosis.model.Configurable;
-import de.claas.mosis.model.Relation;
+import de.claas.mosis.model.Observable;
+import de.claas.mosis.model.Observer;
 import de.claas.mosis.util.Utils;
 
 import java.io.IOException;
@@ -32,7 +32,7 @@ import java.util.List;
  *            de.claas.mosis.model.Processor} for details.
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
-public abstract class StreamHandler<T> extends DataHandler<T> {
+public abstract class StreamHandler<T> extends DataHandler<T> implements Observer {
 
     @Parameter("Name of class from StreamHandlerImpl. An instance of this class backs this handler.  Any class, implementing de.claas.mosis.io.StreamHandlerImpl, can be used.")
     public static final String IMPL = "impl";
@@ -45,7 +45,7 @@ public abstract class StreamHandler<T> extends DataHandler<T> {
      */
     public StreamHandler() {
         addCondition(IMPL, new Condition.ClassExists());
-        addRelation(new ImplCreator());
+        addObserver(this);
         setParameter(IMPL, StandardInputOutputImpl.class.getName());
     }
 
@@ -162,33 +162,15 @@ public abstract class StreamHandler<T> extends DataHandler<T> {
         return _Output;
     }
 
-    /**
-     * The class {@link de.claas.mosis.io.StreamHandler.ImplCreator}. It is
-     * intended to create {@link de.claas.mosis.io.StreamHandlerImpl} objects
-     * whenever the {@link #IMPL} parameter is changed.
-     *
-     * @author Claas Ahlrichs (claasahl@tzi.de)
-     */
-    private class ImplCreator implements Relation {
-
-        @Override
-        public void compute(Configurable configurable, String parameter,
-                            String value) {
-            if (IMPL.equals(parameter)) {
-                try {
-                    _Impl = (StreamHandlerImpl) Utils.instance(Class
-                            .forName(value));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+    @Override
+    public void update(Observable observable, String parameter) {
+        if (IMPL.equals(parameter)) {
+            try {
+                Class<?> clazz = Class.forName(getParameter(IMPL));
+                _Impl = (StreamHandlerImpl) Utils.instance(clazz);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
-
-        @Override
-        public boolean equals(Object obj) {
-            return obj != null && getClass().equals(obj.getClass());
-        }
-
     }
-
 }

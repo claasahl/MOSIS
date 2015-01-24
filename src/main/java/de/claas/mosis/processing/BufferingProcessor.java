@@ -3,9 +3,7 @@ package de.claas.mosis.processing;
 import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
-import de.claas.mosis.model.Configurable;
 import de.claas.mosis.model.ProcessorAdapter;
-import de.claas.mosis.model.Relation;
 
 import java.util.List;
 import java.util.Vector;
@@ -40,7 +38,15 @@ public abstract class BufferingProcessor<I, O> extends ProcessorAdapter<I, O> {
         addCondition(WINDOW_SIZE, new Condition.IsGreaterOrEqual(0d));
         addCondition(WINDOW_SIZE, new Condition.IsInteger());
         setParameter(WINDOW_SIZE, 0);
-        addRelation(new UpdateWindow());
+    }
+
+    @Override
+    public void setUp() {
+        super.setUp();
+        int size = getParameterAsInteger(WINDOW_SIZE);
+        while (getBuffer().size() > size) {
+            getBuffer().remove(0);
+        }
     }
 
     @Override
@@ -93,27 +99,4 @@ public abstract class BufferingProcessor<I, O> extends ProcessorAdapter<I, O> {
             return removed;
         }
     }
-
-    /**
-     * The class {@link de.claas.mosis.processing.BufferingProcessor.UpdateWindow}.
-     * It is intended to update the {@link #getBuffer()} list whenever the
-     * {@link #WINDOW_SIZE} parameter is changed.
-     *
-     * @author Claas Ahlrichs (claasahl@tzi.de)
-     */
-    private class UpdateWindow implements Relation {
-
-        @Override
-        public void compute(Configurable configurable, String parameter,
-                            String value) {
-            if (WINDOW_SIZE.equals(parameter)) {
-                int size = Integer.parseInt(value);
-                while (getBuffer().size() > size) {
-                    getBuffer().remove(0);
-                }
-            }
-        }
-
-    }
-
 }
