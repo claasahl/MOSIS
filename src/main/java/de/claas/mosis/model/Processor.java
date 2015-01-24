@@ -53,6 +53,13 @@ public interface Processor<I, O> extends Configurable {
      * required for the module to properly work. It can be safely assumed that
      * this method is invoked before any processing is done (i.e. call of {@link
      * #process(java.util.List, java.util.List)}).
+     * <p/>
+     * One cannot assume that a module reacts to changes im a parameter
+     * immediately. However, the module must have reacted to changes in a
+     * parameter after this method has been called. Nonetheless, a module may
+     * adapt to changes in parameters as soon as they occur. But when using
+     * arbitrary modules, one must "restart" a module to ensure that changes in
+     * parameters take effect.
      */
     public void setUp();
 
