@@ -7,9 +7,10 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * The class {@link de.claas.mosis.processing.MovingAverage}. It is intended to calculate a simple moving
- * average. This {@link de.claas.mosis.processing.BufferingProcessor} implementation allows varying modes
- * of operation (see parameter {@link #MODE}) for non-full buffers.
+ * The class {@link de.claas.mosis.processing.MovingAverage}. It is intended to
+ * calculate a simple moving average. This {@link de.claas.mosis.processing.BufferingProcessor}
+ * implementation allows varying modes of operation (see parameter {@link
+ * #MODE}) for non-full buffers.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */

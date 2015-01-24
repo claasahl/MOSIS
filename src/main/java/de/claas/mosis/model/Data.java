@@ -4,10 +4,10 @@ import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 
 /**
- * The class {@link de.claas.mosis.model.Data}. It is intended to provide a common data exchange
- * format. The main purpose is to simplify reading of streams and other
- * resources. It provides a unified interface for accessing and setting values
- * of various types (e.g. string, numeric, nominal).
+ * The class {@link de.claas.mosis.model.Data}. It is intended to provide a
+ * common data exchange format. The main purpose is to simplify reading of
+ * streams and other resources. It provides a unified interface for accessing
+ * and setting values of various types (e.g. string, numeric, nominal).
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -28,9 +28,10 @@ public class Data extends LinkedHashMap<String, Object> {
     }
 
     /**
-     * Returns the key's value as {@link java.lang.String}. Any object is returned as
-     * {@link java.lang.String} using the {@link #toString()} method. If the value is
-     * {@code null}, then "null" (as a string) is returned.
+     * Returns the key's value as {@link java.lang.String}. Any object is
+     * returned as {@link java.lang.String} using the {@link #toString()}
+     * method. If the value is {@code null}, then "null" (as a string) is
+     * returned.
      *
      * @param key the key, which value it to be returned
      * @return the key's value as {@link java.lang.String}
@@ -41,11 +42,12 @@ public class Data extends LinkedHashMap<String, Object> {
     }
 
     /**
-     * Returns the key's value as {@link java.lang.Number}. Any instance of {@link java.lang.Number}
-     * is recognized (e.g. {@link java.lang.Double}, {@link java.lang.Long}, etc.). Strings are
-     * parsed and returned as number. If the value equals {@code null}, then
-     * {@code null} is returned. If the value could not be interpreted as
-     * number, then a {@link java.lang.NumberFormatException} is thrown.
+     * Returns the key's value as {@link java.lang.Number}. Any instance of
+     * {@link java.lang.Number} is recognized (e.g. {@link java.lang.Double},
+     * {@link java.lang.Long}, etc.). Strings are parsed and returned as number.
+     * If the value equals {@code null}, then {@code null} is returned. If the
+     * value could not be interpreted as number, then a {@link
+     * java.lang.NumberFormatException} is thrown.
      *
      * @param key the key, which value it to be returned
      * @return the key's value as {@link java.lang.Double}
@@ -64,12 +66,14 @@ public class Data extends LinkedHashMap<String, Object> {
     }
 
     /**
-     * Returns the key's value as {@link java.lang.Enum}. Any {@link java.lang.Enum} is returned as
-     * such. Any {@link java.lang.Number} or {@link java.lang.String} representation of a number is
-     * interpreted as the enumeration's index / constant and the corresponding
-     * {@link java.lang.Enum} is returned. Any {@link java.lang.String} is interpreted as the
-     * enumeration's name and the corresponding {@link java.lang.Enum} is returned. If the
-     * value equals {@code null}, then {@code null} is returned.
+     * Returns the key's value as {@link java.lang.Enum}. Any {@link
+     * java.lang.Enum} is returned as such. Any {@link java.lang.Number} or
+     * {@link java.lang.String} representation of a number is interpreted as the
+     * enumeration's index / constant and the corresponding {@link
+     * java.lang.Enum} is returned. Any {@link java.lang.String} is interpreted
+     * as the enumeration's name and the corresponding {@link java.lang.Enum} is
+     * returned. If the value equals {@code null}, then {@code null} is
+     * returned.
      *
      * @param key the key, which value it to be returned
      * @return the key's value as {@link java.lang.Enum}

@@ -4,18 +4,19 @@ import java.io.File;
 import java.util.List;
 
 /**
- * The interface {@link de.claas.mosis.model.Condition}. It is intended to provide a unified way for
- * checking the validity of configuration parameters and their corresponding
- * values. Implementing classes may want to verify that the parameter, value and
- * / or both satisfy certain criteria (e.g. such as a value being numeric or a
- * parameter being properly formatted).
+ * The interface {@link de.claas.mosis.model.Condition}. It is intended to
+ * provide a unified way for checking the validity of configuration parameters
+ * and their corresponding values. Implementing classes may want to verify that
+ * the parameter, value and / or both satisfy certain criteria (e.g. such as a
+ * value being numeric or a parameter being properly formatted).
  * <p/>
  * <b>Note:</b> It is highly recommended to override {@link #equals(Object)},
  * {@link #hashCode()} and {@link #toString()}. They are used for management
- * purposes (see {@link de.claas.mosis.model.ConfigurableAdapter#addCondition(String, Condition)} and
- * {@link de.claas.mosis.model.ConfigurableAdapter#removeCondition(String, Condition)} for details)
- * and to generate error messages (see
- * {@link de.claas.mosis.model.ConfigurableAdapter#setParameter(String, String)} for details).
+ * purposes (see {@link de.claas.mosis.model.ConfigurableAdapter#addCondition(String,
+ * Condition)} and {@link de.claas.mosis.model.ConfigurableAdapter#removeCondition(String,
+ * Condition)} for details) and to generate error messages (see {@link
+ * de.claas.mosis.model.ConfigurableAdapter#setParameter(String, String)} for
+ * details).
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  * @see de.claas.mosis.model.ConfigurableAdapter
@@ -25,8 +26,8 @@ public interface Condition {
     /**
      * Returns <code>true</code>, if the combination of parameter and value
      * satisfy the condition. Otherwise, <code>false</code> is returned. One can
-     * assume that this method does not throw a {@link java.lang.NullPointerException} if
-     * one or more parameters equal <code>null</code>.
+     * assume that this method does not throw a {@link java.lang.NullPointerException}
+     * if one or more parameters equal <code>null</code>.
      *
      * @param parameter the parameter
      * @param value     the value
@@ -36,8 +37,9 @@ public interface Condition {
     public boolean complies(String parameter, String value);
 
     /**
-     * The class {@link de.claas.mosis.model.Condition.RegularExpression}. It is intended to verify that a
-     * parameter and / or value match a regular expression.
+     * The class {@link de.claas.mosis.model.Condition.RegularExpression}. It is
+     * intended to verify that a parameter and / or value match a regular
+     * expression.
      *
      * @author Claas Ahlrichs (claasahl@tzi.de)
      * @see java.util.regex.Pattern
@@ -53,10 +55,12 @@ public interface Condition {
          * values. Parameters will not be checked if their corresponding regular
          * expression is <code>null</code>.
          *
-         * @param regexParam regular expression that a parameter should match. If
-         *                   <code>null</code> then the parameter will not be checked.
+         * @param regexParam regular expression that a parameter should match.
+         *                   If <code>null</code> then the parameter will not be
+         *                   checked.
          * @param regexValue regular expression that a value should match. If
-         *                   <code>null</code> then the value will not be checked.
+         *                   <code>null</code> then the value will not be
+         *                   checked.
          */
         public RegularExpression(String regexParam, String regexValue) {
             _RegExParameter = regexParam;
@@ -70,7 +74,7 @@ public interface Condition {
 
         @Override
         public boolean equals(Object o) {
-            return getClass().equals(o == null ? null : o.getClass())
+            return o != null && getClass().equals(o.getClass())
                     && hashCode() == o.hashCode();
         }
 
@@ -102,8 +106,8 @@ public interface Condition {
     }
 
     /**
-     * The class {@link de.claas.mosis.model.Condition.IsBoolean}. It is intended to verify that a value is
-     * boolean.
+     * The class {@link de.claas.mosis.model.Condition.IsBoolean}. It is
+     * intended to verify that a value is boolean.
      *
      * @author Claas Ahlrichs (claasahl@tzi.de)
      */
@@ -116,8 +120,8 @@ public interface Condition {
     }
 
     /**
-     * The class {@link de.claas.mosis.model.Condition.IsNumeric}. It is intended to verify that a value is
-     * numeric.
+     * The class {@link de.claas.mosis.model.Condition.IsNumeric}. It is
+     * intended to verify that a value is numeric.
      *
      * @author Claas Ahlrichs (claasahl@tzi.de)
      */
@@ -130,8 +134,8 @@ public interface Condition {
     }
 
     /**
-     * The class {@link de.claas.mosis.model.Condition.IsInteger}. It is intended to verify that a value is an
-     * integer (and not real-valued).
+     * The class {@link de.claas.mosis.model.Condition.IsInteger}. It is
+     * intended to verify that a value is an integer (and not real-valued).
      *
      * @author Claas Ahlrichs (claasahl@tzi.de)
      */
@@ -144,8 +148,8 @@ public interface Condition {
     }
 
     /**
-     * The class {@link de.claas.mosis.model.Condition.IsGreaterThan}. It is intended to verify that a value is
-     * greater than a given threshold.
+     * The class {@link de.claas.mosis.model.Condition.IsGreaterThan}. It is
+     * intended to verify that a value is greater than a given threshold.
      *
      * @author Claas Ahlrichs (claasahl@tzi.de)
      */
@@ -169,7 +173,7 @@ public interface Condition {
 
         @Override
         public boolean equals(Object o) {
-            return getClass().equals(o == null ? null : o.getClass())
+            return o != null && getClass().equals(o.getClass())
                     && hashCode() == o.hashCode();
         }
 
@@ -189,8 +193,8 @@ public interface Condition {
     }
 
     /**
-     * The class {@link de.claas.mosis.model.Condition.IsGreaterOrEqual}. It is intended to verify that a value
-     * is greater or equal a given threshold.
+     * The class {@link de.claas.mosis.model.Condition.IsGreaterOrEqual}. It is
+     * intended to verify that a value is greater or equal a given threshold.
      *
      * @author Claas Ahlrichs (claasahl@tzi.de)
      */
@@ -214,7 +218,7 @@ public interface Condition {
 
         @Override
         public boolean equals(Object o) {
-            return getClass().equals(o == null ? null : o.getClass())
+            return o != null && getClass().equals(o.getClass())
                     && hashCode() == o.hashCode();
         }
 
@@ -234,8 +238,8 @@ public interface Condition {
     }
 
     /**
-     * The class {@link de.claas.mosis.model.Condition.IsLessThan}. It is intended to verify that a value is
-     * less than a given threshold.
+     * The class {@link de.claas.mosis.model.Condition.IsLessThan}. It is
+     * intended to verify that a value is less than a given threshold.
      *
      * @author Claas Ahlrichs (claasahl@tzi.de)
      */
@@ -259,7 +263,7 @@ public interface Condition {
 
         @Override
         public boolean equals(Object o) {
-            return getClass().equals(o == null ? null : o.getClass())
+            return o != null && getClass().equals(o.getClass())
                     && hashCode() == o.hashCode();
         }
 
@@ -279,8 +283,8 @@ public interface Condition {
     }
 
     /**
-     * The class {@link de.claas.mosis.model.Condition.IsLessOrEqual}. It is intended to verify that a value is
-     * less or equal a given threshold.
+     * The class {@link de.claas.mosis.model.Condition.IsLessOrEqual}. It is
+     * intended to verify that a value is less or equal a given threshold.
      *
      * @author Claas Ahlrichs (claasahl@tzi.de)
      */
@@ -304,7 +308,7 @@ public interface Condition {
 
         @Override
         public boolean equals(Object o) {
-            return getClass().equals(o == null ? null : o.getClass())
+            return o != null && getClass().equals(o.getClass())
                     && hashCode() == o.hashCode();
         }
 
@@ -324,8 +328,8 @@ public interface Condition {
     }
 
     /**
-     * The class {@link de.claas.mosis.model.Condition.IsInList}. It is intended to verify that a value is in a
-     * (white) list.
+     * The class {@link de.claas.mosis.model.Condition.IsInList}. It is intended
+     * to verify that a value is in a (white) list.
      *
      * @author Claas Ahlrichs (claasahl@tzi.de)
      */
@@ -349,7 +353,7 @@ public interface Condition {
 
         @Override
         public boolean equals(Object o) {
-            return getClass().equals(o == null ? null : o.getClass())
+            return o != null && getClass().equals(o.getClass())
                     && hashCode() == o.hashCode();
         }
 
@@ -369,8 +373,8 @@ public interface Condition {
     }
 
     /**
-     * The class {@link de.claas.mosis.model.Condition.IsNotNull}. It is intended to verify that a value is not
-     * <code>null</code>.
+     * The class {@link de.claas.mosis.model.Condition.IsNotNull}. It is
+     * intended to verify that a value is not <code>null</code>.
      *
      * @author Claas Ahlrichs (claasahl@tzi.de)
      */
@@ -383,7 +387,7 @@ public interface Condition {
 
         @Override
         public boolean equals(Object o) {
-            return getClass().equals(o == null ? null : o.getClass())
+            return o != null && getClass().equals(o.getClass())
                     && hashCode() == o.hashCode();
         }
 
@@ -400,8 +404,8 @@ public interface Condition {
     }
 
     /**
-     * The class {@link de.claas.mosis.model.Condition.ReadOnly}. It is intended to prevent modifications of a
-     * parameter's value.
+     * The class {@link de.claas.mosis.model.Condition.ReadOnly}. It is intended
+     * to prevent modifications of a parameter's value.
      *
      * @author Claas Ahlrichs (claasahl@tzi.de)
      */
@@ -414,7 +418,7 @@ public interface Condition {
 
         @Override
         public boolean equals(Object o) {
-            return getClass().equals(o == null ? null : o.getClass())
+            return o != null && getClass().equals(o.getClass())
                     && hashCode() == o.hashCode();
         }
 
@@ -431,9 +435,10 @@ public interface Condition {
     }
 
     /**
-     * The class {@link de.claas.mosis.model.Condition.FileExists}. It is intended to verify the existence of a
-     * file (e.g. prior to reading from it). This assumes that the given value
-     * does represent either an absolute or relative path to a file.
+     * The class {@link de.claas.mosis.model.Condition.FileExists}. It is
+     * intended to verify the existence of a file (e.g. prior to reading from
+     * it). This assumes that the given value does represent either an absolute
+     * or relative path to a file.
      *
      * @author Claas Ahlrichs (claasahl@tzi.de)
      */
@@ -446,7 +451,7 @@ public interface Condition {
 
         @Override
         public boolean equals(Object o) {
-            return getClass().equals(o == null ? null : o.getClass())
+            return o != null && getClass().equals(o.getClass())
                     && hashCode() == o.hashCode();
         }
 
@@ -463,11 +468,12 @@ public interface Condition {
     }
 
     /**
-     * The class {@link de.claas.mosis.model.Condition.WriteOnce}. It is intended to ensure that a parameter is
-     * written only once. Afterwards the parameter cannot be changed anymore.
-     * This condition should always be added last (i.e. after all other
-     * conditions for a parameter were added). Failure to do so may result in
-     * unexpected behavior (i.e. not being able to write, not even once).
+     * The class {@link de.claas.mosis.model.Condition.WriteOnce}. It is
+     * intended to ensure that a parameter is written only once. Afterwards the
+     * parameter cannot be changed anymore. This condition should always be
+     * added last (i.e. after all other conditions for a parameter were added).
+     * Failure to do so may result in unexpected behavior (i.e. not being able
+     * to write, not even once).
      *
      * @author Claas Ahlrichs (claasahl@tzi.de)
      */
@@ -482,7 +488,7 @@ public interface Condition {
 
         @Override
         public boolean equals(Object o) {
-            return getClass().equals(o == null ? null : o.getClass())
+            return o != null && getClass().equals(o.getClass())
                     && hashCode() == o.hashCode();
         }
 
@@ -501,11 +507,12 @@ public interface Condition {
     }
 
     /**
-     * The class {@link de.claas.mosis.model.Condition.IsNot}. It is intended to negate the restriction(s) of
-     * another {@link de.claas.mosis.model.Condition}. This could be used to allow only non-numeric
-     * values (i.e. <code>new Condition.IsNot(new Condition.IsNumeric())</code>)
-     * or verify that a file will not be overridden (i.e.
-     * <code>new Condition.IsNot(new Condition.IsNumeric())</code>).
+     * The class {@link de.claas.mosis.model.Condition.IsNot}. It is intended to
+     * negate the restriction(s) of another {@link de.claas.mosis.model.Condition}.
+     * This could be used to allow only non-numeric values (i.e. <code>new
+     * Condition.IsNot(new Condition.IsNumeric())</code>) or verify that a file
+     * will not be overridden (i.e. <code>new Condition.IsNot(new
+     * Condition.IsNumeric())</code>).
      *
      * @author Claas Ahlrichs (claasahl@tzi.de)
      */
@@ -516,7 +523,8 @@ public interface Condition {
         /**
          * Initializes the class with the given parameters.
          *
-         * @param condition the {@link de.claas.mosis.model.Condition} that is negated
+         * @param condition the {@link de.claas.mosis.model.Condition} that is
+         *                  negated
          */
         public IsNot(Condition condition) {
             _Condition = condition;
@@ -529,7 +537,7 @@ public interface Condition {
 
         @Override
         public boolean equals(Object o) {
-            return getClass().equals(o == null ? null : o.getClass())
+            return o != null && getClass().equals(o.getClass())
                     && hashCode() == o.hashCode();
         }
 
@@ -550,10 +558,11 @@ public interface Condition {
     }
 
     /**
-     * The class {@link de.claas.mosis.model.Condition.ClassExists}. It is intended to verify the existence of
-     * a class (e.g. prior to instantiating). This assumes that the given value
-     * does represent a class's absolute class name and is accessible within the
-     * current class path.
+     * The class {@link de.claas.mosis.model.Condition.ClassExists}. It is
+     * intended to verify the existence of a class (e.g. prior to
+     * instantiating). This assumes that the given value does represent a
+     * class's absolute class name and is accessible within the current class
+     * path.
      *
      * @author Claas Ahlrichs (claasahl@tzi.de)
      */
@@ -570,7 +579,7 @@ public interface Condition {
 
         @Override
         public boolean equals(Object o) {
-            return getClass().equals(o == null ? null : o.getClass())
+            return o != null && getClass().equals(o.getClass())
                     && hashCode() == o.hashCode();
         }
 
