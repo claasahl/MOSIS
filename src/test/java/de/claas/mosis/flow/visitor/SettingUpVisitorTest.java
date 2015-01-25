@@ -5,6 +5,7 @@ import de.claas.mosis.io.generator.Linear;
 import de.claas.mosis.processing.debug.BreakOut;
 import de.claas.mosis.processing.debug.Forward;
 import de.claas.mosis.processing.debug.Null;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -51,6 +52,14 @@ public class SettingUpVisitorTest {
         _C = new CompositeNode(tmp, tmp2);
         _P1.addSuccessor(_C, new UnbiasedLink());
         _C.addSuccessor(_P2, new UnbiasedLink());
+    }
+
+    @After
+    public void after() {
+        _B1.dismantle();
+        _B21.dismantle();
+        _B22.dismantle();
+        _B3.dismantle();
     }
 
     @Test

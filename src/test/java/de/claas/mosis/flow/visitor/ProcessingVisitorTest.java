@@ -5,6 +5,7 @@ import de.claas.mosis.io.generator.Linear;
 import de.claas.mosis.processing.debug.BreakOut;
 import de.claas.mosis.processing.debug.Forward;
 import de.claas.mosis.processing.debug.Null;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -34,12 +35,16 @@ public class ProcessingVisitorTest {
     public void before() {
         _B1 = new BreakOut();
         _B1.setParameter(BreakOut.CLASS, Linear.class.getName());
+        _B1.setUp();
         _B21 = new BreakOut();
         _B21.setParameter(BreakOut.CLASS, Linear.class.getName());
+        _B21.setUp();
         _B22 = new BreakOut();
         _B22.setParameter(BreakOut.CLASS, Forward.class.getName());
+        _B22.setUp();
         _B3 = new BreakOut();
         _B3.setParameter(BreakOut.CLASS, Null.class.getName());
+        _B3.setUp();
 
         _V = new ProcessingVisitor();
         _P1 = new PlainNode(_B1);
@@ -52,6 +57,14 @@ public class ProcessingVisitorTest {
         _C = new CompositeNode(tmp, tmp2);
         _P1.addSuccessor(_C, new UnbiasedLink());
         _C.addSuccessor(_P2, new UnbiasedLink());
+    }
+
+    @After
+    public void after() {
+        _B1.dismantle();
+        _B21.dismantle();
+        _B22.dismantle();
+        _B3.dismantle();
     }
 
     @Test
