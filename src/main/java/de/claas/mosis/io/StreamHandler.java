@@ -2,7 +2,7 @@ package de.claas.mosis.io;
 
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
-import de.claas.mosis.model.Observable;
+import de.claas.mosis.model.Configurable;
 import de.claas.mosis.model.Observer;
 import de.claas.mosis.util.Utils;
 
@@ -163,7 +163,7 @@ public abstract class StreamHandler<T> extends DataHandler<T> implements Observe
     }
 
     @Override
-    public void update(Observable observable, String parameter) {
+    public void update(Configurable configurable, String parameter) {
         if (IMPL.equals(parameter)) {
             try {
                 Class<?> clazz = Class.forName(getParameter(IMPL));

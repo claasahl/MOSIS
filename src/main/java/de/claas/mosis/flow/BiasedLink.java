@@ -1,7 +1,7 @@
 package de.claas.mosis.flow;
 
 import de.claas.mosis.model.Condition;
-import de.claas.mosis.model.Observable;
+import de.claas.mosis.model.Configurable;
 import de.claas.mosis.model.Observer;
 
 import java.util.ArrayList;
@@ -42,7 +42,7 @@ public class BiasedLink extends LinkAdapter implements Observer {
     }
 
     @Override
-    public void update(Observable observable, String parameter) {
+    public void update(Configurable configurable, String parameter) {
         if (CLASS.equals(parameter)) {
             try {
                 _Class = Class.forName(getParameter(CLASS));

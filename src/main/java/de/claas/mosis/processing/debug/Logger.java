@@ -3,8 +3,8 @@ package de.claas.mosis.processing.debug;
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
 import de.claas.mosis.model.DecoratorProcessor;
+import de.claas.mosis.model.Observer;
 import de.claas.mosis.model.ProcessorAdapter;
-import de.claas.mosis.model.Relation;
 
 import java.util.List;
 
@@ -78,17 +78,24 @@ public class Logger<I, O> extends DecoratorProcessor<I, O> {
     }
 
     @Override
-    protected void addRelation(Relation relation) {
-        entering("addRelation", relation);
-        super.addRelation(relation);
-        exiting("addRelation", null);
+    public void addObserver(Observer observer) {
+        entering("addObserver", observer);
+        super.addObserver(observer);
+        exiting("addObserver", null);
     }
 
     @Override
-    protected void removeRelation(Relation relation) {
-        entering("removeRelation", relation);
-        super.removeRelation(relation);
-        exiting("removeRelation", null);
+    public void removeObserver(Observer observer) {
+        entering("removeObserver", observer);
+        super.removeObserver(observer);
+        exiting("removeObserver", null);
+    }
+
+    @Override
+    public void notifyObservers(String parameter) {
+        entering("notifyObservers", parameter);
+        super.notifyObservers(parameter);
+        exiting("notifyObservers", null);
     }
 
     @Override

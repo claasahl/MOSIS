@@ -16,13 +16,95 @@ public interface Observer {
 
     /**
      * Notifies an {@link de.claas.mosis.model.Observer} that a configuration
-     * parameter / property of an {@link de.claas.mosis.model.Observable} has
+     * parameter / property of an {@link de.claas.mosis.model.Configurable} has
      * changed (i.e. old and new value are different as well as non-{@code
      * null}).
      *
-     * @param observable the {@link de.claas.mosis.model.Observable}
+     * @param configurable the {@link de.claas.mosis.model.Configurable}
      * @param parameter  the parameter, which has changed
      */
-    public void update(Observable observable, String parameter);
+    public void update(Configurable configurable, String parameter);
+
+    /**
+     * The class {@link de.claas.mosis.model.Observer.LastChanged}. It is
+     * intended to add/update a parameter with the current date and time.
+     *
+     * @author Claas Ahlrichs (claasahl@tzi.de)
+     */
+    public static class LastChanged implements Observer {
+
+        public final static String LastChanged = "LastChanged";
+
+        @Override
+        public void update(Configurable configurable, String parameter) {
+            if (!LastChanged.equals(parameter)) {
+                long d = System.currentTimeMillis();
+                String date = String.format("%d", d);
+                configurable.setParameter(LastChanged, date);
+            }
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            return getClass().equals(o == null ? null : o.getClass());
+        }
+    }
+
+    /**
+     * The class {@link de.claas.mosis.model.Observer.UpdateVersion}. It is
+     * intended to add/update a parameter with the version (i.e. total number of
+     * changes that have been made).
+     *
+     * @author Claas Ahlrichs (claasahl@tzi.de)
+     */
+    public static class UpdateVersion implements Observer {
+
+        public final static String Version = "Version";
+
+        @Override
+        public void update(Configurable configurable, String parameter) {
+            if (!Version.equals(parameter)) {
+                String old = configurable.getParameter(Version);
+                old = old == null ? "0" : old;
+                int version = Integer.parseInt(old);
+                configurable.setParameter(Version, Integer.toString(++version));
+            }
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            return getClass().equals(o == null ? null : o.getClass());
+        }
+    }
+
+    /**
+     * The class {@link de.claas.mosis.model.Observer.ParameterHistory}. It is
+     * intended to track changes of parameters. The parameter history is stored
+     * in the form "history-<parameter's name>".
+     *
+     * @author Claas Ahlrichs (claasahl@tzi.de)
+     */
+    public class ParameterHistory implements Observer {
+
+        public final static String Prefix = "history-";
+
+        @Override
+        public void update(Configurable configurable, String parameter) {
+            if (parameter == null || !parameter.startsWith(Prefix)) {
+                String p = Prefix + parameter;
+                String v = configurable.getParameter(parameter);
+                String history = configurable.getParameter(p);
+                history = history == null ? "" : history;
+                history += String.format("%s@%d;", v,
+                        System.currentTimeMillis());
+                configurable.setParameter(p, history);
+            }
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            return getClass().equals(o == null ? null : o.getClass());
+        }
+    }
 
 }

@@ -2,7 +2,7 @@ package de.claas.mosis.io.generator;
 
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
-import de.claas.mosis.model.Observable;
+import de.claas.mosis.model.Configurable;
 import de.claas.mosis.model.Observer;
 import de.claas.mosis.model.ProcessorAdapter;
 
@@ -58,7 +58,7 @@ public class Random extends ProcessorAdapter<Double, Double> implements Observer
     }
 
     @Override
-    public void update(Observable observable, String parameter) {
+    public void update(Configurable configurable, String parameter) {
         if (LOWER.equals(parameter) || UPPER.equals(parameter)) {
             double upper = getParameterAsDouble(UPPER);
             double lower = getParameterAsDouble(LOWER);

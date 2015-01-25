@@ -40,7 +40,6 @@ public class DecoratorProcessor<I, O> extends ProcessorAdapter<I, O> {
     public DecoratorProcessor() {
         setParameter(CLASS, "");
         addCondition(CLASS, new Condition.ClassExists());
-        addRelation(new ProcessorCreator());
     }
 
     @Override
@@ -91,20 +90,27 @@ public class DecoratorProcessor<I, O> extends ProcessorAdapter<I, O> {
     }
 
     @Override
-    protected void addRelation(Relation relation) {
+    public void addObserver(Observer observer) {
+        super.addObserver(observer);
         if (_Processor != null) {
-            _Processor.addRelation(relation);
-        } else {
-            super.addRelation(relation);
+            _Processor.addObserver(observer);
         }
     }
 
     @Override
-    protected void removeRelation(Relation relation) {
+    public void removeObserver(Observer observer) {
+        super.removeObserver(observer);
         if (_Processor != null) {
-            _Processor.removeRelation(relation);
+            _Processor.removeObserver(observer);
+        }
+    }
+
+    @Override
+    public void notifyObservers(String parameter) {
+        if (_Processor != null && !isLocalParameter(parameter)) {
+            _Processor.notifyObservers(parameter);
         } else {
-            super.removeRelation(relation);
+            super.notifyObservers(parameter);
         }
     }
 
@@ -112,7 +118,17 @@ public class DecoratorProcessor<I, O> extends ProcessorAdapter<I, O> {
     public void setUp() {
         super.setUp();
         if (_Processor != null) {
-            _Processor.setUp();
+            _Processor.dismantle();
+            _Processor = null;
+        }
+        try {
+            Class<?> clazz = Class.forName(getParameter(CLASS));
+            _Processor = (ProcessorAdapter<I, O>) Utils.instance(clazz);
+            if (_Processor != null) {
+                _Processor.setUp();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -151,43 +167,4 @@ public class DecoratorProcessor<I, O> extends ProcessorAdapter<I, O> {
         return super.getParameters().contains(parameter)
                 && !parameter.startsWith(SHADOWED);
     }
-
-    /**
-     * The class {@link de.claas.mosis.model.DecoratorProcessor.ProcessorCreator}.
-     * It is intended to create {@link de.claas.mosis.model.Processor} objects
-     * whenever the {@link de.claas.mosis.model.DecoratorProcessor#CLASS}
-     * parameter is changed.
-     *
-     * @author Claas Ahlrichs (claasahl@tzi.de)
-     */
-    private class ProcessorCreator implements Relation {
-
-        @SuppressWarnings("unchecked")
-        @Override
-        public void compute(Configurable configurable, String parameter,
-                            String value) {
-            if (CLASS.equals(parameter)) {
-                if (_Processor != null) {
-                    _Processor.dismantle();
-                    _Processor = null;
-                }
-                try {
-                    _Processor = (ProcessorAdapter<I, O>) Utils.instance(Class
-                            .forName(value));
-                    if (_Processor != null) {
-                        _Processor.setUp();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            return obj != null && getClass().equals(obj.getClass());
-        }
-
-    }
-
 }

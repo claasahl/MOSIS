@@ -22,12 +22,11 @@ import java.util.Vector;
         description = "This is a partial implementation of the main interface (i.e. Processor). It is intended to provide a unified way for getting and setting parameters. One can use this as a basis for creating new modules.",
         author = "Claas Ahlrichs",
         noOutputData = "Refer to concrete implementations.")
-public class ConfigurableAdapter implements Configurable, Observable {
+public class ConfigurableAdapter implements Configurable {
 
     private final Map<String, String> _Parameters = new HashMap<>();
     private final Map<String, List<Condition>> _Conditions = new HashMap<>();
     private final List<Observer> _Observers = new Vector<>();
-    private final List<Relation> _Relations = new Vector<>();
 
     @Override
     public List<String> getParameters() {
@@ -103,9 +102,6 @@ public class ConfigurableAdapter implements Configurable, Observable {
         // Set value and notify observers (if any)
         _Parameters.put(parameter, value);
         notifyObservers(parameter);
-        for (Relation relation : _Relations) {
-            relation.compute(this, parameter, value);
-        }
     }
 
     /**
@@ -175,36 +171,41 @@ public class ConfigurableAdapter implements Configurable, Observable {
     }
 
     /**
-     * Adds a {@link de.claas.mosis.model.Relation} to a parameter. This {@link
-     * de.claas.mosis.model.Relation} is evaluated every time the parameter is
-     * modified.
+     * Adds an {@link de.claas.mosis.model.Observer} to the observer list. The
+     * observer is registered for all parameters / properties. The same observer
+     * object may be added more than once, and will be called as many times as
+     * it is added. If observer is {@code null}, no exception is thrown and no
+     * action is taken.
      *
-     * @param relation the {@link de.claas.mosis.model.Relation}
+     * @param observer the {@link de.claas.mosis.model.Observer} to be added
      */
-    protected void addRelation(Relation relation) {
-        _Relations.add(relation);
-    }
-
-    /**
-     * Removes a {@link de.claas.mosis.model.Relation} from a parameter.
-     *
-     * @param relation the {@link de.claas.mosis.model.Relation}
-     */
-    protected void removeRelation(Relation relation) {
-        _Relations.remove(relation);
-    }
-
-    @Override
     public void addObserver(Observer observer) {
         _Observers.add(observer);
     }
 
-    @Override
+    /**
+     * Removes an {@link de.claas.mosis.model.Observer} from the observer list.
+     * This removes an {@link de.claas.mosis.model.Observer} that was registered
+     * for all parameters / properties. If the observer was added more than once
+     * to the same event source, it will be notified one less time after being
+     * removed. If observer is {@code null}, or was never added, no exception is
+     * thrown and no action is taken.
+     *
+     * @param observer the {@link de.claas.mosis.model.Observer} to be removed
+     */
     public void removeObserver(Observer observer) {
         _Observers.remove(observer);
     }
 
-    @Override
+    /**
+     * Notifies all observers that have been registered to track updates. The
+     * notification implies that the given parameter has changed its value (i.e.
+     * old and new value are different as well as non-{@code null}). If {@code
+     * null} is passed into this method, no exception is thrown and no action is
+     * taken.
+     *
+     * @param parameter the parameter, which value has changed
+     */
     public void notifyObservers(String parameter) {
         for (Observer observer : _Observers) {
             observer.update(this, parameter);
