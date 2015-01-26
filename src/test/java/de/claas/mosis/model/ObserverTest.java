@@ -23,7 +23,7 @@ import java.util.Vector;
 public class ObserverTest {
 
     private final Class<Observer> _Clazz;
-    private Observable _Observable;
+    private ConfigurableAdapter _Observable;
     private Observer _O;
 
     /**
