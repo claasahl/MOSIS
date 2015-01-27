@@ -10,9 +10,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -31,6 +29,7 @@ public class ConfigurableAdapterTest {
 
     private final Class<ConfigurableAdapter> _Clazz;
     private ConfigurableAdapter _C;
+    private TestObserver _Observer;
 
     /**
      * Initializes this JUnit test for an implementation of the {@link
@@ -57,6 +56,7 @@ public class ConfigurableAdapterTest {
     @Before
     public void before() throws Exception {
         _C = Utils.instance(_Clazz);
+        _Observer = new TestObserver();
     }
 
     @Test
@@ -94,19 +94,19 @@ public class ConfigurableAdapterTest {
     }
 
     @Test
-    public void shouldManageRelation() throws Exception {
-        String VERSION = Relation.UpdateVersion.Version;
+    public void shouldManageObserver() throws Exception {
+        String VERSION = Observer.UpdateVersion.Version;
         String param = Utils.unknownParameter(_C);
         assertFalse(_C.getParameters().contains(VERSION));
 
-        _C.addRelation(new Relation.UpdateVersion());
+        _C.addObserver(new Observer.UpdateVersion());
         _C.setParameter(param, "hello");
         assertTrue(_C.getParameters().contains(VERSION));
         int version = _C.getParameterAsInteger(VERSION);
         _C.setParameter(param, "world");
         assertEquals(version + 1, (int) _C.getParameterAsInteger(VERSION));
 
-        _C.removeRelation(new Relation.UpdateVersion());
+        _C.removeObserver(new Observer.UpdateVersion());
         _C.setParameter(param, "hello world");
         assertEquals(version + 1, (int) _C.getParameterAsInteger(VERSION));
     }
@@ -159,5 +159,88 @@ public class ConfigurableAdapterTest {
         _C.setParameter(param, "42.3");
         assertEquals(42.3, _C.getParameterAsDouble(param), 0.0001);
     }
+
+    @Test
+    public void assumptionsOnTestObserver() {
+        assertEquals(0, _Observer.callsToUpdate);
+        assertTrue(_Observer.updatedConfigurables.isEmpty());
+        assertTrue(_Observer.updatedParameters.isEmpty());
+    }
+
+    @Test
+    public void shouldNotCallUpdate() {
+        _C.notifyObservers("test");
+        _C.notifyObservers(null);
+        assertEquals(0, _Observer.callsToUpdate);
+        assertTrue(_Observer.updatedConfigurables.isEmpty());
+        assertTrue(_Observer.updatedParameters.isEmpty());
+    }
+
+    @Test
+    public void shouldAddObserver() {
+        _C.addObserver(_Observer);
+        _C.notifyObservers("house");
+        assertEquals(1, _Observer.callsToUpdate);
+        assertTrue(_Observer.updatedParameters.containsKey("house"));
+        assertEquals(1, (int) _Observer.updatedParameters.get("house"));
+        assertTrue(_Observer.updatedConfigurables.containsKey(_C));
+        assertEquals(1, (int) _Observer.updatedConfigurables.get(_C));
+    }
+
+    @Test
+    public void shouldRemoveObserver() {
+        _C.addObserver(_Observer);
+        _C.addObserver(_Observer);
+        _C.removeObserver(_Observer);
+        _C.notifyObservers("keyboard");
+        assertEquals(1, _Observer.callsToUpdate);
+        assertTrue(_Observer.updatedParameters.containsKey("keyboard"));
+        assertEquals(1, (int) _Observer.updatedParameters.get("keyboard"));
+        assertTrue(_Observer.updatedConfigurables.containsKey(_C));
+        assertEquals(1, (int) _Observer.updatedConfigurables.get(_C));
+    }
+
+    @Test
+    public void shouldUpdateMultipleObserver() {
+        _C.addObserver(_Observer);
+        _C.addObserver(_Observer);
+        _C.addObserver(_Observer);
+        _C.notifyObservers("multi");
+        assertEquals(3, _Observer.callsToUpdate);
+        assertTrue(_Observer.updatedParameters.containsKey("multi"));
+        assertEquals(3, (int) _Observer.updatedParameters.get("multi"));
+        assertTrue(_Observer.updatedConfigurables.containsKey(_C));
+        assertEquals(3, (int) _Observer.updatedConfigurables.get(_C));
+    }
+
+    @Test
+    public void shouldAcceptNullValues() {
+        _C.addObserver(null);
+        _C.removeObserver(null);
+        _C.notifyObservers(null);
+    }
+
+
+    private static final class TestObserver implements Observer {
+
+        int callsToUpdate = 0;
+        Map<String, Integer> updatedParameters = new HashMap<>();
+        Map<Configurable, Integer> updatedConfigurables = new HashMap<>();
+
+        @Override
+        public void update(Configurable configurable, String parameter) {
+            callsToUpdate++;
+            if (updatedParameters.containsKey(parameter))
+                updatedParameters.put(parameter, updatedParameters.get(parameter) + 1);
+            else
+                updatedParameters.put(parameter, 1);
+
+            if (updatedConfigurables.containsKey(configurable))
+                updatedConfigurables.put(configurable, updatedConfigurables.get(configurable) + 1);
+            else
+                updatedConfigurables.put(configurable, 1);
+        }
+    }
+
 
 }
