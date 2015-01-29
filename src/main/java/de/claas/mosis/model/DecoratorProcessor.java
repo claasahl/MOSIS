@@ -117,18 +117,25 @@ public class DecoratorProcessor<I, O> extends ProcessorAdapter<I, O> {
     @Override
     public void setUp() {
         super.setUp();
-        if (_Processor != null) {
-            _Processor.dismantle();
-            _Processor = null;
-        }
+        // Create module that is being "decorated"
         try {
             Class<?> clazz = Class.forName(getParameter(CLASS));
             _Processor = (ProcessorAdapter<I, O>) Utils.instance(clazz);
-            if (_Processor != null) {
-                _Processor.setUp();
-            }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+        // Moved "wrapped" parameters to new module
+        if (_Processor != null) {
+            for (String parameter : super.getParameters()) {
+                if (parameter.startsWith(SHADOWED)) {
+                    String value = super.getParameter(parameter);
+                    super.setParameter(parameter, (String) null);
+                    parameter = parameter.replace(SHADOWED, "");
+                    _Processor.setParameter(parameter, value);
+                }
+            }
+            _Processor.setUp();
         }
     }
 
