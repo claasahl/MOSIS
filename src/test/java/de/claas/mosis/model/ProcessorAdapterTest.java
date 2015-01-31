@@ -254,38 +254,38 @@ public class ProcessorAdapterTest {
     }
 
     @Test
-    public void shouldAddAndRemoveRelations() throws Exception {
-        Relation relation = new Relation.UpdateVersion();
-        assertNull(_P.getParameter(Relation.UpdateVersion.Version));
+    public void shouldAddAndRemoveObservers() throws Exception {
+        Observer relation = new Observer.UpdateVersion();
+        assertNull(_P.getParameter(Observer.UpdateVersion.Version));
 
-        _P.addRelation(relation);
+        _P.addObserver(relation);
         Utils.updateParameter(_P, "some parameter 1", "some value 1");
         assertEquals((Integer) 1,
-                _P.getParameterAsInteger(Relation.UpdateVersion.Version));
-        _P.removeRelation(relation);
+                _P.getParameterAsInteger(Observer.UpdateVersion.Version));
+        _P.removeObserver(relation);
         Utils.updateParameter(_P, "some parameter 2", "some value 2");
         assertEquals((Integer) 1,
-                _P.getParameterAsInteger(Relation.UpdateVersion.Version));
+                _P.getParameterAsInteger(Observer.UpdateVersion.Version));
 
-        _P.addRelation(new Relation.UpdateVersion());
+        _P.addObserver(new Observer.UpdateVersion());
         Utils.updateParameter(_P, "some parameter 3", "some value 3");
         assertEquals((Integer) 2,
-                _P.getParameterAsInteger(Relation.UpdateVersion.Version));
-        _P.removeRelation(new Relation.UpdateVersion());
+                _P.getParameterAsInteger(Observer.UpdateVersion.Version));
+        _P.removeObserver(new Observer.UpdateVersion());
         Utils.updateParameter(_P, "some parameter 4", "some value 4");
         assertEquals((Integer) 2,
-                _P.getParameterAsInteger(Relation.UpdateVersion.Version));
+                _P.getParameterAsInteger(Observer.UpdateVersion.Version));
     }
 
     @Test
-    public void shouldApplyRelationAfterSettingParameter() throws Exception {
+    public void shouldApplyObserverAfterSettingParameter() throws Exception {
         String parameter = String.format("%s%d", getClass(),
                 System.currentTimeMillis());
         Dummy dummy = new Dummy();
 
         assertEquals(0, dummy.AccessCount);
         Utils.updateParameter(_P, parameter, "a");
-        _P.addRelation(dummy);
+        _P.addObserver(dummy);
         assertEquals("a", _P.getParameter(parameter));
         Utils.updateParameter(_P, parameter, "b");
         assertEquals("b", _P.getParameter(parameter));
@@ -293,7 +293,7 @@ public class ProcessorAdapterTest {
     }
 
     @Test
-    public void shouldApplyRelationOnlyIfParameterChanges() throws Exception {
+    public void shouldApplyObserverOnlyIfParameterChanges() throws Exception {
         String parameter = String.format("%s%d", getClass(),
                 System.currentTimeMillis());
         Dummy dummy = new Dummy();
@@ -301,7 +301,7 @@ public class ProcessorAdapterTest {
         assertEquals(0, dummy.AccessCount);
         Utils.updateParameter(_P, parameter, parameter);
         assertEquals(parameter, _P.getParameter(parameter));
-        _P.addRelation(dummy);
+        _P.addObserver(dummy);
         Utils.updateParameter(_P, parameter, parameter);
         assertEquals(parameter, _P.getParameter(parameter));
         assertEquals(0, dummy.AccessCount);
@@ -319,24 +319,19 @@ public class ProcessorAdapterTest {
 
     /**
      * The class {@link de.claas.mosis.model.ProcessorAdapterTest.Dummy}. It is
-     * intended to verify how often a {@link de.claas.mosis.model.Relation} is
+     * intended to verify how often a {@link de.claas.mosis.model.Observer} is
      * accessed and when it is accessed.
      *
      * @author Claas Ahlrichs (claasahl@tzi.de)
      */
-    private static class Dummy implements Relation {
+    private static class Dummy implements Observer {
 
         public int AccessCount = 0;
 
         @Override
-        public void compute(Configurable configurable, String parameter,
-                            String value) {
+        public void update(Configurable configurable, String parameter) {
             AccessCount++;
-            if (!configurable.getParameter(parameter).equals(value)) {
-                AccessCount = Integer.MIN_VALUE;
-            }
         }
-
     }
 
 }
