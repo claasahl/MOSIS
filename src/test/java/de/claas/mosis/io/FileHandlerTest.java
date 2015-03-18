@@ -19,7 +19,7 @@ public class FileHandlerTest extends DataHandlerTest<File, FileHandler> {
 
     private final File tmp1 = new File("./" + FileHandler.class.getSimpleName() + "_1.tmp");
     private final File tmp2 = new File("./" + FileHandler.class.getSimpleName() + "_2.tmp");
-    private final File tmp3 = new File("./" + FileHandler.class.getSimpleName() + "_3.tmp");
+    private final File tmp3 = new File("./" + FileHandler.class.getSimpleName() + "_3.tmp/");
 
     @Override
     public void after() {
@@ -87,6 +87,13 @@ public class FileHandlerTest extends DataHandlerTest<File, FileHandler> {
         assertTrue(tmp1.exists());
         assertTrue(tmp2.exists());
         assertTrue(tmp3.exists());
+    }
+
+    @Test
+    public void shouldHandleInvalidFile() {
+        Utils.updateParameters(_H, FileHandler.ROOT, tmp3.getAbsolutePath(),
+                DataHandler.MODE, DataHandler.MODE_READ);
+        assertTrue(Utils.processAll(_H).isEmpty());
     }
 
 }

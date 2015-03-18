@@ -48,10 +48,10 @@ public class FileHandler extends DataHandler<File> {
     @Override
     public void process(List<File> in, List<File> out) {
         if (isReadOnly(in)) {
+            while (!files.isEmpty() && !files.peek().exists()) {
+                files.pop();
+            }
             if (!files.isEmpty()) {
-                while (!files.peek().exists()) {
-                    files.pop();
-                }
                 File exists = files.pop();
                 out.add(exists);
 
