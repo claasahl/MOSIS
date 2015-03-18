@@ -2,10 +2,7 @@ package de.claas.mosis.model;
 
 import de.claas.mosis.annotation.Documentation;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Vector;
+import java.util.*;
 
 /**
  * The class {@link de.claas.mosis.model.ConfigurableAdapter}. It is intended to
@@ -26,11 +23,12 @@ public class ConfigurableAdapter implements Configurable {
 
     private final Map<String, String> _Parameters = new HashMap<>();
     private final Map<String, List<Condition>> _Conditions = new HashMap<>();
-    private final List<Observer> _Observers = new Vector<>();
+    private final List<Observer> _Observers = new ArrayList<>();
 
     @Override
+    // TODO make collection!?
     public List<String> getParameters() {
-        return new Vector<>(_Parameters.keySet());
+        return new ArrayList<>(_Parameters.keySet());
     }
 
     @Override
@@ -143,12 +141,16 @@ public class ConfigurableAdapter implements Configurable {
     /**
      * Adds a {@link de.claas.mosis.model.Condition} to a parameter. This {@link
      * de.claas.mosis.model.Condition} is evaluated every time the parameter is
-     * modified.
+     * modified. If condition is {@code null}, no exception is thrown and no
+     * action is taken.
      *
      * @param parameter the parameter
      * @param condition the {@link de.claas.mosis.model.Condition}
      */
     protected void addCondition(String parameter, Condition condition) {
+        if (!_Parameters.containsKey(parameter))
+            _Parameters.put(parameter, null);
+
         List<Condition> conditions = _Conditions.get(parameter);
         if (conditions == null) {
             conditions = new Vector<>();
@@ -158,7 +160,9 @@ public class ConfigurableAdapter implements Configurable {
     }
 
     /**
-     * Removes a {@link de.claas.mosis.model.Condition} from a parameter.
+     * Removes a {@link de.claas.mosis.model.Condition} from a parameter. If
+     * condition is {@code null}, or was never added, no exception is thrown and
+     * no action is taken.
      *
      * @param parameter the parameter
      * @param condition the {@link de.claas.mosis.model.Condition}
@@ -171,6 +175,28 @@ public class ConfigurableAdapter implements Configurable {
     }
 
     /**
+     * Returns all registered conditions for a parameter. It is save to assume
+     * that every condition (added by calling {@link #addCondition(String,
+     * Condition)} and not removed by calling {@link #removeCondition(String,
+     * Condition)}) is contained in the list returned by this method. This
+     * method will always return a list, even if it is empty. Thus
+     * <code>null</code> will never be returned.
+     * <p/>
+     * The list may be edited and clear. It does not affect the internal status
+     * of this {@link de.claas.mosis.model.Configurable}.
+     *
+     * @param parameter the parameter
+     * @return all registered conditions for a paramater
+     */
+    protected Collection<Condition> getConditions(String parameter) {
+        if (_Conditions.containsKey(parameter)
+                && _Conditions.get(parameter) != null)
+            return new ArrayList<>(_Conditions.get(parameter));
+        else
+            return new ArrayList<>();
+    }
+
+    /**
      * Adds an {@link de.claas.mosis.model.Observer} to the observer list. The
      * observer is registered for all parameters / properties. The same observer
      * object may be added more than once, and will be called as many times as
@@ -179,7 +205,7 @@ public class ConfigurableAdapter implements Configurable {
      *
      * @param observer the {@link de.claas.mosis.model.Observer} to be added
      */
-    public void addObserver(Observer observer) {
+    protected void addObserver(Observer observer) {
         _Observers.add(observer);
     }
 
@@ -193,9 +219,26 @@ public class ConfigurableAdapter implements Configurable {
      *
      * @param observer the {@link de.claas.mosis.model.Observer} to be removed
      */
-    public void removeObserver(Observer observer) {
+    protected void removeObserver(Observer observer) {
         _Observers.remove(observer);
     }
+
+    /**
+     * Returns all registered observers. It is save to assume that every
+     * observer (added by calling {@link #addObserver(Observer)} and not removed
+     * by calling {@link #removeObserver(Observer)}) is contained in the list
+     * returned by this method. This method will always return a list, even if
+     * it is empty. Thus <code>null</code> will never be returned.
+     * <p/>
+     * The list may be edited and clear. It does not affect the internal status
+     * of this {@link de.claas.mosis.model.Configurable}.
+     *
+     * @return all registered observers
+     */
+    protected Collection<Observer> getObservers() {
+        return new ArrayList<>(_Observers);
+    }
+
 
     /**
      * Notifies all observers that have been registered to track updates. The
@@ -206,9 +249,36 @@ public class ConfigurableAdapter implements Configurable {
      *
      * @param parameter the parameter, which value has changed
      */
-    public void notifyObservers(String parameter) {
+    protected void notifyObservers(String parameter) {
         for (Observer observer : _Observers) {
             observer.update(this, parameter);
         }
+    }
+
+    /**
+     * Updates (or replaces) the internal state based on another {@link
+     * de.claas.mosis.model.ConfigurableAdapter}. The internal state can
+     * optionally be cleared before any updates are performed, thus effectively
+     * overwriting the previous state. While updating, all relevant conditions
+     * are evaluated and may result in an exception if parameters do not adhere
+     * to their constraints, resulting in an undefined internal state.
+     *
+     * @param configurable the {@link de.claas.mosis.model.ConfigurableAdapter}
+     *                     which state is used during the update
+     * @param clear        whether the internal state is cleared first or not
+     */
+    protected void update(ConfigurableAdapter configurable, boolean clear) {
+        if (clear) {
+            _Parameters.clear();
+            _Conditions.clear();
+            _Observers.clear();
+        }
+        for (String parameter : configurable.getParameters()) {
+            for (Condition condition : configurable.getConditions(parameter))
+                addCondition(parameter, condition);
+            setParameter(parameter, configurable.getParameter(parameter));
+        }
+        for (Observer observer : configurable.getObservers())
+            addObserver(observer);
     }
 }
