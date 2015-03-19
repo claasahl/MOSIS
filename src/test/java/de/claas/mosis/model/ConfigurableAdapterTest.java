@@ -10,7 +10,9 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Vector;
 
 import static org.junit.Assert.*;
 
@@ -29,7 +31,7 @@ public class ConfigurableAdapterTest {
 
     private final Class<ConfigurableAdapter> _Clazz;
     private ConfigurableAdapter _C;
-    private TestObserver _Observer;
+    private Observer.BreakOut _Observer;
 
     /**
      * Initializes this JUnit test for an implementation of the {@link
@@ -56,7 +58,7 @@ public class ConfigurableAdapterTest {
     @Before
     public void before() throws Exception {
         _C = Utils.instance(_Clazz);
-        _Observer = new TestObserver();
+        _Observer = new Observer.BreakOut();
     }
 
     @Test
@@ -132,8 +134,6 @@ public class ConfigurableAdapterTest {
         assertEquals(1, _Observer.callsToUpdate);
         assertTrue(_Observer.updatedParameters.containsKey("house"));
         assertEquals(1, (int) _Observer.updatedParameters.get("house"));
-        assertTrue(_Observer.updatedConfigurables.containsKey(_C));
-        assertEquals(1, (int) _Observer.updatedConfigurables.get(_C));
     }
 
     @Test
@@ -145,8 +145,6 @@ public class ConfigurableAdapterTest {
         assertEquals(3, _Observer.callsToUpdate);
         assertTrue(_Observer.updatedParameters.containsKey("multi"));
         assertEquals(3, (int) _Observer.updatedParameters.get("multi"));
-        assertTrue(_Observer.updatedConfigurables.containsKey(_C));
-        assertEquals(3, (int) _Observer.updatedConfigurables.get(_C));
     }
 
     @Test
@@ -157,8 +155,6 @@ public class ConfigurableAdapterTest {
         assertEquals(1, _Observer.callsToUpdate);
         assertTrue(_Observer.updatedParameters.containsKey(unknown));
         assertEquals(1, (int) _Observer.updatedParameters.get(unknown));
-        assertTrue(_Observer.updatedConfigurables.containsKey(_C));
-        assertEquals(1, (int) _Observer.updatedConfigurables.get(_C));
     }
 
     @Test
@@ -174,8 +170,6 @@ public class ConfigurableAdapterTest {
         assertEquals(1, _Observer.callsToUpdate);
         assertTrue(_Observer.updatedParameters.containsKey(unknown));
         assertEquals(1, (int) _Observer.updatedParameters.get(unknown));
-        assertTrue(_Observer.updatedConfigurables.containsKey(_C));
-        assertEquals(1, (int) _Observer.updatedConfigurables.get(_C));
     }
 
     @Test
@@ -205,7 +199,7 @@ public class ConfigurableAdapterTest {
         Condition.IsNotNull notNull = new Condition.IsNotNull();
         Condition.IsGreaterThan greaterThan = new Condition.IsGreaterThan(0d);
         ConfigurableAdapter configurable = new ConfigurableAdapter();
-        configurable.addObserver(new TestObserver());
+        configurable.addObserver(new Observer.BreakOut());
         configurable.addCondition("hello", notNull);
         configurable.setParameter("hello", "world");
         configurable.addCondition("number", greaterThan);
@@ -234,7 +228,7 @@ public class ConfigurableAdapterTest {
         Condition.IsNotNull notNull = new Condition.IsNotNull();
         Condition.IsGreaterThan greaterThan = new Condition.IsGreaterThan(0d);
         ConfigurableAdapter configurable = new ConfigurableAdapter();
-        configurable.addObserver(new TestObserver());
+        configurable.addObserver(new Observer.BreakOut());
         configurable.addCondition("hello", notNull);
         configurable.setParameter("hello", "false");
         configurable.addCondition("number", greaterThan);
@@ -349,28 +343,5 @@ public class ConfigurableAdapterTest {
         _C.addCondition(unknown, null);
         _C.removeCondition(unknown, null);
     }
-
-
-    private static final class TestObserver implements Observer {
-
-        int callsToUpdate = 0;
-        Map<String, Integer> updatedParameters = new HashMap<>();
-        Map<Configurable, Integer> updatedConfigurables = new HashMap<>();
-
-        @Override
-        public void update(Configurable configurable, String parameter) {
-            callsToUpdate++;
-            if (updatedParameters.containsKey(parameter))
-                updatedParameters.put(parameter, updatedParameters.get(parameter) + 1);
-            else
-                updatedParameters.put(parameter, 1);
-
-            if (updatedConfigurables.containsKey(configurable))
-                updatedConfigurables.put(configurable, updatedConfigurables.get(configurable) + 1);
-            else
-                updatedConfigurables.put(configurable, 1);
-        }
-    }
-
 
 }

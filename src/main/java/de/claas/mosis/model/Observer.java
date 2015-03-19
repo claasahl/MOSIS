@@ -1,5 +1,8 @@
 package de.claas.mosis.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * The interface {@link de.claas.mosis.model.Observer}. It is intended to
  * provide an unified way for automatic computation of configuration parameters
@@ -105,6 +108,31 @@ public interface Observer {
         public boolean equals(Object o) {
             return getClass().equals(o == null ? null : o.getClass());
         }
+    }
+
+    // TODO Documentation (Mainly for testing purposes)
+    // TODO Write separate test for this observer
+    public class BreakOut implements Observer {
+
+        int callsToUpdate = 0;
+        Map<String, Integer> updatedParameters = new HashMap<>();
+        Map<Configurable, Integer> updatedConfigurables = new HashMap<>();
+
+        @Override
+        public void update(Configurable configurable, String parameter) {
+            callsToUpdate++;
+            if (updatedParameters.containsKey(parameter))
+                updatedParameters.put(parameter, updatedParameters.get(parameter) + 1);
+            else
+                updatedParameters.put(parameter, 1);
+
+            if (updatedConfigurables.containsKey(configurable))
+                updatedConfigurables.put(configurable, updatedConfigurables.get(configurable) + 1);
+            else
+                updatedConfigurables.put(configurable, 1);
+        }
+
+        // TODO Equals method ...
     }
 
 }
