@@ -149,10 +149,14 @@ public class DecoratorProcessor<I, O> extends ProcessorAdapter<I, O> implements 
     @Override
     protected Collection<Observer> getObservers() {
         Collection<Observer> observers = super.getObservers();
-        if (_Processor != null)
-            observers.addAll(_Processor.getObservers());
-        else
-            observers.addAll(_Configuration.getObservers());
+        if (_Processor != null) {
+            // Observers in this decorator, the temp. configuration and
+            // the decorated module are (mostly) synchronized). We should not
+            // consider those observers that are in all of these lists.
+            Collection<Observer> tmp = _Processor.getObservers();
+            tmp.removeAll(_Configuration.getObservers());
+            observers.addAll(tmp);
+        }
         return observers;
     }
 
