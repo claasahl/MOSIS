@@ -4,8 +4,8 @@ import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.util.Utils;
 
+import java.util.Collection;
 import java.util.List;
-import java.util.regex.Pattern;
 
 /**
  * The class {@link de.claas.mosis.model.DecoratorProcessor}. It is an
@@ -27,19 +27,22 @@ import java.util.regex.Pattern;
         description = "This implementation is meant to be overridden in one way or another. It is intended to wrap another module and forwards all method calls to it. Subclasses may want to override some (or all methods) to add functionality and behavior.",
         author = "Claas Ahlrichs",
         noOutputData = "This implementation will forward output data from the module that it wraps. Refer to the wrapped module for more details.")
-public class DecoratorProcessor<I, O> extends ProcessorAdapter<I, O> {
+public class DecoratorProcessor<I, O> extends ProcessorAdapter<I, O> implements Observer {
 
     @Parameter("Name of class from decorated processor / module. An instance of this class backs this decorator. Any class, implementing de.claas.mosis.model.ProcessorAdapter, can be used.")
     public static final String CLASS = "class of processor";
     public static final String SHADOWED = "wrapped.";
+    protected static final String LOCAL = "local.";
+    private ConfigurableAdapter _Configuration = new ConfigurableAdapter();
     private ProcessorAdapter<I, O> _Processor;
 
     /**
      * Initializes the class with default values.
      */
     public DecoratorProcessor() {
-        setParameter(CLASS, "");
-        addCondition(CLASS, new Condition.ClassExists());
+        setParameter(LOCAL + CLASS, "");
+        addCondition(LOCAL + CLASS, new Condition.ClassExists());
+        addObserver(this);
     }
 
     @Override
@@ -47,51 +50,88 @@ public class DecoratorProcessor<I, O> extends ProcessorAdapter<I, O> {
         List<String> params = super.getParameters();
         if (_Processor != null) {
             params.addAll(_Processor.getParameters());
+        } else {
+            params.addAll(_Configuration.getParameters());
         }
         return params;
     }
 
     @Override
     public String getParameter(String parameter) {
-        if (_Processor != null && !isLocalParameter(parameter)) {
-            return _Processor.getParameter(parameter.replaceFirst(
-                    Pattern.quote(SHADOWED), ""));
+        if (isDecoratedParameter(parameter)) {
+            parameter = fixParameter(parameter);
+            if (_Processor != null) {
+                return _Processor.getParameter(parameter);
+            } else {
+                return _Configuration.getParameter(parameter);
+            }
         } else {
+            parameter = fixParameter(parameter);
             return super.getParameter(parameter);
         }
     }
 
     @Override
     public void setParameter(String parameter, String value) {
-        if (_Processor != null && !isLocalParameter(parameter)) {
-            _Processor.setParameter(
-                    parameter.replaceFirst(Pattern.quote(SHADOWED), ""), value);
+        if (isDecoratedParameter(parameter)) {
+            parameter = fixParameter(parameter);
+            _Configuration.setParameter(parameter, value);
+            if (_Processor != null) {
+                _Processor.setParameter(parameter, value);
+            }
         } else {
+            parameter = fixParameter(parameter);
             super.setParameter(parameter, value);
         }
     }
 
     @Override
     protected void addCondition(String parameter, Condition condition) {
-        if (_Processor != null && !isLocalParameter(parameter)) {
-            _Processor.addCondition(parameter, condition);
+        if (isDecoratedParameter(parameter)) {
+            parameter = fixParameter(parameter);
+            _Configuration.addCondition(parameter, condition);
+            if (_Processor != null) {
+                _Processor.addCondition(parameter, condition);
+            }
         } else {
+            parameter = fixParameter(parameter);
             super.addCondition(parameter, condition);
         }
     }
 
     @Override
     protected void removeCondition(String parameter, Condition condition) {
-        if (_Processor != null && !isLocalParameter(parameter)) {
-            _Processor.removeCondition(parameter, condition);
+        if (isDecoratedParameter(parameter)) {
+            parameter = fixParameter(parameter);
+            _Configuration.removeCondition(parameter, condition);
+            if (_Processor != null) {
+                _Processor.removeCondition(parameter, condition);
+            }
         } else {
+            parameter = fixParameter(parameter);
             super.removeCondition(parameter, condition);
+        }
+    }
+
+    @Override
+    protected Collection<Condition> getConditions(String parameter) {
+        if (isDecoratedParameter(parameter)) {
+            parameter = fixParameter(parameter);
+            if (_Processor != null) {
+                return _Processor.getConditions(parameter);
+            } else {
+                return _Configuration.getConditions(parameter);
+            }
+        } else {
+            parameter = fixParameter(parameter);
+            return super.getConditions(parameter);
         }
     }
 
     @Override
     public void addObserver(Observer observer) {
         super.addObserver(observer);
+        _Configuration.addObserver(observer);
         if (_Processor != null) {
             _Processor.addObserver(observer);
         }
@@ -100,16 +140,33 @@ public class DecoratorProcessor<I, O> extends ProcessorAdapter<I, O> {
     @Override
     public void removeObserver(Observer observer) {
         super.removeObserver(observer);
+        _Configuration.removeObserver(observer);
         if (_Processor != null) {
             _Processor.removeObserver(observer);
         }
     }
 
     @Override
+    protected Collection<Observer> getObservers() {
+        Collection<Observer> observers = super.getObservers();
+        if (_Processor != null)
+            observers.addAll(_Processor.getObservers());
+        else
+            observers.addAll(_Configuration.getObservers());
+        return observers;
+    }
+
+    @Override
     public void notifyObservers(String parameter) {
-        if (_Processor != null && !isLocalParameter(parameter)) {
-            _Processor.notifyObservers(parameter);
+        if (isDecoratedParameter(parameter)) {
+            parameter = fixParameter(parameter);
+            if (_Processor != null) {
+                _Processor.notifyObservers(parameter);
+            } else {
+                _Configuration.notifyObservers(parameter);
+            }
         } else {
+            parameter = fixParameter(parameter);
             super.notifyObservers(parameter);
         }
     }
@@ -117,24 +174,7 @@ public class DecoratorProcessor<I, O> extends ProcessorAdapter<I, O> {
     @Override
     public void setUp() {
         super.setUp();
-        // Create module that is being "decorated"
-        try {
-            Class<?> clazz = Class.forName(getParameter(CLASS));
-            _Processor = (ProcessorAdapter<I, O>) Utils.instance(clazz);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // Moved "wrapped" parameters to new module
         if (_Processor != null) {
-            for (String parameter : super.getParameters()) {
-                if (parameter.startsWith(SHADOWED)) {
-                    String value = super.getParameter(parameter);
-                    super.setParameter(parameter, (String) null);
-                    parameter = parameter.replace(SHADOWED, "");
-                    _Processor.setParameter(parameter, value);
-                }
-            }
             _Processor.setUp();
         }
     }
@@ -144,13 +184,21 @@ public class DecoratorProcessor<I, O> extends ProcessorAdapter<I, O> {
         super.dismantle();
         if (_Processor != null) {
             _Processor.dismantle();
-            _Processor = null;
         }
     }
 
     @Override
     public void process(List<I> in, List<O> out) {
-        _Processor.process(in, out);
+        if (_Processor != null) {
+            _Processor.process(in, out);
+        }
+    }
+
+    @Override
+    protected void update(ConfigurableAdapter configurable, boolean clear) {
+        if (clear)
+            _Configuration = new ConfigurableAdapter();
+        super.update(configurable, clear);
     }
 
     /**
@@ -163,15 +211,41 @@ public class DecoratorProcessor<I, O> extends ProcessorAdapter<I, O> {
     }
 
     /**
-     * Returns <code>true</code>, if the parameter belongs to this processor (as
-     * opposed to the processor that is being decorated). Otherwise,
-     * <code>false</code> is returned.
+     * Returns <code>true</code>, if the parameter belongs to the decorated
+     * processor (as opposed to this processor). Otherwise, <code>false</code>
+     * is returned.
      *
      * @param parameter the parameter
-     * @return <code>true</code>, if the parameter belongs to this processor
+     * @return <code>true</code>, if the parameter belongs to the decorated
+     * processor
      */
-    protected boolean isLocalParameter(String parameter) {
-        return super.getParameters().contains(parameter)
-                && !parameter.startsWith(SHADOWED);
+    protected boolean isDecoratedParameter(String parameter) {
+        return parameter != null && !parameter.startsWith(LOCAL) &&
+                !super.getParameters().contains(parameter);
+    }
+
+    // TODO Documentation
+    private String fixParameter(String parameter) {
+        if (parameter != null && parameter.startsWith(LOCAL))
+            parameter = parameter.replaceFirst(LOCAL, "");
+        if (parameter != null && parameter.startsWith(SHADOWED))
+            parameter = parameter.replaceFirst(SHADOWED, "");
+        return parameter;
+    }
+
+    @Override
+    public void update(Configurable configurable, String parameter) {
+        if (CLASS.equals(parameter) && this.equals(configurable)) {
+            try {
+                // Create module that is being "decorated"
+                Class<?> clazz = Class.forName(getParameter(CLASS));
+                _Processor = (ProcessorAdapter<I, O>) Utils.instance(clazz);
+
+                // Update configuration of "decorated" module
+                _Processor.update(_Configuration, false);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
