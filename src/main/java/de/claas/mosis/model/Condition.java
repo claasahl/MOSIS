@@ -1,7 +1,9 @@
 package de.claas.mosis.model;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * The interface {@link de.claas.mosis.model.Condition}. It is intended to
@@ -593,6 +595,26 @@ public interface Condition {
             return "Class does not exist.";
         }
 
+    }
+
+    // TODO Documentation (Mainly for testing purposes)
+    // TODO Write separate test for this condition
+    public class BreakOut implements Condition {
+
+        int calls = 0;
+        Map<String, Integer> updatedParameters = new HashMap<>();
+
+        @Override
+        public boolean complies(String parameter, String value) {
+            calls++;
+            if (updatedParameters.containsKey(parameter))
+                updatedParameters.put(parameter, updatedParameters.get(parameter) + 1);
+            else
+                updatedParameters.put(parameter, 1);
+            return true;
+        }
+
+        // TODO equals, hashcode, toString
     }
 
 }
