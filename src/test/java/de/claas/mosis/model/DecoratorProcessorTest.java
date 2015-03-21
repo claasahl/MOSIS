@@ -298,8 +298,8 @@ public class DecoratorProcessorTest {
         assertEquals(5, observer.getCalls());
         assertEquals(4, observer.getUpdates(unknown));
         assertEquals(1, observer.getUpdates(DecoratorProcessor.CLASS));
-        assertNull(observer.getUpdates(DecoratorProcessor.LOCAL + unknown));
-        assertNull(observer.getUpdates(DecoratorProcessor.SHADOWED + unknown));
+        assertEquals(0, observer.getUpdates(DecoratorProcessor.LOCAL + unknown));
+        assertEquals(0, observer.getUpdates(DecoratorProcessor.SHADOWED + unknown));
     }
 
     @Test
@@ -315,8 +315,8 @@ public class DecoratorProcessorTest {
 
         assertEquals(6, condition.getCalls());
         assertEquals(6, condition.getUpdates(unknown));
-        assertNull(condition.getUpdates(DecoratorProcessor.LOCAL + unknown));
-        assertNull(condition.getUpdates(DecoratorProcessor.SHADOWED + unknown));
+        assertNull(condition.getValue(DecoratorProcessor.LOCAL + unknown));
+        assertNull(condition.getValue(DecoratorProcessor.SHADOWED + unknown));
     }
 
     @Test
