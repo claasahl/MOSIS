@@ -52,7 +52,7 @@ public class LinkTest {
                 new Object[]{null, -23, 1L, 42.3, "hello world", new Object()}});
         impl.add(new Object[]{
                 BiasedLink.class,
-                new Object[]{-23, 1L, 42.3, "hello world", new Object()}});
+                new Object[]{null, -23, 1L, 42.3, "hello world", new Object()}});
         return impl;
     }
 

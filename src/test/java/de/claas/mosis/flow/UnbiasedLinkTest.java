@@ -1,8 +1,12 @@
 package de.claas.mosis.flow;
 
-import org.junit.Ignore;
+import org.junit.Before;
+import org.junit.Test;
 
-import static org.junit.Assert.fail;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 /**
  * The JUnit test for class {@link de.claas.mosis.flow.UnbiasedLink}. It is
@@ -15,9 +19,28 @@ import static org.junit.Assert.fail;
  */
 public class UnbiasedLinkTest {
 
-    @Ignore
-    public void test() {
-        fail("Not yet implemented");
+    private Link _L;
+
+    @Before
+    public void setUp() {
+        _L = new UnbiasedLink();
+    }
+
+    @Test
+    public void shouldBuffer() throws Exception {
+        List<Object> list = Arrays.asList(-23, 1L, 42.3, "hello world", new Object());
+        assertTrue(_L.push(list));
+        for (Object arg : list) {
+            assertEquals(arg, _L.poll());
+        }
+        assertTrue(_L.isEmpty());
+    }
+
+    @Test
+    public void shouldHandleNullValues() {
+        assertTrue(_L.push(Arrays.asList((Object) null)));
+        assertNull(_L.poll());
+        assertTrue(_L.isEmpty());
     }
 
 }
