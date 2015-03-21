@@ -1,5 +1,7 @@
 package de.claas.mosis.processing.debug;
 
+import de.claas.mosis.annotation.Category;
+import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.model.ProcessorAdapter;
 
 import java.util.List;
@@ -13,6 +15,13 @@ import java.util.List;
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
+@Documentation(
+        supportMultipleInputs = true,
+        canHandelMissingData = true,
+        category = Category.Other,
+        author = {"Claas Ahlrichs"},
+        description = "This implementation converts all input values into String-objects. Null values are simply forwarded.",
+        purpose = "This implementation is intended for debugging purposes.")
 public class ToString extends ProcessorAdapter<Object, String> {
 
     @Override

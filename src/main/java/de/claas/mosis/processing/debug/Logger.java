@@ -1,5 +1,7 @@
 package de.claas.mosis.processing.debug;
 
+import de.claas.mosis.annotation.Category;
+import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
 import de.claas.mosis.model.DecoratorProcessor;
@@ -29,6 +31,11 @@ import java.util.List;
  *            for details.
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
+@Documentation(
+        category = Category.Decorator,
+        author = {"Claas Ahlrichs"},
+        description = "This is a DecoratorProcessor which logs all method calls (including their parameters and return values).",
+        purpose = "This implementation is intended for debugging purposes.")
 public class Logger<I, O> extends DecoratorProcessor<I, O> {
 
     @Parameter("Name of the logger, that was previous registered and configured by a java.util.logging.LogManager.")

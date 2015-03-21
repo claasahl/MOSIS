@@ -1,5 +1,7 @@
 package de.claas.mosis.io;
 
+import de.claas.mosis.annotation.Category;
+import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
 
@@ -20,6 +22,11 @@ import java.util.List;
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
+@Documentation(
+        category = Category.InputOutput,
+        author = {"Claas Ahlrichs"},
+        description = "This implementation allows storing data in UDP datagrams as well as retrieving data from UDP datagrams.",
+        purpose = "To allow storage in UDP datagrams and retrieval of UDP datagrams.")
 public class UserDatagramProtocolHandler extends DataHandler<DatagramPacket> {
 
     @Parameter("Local hostname / IP to which the socket is bound.")

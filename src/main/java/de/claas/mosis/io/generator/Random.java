@@ -1,5 +1,7 @@
 package de.claas.mosis.io.generator;
 
+import de.claas.mosis.annotation.Category;
+import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
 import de.claas.mosis.model.Configurable;
@@ -16,6 +18,12 @@ import java.util.List;
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
+@Documentation(
+        dataSource = true,
+        category = Category.InputOutput,
+        author = {"Claas Ahlrichs"},
+        description = "This implementation outputs random numbers.",
+        purpose = "To provide access to random numbers.")
 public class Random extends ProcessorAdapter<Double, Double> implements Observer {
 
     @Parameter("Represents the seed of this random number generator.")

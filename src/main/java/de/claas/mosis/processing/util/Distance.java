@@ -1,5 +1,7 @@
 package de.claas.mosis.processing.util;
 
+import de.claas.mosis.annotation.Category;
+import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.processing.ComparingProcessor;
 
 import java.util.List;
@@ -13,6 +15,11 @@ import java.util.List;
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
+@Documentation(
+        category = Category.Other,
+        author = {"Claas Ahlrichs"},
+        description = "This implementation calculates the distance between two successive input values.",
+        purpose = "To calculate the distance between two successive input values.")
 public class Distance extends ComparingProcessor<Double, Double> {
 
     @Override

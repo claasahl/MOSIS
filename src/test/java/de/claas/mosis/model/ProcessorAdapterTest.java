@@ -1,7 +1,12 @@
 package de.claas.mosis.model;
 
+import de.claas.mosis.io.BlockingQueueHandler;
+import de.claas.mosis.io.FileHandler;
 import de.claas.mosis.io.QueueHandler;
 import de.claas.mosis.io.UserDatagramProtocolHandler;
+import de.claas.mosis.io.format.CommaSeparatedValues;
+import de.claas.mosis.io.format.JavaScriptObjectNotation;
+import de.claas.mosis.io.format.PlainText;
 import de.claas.mosis.io.format.Serialization;
 import de.claas.mosis.io.generator.Function;
 import de.claas.mosis.io.generator.Linear;
@@ -68,12 +73,17 @@ public class ProcessorAdapterTest {
         impl.add(new Object[]{Serialization.class});
         impl.add(new Object[]{UserDatagramProtocolHandler.class});
         impl.add(new Object[]{QueueHandler.class});
+        impl.add(new Object[]{BlockingQueueHandler.class});
+        impl.add(new Object[]{FileHandler.class});
         impl.add(new Object[]{DecoratorProcessor.class});
         impl.add(new Object[]{MovingAverage.class});
         impl.add(new Object[]{Random.class});
         impl.add(new Object[]{de.claas.mosis.io.generator.Time.class});
         impl.add(new Object[]{ToString.class});
         impl.add(new Object[]{Logger.class});
+        impl.add(new Object[]{PlainText.class});
+        impl.add(new Object[]{CommaSeparatedValues.class});
+        impl.add(new Object[]{JavaScriptObjectNotation.class});
         return impl;
     }
 

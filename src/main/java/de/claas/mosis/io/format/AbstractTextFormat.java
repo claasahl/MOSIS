@@ -1,5 +1,7 @@
 package de.claas.mosis.io.format;
 
+import de.claas.mosis.annotation.Category;
+import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.io.StreamHandler;
 import de.claas.mosis.model.Condition;
@@ -21,6 +23,11 @@ import java.util.Queue;
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
+@Documentation(
+        category = Category.DataFormat,
+        author = {"Claas Ahlrichs"},
+        description = "This implementation represents a data format for storing and retrieving (plain) text.",
+        purpose = "To allow storage and retrieval in (plain) text.")
 public abstract class AbstractTextFormat<T> extends StreamHandler<T> {
 
     @Parameter("Number of bytes used during input operations.")

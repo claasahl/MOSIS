@@ -10,5 +10,5 @@ package de.claas.mosis.annotation;
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
 public enum Category {
-    InputOutput, DataFormat, Classification, Clustering, Mining, Other
+    InputOutput, DataFormat, Classification, Clustering, Mining, Other, Decorator
 }

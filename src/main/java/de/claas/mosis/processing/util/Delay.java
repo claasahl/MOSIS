@@ -1,5 +1,7 @@
 package de.claas.mosis.processing.util;
 
+import de.claas.mosis.annotation.Category;
+import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
 import de.claas.mosis.processing.BufferingProcessor;
@@ -14,6 +16,12 @@ import java.util.List;
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
+@Documentation(
+        canHandelMissingData = true,
+        category = Category.Other,
+        author = {"Claas Ahlrichs"},
+        description = "This implementation allows the delayed forwarding of input values.",
+        purpose = "To delay and forward input values.")
 public class Delay<T> extends BufferingProcessor<T, T> {
 
     @Parameter("N-th input processor / module which values are delayed. Only values from the referenced processor / module are delayed and forwarded (everything else is discarded). E.g. when set to three then only the input values comping from the fourth processor / module (parent) are utilized.")

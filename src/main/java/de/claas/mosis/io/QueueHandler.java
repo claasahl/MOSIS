@@ -1,5 +1,7 @@
 package de.claas.mosis.io;
 
+import de.claas.mosis.annotation.Category;
+import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
 import de.claas.mosis.util.Utils;
@@ -21,6 +23,11 @@ import java.util.Queue;
  *            de.claas.mosis.model.Processor} for details.
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
+@Documentation(
+        category = Category.InputOutput,
+        author = {"Claas Ahlrichs"},
+        description = "This implementation allows storing data in a queue as well as retrieving data from a queue.",
+        purpose = "To allow storage and retrieval of objects within a queue.")
 public class QueueHandler<T> extends DataHandler<T> {
 
     @Parameter("Name of class from queue. An instance of this class backs this handler. Any class, implementing java.util.Queue, can be used.")

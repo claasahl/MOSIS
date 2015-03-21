@@ -1,5 +1,7 @@
 package de.claas.mosis.processing.debug;
 
+import de.claas.mosis.annotation.Category;
+import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.model.ProcessorAdapter;
 
 import java.util.List;
@@ -14,6 +16,13 @@ import java.util.List;
  *            details.
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
+@Documentation(
+        supportMultipleInputs = true,
+        canHandelMissingData = true,
+        category = Category.Other,
+        author = {"Claas Ahlrichs"},
+        description = "This implementation forwards all input values as output values.",
+        purpose = "This implementation is intended for debugging purposes.")
 public class Forward<I> extends ProcessorAdapter<I, I> {
 
     @Override

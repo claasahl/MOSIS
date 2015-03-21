@@ -1,5 +1,7 @@
 package de.claas.mosis.io.generator;
 
+import de.claas.mosis.annotation.Category;
+import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
 import de.claas.mosis.model.ProcessorAdapter;
@@ -14,6 +16,12 @@ import java.util.List;
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
+@Documentation(
+        dataSource = true,
+        category = Category.InputOutput,
+        author = {"Claas Ahlrichs"},
+        description = "This implementation provides access to a predefined sequence of numbers.",
+        purpose = "To provide access to a predefined sequence of numbers.")
 public class Linear extends ProcessorAdapter<Double, Double> {
 
     @Parameter("Slope of linear expression.")

@@ -1,5 +1,7 @@
 package de.claas.mosis.processing;
 
+import de.claas.mosis.annotation.Category;
+import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
 
@@ -14,6 +16,11 @@ import java.util.List;
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
+@Documentation(
+        category = Category.Other,
+        author = {"Claas Ahlrichs"},
+        description = "This implementation calculates the moving average for its input values.",
+        purpose = "To calculate the moving average.")
 public class MovingAverage extends BufferingProcessor<Double, Double> {
 
     @Parameter("Mode of operation. Defines how the moving average is calculated (if at all) when the buffer is not entirely filled.")

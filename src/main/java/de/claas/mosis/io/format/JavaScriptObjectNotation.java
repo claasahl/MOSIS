@@ -1,5 +1,7 @@
 package de.claas.mosis.io.format;
 
+import de.claas.mosis.annotation.Category;
+import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.model.Data;
 import de.claas.mosis.util.Parser;
 
@@ -50,6 +52,11 @@ import java.util.regex.Pattern;
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
+@Documentation(
+        category = Category.DataFormat,
+        author = {"Claas Ahlrichs"},
+        description = "This implementation represents a data format for storing and retrieving JSON data.",
+        purpose = "To allow storage in JSON and retrieval of data in JSON.")
 public class JavaScriptObjectNotation extends AbstractTextFormat<Data> {
 
     private final Pattern BeginArray;

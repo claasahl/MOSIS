@@ -1,5 +1,7 @@
 package de.claas.mosis.processing.debug;
 
+import de.claas.mosis.annotation.Category;
+import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
 import de.claas.mosis.model.DecoratorProcessor;
@@ -19,6 +21,11 @@ import java.util.List;
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
+@Documentation(
+        category = Category.Decorator,
+        author = {"Claas Ahlrichs"},
+        description = "This is a DecoratorProcessor which measures the number of milliseconds that the decorated module requires for processing. This implementation also provides several ",
+        purpose = "This implementation is intended for debugging purposes.")
 public class Time extends DecoratorProcessor<Object, Object> {
 
     @Parameter("Number of milliseconds the last invocation of the process-method took.")

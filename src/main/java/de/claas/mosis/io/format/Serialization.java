@@ -1,5 +1,7 @@
 package de.claas.mosis.io.format;
 
+import de.claas.mosis.annotation.Category;
+import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.io.StreamHandler;
 
 import java.io.IOException;
@@ -18,6 +20,11 @@ import java.util.List;
  *            de.claas.mosis.model.Processor} for details.
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
+@Documentation(
+        category = Category.DataFormat,
+        author = {"Claas Ahlrichs"},
+        description = "This implementation represents a data format for serialization and deserialization of objects.",
+        purpose = "To allow serialization and deserialization.")
 public class Serialization<T> extends StreamHandler<T> {
 
     private ObjectInputStream _Input;

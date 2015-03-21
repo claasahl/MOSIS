@@ -1,5 +1,7 @@
 package de.claas.mosis.io;
 
+import de.claas.mosis.annotation.Category;
+import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
 import de.claas.mosis.model.ProcessorAdapter;
@@ -22,6 +24,11 @@ import java.util.List;
  *            de.claas.mosis.model.Processor} for details.
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
+@Documentation(
+        category = Category.InputOutput,
+        author = {"Claas Ahlrichs"},
+        description = "This implementation represents a data format for storing and retrieving (plain) text.",
+        purpose = "To allow storage in (plain) text and retrieval of (plain) text.")
 public abstract class DataHandler<T> extends ProcessorAdapter<T, T> {
 
     @Parameter("Mode of operation. Defines whether values should be read or written.")

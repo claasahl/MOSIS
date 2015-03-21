@@ -1,5 +1,7 @@
 package de.claas.mosis.processing.debug;
 
+import de.claas.mosis.annotation.Category;
+import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.model.ProcessorAdapter;
 
 import java.util.List;
@@ -11,6 +13,12 @@ import java.util.List;
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
+@Documentation(
+        noOutputData = {"It will never return a value."},
+        category = Category.Other,
+        author = {"Claas Ahlrichs"},
+        description = "This implementation does nothing.",
+        purpose = "This implementation is intended for debugging purposes.")
 public class NoOperation extends ProcessorAdapter<Object, Object> {
 
     @Override

@@ -1,5 +1,7 @@
 package de.claas.mosis.processing.debug;
 
+import de.claas.mosis.annotation.Category;
+import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
 import de.claas.mosis.model.DecoratorProcessor;
@@ -15,6 +17,11 @@ import java.util.List;
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
+@Documentation(
+        category = Category.Decorator,
+        author = {"Claas Ahlrichs"},
+        description = "This is a DecoratorProcessor which the name and input values right before the decorated module is called. It also outputs the name and output values right after the decorated module was called.",
+        purpose = "This implementation is intended for debugging purposes.")
 public class SystemOut extends DecoratorProcessor<Object, Object> {
 
     @Parameter("Name / identifier of this module. This name is prepended before the input and output values are written to System.out.")

@@ -1,5 +1,7 @@
 package de.claas.mosis.processing.debug;
 
+import de.claas.mosis.annotation.Category;
+import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.model.DecoratorProcessor;
 
 import java.util.List;
@@ -14,6 +16,11 @@ import java.util.Vector;
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
+@Documentation(
+        category = Category.Decorator,
+        author = {"Claas Ahlrichs"},
+        description = "This is a DecoratorProcessor which provides access to the most recent set of input and output values that were passed to the process-method. It also count how often various methods were called.",
+        purpose = "This implementation is intended for debugging purposes.")
 public class BreakOut extends DecoratorProcessor<Object, Object> {
 
     private List<Object> _Input;

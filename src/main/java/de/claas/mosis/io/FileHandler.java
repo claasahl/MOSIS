@@ -1,5 +1,7 @@
 package de.claas.mosis.io;
 
+import de.claas.mosis.annotation.Category;
+import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
 
@@ -18,6 +20,11 @@ import java.util.Stack;
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
+@Documentation(
+        category = Category.InputOutput,
+        author = {"Claas Ahlrichs"},
+        description = "This implementation allows creating (empty) files and listing file system objects.",
+        purpose = "To allow creating and listing file system objects.")
 public class FileHandler extends DataHandler<File> {
 
     @Parameter("The root directory which contents are to be returned (recursively).")

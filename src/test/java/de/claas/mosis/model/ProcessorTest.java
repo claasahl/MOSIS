@@ -5,7 +5,6 @@ import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.util.Utils;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -75,12 +74,12 @@ public class ProcessorTest {
         assertTrue(hasEmptyConstructor);
     }
 
-    @Ignore
+    @Test
     public void shouldHaveAnnotationForClass() throws Exception {
         assertNotNull(_P.getClass().getAnnotation(Documentation.class));
     }
 
-    @Ignore
+    @Test
     public void shouldHaveAnnotationForParameters() throws Exception {
         for (String param : _P.getParameters()) {
             boolean found = false;

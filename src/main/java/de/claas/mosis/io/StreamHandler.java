@@ -1,5 +1,7 @@
 package de.claas.mosis.io;
 
+import de.claas.mosis.annotation.Category;
+import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
 import de.claas.mosis.model.Configurable;
@@ -32,6 +34,11 @@ import java.util.Collection;
  *            de.claas.mosis.model.Processor} for details.
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
+@Documentation(
+        category = Category.InputOutput,
+        author = {"Claas Ahlrichs"},
+        description = "This implementation allows storing data in an OutputStream as well as retrieving data from an InputStream.",
+        purpose = "To allow storage and retrieval of objects within any stream-based resource.")
 public abstract class StreamHandler<T> extends DataHandler<T> implements Observer {
 
     @Parameter("Name of class from StreamHandlerImpl. An instance of this class backs this handler.  Any class, implementing de.claas.mosis.io.StreamHandlerImpl, can be used.")
