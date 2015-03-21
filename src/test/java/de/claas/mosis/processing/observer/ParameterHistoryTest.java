@@ -50,11 +50,13 @@ public class ParameterHistoryTest {
     @Test
     public void shouldUpdateParameter() {
         Observer o = build();
+        _Dummy.setParameter(P, "hello");
         o.update(_Dummy, P);
         assertTrue(_Dummy.getParameters().contains(H));
         assertTrue(_Dummy.getParameter(H).contains("hello@"));
         assertFalse(_Dummy.getParameter(H).contains("world@"));
 
+        _Dummy.setParameter(P, "world");
         o.update(_Dummy, P);
         assertTrue(_Dummy.getParameter(H).contains("hello@"));
         assertTrue(_Dummy.getParameter(H).contains("world@"));
