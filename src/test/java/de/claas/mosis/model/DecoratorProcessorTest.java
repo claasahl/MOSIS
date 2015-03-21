@@ -63,6 +63,7 @@ public class DecoratorProcessorTest {
     @Before
     public void before() throws Exception {
         _P1 = Utils.instance(_Clazz);
+        _P1.setParameter(DecoratorProcessor.CLASS, Null.class.getName());
         _P1.setUp();
         _P2 = new SystemOut();
         _P2.setUp();
@@ -76,7 +77,7 @@ public class DecoratorProcessorTest {
 
     @Test
     public void assumptionsOnParameterClass() throws Exception {
-        assertEquals("", _P1.getParameter(DecoratorProcessor.CLASS));
+        assertEquals(Null.class.getName(), _P1.getParameter(DecoratorProcessor.CLASS));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -106,7 +107,7 @@ public class DecoratorProcessorTest {
 
     @Test
     public void shouldInstantiateNewClass() throws Exception {
-        assertNull(_P1.getProcessor());
+        assertEquals(Null.class, _P1.getProcessor().getClass());
         Utils.updateParameter(_P1, DecoratorProcessor.CLASS, SystemOut.class.getName());
         assertNotNull(_P1.getProcessor());
         assertEquals(SystemOut.class, _P1.getProcessor().getClass());
@@ -134,7 +135,7 @@ public class DecoratorProcessorTest {
     @Test
     public void shouldNotForwardParameter() {
         String unknown = Utils.unknownParameter(_P1);
-        _P1.setParameter(unknown, "hello");
+        _P1.setParameter(DecoratorProcessor.LOCAL + unknown, "hello");
         assertNull(_P1.getProcessor().getParameter(unknown));
         assertEquals("hello", _P1.getParameter(unknown));
     }
@@ -151,7 +152,7 @@ public class DecoratorProcessorTest {
     @Test
     public void shouldNotForwardParameterAsBoolean() {
         String unknown = Utils.unknownParameter(_P1);
-        _P1.setParameter(unknown, true);
+        _P1.setParameter(DecoratorProcessor.LOCAL + unknown, true);
         assertNull(_P1.getProcessor().getParameterAsBoolean(unknown));
         assertTrue(_P1.getParameterAsBoolean(unknown));
     }
@@ -168,7 +169,7 @@ public class DecoratorProcessorTest {
     @Test
     public void shouldNotForwardParameterAsInteger() {
         String unknown = Utils.unknownParameter(_P1);
-        _P1.setParameter(unknown, Integer.MAX_VALUE);
+        _P1.setParameter(DecoratorProcessor.LOCAL + unknown, Integer.MAX_VALUE);
         assertNull(_P1.getProcessor().getParameterAsInteger(unknown));
         assertEquals(Integer.MAX_VALUE, (int) _P1.getParameterAsInteger(unknown));
     }
@@ -210,9 +211,10 @@ public class DecoratorProcessorTest {
     @Test
     public void shouldForwardObserver() {
         Observer observer = new Observer.BreakOut();
-        _P1.addObserver(observer);
         Utils.updateParameter(_P1, DecoratorProcessor.CLASS, SystemOut.class.getName());
-        assertEquals(1, _P1.getProcessor().getObservers().size());
+        int numberObservers = _P1.getObservers().size();
+        _P1.addObserver(observer);
+        assertEquals(numberObservers + 1, _P1.getProcessor().getObservers().size());
         assertTrue(_P1.getProcessor().getObservers().contains(observer));
     }
 
@@ -241,7 +243,7 @@ public class DecoratorProcessorTest {
         String unknown = Utils.unknownParameter(_P1);
         assertTrue(_P1.isDecoratedParameter(unknown));
         assertTrue(_P1.isDecoratedParameter(DecoratorProcessor.SHADOWED + unknown));
-        assertFalse(_P1.isDecoratedParameter(DecoratorProcessor.SHADOWED + DecoratorProcessor.CLASS));
+        assertTrue(_P1.isDecoratedParameter(DecoratorProcessor.SHADOWED + DecoratorProcessor.CLASS));
     }
 
     @Test
@@ -293,8 +295,9 @@ public class DecoratorProcessorTest {
         _P1.notifyObservers(DecoratorProcessor.SHADOWED + unknown);
         Utils.updateParameters(_P1, DecoratorProcessor.CLASS, Linear.class.getName());
         _P1.getProcessor().notifyObservers(unknown);
-        assertEquals(4, observer.callsToUpdate);
+        assertEquals(5, observer.callsToUpdate);
         assertEquals(4, (int) observer.updatedParameters.get(unknown));
+        assertEquals(1, (int) observer.updatedParameters.get(DecoratorProcessor.CLASS));
         assertNull(observer.updatedParameters.get(DecoratorProcessor.LOCAL + unknown));
         assertNull(observer.updatedParameters.get(DecoratorProcessor.SHADOWED + unknown));
     }
@@ -304,14 +307,14 @@ public class DecoratorProcessorTest {
         String unknown = Utils.unknownParameter(_P1);
         Condition.BreakOut condition = new Condition.BreakOut();
         _P1.addCondition(unknown, condition);
-        _P1.setParameter(unknown, "hello");
-        _P1.setParameter(DecoratorProcessor.SHADOWED + unknown, "world");
-        _P1.setParameter(DecoratorProcessor.LOCAL + unknown, "hello");
+        _P1.setParameter(unknown, "hello1");
+        _P1.setParameter(DecoratorProcessor.SHADOWED + unknown, "hello2");
+        _P1.setParameter(DecoratorProcessor.LOCAL + unknown, "hello3");
         Utils.updateParameters(_P1, DecoratorProcessor.CLASS, Linear.class.getName());
-        _P1.getProcessor().setParameter(unknown, "world");
+        _P1.getProcessor().setParameter(unknown, "hello4");
 
-        assertEquals(4, condition.calls);
-        assertEquals(4, (int) condition.updatedParameters.get(unknown));
+        assertEquals(6, condition.calls);
+        assertEquals(6, (int) condition.updatedParameters.get(unknown));
         assertNull(condition.updatedParameters.get(DecoratorProcessor.LOCAL + unknown));
         assertNull(condition.updatedParameters.get(DecoratorProcessor.SHADOWED + unknown));
     }
@@ -339,9 +342,9 @@ public class DecoratorProcessorTest {
     public void shouldHideCondition() throws Exception {
         String unknown = Utils.unknownParameter(_P1);
         Condition condition1 = new Condition.BreakOut();
-        Condition condition2 = new Condition.BreakOut();
-        _P1.addCondition(DecoratorProcessor.LOCAL + unknown, condition1);
+        Condition condition2 = new Condition.IsBoolean();
         _P1.addCondition(unknown, condition2);
+        _P1.addCondition(DecoratorProcessor.LOCAL + unknown, condition1);
         assertTrue(_P1.getConditions(unknown).contains(condition1));
         assertFalse(_P1.getConditions(unknown).contains(condition2));
         assertFalse(_P1.getConditions(DecoratorProcessor.SHADOWED + unknown).contains(condition1));

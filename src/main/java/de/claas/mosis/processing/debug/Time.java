@@ -34,18 +34,18 @@ public class Time extends DecoratorProcessor<Object, Object> {
      * Initializes the class with default values.
      */
     public Time() {
-        setParameter(TIME, "");
-        addCondition(TIME, new Condition.IsInteger());
-        addCondition(TIME, new Condition.IsGreaterOrEqual(0d));
-        setParameter(TOTAL_TIME, 0);
-        addCondition(TOTAL_TIME, new Condition.IsInteger());
-        addCondition(TOTAL_TIME, new Condition.IsGreaterOrEqual(0d));
-        setParameter(FIRST_CALL, "");
-        addCondition(FIRST_CALL, new Condition.IsInteger());
-        addCondition(FIRST_CALL, new Condition.IsGreaterOrEqual(0d));
-        setParameter(LAST_CALL, "");
-        addCondition(LAST_CALL, new Condition.IsInteger());
-        addCondition(LAST_CALL, new Condition.IsGreaterOrEqual(0d));
+        setParameter(LOCAL + TIME, "");
+        addCondition(LOCAL + TIME, new Condition.IsInteger());
+        addCondition(LOCAL + TIME, new Condition.IsGreaterOrEqual(0d));
+        setParameter(LOCAL + TOTAL_TIME, 0);
+        addCondition(LOCAL + TOTAL_TIME, new Condition.IsInteger());
+        addCondition(LOCAL + TOTAL_TIME, new Condition.IsGreaterOrEqual(0d));
+        setParameter(LOCAL + FIRST_CALL, "");
+        addCondition(LOCAL + FIRST_CALL, new Condition.IsInteger());
+        addCondition(LOCAL + FIRST_CALL, new Condition.IsGreaterOrEqual(0d));
+        setParameter(LOCAL + LAST_CALL, "");
+        addCondition(LOCAL + LAST_CALL, new Condition.IsInteger());
+        addCondition(LOCAL + LAST_CALL, new Condition.IsGreaterOrEqual(0d));
     }
 
     @Override

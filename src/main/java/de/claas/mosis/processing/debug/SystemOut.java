@@ -24,8 +24,8 @@ public class SystemOut extends DecoratorProcessor<Object, Object> {
      * Initializes the class with default values.
      */
     public SystemOut() {
-        addCondition(NAME, new Condition.IsNotNull());
-        setParameter(NAME, toString());
+        addCondition(LOCAL + NAME, new Condition.IsNotNull());
+        setParameter(LOCAL + NAME, toString());
     }
 
     /**

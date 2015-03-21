@@ -24,9 +24,9 @@ public class Counter extends DecoratorProcessor<Object, Object> {
      * Initializes the class with default values.
      */
     public Counter() {
-        addCondition(COUNTER, new Condition.IsInteger());
-        addCondition(COUNTER, new Condition.IsGreaterOrEqual(0d));
-        setParameter(COUNTER, 0);
+        addCondition(LOCAL + COUNTER, new Condition.IsInteger());
+        addCondition(LOCAL + COUNTER, new Condition.IsGreaterOrEqual(0d));
+        setParameter(LOCAL + COUNTER, 0);
     }
 
     @Override

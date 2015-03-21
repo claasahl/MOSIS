@@ -36,8 +36,8 @@ public class Logger<I, O> extends DecoratorProcessor<I, O> {
     private java.util.logging.Logger logger;
 
     public Logger() {
-        setParameter(NAME, "de.claas.mosis");
-        addCondition(NAME, new Condition.IsNotNull());
+        setParameter(LOCAL + NAME, "de.claas.mosis");
+        addCondition(LOCAL + NAME, new Condition.IsNotNull());
     }
 
     @Override

@@ -23,9 +23,9 @@ public class Sleep extends DecoratorProcessor<Object, Object> {
      * Initializes the class with default values.
      */
     public Sleep() {
-        addCondition(DELAY, new Condition.IsInteger());
-        addCondition(DELAY, new Condition.IsGreaterOrEqual(0.0));
-        setParameter(DELAY, 0);
+        addCondition(LOCAL + DELAY, new Condition.IsInteger());
+        addCondition(LOCAL + DELAY, new Condition.IsGreaterOrEqual(0.0));
+        setParameter(LOCAL + DELAY, 0);
     }
 
     @Override

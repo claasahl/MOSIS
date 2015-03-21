@@ -228,7 +228,17 @@ public class DecoratorProcessor<I, O> extends ProcessorAdapter<I, O> implements 
                 !super.getParameters().contains(parameter);
     }
 
-    // TODO Documentation
+    /**
+     * Returns the parameter without the prefix. The prefix {@value #LOCAL} or
+     * {@value #SHADOWED} is going to be removed, as it is only used to indicate
+     * whether the parameter should be stored within the decorated module or the
+     * decorating module.
+     * <p/>
+     * This function is closely related to {@link #isDecoratedParameter(String)}.
+     *
+     * @param parameter the parameter
+     * @return the parameter, but may have removed any prefix
+     */
     private String fixParameter(String parameter) {
         if (parameter != null && parameter.startsWith(LOCAL))
             parameter = parameter.replaceFirst(LOCAL, "");
@@ -244,11 +254,12 @@ public class DecoratorProcessor<I, O> extends ProcessorAdapter<I, O> implements 
                 // Create module that is being "decorated"
                 Class<?> clazz = Class.forName(getParameter(CLASS));
                 _Processor = (ProcessorAdapter<I, O>) Utils.instance(clazz);
-
-                // Update configuration of "decorated" module
-                _Processor.update(_Configuration, false);
             } catch (Exception e) {
                 e.printStackTrace();
+            } finally {
+                // Update configuration of "decorated" module
+                if (_Processor != null)
+                    _Processor.update(_Configuration, false);
             }
         }
     }
