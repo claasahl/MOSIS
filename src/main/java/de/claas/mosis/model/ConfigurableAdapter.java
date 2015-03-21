@@ -27,7 +27,13 @@ public class ConfigurableAdapter implements Configurable {
 
     @Override
     public Collection<String> getParameters() {
-        return new ArrayList<>(_Parameters.keySet());
+        ArrayList<String> params = new ArrayList<>(_Parameters.keySet());
+        if (!_Conditions.keySet().isEmpty()) {
+            Collection<String> tmp = new ArrayList<>(_Conditions.keySet());
+            tmp.removeAll(params);
+            params.addAll(tmp);
+        }
+        return params;
     }
 
     @Override
@@ -147,9 +153,6 @@ public class ConfigurableAdapter implements Configurable {
      * @param condition the {@link de.claas.mosis.model.Condition}
      */
     protected void addCondition(String parameter, Condition condition) {
-        if (!_Parameters.containsKey(parameter))
-            _Parameters.put(parameter, null);
-
         List<Condition> conditions = _Conditions.get(parameter);
         if (conditions == null) {
             conditions = new Vector<>();
@@ -272,12 +275,13 @@ public class ConfigurableAdapter implements Configurable {
             _Conditions.clear();
             _Observers.clear();
         }
-        for (String parameter : configurable.getParameters()) {
-            for (Condition condition : configurable.getConditions(parameter))
+        for (String parameter : configurable._Conditions.keySet()) {
+            for (Condition condition : configurable._Conditions.get(parameter))
                 addCondition(parameter, condition);
-            setParameter(parameter, configurable.getParameter(parameter));
         }
-        for (Observer observer : configurable.getObservers())
+        for (String parameter : configurable._Parameters.keySet())
+            setParameter(parameter, configurable._Parameters.get(parameter));
+        for (Observer observer : configurable._Observers)
             addObserver(observer);
     }
 }

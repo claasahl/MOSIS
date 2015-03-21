@@ -115,7 +115,7 @@ public class ConfigurableAdapterTest {
 
         ConfigurableAdapter configurable = new ConfigurableAdapter();
         configurable.addCondition(unknown, new Condition.IsBoolean());
-        _C.update(configurable, false);
+        configurable.update(_C, false);
     }
 
     @Test
