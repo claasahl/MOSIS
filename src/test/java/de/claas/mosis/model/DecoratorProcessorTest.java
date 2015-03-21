@@ -313,10 +313,10 @@ public class DecoratorProcessorTest {
         Utils.updateParameters(_P1, DecoratorProcessor.CLASS, Linear.class.getName());
         _P1.getProcessor().setParameter(unknown, "hello4");
 
-        assertEquals(6, condition.calls);
-        assertEquals(6, (int) condition.updatedParameters.get(unknown));
-        assertNull(condition.updatedParameters.get(DecoratorProcessor.LOCAL + unknown));
-        assertNull(condition.updatedParameters.get(DecoratorProcessor.SHADOWED + unknown));
+        assertEquals(6, condition.getCalls());
+        assertEquals(6, (int) condition.getUpdates(unknown));
+        assertNull(condition.getUpdates(DecoratorProcessor.LOCAL + unknown));
+        assertNull(condition.getUpdates(DecoratorProcessor.SHADOWED + unknown));
     }
 
     @Test

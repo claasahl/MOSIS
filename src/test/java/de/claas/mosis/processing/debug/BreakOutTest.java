@@ -41,7 +41,9 @@ public class BreakOutTest {
 
     @Test
     public void assumeZeroCalls() {
+        assertEquals(1, _P.getCallsToSetUp());
         assertEquals(0, _P.getCallsToProcess());
+        assertEquals(0, _P.getCallsToDismantle());
         assertNull(_P.getLastInput());
         assertNull(_P.getLastInput());
     }
@@ -54,6 +56,18 @@ public class BreakOutTest {
         Utils.process(_P, 23, 42);
         Utils.process(_P);
         assertEquals(4, _P.getCallsToProcess());
+    }
+
+    @Test
+    public void shouldCountCallsToSetUpAndDismantle() {
+        assertEquals(1, _P.getCallsToSetUp());
+        assertEquals(0, _P.getCallsToDismantle());
+        Utils.updateParameters(_P);
+        assertEquals(2, _P.getCallsToSetUp());
+        assertEquals(1, _P.getCallsToDismantle());
+        Utils.updateParameters(_P);
+        assertEquals(3, _P.getCallsToSetUp());
+        assertEquals(2, _P.getCallsToDismantle());
     }
 
     @Test

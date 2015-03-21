@@ -1,6 +1,7 @@
 package de.claas.mosis.model;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -597,24 +598,90 @@ public interface Condition {
 
     }
 
-    // TODO Documentation (Mainly for testing purposes)
-    // TODO Write separate test for this condition
+    /**
+     * The class {@link de.claas.mosis.model.Condition.BreakOut}. It is intended
+     * for debugging purposes. This {@link de.claas.mosis.model.Condition}
+     * implementation provides access to the most recent value for a parameter
+     * (see {@link #getValue(String)}) as well as other statistics. This {@link
+     * de.claas.mosis.model.Condition} will always return <code>true</code>.
+     *
+     * @author Claas Ahlrichs (claasahl@tzi.de)
+     */
     public class BreakOut implements Condition {
 
-        int calls = 0;
-        Map<String, Integer> updatedParameters = new HashMap<>();
+        private int calls = 0;
+        private Map<String, Integer> parameters = new HashMap<>();
+        private Map<String, String> values = new HashMap<>();
+
+        /**
+         * Returns the set of parameters that were evaluated. This corresponds
+         * to those parameters that were registered for this {@link
+         * de.claas.mosis.model.Condition} and that have already been
+         * evaluated.
+         *
+         * @return the set of parameters that were evaluated
+         */
+        public Collection<String> getParameters() {
+            return parameters.keySet();
+        }
+
+        /**
+         * Returns the most recent value for a parameter.
+         *
+         * @param parameter the parameter
+         * @return the most recent value for a parameter
+         */
+        public String getValue(String parameter) {
+            return values.get(parameter);
+        }
+
+        /**
+         * Returns the number of updates / evaluations for a parameter. This
+         * will usually correspond to the number of times that a parameter
+         * changed it's value.
+         *
+         * @param parameter the parameter
+         * @return the number of updates / evaluations for a parameter
+         */
+        public int getUpdates(String parameter) {
+            return parameters.containsKey(parameter) ? parameters.get(parameter) : 0;
+        }
+
+        /**
+         * Returns the number of calls of {@link #complies(String, String)}.
+         *
+         * @return the number of calls of {@link #complies(String, String)}
+         */
+        public int getCalls() {
+            return calls;
+        }
 
         @Override
         public boolean complies(String parameter, String value) {
             calls++;
-            if (updatedParameters.containsKey(parameter))
-                updatedParameters.put(parameter, updatedParameters.get(parameter) + 1);
+            if (parameters.containsKey(parameter))
+                parameters.put(parameter, parameters.get(parameter) + 1);
             else
-                updatedParameters.put(parameter, 1);
+                parameters.put(parameter, 1);
             return true;
         }
 
-        // TODO equals, hashcode, toString
+        @Override
+        public boolean equals(Object o) {
+            return o != null && getClass().equals(o.getClass())
+                    && hashCode() == o.hashCode();
+        }
+
+        @Override
+        public int hashCode() {
+            return getClass().hashCode();
+        }
+
+        @Override
+        public String toString() {
+            return "Provides access to ";
+        }
+
     }
 
 }

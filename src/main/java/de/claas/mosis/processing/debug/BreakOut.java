@@ -9,7 +9,8 @@ import java.util.Vector;
  * The class {@link de.claas.mosis.processing.debug.BreakOut}. It is intended
  * for debugging purposes. This {@link de.claas.mosis.model.DecoratorProcessor}
  * implementation provides access to the most recent input (see {@link
- * #getLastInput()}) and output (see {@link #getLastOutput()}) values.
+ * #getLastInput()}) and output (see {@link #getLastOutput()}) values as well as
+ * several other potentially relevant statistics.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */

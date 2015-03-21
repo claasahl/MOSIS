@@ -67,6 +67,7 @@ public class ConditionTest {
         impl.add(new Object[]{Condition.RegularExpression.class,
                 new Object[]{"abc", "abc"}});
         impl.add(new Object[]{Condition.WriteOnce.class, new Object[0]});
+        impl.add(new Object[]{Condition.BreakOut.class, new Object[0]});
         return impl;
     }
 
