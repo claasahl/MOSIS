@@ -6,6 +6,7 @@ import de.claas.mosis.model.DecoratorProcessor;
 import de.claas.mosis.model.Observer;
 import de.claas.mosis.model.ProcessorAdapter;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -41,9 +42,9 @@ public class Logger<I, O> extends DecoratorProcessor<I, O> {
     }
 
     @Override
-    public List<String> getParameters() {
+    public Collection<String> getParameters() {
         entering("getParameters", null);
-        List<String> parameters = super.getParameters();
+        Collection<String> parameters = super.getParameters();
         exiting("getParameters", parameters);
         return parameters;
     }

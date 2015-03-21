@@ -26,8 +26,7 @@ public class ConfigurableAdapter implements Configurable {
     private final List<Observer> _Observers = new ArrayList<>();
 
     @Override
-    // TODO make collection!?
-    public List<String> getParameters() {
+    public Collection<String> getParameters() {
         return new ArrayList<>(_Parameters.keySet());
     }
 

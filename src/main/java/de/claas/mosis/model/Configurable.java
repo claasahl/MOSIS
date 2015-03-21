@@ -1,6 +1,6 @@
 package de.claas.mosis.model;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * The interface {@link de.claas.mosis.model.Configurable}. It is intended to
@@ -24,7 +24,7 @@ public interface Configurable {
      *
      * @return all available parameters
      */
-    public List<String> getParameters();
+    public Collection<String> getParameters();
 
     /**
      * Returns the value of a parameter. The returned value may also be

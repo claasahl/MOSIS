@@ -9,7 +9,7 @@ import de.claas.mosis.util.Utils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.List;
+import java.util.Collection;
 
 /**
  * The class {@link de.claas.mosis.io.StreamHandler}. It is a partial
@@ -50,8 +50,8 @@ public abstract class StreamHandler<T> extends DataHandler<T> implements Observe
     }
 
     @Override
-    public List<String> getParameters() {
-        List<String> params = super.getParameters();
+    public Collection<String> getParameters() {
+        Collection<String> params = super.getParameters();
         if (_Impl != null) {
             params.addAll(_Impl.getParameters());
         }

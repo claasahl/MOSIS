@@ -46,8 +46,8 @@ public class DecoratorProcessor<I, O> extends ProcessorAdapter<I, O> implements 
     }
 
     @Override
-    public List<String> getParameters() {
-        List<String> params = super.getParameters();
+    public Collection<String> getParameters() {
+        Collection<String> params = super.getParameters();
         if (_Processor != null) {
             params.addAll(_Processor.getParameters());
         } else {
