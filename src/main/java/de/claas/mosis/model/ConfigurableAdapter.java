@@ -259,8 +259,8 @@ public class ConfigurableAdapter implements Configurable {
 
     /**
      * Updates (or replaces) the internal state based on another {@link
-     * de.claas.mosis.model.ConfigurableAdapter}. The internal state can
-     * optionally be cleared before any updates are performed, thus effectively
+     * de.claas.mosis.model.ConfigurableAdapter}. Optionally, the internal state
+     * can be cleared before any updates are performed, thus effectively
      * overwriting the previous state. While updating, all relevant conditions
      * are evaluated and may result in an exception if parameters do not adhere
      * to their constraints, resulting in an undefined internal state.
@@ -275,13 +275,16 @@ public class ConfigurableAdapter implements Configurable {
             _Conditions.clear();
             _Observers.clear();
         }
-        for (String parameter : configurable._Conditions.keySet()) {
-            for (Condition condition : configurable._Conditions.get(parameter))
+        for (String parameter : configurable.getParameters()) {
+            for (Condition condition : configurable.getConditions(parameter))
                 addCondition(parameter, condition);
         }
-        for (String parameter : configurable._Parameters.keySet())
-            setParameter(parameter, configurable._Parameters.get(parameter));
-        for (Observer observer : configurable._Observers)
+        for (String parameter : configurable.getParameters()) {
+            String value = configurable.getParameter(parameter);
+            if (value != null)
+                setParameter(parameter, value);
+        }
+        for (Observer observer : configurable.getObservers())
             addObserver(observer);
     }
 }

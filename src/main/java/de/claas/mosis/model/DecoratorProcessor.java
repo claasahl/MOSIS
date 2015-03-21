@@ -12,9 +12,10 @@ import java.util.List;
  * implementation of the {@link de.claas.mosis.model.Processor} interface. This
  * {@link de.claas.mosis.model.Processor} is intended to wrap another {@link
  * de.claas.mosis.model.Processor} object and meant forward all method calls to
- * the wrapped object. Subclasses may want to override some (or all methods),
- * thus extending the original {@link de.claas.mosis.model.Processor}'s
- * functionality and responsibility.
+ * the wrapped object. Consequently, the default behaviour is that all
+ * parameters and conditions are forwarded as well. Subclasses may want to
+ * override some (or all methods), thus extending the original {@link
+ * de.claas.mosis.model.Processor}'s functionality and responsibility.
  *
  * @param <I> type of incoming data. See {@link de.claas.mosis.model.Processor}
  *            for details.

@@ -29,7 +29,8 @@ public interface Configurable {
     /**
      * Returns the value of a parameter. The returned value may also be
      * <code>null</code> in which case the parameter does not exist or has been
-     * explicitly set to <code>null</code>.
+     * explicitly set to <code>null</code>. In this case, the parameter's should
+     * be interpreted as "empty".
      *
      * @param parameter the parameter
      * @return the value of a parameter
