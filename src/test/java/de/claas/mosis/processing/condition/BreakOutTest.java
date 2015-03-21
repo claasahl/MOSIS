@@ -3,8 +3,7 @@ package de.claas.mosis.processing.condition;
 import de.claas.mosis.model.Condition;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * The JUnit test for class {@link de.claas.mosis.model.Condition.BreakOut}. It
@@ -32,6 +31,18 @@ public class BreakOutTest {
     public void assumeZeroCalls() {
         Condition.BreakOut c = build();
         assertEquals(0, c.getCalls());
+    }
+
+    @Test
+    public void assumeZeroUpdates() {
+        Condition.BreakOut c = build();
+        assertEquals(0, c.getUpdates("random paramater"));
+    }
+
+    @Test
+    public void assumeNull() {
+        Condition.BreakOut c = build();
+        assertNull(c.getValue("random parameter"));
     }
 
     @Test

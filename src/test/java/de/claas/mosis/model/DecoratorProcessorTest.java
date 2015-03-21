@@ -295,11 +295,11 @@ public class DecoratorProcessorTest {
         _P1.notifyObservers(DecoratorProcessor.SHADOWED + unknown);
         Utils.updateParameters(_P1, DecoratorProcessor.CLASS, Linear.class.getName());
         _P1.getProcessor().notifyObservers(unknown);
-        assertEquals(5, observer.callsToUpdate);
-        assertEquals(4, (int) observer.updatedParameters.get(unknown));
-        assertEquals(1, (int) observer.updatedParameters.get(DecoratorProcessor.CLASS));
-        assertNull(observer.updatedParameters.get(DecoratorProcessor.LOCAL + unknown));
-        assertNull(observer.updatedParameters.get(DecoratorProcessor.SHADOWED + unknown));
+        assertEquals(5, observer.getCalls());
+        assertEquals(4, observer.getUpdates(unknown));
+        assertEquals(1, observer.getUpdates(DecoratorProcessor.CLASS));
+        assertNull(observer.getUpdates(DecoratorProcessor.LOCAL + unknown));
+        assertNull(observer.getUpdates(DecoratorProcessor.SHADOWED + unknown));
     }
 
     @Test
@@ -314,7 +314,7 @@ public class DecoratorProcessorTest {
         _P1.getProcessor().setParameter(unknown, "hello4");
 
         assertEquals(6, condition.getCalls());
-        assertEquals(6, (int) condition.getUpdates(unknown));
+        assertEquals(6, condition.getUpdates(unknown));
         assertNull(condition.getUpdates(DecoratorProcessor.LOCAL + unknown));
         assertNull(condition.getUpdates(DecoratorProcessor.SHADOWED + unknown));
     }

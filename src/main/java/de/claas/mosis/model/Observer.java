@@ -1,5 +1,6 @@
 package de.claas.mosis.model;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,7 +25,7 @@ public interface Observer {
      * null}).
      *
      * @param configurable the {@link de.claas.mosis.model.Configurable}
-     * @param parameter  the parameter, which has changed
+     * @param parameter    the parameter, which has changed
      */
     public void update(Configurable configurable, String parameter);
 
@@ -110,29 +111,99 @@ public interface Observer {
         }
     }
 
-    // TODO Documentation (Mainly for testing purposes)
-    // TODO Write separate test for this observer
+    /**
+     * The class {@link de.claas.mosis.model.Observer.BreakOut}. It is intended
+     * for debugging purposes. This {@link de.claas.mosis.model.Observer}
+     * implementation provides access to the observed parameters (see {@link
+     * #getParameters()}) and {@link de.claas.mosis.model.Configurable}s (see
+     * {@link #getConfigurables()} ) values as well as several other potentially
+     * relevant statistics.
+     *
+     * @author Claas Ahlrichs (claasahl@tzi.de)
+     */
     public class BreakOut implements Observer {
 
-        int callsToUpdate = 0;
-        Map<String, Integer> updatedParameters = new HashMap<>();
-        Map<Configurable, Integer> updatedConfigurables = new HashMap<>();
+        private int calls = 0;
+        private Map<String, Integer> parameters = new HashMap<>();
+        private Map<Configurable, Integer> configurables = new HashMap<>();
+
+        /**
+         * Returns the set of parameters that were observed. This corresponds to
+         * those parameters that have changed their value.
+         *
+         * @return the set of parameters that were observed
+         */
+        public Collection<String> getParameters() {
+            return parameters.keySet();
+        }
+
+        /**
+         * Returns the set of {@link de.claas.mosis.model.Configurable}s that
+         * were observed. This corresponds to those {@link
+         * de.claas.mosis.model.Configurable} objects that are associated with
+         * the parameters returned by {@link #getParameters()}.
+         *
+         * @return the set of {@link de.claas.mosis.model.Configurable}s that
+         * were observed
+         */
+        public Collection<Configurable> getConfigurables() {
+            return configurables.keySet();
+        }
+
+        /**
+         * Returns the number of updates / observations for a parameter. This
+         * will usually correspond to the number of times that a parameter
+         * changed it's value.
+         *
+         * @param parameter the parameter
+         * @return the number of updates / observations for a parameter
+         */
+        public int getUpdates(String parameter) {
+            return parameters.containsKey(parameter) ? parameters.get(parameter) : 0;
+        }
+
+        /**
+         * Returns the number of updates / observations for a {@link
+         * de.claas.mosis.model.Configurable}. This will usually correspond to
+         * the number of times that parameters within a {@link
+         * de.claas.mosis.model.Configurable} object were changed.
+         *
+         * @param configurable the {@link de.claas.mosis.model.Configurable}
+         * @return the number of updates / observations for a {@link
+         * de.claas.mosis.model.Configurable}
+         */
+        public int getUpdates(Configurable configurable) {
+            return configurables.containsKey(configurable) ? configurables.get(configurable) : 0;
+        }
+
+        /**
+         * Returns the number of calls of {@link #update(Configurable,
+         * String)}.
+         *
+         * @return the number of calls of {@link #update(Configurable, String)}
+         */
+        public int getCalls() {
+            return calls;
+        }
 
         @Override
         public void update(Configurable configurable, String parameter) {
-            callsToUpdate++;
-            if (updatedParameters.containsKey(parameter))
-                updatedParameters.put(parameter, updatedParameters.get(parameter) + 1);
+            calls++;
+            if (parameters.containsKey(parameter))
+                parameters.put(parameter, parameters.get(parameter) + 1);
             else
-                updatedParameters.put(parameter, 1);
+                parameters.put(parameter, 1);
 
-            if (updatedConfigurables.containsKey(configurable))
-                updatedConfigurables.put(configurable, updatedConfigurables.get(configurable) + 1);
+            if (configurables.containsKey(configurable))
+                configurables.put(configurable, configurables.get(configurable) + 1);
             else
-                updatedConfigurables.put(configurable, 1);
+                configurables.put(configurable, 1);
         }
 
-        // TODO Equals method ...
+        @Override
+        public boolean equals(Object o) {
+            return getClass().equals(o == null ? null : o.getClass());
+        }
     }
 
 }

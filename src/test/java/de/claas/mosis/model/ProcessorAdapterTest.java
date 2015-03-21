@@ -98,8 +98,7 @@ public class ProcessorAdapterTest {
 
     @Test
     public void shouldGetAndSetAsBoolean() throws Exception {
-        String parameter = String.format("%s%d", getClass(),
-                System.currentTimeMillis());
+        String parameter = Utils.unknownParameter(_P);
         _P.addCondition(parameter, new Condition.IsBoolean());
         String[] value = new String[]{"true", "false"};
         Boolean[] exp = new Boolean[]{true, false};
@@ -119,8 +118,7 @@ public class ProcessorAdapterTest {
 
     @Test
     public void shouldGetAndSetAsInteger() throws Exception {
-        String parameter = String.format("%s%d", getClass(),
-                System.currentTimeMillis());
+        String parameter = Utils.unknownParameter(_P);
         _P.addCondition(parameter, new Condition.IsNumeric());
         String[] value = new String[]{"1", "0", "-23"};
         Integer[] exp = new Integer[]{1, 0, -23};
@@ -139,8 +137,7 @@ public class ProcessorAdapterTest {
 
     @Test
     public void shouldGetAndSetAsLong() throws Exception {
-        String parameter = String.format("%s%d", getClass(),
-                System.currentTimeMillis());
+        String parameter = Utils.unknownParameter(_P);
         _P.addCondition(parameter, new Condition.IsNumeric());
         String max = String.format("%d", Long.MAX_VALUE);
         String[] value = new String[]{"1", "0", "-23", max};
@@ -160,8 +157,7 @@ public class ProcessorAdapterTest {
 
     @Test
     public void shouldGetAndSetAsDouble() throws Exception {
-        String parameter = String.format("%s%d", getClass(),
-                System.currentTimeMillis());
+        String parameter = Utils.unknownParameter(_P);
         _P.addCondition(parameter, new Condition.IsNumeric());
         String[] value = new String[]{"1.1", "0.5", "-23.04"};
         Double[] exp = new Double[]{1.1, 0.5, -23.04};
@@ -180,32 +176,28 @@ public class ProcessorAdapterTest {
 
     @Test
     public void shouldRetainNullAsBoolean() throws Exception {
-        String parameter = String.format("%s%d", getClass(),
-                System.currentTimeMillis());
+        String parameter = Utils.unknownParameter(_P);
         assertNull(_P.getParameter(parameter));
         assertNull(_P.getParameterAsBoolean(parameter));
     }
 
     @Test
     public void shouldRetainNullAsInteger() throws Exception {
-        String parameter = String.format("%s%d", getClass(),
-                System.currentTimeMillis());
+        String parameter = Utils.unknownParameter(_P);
         assertNull(_P.getParameter(parameter));
         assertNull(_P.getParameterAsInteger(parameter));
     }
 
     @Test
     public void shouldRetainNullAsLong() throws Exception {
-        String parameter = String.format("%s%d", getClass(),
-                System.currentTimeMillis());
+        String parameter = Utils.unknownParameter(_P);
         assertNull(_P.getParameter(parameter));
         assertNull(_P.getParameterAsLong(parameter));
     }
 
     @Test
     public void shouldRetainNullAsDouble() throws Exception {
-        String parameter = String.format("%s%d", getClass(),
-                System.currentTimeMillis());
+        String parameter = Utils.unknownParameter(_P);
         assertNull(_P.getParameter(parameter));
         assertNull(_P.getParameterAsDouble(parameter));
     }
@@ -213,8 +205,7 @@ public class ProcessorAdapterTest {
     @Test
     public void shouldAddAndRemoveConditions() throws Exception {
         Condition condition = new Condition.IsBoolean();
-        String parameter = String.format("%s%d", getClass(),
-                System.currentTimeMillis());
+        String parameter = Utils.unknownParameter(_P);
 
         _P.addCondition(parameter, condition);
         _P.removeCondition(parameter, condition);
@@ -227,8 +218,7 @@ public class ProcessorAdapterTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldCheckConditionBeforeSettingParameter() throws Exception {
-        String parameter = String.format("%s%d", getClass(),
-                System.currentTimeMillis());
+        String parameter = Utils.unknownParameter(_P);
 
         Utils.updateParameter(_P, parameter, "no boolean");
         assertEquals("no boolean", _P.getParameter(parameter));
@@ -243,8 +233,7 @@ public class ProcessorAdapterTest {
 
     @Test
     public void shouldCheckConditionOnlyIfParameterChanges() throws Exception {
-        String parameter = String.format("%s%d", getClass(),
-                System.currentTimeMillis());
+        String parameter = Utils.unknownParameter(_P);
 
         Utils.updateParameter(_P, parameter, parameter);
         assertEquals(parameter, _P.getParameter(parameter));
@@ -279,59 +268,39 @@ public class ProcessorAdapterTest {
 
     @Test
     public void shouldApplyObserverAfterSettingParameter() throws Exception {
-        String parameter = String.format("%s%d", getClass(),
-                System.currentTimeMillis());
-        Dummy dummy = new Dummy();
+        String parameter = Utils.unknownParameter(_P);
+        Observer.BreakOut observer = new Observer.BreakOut();
 
-        assertEquals(0, dummy.AccessCount);
+        assertEquals(0, observer.getCalls());
         Utils.updateParameter(_P, parameter, "a");
-        _P.addObserver(dummy);
+        _P.addObserver(observer);
         assertEquals("a", _P.getParameter(parameter));
         Utils.updateParameter(_P, parameter, "b");
         assertEquals("b", _P.getParameter(parameter));
-        assertEquals(1, dummy.AccessCount);
+        assertEquals(1, observer.getCalls());
     }
 
     @Test
     public void shouldApplyObserverOnlyIfParameterChanges() throws Exception {
-        String parameter = String.format("%s%d", getClass(),
-                System.currentTimeMillis());
-        Dummy dummy = new Dummy();
+        String parameter = Utils.unknownParameter(_P);
+        Observer.BreakOut observer = new Observer.BreakOut();
 
-        assertEquals(0, dummy.AccessCount);
+        assertEquals(0, observer.getCalls());
         Utils.updateParameter(_P, parameter, parameter);
         assertEquals(parameter, _P.getParameter(parameter));
-        _P.addObserver(dummy);
+        _P.addObserver(observer);
         Utils.updateParameter(_P, parameter, parameter);
         assertEquals(parameter, _P.getParameter(parameter));
-        assertEquals(0, dummy.AccessCount);
+        assertEquals(0, observer.getCalls());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldThrowException() throws Exception {
         Condition condition = new Condition.IsBoolean();
-        String parameter = String.format("%s%d", getClass(),
-                System.currentTimeMillis());
+        String parameter = Utils.unknownParameter(_P);
 
         _P.addCondition(parameter, condition);
         Utils.updateParameter(_P, parameter, "no boolean");
-    }
-
-    /**
-     * The class {@link de.claas.mosis.model.ProcessorAdapterTest.Dummy}. It is
-     * intended to verify how often a {@link de.claas.mosis.model.Observer} is
-     * accessed and when it is accessed.
-     *
-     * @author Claas Ahlrichs (claasahl@tzi.de)
-     */
-    private static class Dummy implements Observer {
-
-        public int AccessCount = 0;
-
-        @Override
-        public void update(Configurable configurable, String parameter) {
-            AccessCount++;
-        }
     }
 
 }

@@ -122,18 +122,18 @@ public class ConfigurableAdapterTest {
     public void shouldNotNotifyObserver() {
         _C.notifyObservers("test");
         _C.notifyObservers(null);
-        assertEquals(0, _Observer.callsToUpdate);
-        assertTrue(_Observer.updatedConfigurables.isEmpty());
-        assertTrue(_Observer.updatedParameters.isEmpty());
+        assertEquals(0, _Observer.getCalls());
+        assertTrue(_Observer.getParameters().isEmpty());
+        assertTrue(_Observer.getConfigurables().isEmpty());
     }
 
     @Test
     public void shouldNotifyObserver() {
         _C.addObserver(_Observer);
         _C.notifyObservers("house");
-        assertEquals(1, _Observer.callsToUpdate);
-        assertTrue(_Observer.updatedParameters.containsKey("house"));
-        assertEquals(1, (int) _Observer.updatedParameters.get("house"));
+        assertEquals(1, _Observer.getCalls());
+        assertTrue(_Observer.getParameters().contains("house"));
+        assertEquals(1, _Observer.getUpdates("house"));
     }
 
     @Test
@@ -142,9 +142,9 @@ public class ConfigurableAdapterTest {
         _C.addObserver(_Observer);
         _C.addObserver(_Observer);
         _C.notifyObservers("multi");
-        assertEquals(3, _Observer.callsToUpdate);
-        assertTrue(_Observer.updatedParameters.containsKey("multi"));
-        assertEquals(3, (int) _Observer.updatedParameters.get("multi"));
+        assertEquals(3, _Observer.getCalls());
+        assertTrue(_Observer.getParameters().contains("multi"));
+        assertEquals(3, _Observer.getUpdates("multi"));
     }
 
     @Test
@@ -152,9 +152,9 @@ public class ConfigurableAdapterTest {
         String unknown = Utils.unknownParameter(_C);
         _C.addObserver(_Observer);
         _C.setParameter(unknown, "hello");
-        assertEquals(1, _Observer.callsToUpdate);
-        assertTrue(_Observer.updatedParameters.containsKey(unknown));
-        assertEquals(1, (int) _Observer.updatedParameters.get(unknown));
+        assertEquals(1, _Observer.getCalls());
+        assertTrue(_Observer.getParameters().contains(unknown));
+        assertEquals(1, _Observer.getUpdates(unknown));
     }
 
     @Test
@@ -164,12 +164,12 @@ public class ConfigurableAdapterTest {
         String unknown = Utils.unknownParameter(_C);
         ConfigurableAdapter configurable = new ConfigurableAdapter();
         configurable.setParameter(unknown, "hello");
-        assertEquals(0, _Observer.callsToUpdate);
+        assertEquals(0, _Observer.getCalls());
 
         _C.update(configurable, false);
-        assertEquals(1, _Observer.callsToUpdate);
-        assertTrue(_Observer.updatedParameters.containsKey(unknown));
-        assertEquals(1, (int) _Observer.updatedParameters.get(unknown));
+        assertEquals(1, _Observer.getCalls());
+        assertTrue(_Observer.getParameters().contains(unknown));
+        assertEquals(1, _Observer.getUpdates(unknown));
     }
 
     @Test
@@ -179,7 +179,7 @@ public class ConfigurableAdapterTest {
         configurable.setParameter(unknown, "hello");
         configurable.addObserver(_Observer);
         _C.update(configurable, false);
-        assertEquals(0, _Observer.callsToUpdate);
+        assertEquals(0, _Observer.getCalls());
     }
 
     @Test
@@ -262,9 +262,9 @@ public class ConfigurableAdapterTest {
 
     @Test
     public void assumptionsOnTestObserver() {
-        assertEquals(0, _Observer.callsToUpdate);
-        assertTrue(_Observer.updatedConfigurables.isEmpty());
-        assertTrue(_Observer.updatedParameters.isEmpty());
+        assertEquals(0, _Observer.getCalls());
+        assertTrue(_Observer.getParameters().isEmpty());
+        assertTrue(_Observer.getConfigurables().isEmpty());
     }
 
     @Test

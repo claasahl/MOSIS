@@ -40,7 +40,10 @@ public class ObserverTest {
     @Parameters
     public static Collection<?> implementations() {
         List<Object> impl = new Vector<>();
-        //impl.add(new Object[]{SomeClass.class});
+        impl.add(new Object[]{Observer.LastChanged.class});
+        impl.add(new Object[]{Observer.ParameterHistory.class});
+        impl.add(new Object[]{Observer.UpdateVersion.class});
+        impl.add(new Object[]{Observer.BreakOut.class});
         return impl;
     }
 

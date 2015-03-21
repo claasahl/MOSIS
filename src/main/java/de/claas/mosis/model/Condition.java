@@ -663,6 +663,7 @@ public interface Condition {
                 parameters.put(parameter, parameters.get(parameter) + 1);
             else
                 parameters.put(parameter, 1);
+            values.put(parameter, value);
             return true;
         }
 
@@ -679,7 +680,7 @@ public interface Condition {
 
         @Override
         public String toString() {
-            return "Provides access to ";
+            return "Provides access to various statistics.";
         }
 
     }
