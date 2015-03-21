@@ -46,7 +46,6 @@ public class Serialization<T> extends StreamHandler<T> {
             try {
                 _Input.close();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } finally {
                 _Input = null;
@@ -56,7 +55,6 @@ public class Serialization<T> extends StreamHandler<T> {
             try {
                 _Output.close();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } finally {
                 _Output = null;

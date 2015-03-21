@@ -83,7 +83,6 @@ public abstract class StreamHandler<T> extends DataHandler<T> implements Observe
             try {
                 _Input.close();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } finally {
                 _Input = null;
@@ -93,7 +92,6 @@ public abstract class StreamHandler<T> extends DataHandler<T> implements Observe
             try {
                 _Output.close();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } finally {
                 _Output = null;
