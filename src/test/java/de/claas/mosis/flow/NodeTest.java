@@ -7,19 +7,19 @@ import java.util.Arrays;
 import static org.junit.Assert.*;
 
 /**
- * The JUnit test for class {@link Node}. It is intended to collect and document
- * a set of test cases for the tested class. Please refer to the individual
- * tests for more detailed information.
+ * The JUnit test for class {@link de.claas.mosis.flow.Node}. It is intended to
+ * collect and document a set of test cases for the tested class. Please refer
+ * to the individual tests for more detailed information.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
 public abstract class NodeTest {
 
     /**
-     * Returns an instantiated {@link Node} class. If appropriate, the instance
-     * is configured with default values.
+     * Returns an instantiated {@link de.claas.mosis.flow.Node} class. If
+     * appropriate, the instance is configured with default values.
      *
-     * @return an instantiated {@link Node} class
+     * @return an instantiated {@link de.claas.mosis.flow.Node} class
      */
     protected abstract Node build();
 

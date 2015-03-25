@@ -10,9 +10,9 @@ import java.net.InetSocketAddress;
 import static org.junit.Assert.*;
 
 /**
- * The JUnit test for class {@link UserDatagramProtocolHandler}. It is intended
- * to collect and document a set of test cases for the tested class. Please
- * refer to the individual tests for more detailed information.
+ * The JUnit test for class {@link de.claas.mosis.io.UserDatagramProtocolHandler}.
+ * It is intended to collect and document a set of test cases for the tested
+ * class. Please refer to the individual tests for more detailed information.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -88,70 +88,75 @@ public class UserDatagramProtocolHandlerTest extends
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterHostMayNotBeNull() throws Exception {
-        _H.setParameter(UserDatagramProtocolHandler.HOST, null);
+        Utils.updateParameter(_H, UserDatagramProtocolHandler.HOST, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterPortMayNotBeNull() throws Exception {
-        _H.setParameter(UserDatagramProtocolHandler.PORT, null);
+        Utils.updateParameter(_H, UserDatagramProtocolHandler.PORT, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterPortMustBeAnInteger() throws Exception {
         try {
-            _H.setParameter(UserDatagramProtocolHandler.PORT, "1");
-            _H.setParameter(UserDatagramProtocolHandler.PORT, "12");
+            Utils.updateParameters(_H,
+                    UserDatagramProtocolHandler.PORT, "1",
+                    UserDatagramProtocolHandler.PORT, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
-        _H.setParameter(UserDatagramProtocolHandler.PORT, "1.2");
+        Utils.updateParameter(_H, UserDatagramProtocolHandler.PORT, "1.2");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterPortMustBeValidPort() throws Exception {
         try {
-            _H.setParameter(UserDatagramProtocolHandler.PORT, "0");
-            _H.setParameter(UserDatagramProtocolHandler.PORT, "65535");
+            Utils.updateParameters(_H,
+                    UserDatagramProtocolHandler.PORT, "0",
+                    UserDatagramProtocolHandler.PORT, "65535");
         } catch (Exception e) {
             fail(e.toString());
         }
-        _H.setParameter(UserDatagramProtocolHandler.PORT, "65536");
+        Utils.updateParameter(_H, UserDatagramProtocolHandler.PORT, "65536");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterBufferMayNotBeNull() throws Exception {
-        _H.setParameter(UserDatagramProtocolHandler.BUFFER, null);
+        Utils.updateParameter(_H, UserDatagramProtocolHandler.BUFFER, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterBufferMustBeAnInteger() throws Exception {
         try {
-            _H.setParameter(UserDatagramProtocolHandler.BUFFER, "1");
-            _H.setParameter(UserDatagramProtocolHandler.BUFFER, "12");
+            Utils.updateParameters(_H,
+                    UserDatagramProtocolHandler.BUFFER, "1",
+                    UserDatagramProtocolHandler.BUFFER, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
-        _H.setParameter(UserDatagramProtocolHandler.BUFFER, "1.2");
+        Utils.updateParameter(_H, UserDatagramProtocolHandler.BUFFER, "1.2");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterBufferMustBePositive() throws Exception {
         try {
-            _H.setParameter(UserDatagramProtocolHandler.BUFFER, "0");
-            _H.setParameter(UserDatagramProtocolHandler.BUFFER, "12");
+            Utils.updateParameters(_H,
+                    UserDatagramProtocolHandler.BUFFER, "0",
+                    UserDatagramProtocolHandler.BUFFER, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
-        _H.setParameter(UserDatagramProtocolHandler.BUFFER, "-1");
+        Utils.updateParameter(_H, UserDatagramProtocolHandler.BUFFER, "-1");
     }
 
     @Override
     public void shouldRead() throws Exception {
         DatagramSocket s = new DatagramSocket(new InetSocketAddress(
                 "localhost", 90));
-        _H.setParameter(DataHandler.MODE, DataHandler.MODE_READ);
-        _H.setParameter(UserDatagramProtocolHandler.HOST, "localhost");
-        _H.setParameter(UserDatagramProtocolHandler.PORT, "81");
+        Utils.updateParameters(_H,
+                DataHandler.MODE, DataHandler.MODE_READ,
+                UserDatagramProtocolHandler.HOST, "localhost",
+                UserDatagramProtocolHandler.PORT, "81");
 
         DatagramPacket p = createDatagram(null, _H);
         s.send(p);
@@ -163,9 +168,10 @@ public class UserDatagramProtocolHandlerTest extends
     public void shouldWrite() throws Exception {
         DatagramSocket s = new DatagramSocket(new InetSocketAddress(
                 "localhost", 100));
-        _H.setParameter(DataHandler.MODE, DataHandler.MODE_WRITE);
-        _H.setParameter(UserDatagramProtocolHandler.HOST, "localhost");
-        _H.setParameter(UserDatagramProtocolHandler.PORT, "82");
+        Utils.updateParameters(_H,
+                DataHandler.MODE, DataHandler.MODE_WRITE,
+                UserDatagramProtocolHandler.HOST, "localhost",
+                UserDatagramProtocolHandler.PORT, "82");
 
         DatagramPacket p = createDatagram(s, null);
         p.setLength(50);
@@ -181,9 +187,9 @@ public class UserDatagramProtocolHandlerTest extends
     public void shouldDetermineMode() throws Exception {
         DatagramSocket s = new DatagramSocket(new InetSocketAddress(
                 "localhost", 110));
-        _H.setParameter(DataHandler.MODE, DataHandler.MODE_AUTO);
-        _H.setParameter(UserDatagramProtocolHandler.HOST, "localhost");
-        _H.setParameter(UserDatagramProtocolHandler.PORT, "83");
+        Utils.updateParameters(_H, DataHandler.MODE, DataHandler.MODE_AUTO,
+                UserDatagramProtocolHandler.HOST, "localhost",
+                UserDatagramProtocolHandler.PORT, "83");
 
         DatagramPacket p = createDatagram(s, null);
         p.setLength(42);

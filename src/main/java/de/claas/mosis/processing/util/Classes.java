@@ -2,7 +2,8 @@ package de.claas.mosis.processing.util;
 
 import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.annotation.Parameter;
-import de.claas.mosis.model.*;
+import de.claas.mosis.model.Condition;
+import de.claas.mosis.model.ProcessorAdapter;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,10 +15,11 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 
 /**
- * The class {@link Classes}. It is intended to output all accessible classes
- * within the class path. This information can be used to enumerate all
- * available modules (i.e. {@link Processor} implementations), automatically
- * generate human-readable documentation, etc.
+ * The class {@link de.claas.mosis.processing.util.Classes}. It is intended to
+ * output all accessible classes within the class path. This information can be
+ * used to enumerate all available modules (i.e. {@link
+ * de.claas.mosis.model.Processor} implementations), automatically generate
+ * human-readable documentation, etc.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -43,16 +45,17 @@ public class Classes extends ProcessorAdapter<Object, String> {
         setParameter(CLASSPATH, System.getProperty("java.class.path"));
         addCondition(SEPARATOR, new Condition.IsNotNull());
         setParameter(SEPARATOR, System.getProperty("path.separator"));
-        addRelation(new ClearPackages());
     }
 
     /**
-     * Recursively enumerates available classes within a {@link Package}. The
-     * package can either be a regular directory or a JAR file.
+     * Recursively enumerates available classes within a {@link
+     * java.lang.Package}. The package can either be a regular directory or a
+     * JAR file.
      *
      * @param classes     the enumerated classes
-     * @param root        origin of currently enumerated {@link Package}
-     * @param packageName name of currently enumerated {@link Package}
+     * @param root        origin of currently enumerated {@link
+     *                    java.lang.Package}
+     * @param packageName name of currently enumerated {@link java.lang.Package}
      */
     private void addClasses(Set<String> classes, String root, String packageName) {
         String sep = "/";
@@ -128,25 +131,4 @@ public class Classes extends ProcessorAdapter<Object, String> {
         }
         out.addAll(packages);
     }
-
-    /**
-     * The class {@link ClearPackages}. It is intended to clear the already
-     * processed {@link Package}s whenever the {@link Classes#CLASSPATH} or
-     * {@link Classes#SEPARATOR} parameter is changed. This forces a
-     * (re-)processing of all {@link Package}s.
-     *
-     * @author Claas Ahlrichs (claasahl@tzi.de)
-     */
-    private class ClearPackages implements Relation {
-
-        @Override
-        public void compute(Configurable configurable, String parameter,
-                            String value) {
-            if (CLASSPATH.equals(parameter) || SEPARATOR.equals(parameter)) {
-                packages.clear();
-            }
-        }
-
-    }
-
 }

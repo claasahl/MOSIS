@@ -1,19 +1,26 @@
 package de.claas.mosis.processing.debug;
 
+import de.claas.mosis.annotation.Category;
+import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
 import de.claas.mosis.model.DecoratorProcessor;
-import de.claas.mosis.model.Processor;
 
 import java.util.List;
 
 /**
- * The class {@link Sleep}. It is intended for debugging purposes. This
- * {@link DecoratorProcessor} implementation will delay the execution of its
- * wrapped {@link Processor} object..
+ * The class {@link de.claas.mosis.processing.debug.Sleep}. It is intended for
+ * debugging purposes. This {@link de.claas.mosis.model.DecoratorProcessor}
+ * implementation will delay the execution of its wrapped {@link
+ * de.claas.mosis.model.Processor} object.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
+@Documentation(
+        category = Category.Decorator,
+        author = {"Claas Ahlrichs"},
+        description = "This is a DecoratorProcessor which waits a defined number of milliseconds before calling the decorated module.",
+        purpose = "This implementation is intended for debugging purposes.")
 public class Sleep extends DecoratorProcessor<Object, Object> {
 
     @Parameter("Number of milliseconds that the invocation of the process-method is delayed.")
@@ -23,9 +30,9 @@ public class Sleep extends DecoratorProcessor<Object, Object> {
      * Initializes the class with default values.
      */
     public Sleep() {
-        addCondition(DELAY, new Condition.IsInteger());
-        addCondition(DELAY, new Condition.IsGreaterOrEqual(0.0));
-        setParameter(DELAY, 0);
+        addCondition(LOCAL + DELAY, new Condition.IsInteger());
+        addCondition(LOCAL + DELAY, new Condition.IsGreaterOrEqual(0.0));
+        setParameter(LOCAL + DELAY, 0);
     }
 
     @Override

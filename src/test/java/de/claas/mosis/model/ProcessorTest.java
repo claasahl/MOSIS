@@ -5,7 +5,6 @@ import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.util.Utils;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -21,9 +20,10 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
- * The JUnit test for {@link Processor} classes. It is intended to collect and
- * document a set of test cases that are applicable to all {@link Processor}
- * classes. Please refer to the individual tests for more detailed information.
+ * The JUnit test for {@link de.claas.mosis.model.Processor} classes. It is
+ * intended to collect and document a set of test cases that are applicable to
+ * all {@link de.claas.mosis.model.Processor} classes. Please refer to the
+ * individual tests for more detailed information.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -34,10 +34,11 @@ public class ProcessorTest {
     private Processor<?, ?> _P;
 
     /**
-     * Initializes this JUnit test for an implementation of the
-     * {@link Processor} class.
+     * Initializes this JUnit test for an implementation of the {@link
+     * de.claas.mosis.model.Processor} class.
      *
-     * @param clazz implementation of {@link Processor} class
+     * @param clazz implementation of {@link de.claas.mosis.model.Processor}
+     *              class
      */
     public ProcessorTest(Class<Processor<?, ?>> clazz) {
         _Clazz = clazz;
@@ -73,12 +74,12 @@ public class ProcessorTest {
         assertTrue(hasEmptyConstructor);
     }
 
-    @Ignore
+    @Test
     public void shouldHaveAnnotationForClass() throws Exception {
         assertNotNull(_P.getClass().getAnnotation(Documentation.class));
     }
 
-    @Ignore
+    @Test
     public void shouldHaveAnnotationForParameters() throws Exception {
         for (String param : _P.getParameters()) {
             boolean found = false;

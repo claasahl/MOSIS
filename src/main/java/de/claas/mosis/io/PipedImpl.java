@@ -3,10 +3,10 @@ package de.claas.mosis.io;
 import java.io.*;
 
 /**
- * The class {@link PipedImpl}. It is intended to provide a "pipe" between a
- * pair of linked a {@link InputStream} and a {@link OutputStream}, such that
- * {@link StreamHandler} implementations can process them. This is mainly for
- * debugging purposes.
+ * The class {@link de.claas.mosis.io.PipedImpl}. It is intended to provide a
+ * "pipe" between a pair of linked a {@link java.io.InputStream} and a {@link
+ * java.io.OutputStream}, such that {@link de.claas.mosis.io.StreamHandler}
+ * implementations can process them. This is mainly for debugging purposes.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */

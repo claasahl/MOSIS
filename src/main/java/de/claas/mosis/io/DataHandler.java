@@ -1,26 +1,34 @@
 package de.claas.mosis.io;
 
+import de.claas.mosis.annotation.Category;
+import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
-import de.claas.mosis.model.Processor;
 import de.claas.mosis.model.ProcessorAdapter;
 
 import java.util.Arrays;
 import java.util.List;
 
 /**
- * The class {@link DataHandler}. It is a partial implementation of the
- * {@link Processor} interface and forms the core of all input / output handling
- * {@link Processor}s. The basic idea is to give external entities the
- * possibility to communicate with modules in this framework (e.g. files, data
- * services, databases, etc.). Implementing classes may provide the ability to
- * communicate through stream-based resources (e.g. {@link StreamHandler}) or
- * directly pass objects to the framework (e.g. {@link QueueHandler}).
+ * The class {@link de.claas.mosis.io.DataHandler}. It is a partial
+ * implementation of the {@link de.claas.mosis.model.Processor} interface and
+ * forms the core of all input / output handling {@link
+ * de.claas.mosis.model.Processor}s. The basic idea is to give external entities
+ * the possibility to communicate with modules in this framework (e.g. files,
+ * data services, databases, etc.). Implementing classes may provide the ability
+ * to communicate through stream-based resources (e.g. {@link
+ * de.claas.mosis.io.StreamHandler}) or directly pass objects to the framework
+ * (e.g. {@link de.claas.mosis.io.QueueHandler}).
  *
- * @param <T> type of (incoming and outgoing) data. See {@link Processor} for
- *            details.
+ * @param <T> type of (incoming and outgoing) data. See {@link
+ *            de.claas.mosis.model.Processor} for details.
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
+@Documentation(
+        category = Category.InputOutput,
+        author = {"Claas Ahlrichs"},
+        description = "This implementation represents a data format for storing and retrieving (plain) text.",
+        purpose = "To allow storage in (plain) text and retrieval of (plain) text.")
 public abstract class DataHandler<T> extends ProcessorAdapter<T, T> {
 
     @Parameter("Mode of operation. Defines whether values should be read or written.")
@@ -44,15 +52,16 @@ public abstract class DataHandler<T> extends ProcessorAdapter<T, T> {
     }
 
     /**
-     * Returns <code>true</code>, if the current mode of operation is
-     * "read only". Otherwise, <code>false</code> is returned. This is either
-     * the case when the {@link #MODE} parameter is set to {@value #MODE_READ}
-     * or {@link #MODE_AUTO} and no data is passed to the {@link #process(java.util.List, java.util.List)}
-     * method.
+     * Returns <code>true</code>, if the current mode of operation is "read
+     * only". Otherwise, <code>false</code> is returned. This is either the case
+     * when the {@link #MODE} parameter is set to {@value #MODE_READ} or {@link
+     * #MODE_AUTO} and no data is passed to the {@link #process(java.util.List,
+     * java.util.List)} method.
      *
-     * @param data the data passed to {@link #process(java.util.List, java.util.List)}
-     * @return <code>true</code>, if the current mode of operation is
-     * "read only"
+     * @param data the data passed to {@link #process(java.util.List,
+     *             java.util.List)}
+     * @return <code>true</code>, if the current mode of operation is "read
+     * only"
      */
     protected boolean isReadOnly(List<?> data) {
         return MODE_READ.equals(getParameter(MODE))
@@ -60,15 +69,16 @@ public abstract class DataHandler<T> extends ProcessorAdapter<T, T> {
     }
 
     /**
-     * Returns <code>true</code>, if the current mode of operation is
-     * "write only". Otherwise, <code>false</code> is returned. This is either
-     * the case when the {@link #MODE} parameter is set to {@value #MODE_WRITE}
-     * or {@link #MODE_AUTO} and some data is passed to the
-     * {@link #process(java.util.List, java.util.List)} method.
+     * Returns <code>true</code>, if the current mode of operation is "write
+     * only". Otherwise, <code>false</code> is returned. This is either the case
+     * when the {@link #MODE} parameter is set to {@value #MODE_WRITE} or {@link
+     * #MODE_AUTO} and some data is passed to the {@link
+     * #process(java.util.List, java.util.List)} method.
      *
-     * @param data the data passed to {@link #process(java.util.List, java.util.List)}
-     * @return <code>true</code>, if the current mode of operation is
-     * "write only"
+     * @param data the data passed to {@link #process(java.util.List,
+     *             java.util.List)}
+     * @return <code>true</code>, if the current mode of operation is "write
+     * only"
      */
     protected boolean isWriteOnly(List<?> data) {
         return MODE_WRITE.equals(getParameter(MODE))

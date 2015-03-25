@@ -1,9 +1,6 @@
 package de.claas.mosis.processing.debug;
 
 import de.claas.mosis.model.DecoratorProcessor;
-import de.claas.mosis.model.DecoratorProcessorTest;
-import de.claas.mosis.model.ProcessorAdapterTest;
-import de.claas.mosis.model.ProcessorTest;
 import de.claas.mosis.util.Utils;
 import org.junit.After;
 import org.junit.Before;
@@ -12,12 +9,13 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * The JUnit test for class {@link Time}. It is intended to collect and document
- * a set of test cases for the tested class. Please refer to the individual
- * tests for more detailed information.
+ * The JUnit test for class {@link de.claas.mosis.processing.debug.Time}. It is
+ * intended to collect and document a set of test cases for the tested class.
+ * Please refer to the individual tests for more detailed information.
  * <p/>
- * Additional test cases can be found in {@link ProcessorTest},
- * {@link ProcessorAdapterTest} and {@link DecoratorProcessorTest}.
+ * Additional test cases can be found in {@link de.claas.mosis.model.ProcessorTest},
+ * {@link de.claas.mosis.model.ProcessorAdapterTest} and {@link
+ * de.claas.mosis.model.DecoratorProcessorTest}.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -65,83 +63,89 @@ public class TimeTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterTimeMayNotBeNull() throws Exception {
-        _P.setParameter(Time.TIME, null);
+        Utils.updateParameter(_P, Time.TIME, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterTimeMustBeAnInteger() throws Exception {
         try {
-            _P.setParameter(Time.TIME, "1");
-            _P.setParameter(Time.TIME, "12");
+            Utils.updateParameters(_P,
+                    Time.TIME, "1",
+                    Time.TIME, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
-        _P.setParameter(Time.TIME, "1.2");
+        Utils.updateParameter(_P, Time.TIME, "1.2");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterTimeMustBePositive() throws Exception {
         try {
-            _P.setParameter(Time.TIME, "0");
-            _P.setParameter(Time.TIME, "12");
+            Utils.updateParameters(_P,
+                    Time.TIME, "0",
+                    Time.TIME, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
-        _P.setParameter(Time.TIME, "-1");
+        Utils.updateParameter(_P, Time.TIME, "-1");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterFirstCallMayNotBeNull() throws Exception {
-        _P.setParameter(Time.FIRST_CALL, null);
+        Utils.updateParameter(_P, Time.FIRST_CALL, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterFirstCallMustBeAnInteger() throws Exception {
         try {
-            _P.setParameter(Time.FIRST_CALL, "1");
-            _P.setParameter(Time.FIRST_CALL, "12");
+            Utils.updateParameters(_P,
+                    Time.FIRST_CALL, "1",
+                    Time.FIRST_CALL, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
-        _P.setParameter(Time.FIRST_CALL, "1.2");
+        Utils.updateParameter(_P, Time.FIRST_CALL, "1.2");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterFirstCallMustBePositive() throws Exception {
         try {
-            _P.setParameter(Time.FIRST_CALL, "0");
-            _P.setParameter(Time.FIRST_CALL, "12");
+            Utils.updateParameters(_P,
+                    Time.FIRST_CALL, "0",
+                    Time.FIRST_CALL, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
-        _P.setParameter(Time.FIRST_CALL, "-1");
+        Utils.updateParameter(_P, Time.FIRST_CALL, "-1");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterLastCallMayNotBeNull() throws Exception {
-        _P.setParameter(Time.LAST_CALL, null);
+        Utils.updateParameter(_P, Time.LAST_CALL, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterLastCallMustBeAnInteger() throws Exception {
         try {
-            _P.setParameter(Time.LAST_CALL, "1");
-            _P.setParameter(Time.LAST_CALL, "12");
+            Utils.updateParameters(_P,
+                    Time.LAST_CALL, "1",
+                    Time.LAST_CALL, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
-        _P.setParameter(Time.LAST_CALL, "1.2");
+        Utils.updateParameter(_P, Time.LAST_CALL, "1.2");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterLastCallMustBePositive() throws Exception {
         try {
-            _P.setParameter(Time.LAST_CALL, "0");
-            _P.setParameter(Time.LAST_CALL, "12");
+            Utils.updateParameters(_P,
+                    Time.LAST_CALL, "0",
+                    Time.LAST_CALL, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
-        _P.setParameter(Time.LAST_CALL, "-1");
+        Utils.updateParameter(_P, Time.LAST_CALL, "-1");
     }
 
     @Test

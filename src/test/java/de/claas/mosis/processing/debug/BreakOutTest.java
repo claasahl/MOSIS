@@ -1,8 +1,5 @@
 package de.claas.mosis.processing.debug;
 
-import de.claas.mosis.model.DecoratorProcessorTest;
-import de.claas.mosis.model.ProcessorAdapterTest;
-import de.claas.mosis.model.ProcessorTest;
 import de.claas.mosis.util.Utils;
 import org.junit.After;
 import org.junit.Before;
@@ -11,12 +8,13 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * The JUnit test for class {@link BreakOut}. It is intended to collect and
- * document a set of test cases for the tested class. Please refer to the
- * individual tests for more detailed information.
+ * The JUnit test for class {@link de.claas.mosis.processing.debug.BreakOut}. It
+ * is intended to collect and document a set of test cases for the tested class.
+ * Please refer to the individual tests for more detailed information.
  * <p/>
- * Additional test cases can be found in {@link ProcessorTest},
- * {@link ProcessorAdapterTest} and {@link DecoratorProcessorTest}.
+ * Additional test cases can be found in {@link de.claas.mosis.model.ProcessorTest},
+ * {@link de.claas.mosis.model.ProcessorAdapterTest} and {@link
+ * de.claas.mosis.model.DecoratorProcessorTest}.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -43,7 +41,9 @@ public class BreakOutTest {
 
     @Test
     public void assumeZeroCalls() {
-        assertEquals(0, _P.getCalls());
+        assertEquals(1, _P.getCallsToSetUp());
+        assertEquals(0, _P.getCallsToProcess());
+        assertEquals(0, _P.getCallsToDismantle());
         assertNull(_P.getLastInput());
         assertNull(_P.getLastInput());
     }
@@ -51,11 +51,23 @@ public class BreakOutTest {
     @Test
     public void shouldCountCalls() {
         Utils.process(_P);
-        assertEquals(1, _P.getCalls());
+        assertEquals(1, _P.getCallsToProcess());
         Utils.process(_P, (Object) null);
         Utils.process(_P, 23, 42);
         Utils.process(_P);
-        assertEquals(4, _P.getCalls());
+        assertEquals(4, _P.getCallsToProcess());
+    }
+
+    @Test
+    public void shouldCountCallsToSetUpAndDismantle() {
+        assertEquals(1, _P.getCallsToSetUp());
+        assertEquals(0, _P.getCallsToDismantle());
+        Utils.updateParameters(_P);
+        assertEquals(2, _P.getCallsToSetUp());
+        assertEquals(1, _P.getCallsToDismantle());
+        Utils.updateParameters(_P);
+        assertEquals(3, _P.getCallsToSetUp());
+        assertEquals(2, _P.getCallsToDismantle());
     }
 
     @Test
@@ -72,7 +84,7 @@ public class BreakOutTest {
 
     @Test
     public void shouldReturnOutput() {
-        _P.setParameter(BreakOut.CLASS, Forward.class.getName());
+        Utils.updateParameter(_P, BreakOut.CLASS, Forward.class.getName());
         Utils.process(_P, "hello world");
         assertFalse(_P.getLastOutput().isEmpty());
         assertEquals(1, _P.getLastOutput().size());

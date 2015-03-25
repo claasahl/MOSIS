@@ -7,36 +7,37 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
- * The class {@link StreamHandlerImpl}. It is intended to provide a unified
- * interface for accessing stream-based resources. All {@link StreamHandler}
- * classes utilize this interface and can potentially make use of the herein
- * provided access to {@link InputStream} and {@link OutputStream} instances..
+ * The class {@link de.claas.mosis.io.StreamHandlerImpl}. It is intended to
+ * provide a unified interface for accessing stream-based resources. All {@link
+ * de.claas.mosis.io.StreamHandler} classes utilize this interface and can
+ * potentially make use of the herein provided access to {@link
+ * java.io.InputStream} and {@link java.io.OutputStream} instances..
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
 public abstract class StreamHandlerImpl extends ConfigurableAdapter {
 
     /**
-     * Returns a corresponding {@link InputStream}. It may be assumed that each
-     * call to this method results in a new {@link InputStream} object.
-     * <code>null</code> may be returned if the {@link InputStream} cannot be
-     * created or is not supported.
+     * Returns a corresponding {@link java.io.InputStream}. It may be assumed
+     * that each call to this method results in a new {@link
+     * java.io.InputStream} object. <code>null</code> may be returned if the
+     * {@link java.io.InputStream} cannot be created or is not supported.
      *
-     * @return the {@link InputStream}. <code>null</code> if {@link InputStream}
-     * cannot be created.
-     * @throws IOException if something unexpected happens
+     * @return the {@link java.io.InputStream}. <code>null</code> if {@link
+     * java.io.InputStream} cannot be created.
+     * @throws java.io.IOException if something unexpected happens
      */
     public abstract InputStream getInputStream() throws IOException;
 
     /**
-     * Returns a corresponding {@link OutputStream}. It may be assumed that each
-     * call to this method results in a new {@link OutputStream} object.
-     * <code>null</code> may be returned if the {@link OutputStream} cannot be
-     * created or is not supported.
+     * Returns a corresponding {@link java.io.OutputStream}. It may be assumed
+     * that each call to this method results in a new {@link
+     * java.io.OutputStream} object. <code>null</code> may be returned if the
+     * {@link java.io.OutputStream} cannot be created or is not supported.
      *
-     * @return the {@link OutputStream}. <code>null</code> if stream cannot be
-     * created.
-     * @throws IOException if something unexpected happens
+     * @return the {@link java.io.OutputStream}. <code>null</code> if stream
+     * cannot be created.
+     * @throws java.io.IOException if something unexpected happens
      */
     public abstract OutputStream getOutputStream() throws IOException;
 

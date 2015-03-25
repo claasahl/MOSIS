@@ -1,7 +1,6 @@
 package de.claas.mosis.io;
 
-import de.claas.mosis.model.ProcessorAdapterTest;
-import de.claas.mosis.model.ProcessorTest;
+import de.claas.mosis.util.Utils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,12 +10,13 @@ import java.util.Arrays;
 import static org.junit.Assert.*;
 
 /**
- * The JUnit test for {@link DataHandler} classes. It is intended to collect and
- * document a set of test cases that are applicable to all {@link DataHandler}
- * classes. Please refer to the individual tests for more detailed information.
+ * The JUnit test for {@link de.claas.mosis.io.DataHandler} classes. It is
+ * intended to collect and document a set of test cases that are applicable to
+ * all {@link de.claas.mosis.io.DataHandler} classes. Please refer to the
+ * individual tests for more detailed information.
  * <p/>
- * Additional test cases can be found in {@link ProcessorTest} and
- * {@link ProcessorAdapterTest}.
+ * Additional test cases can be found in {@link de.claas.mosis.model.ProcessorTest}
+ * and {@link de.claas.mosis.model.ProcessorAdapterTest}.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -25,10 +25,10 @@ public abstract class DataHandlerTest<S, T extends DataHandler<S>> {
     protected T _H;
 
     /**
-     * Returns an instantiated {@link DataHandler} class. If appropriate, the
-     * instance is configured with default values.
+     * Returns an instantiated {@link de.claas.mosis.io.DataHandler} class. If
+     * appropriate, the instance is configured with default values.
      *
-     * @return an instantiated {@link DataHandler} class
+     * @return an instantiated {@link de.claas.mosis.io.DataHandler} class
      */
     protected abstract T build() throws Exception;
 
@@ -64,40 +64,42 @@ public abstract class DataHandlerTest<S, T extends DataHandler<S>> {
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterModeMayNotBeNull() throws Exception {
-        _H.setParameter(DataHandler.MODE, null);
+        Utils.updateParameter(_H, DataHandler.MODE, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterCounterMustBeInWhiteList() throws Exception {
         try {
-            _H.setParameter(DataHandler.MODE, DataHandler.MODE_AUTO);
-            _H.setParameter(DataHandler.MODE, DataHandler.MODE_READ);
-            _H.setParameter(DataHandler.MODE, DataHandler.MODE_WRITE);
+            Utils.updateParameters(_H,
+                    DataHandler.MODE, DataHandler.MODE_AUTO,
+                    DataHandler.MODE, DataHandler.MODE_READ,
+                    DataHandler.MODE, DataHandler.MODE_WRITE);
         } catch (Exception e) {
             fail(e.toString());
         }
-        _H.setParameter(DataHandler.MODE, "hello world");
+        Utils.updateParameter(_H, DataHandler.MODE, "hello world");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterForwardInputsMayNotBeNull() throws Exception {
-        _H.setParameter(DataHandler.FORWARD_INPUTS, null);
+        Utils.updateParameter(_H, DataHandler.FORWARD_INPUTS, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterForwardInputsMustBeBoolean() throws Exception {
         try {
-            _H.setParameter(DataHandler.FORWARD_INPUTS, "true");
-            _H.setParameter(DataHandler.FORWARD_INPUTS, "false");
+            Utils.updateParameters(_H,
+                    DataHandler.FORWARD_INPUTS, "true",
+                    DataHandler.FORWARD_INPUTS, "false");
         } catch (Exception e) {
             fail(e.toString());
         }
-        _H.setParameter(DataHandler.FORWARD_INPUTS, "maybe");
+        Utils.updateParameter(_H, DataHandler.FORWARD_INPUTS, "maybe");
     }
 
     @Test
     public void shouldBeReadOnly() throws Exception {
-        _H.setParameter(DataHandler.MODE, DataHandler.MODE_READ);
+        Utils.updateParameter(_H, DataHandler.MODE, DataHandler.MODE_READ);
         assertTrue(_H.isReadOnly(null));
         assertTrue(_H.isReadOnly(Arrays.asList()));
         assertTrue(_H.isReadOnly(Arrays.asList("hello world")));
@@ -108,7 +110,7 @@ public abstract class DataHandlerTest<S, T extends DataHandler<S>> {
 
     @Test
     public void shouldBeWriteOnly() throws Exception {
-        _H.setParameter(DataHandler.MODE, DataHandler.MODE_WRITE);
+        Utils.updateParameter(_H, DataHandler.MODE, DataHandler.MODE_WRITE);
         assertFalse(_H.isReadOnly(null));
         assertFalse(_H.isReadOnly(Arrays.asList()));
         assertFalse(_H.isReadOnly(Arrays.asList("hello world")));
@@ -119,7 +121,7 @@ public abstract class DataHandlerTest<S, T extends DataHandler<S>> {
 
     @Test
     public void shouldAutomaticallySwitchModes() throws Exception {
-        _H.setParameter(DataHandler.MODE, DataHandler.MODE_AUTO);
+        Utils.updateParameter(_H, DataHandler.MODE, DataHandler.MODE_AUTO);
         assertTrue(_H.isReadOnly(null));
         assertTrue(_H.isReadOnly(Arrays.asList()));
         assertFalse(_H.isReadOnly(Arrays.asList("hello world")));

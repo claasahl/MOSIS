@@ -1,34 +1,45 @@
 package de.claas.mosis.io;
 
+import de.claas.mosis.annotation.Category;
+import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.annotation.Parameter;
-import de.claas.mosis.model.*;
+import de.claas.mosis.model.Condition;
+import de.claas.mosis.model.Configurable;
+import de.claas.mosis.model.Observer;
 import de.claas.mosis.util.Utils;
 
-import java.io.*;
-import java.util.List;
-import java.util.zip.ZipInputStream;
-import java.util.zip.ZipOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Collection;
 
 /**
- * The class {@link StreamHandler}. It is a partial implementation of the
- * {@link DataHandler} class and forms the core of all stream-based input /
- * output handling {@link Processor}s. This {@link DataHandler} is intended to
- * enable external entities to communicate with the framework through
- * stream-based resources.
+ * The class {@link de.claas.mosis.io.StreamHandler}. It is a partial
+ * implementation of the {@link de.claas.mosis.io.DataHandler} class and forms
+ * the core of all stream-based input / output handling {@link
+ * de.claas.mosis.model.Processor}s. This {@link de.claas.mosis.io.DataHandler}
+ * is intended to enable external entities to communicate with the framework
+ * through stream-based resources.
  * <p/>
- * Calls to {@link #getParameters()}, {@link #getParameter(String)} and
- * {@link #setParameter(String, String)} take the parameters of the
- * {@link StreamHandlerImpl} instance into account (i.e. they are forwarded to
- * the {@link StreamHandlerImpl} instance if the given parameter is defined for
- * it). As opposed to {@link DecoratorProcessor} classes, calls to
- * {@link #addCondition(String, Condition)},
- * {@link #removeCondition(String, Condition)}, etc. are not forwarded.
+ * Calls to {@link #getParameters()}, {@link #getParameter(String)} and {@link
+ * #setParameter(String, String)} take the parameters of the {@link
+ * de.claas.mosis.io.StreamHandlerImpl} instance into account (i.e. they are
+ * forwarded to the {@link de.claas.mosis.io.StreamHandlerImpl} instance if the
+ * given parameter is defined for it). As opposed to {@link
+ * de.claas.mosis.model.DecoratorProcessor} classes, calls to {@link
+ * #addCondition(String, Condition)}, {@link #removeCondition(String,
+ * Condition)}, etc. are not forwarded.
  *
- * @param <T> type of (incoming and outgoing) data. See {@link Processor} for
- *            details.
+ * @param <T> type of (incoming and outgoing) data. See {@link
+ *            de.claas.mosis.model.Processor} for details.
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
-public abstract class StreamHandler<T> extends DataHandler<T> {
+@Documentation(
+        category = Category.InputOutput,
+        author = {"Claas Ahlrichs"},
+        description = "This implementation allows storing data in an OutputStream as well as retrieving data from an InputStream.",
+        purpose = "To allow storage and retrieval of objects within any stream-based resource.")
+public abstract class StreamHandler<T> extends DataHandler<T> implements Observer {
 
     @Parameter("Name of class from StreamHandlerImpl. An instance of this class backs this handler.  Any class, implementing de.claas.mosis.io.StreamHandlerImpl, can be used.")
     public static final String IMPL = "impl";
@@ -41,13 +52,13 @@ public abstract class StreamHandler<T> extends DataHandler<T> {
      */
     public StreamHandler() {
         addCondition(IMPL, new Condition.ClassExists());
-        addRelation(new ImplCreator());
+        addObserver(this);
         setParameter(IMPL, StandardInputOutputImpl.class.getName());
     }
 
     @Override
-    public List<String> getParameters() {
-        List<String> params = super.getParameters();
+    public Collection<String> getParameters() {
+        Collection<String> params = super.getParameters();
         if (_Impl != null) {
             params.addAll(_Impl.getParameters());
         }
@@ -79,7 +90,6 @@ public abstract class StreamHandler<T> extends DataHandler<T> {
             try {
                 _Input.close();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } finally {
                 _Input = null;
@@ -89,7 +99,6 @@ public abstract class StreamHandler<T> extends DataHandler<T> {
             try {
                 _Output.close();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } finally {
                 _Output = null;
@@ -98,9 +107,9 @@ public abstract class StreamHandler<T> extends DataHandler<T> {
     }
 
     /**
-     * Returns the corresponding {@link StreamHandlerImpl}.
+     * Returns the corresponding {@link de.claas.mosis.io.StreamHandlerImpl}.
      *
-     * @return the corresponding {@link StreamHandlerImpl}
+     * @return the corresponding {@link de.claas.mosis.io.StreamHandlerImpl}
      */
     protected StreamHandlerImpl getImpl() {
         return _Impl;
@@ -108,7 +117,7 @@ public abstract class StreamHandler<T> extends DataHandler<T> {
 
     /**
      * Returns <code>true</code>, if the parameter belongs to this processor.
-     * Otherwise (e.g. parameter belongs to {@link StreamHandlerImpl}),
+     * Otherwise (e.g. parameter belongs to {@link de.claas.mosis.io.StreamHandlerImpl}),
      * <code>false</code> is returned.
      *
      * @param parameter the parameter
@@ -119,15 +128,17 @@ public abstract class StreamHandler<T> extends DataHandler<T> {
     }
 
     /**
-     * Returns and caches an {@link InputStream}. Once an {@link InputStream} is
-     * created (see {@link StreamHandlerImpl#getInputStream()} for details), it
-     * is cached and succeeding calls to this method return the same instance.
-     * Concrete implementations of the {@link StreamHandler} interface may wish
-     * to override this method and return a more specialized {@link InputStream}
-     * (e.g. {@link DataInputStream} or {@link ZipInputStream}).
+     * Returns and caches an {@link java.io.InputStream}. Once an {@link
+     * java.io.InputStream} is created (see {@link de.claas.mosis.io.StreamHandlerImpl#getInputStream()}
+     * for details), it is cached and succeeding calls to this method return the
+     * same instance. Concrete implementations of the {@link
+     * de.claas.mosis.io.StreamHandler} interface may wish to override this
+     * method and return a more specialized {@link java.io.InputStream} (e.g.
+     * {@link java.io.DataInputStream} or {@link java.util.zip.ZipInputStream}).
      *
-     * @return the {@link InputStream}
-     * @throws IOException See {@link StreamHandlerImpl#getInputStream()} for details.
+     * @return the {@link java.io.InputStream}
+     * @throws java.io.IOException See {@link de.claas.mosis.io.StreamHandlerImpl#getInputStream()}
+     *                             for details.
      */
     protected InputStream getInputStream() throws IOException {
         if (_Input == null) {
@@ -137,16 +148,17 @@ public abstract class StreamHandler<T> extends DataHandler<T> {
     }
 
     /**
-     * Returns and caches an {@link OutputStream}. Once an {@link OutputStream}
-     * is created (see {@link StreamHandlerImpl#getOutputStream()} for details),
-     * it is cached and succeeding calls to this method return the same
-     * instance. Concrete implementations of the {@link StreamHandler} interface
-     * may wish to override this method and return a more specialized
-     * {@link OutputStream} (e.g. {@link DataOutputStream} or
-     * {@link ZipOutputStream}).
+     * Returns and caches an {@link java.io.OutputStream}. Once an {@link
+     * java.io.OutputStream} is created (see {@link de.claas.mosis.io.StreamHandlerImpl#getOutputStream()}
+     * for details), it is cached and succeeding calls to this method return the
+     * same instance. Concrete implementations of the {@link
+     * de.claas.mosis.io.StreamHandler} interface may wish to override this
+     * method and return a more specialized {@link java.io.OutputStream} (e.g.
+     * {@link java.io.DataOutputStream} or {@link java.util.zip.ZipOutputStream}).
      *
-     * @return the {@link OutputStream}
-     * @throws IOException See {@link StreamHandlerImpl#getInputStream()} for details.
+     * @return the {@link java.io.OutputStream}
+     * @throws java.io.IOException See {@link de.claas.mosis.io.StreamHandlerImpl#getInputStream()}
+     *                             for details.
      */
     protected OutputStream getOutputStream() throws IOException {
         if (_Output == null) {
@@ -155,33 +167,15 @@ public abstract class StreamHandler<T> extends DataHandler<T> {
         return _Output;
     }
 
-    /**
-     * The class {@link ImplCreator}. It is intended to create
-     * {@link StreamHandlerImpl} objects whenever the {@link StreamHandler#IMPL}
-     * parameter is changed.
-     *
-     * @author Claas Ahlrichs (claasahl@tzi.de)
-     */
-    private class ImplCreator implements Relation {
-
-        @Override
-        public void compute(Configurable configurable, String parameter,
-                            String value) {
-            if (IMPL.equals(parameter)) {
-                try {
-                    _Impl = (StreamHandlerImpl) Utils.instance(Class
-                            .forName(value));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+    @Override
+    public void update(Configurable configurable, String parameter) {
+        if (IMPL.equals(parameter)) {
+            try {
+                Class<?> clazz = Class.forName(getParameter(IMPL));
+                _Impl = (StreamHandlerImpl) Utils.instance(clazz);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
-
-        @Override
-        public boolean equals(Object obj) {
-            return obj != null && getClass().equals(obj.getClass());
-        }
-
     }
-
 }

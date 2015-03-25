@@ -1,7 +1,5 @@
 package de.claas.mosis.processing;
 
-import de.claas.mosis.model.ProcessorAdapterTest;
-import de.claas.mosis.model.ProcessorTest;
 import de.claas.mosis.processing.util.Distance;
 import de.claas.mosis.util.Utils;
 import org.junit.After;
@@ -18,13 +16,13 @@ import java.util.Vector;
 import static org.junit.Assert.*;
 
 /**
- * The JUnit test for {@link ComparingProcessor} classes. It is intended to
- * collect and document a set of test cases that are applicable to all
- * {@link ComparingProcessor} classes. Please refer to the individual tests for
- * more detailed information.
+ * The JUnit test for {@link de.claas.mosis.processing.ComparingProcessor}
+ * classes. It is intended to collect and document a set of test cases that are
+ * applicable to all {@link de.claas.mosis.processing.ComparingProcessor}
+ * classes. Please refer to the individual tests for more detailed information.
  * <p/>
- * Additional test cases can be found in {@link ProcessorTest} and
- * {@link ProcessorAdapterTest}.
+ * Additional test cases can be found in {@link de.claas.mosis.model.ProcessorTest}
+ * and {@link de.claas.mosis.model.ProcessorAdapterTest}.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -35,10 +33,11 @@ public class ComparingProcessorTest {
     private ComparingProcessor<Object, Object> _P;
 
     /**
-     * Initializes this JUnit test for an implementation of the
-     * {@link ComparingProcessor} class.
+     * Initializes this JUnit test for an implementation of the {@link
+     * de.claas.mosis.processing.ComparingProcessor} class.
      *
-     * @param clazz implementation of {@link ComparingProcessor} class
+     * @param clazz implementation of {@link de.claas.mosis.processing.ComparingProcessor}
+     *              class
      */
     public ComparingProcessorTest(
             Class<ComparingProcessor<Object, Object>> clazz) {
@@ -70,29 +69,31 @@ public class ComparingProcessorTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterPortToUseMayNotBeNull() throws Exception {
-        _P.setParameter(ComparingProcessor.PORT_TO_USE, null);
+        Utils.updateParameter(_P, ComparingProcessor.PORT_TO_USE, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterPortToUseMustBeAnInteger() throws Exception {
         try {
-            _P.setParameter(ComparingProcessor.PORT_TO_USE, "1");
-            _P.setParameter(ComparingProcessor.PORT_TO_USE, "12");
+            Utils.updateParameters(_P,
+                    ComparingProcessor.PORT_TO_USE, "1",
+                    ComparingProcessor.PORT_TO_USE, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
-        _P.setParameter(ComparingProcessor.PORT_TO_USE, "1.2");
+        Utils.updateParameter(_P, ComparingProcessor.PORT_TO_USE, "1.2");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterPortToUseMustBePositive() throws Exception {
         try {
-            _P.setParameter(ComparingProcessor.PORT_TO_USE, "0");
-            _P.setParameter(ComparingProcessor.PORT_TO_USE, "12");
+            Utils.updateParameters(_P,
+                    ComparingProcessor.PORT_TO_USE, "0",
+                    ComparingProcessor.PORT_TO_USE, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
-        _P.setParameter(ComparingProcessor.PORT_TO_USE, "-1");
+        Utils.updateParameter(_P, ComparingProcessor.PORT_TO_USE, "-1");
     }
 
     @Test

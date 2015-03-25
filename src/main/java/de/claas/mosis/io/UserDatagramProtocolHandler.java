@@ -1,10 +1,9 @@
 package de.claas.mosis.io;
 
+import de.claas.mosis.annotation.Category;
+import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
-import de.claas.mosis.model.Configurable;
-import de.claas.mosis.model.Processor;
-import de.claas.mosis.model.Relation;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -13,15 +12,21 @@ import java.net.InetSocketAddress;
 import java.util.List;
 
 /**
- * The class {@link UserDatagramProtocolHandler}. It is intended to enable
- * communication with external entities through a {@link DatagramSocket} (UDP
- * connection). This {@link DataHandler} provide an alternative to the otherwise
+ * The class {@link de.claas.mosis.io.UserDatagramProtocolHandler}. It is
+ * intended to enable communication with external entities through a {@link
+ * java.net.DatagramSocket} (UDP connection). This {@link
+ * de.claas.mosis.io.DataHandler} provide an alternative to the otherwise
  * (mostly) stream-based communication. This implementation allows the use of
- * UDP connections, such that {@link Processor} modules can process
- * {@link DatagramPacket} objects.
+ * UDP connections, such that {@link de.claas.mosis.model.Processor} modules can
+ * process {@link java.net.DatagramPacket} objects.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
+@Documentation(
+        category = Category.InputOutput,
+        author = {"Claas Ahlrichs"},
+        description = "This implementation allows storing data in UDP datagrams as well as retrieving data from UDP datagrams.",
+        purpose = "To allow storage in UDP datagrams and retrieval of UDP datagrams.")
 public class UserDatagramProtocolHandler extends DataHandler<DatagramPacket> {
 
     @Parameter("Local hostname / IP to which the socket is bound.")
@@ -50,16 +55,21 @@ public class UserDatagramProtocolHandler extends DataHandler<DatagramPacket> {
     @Override
     public void setUp() {
         super.setUp();
-        Relation r = new ChangeHostAndPort();
-        addRelation(r);
-        r.compute(this, HOST, getParameter(HOST));
-        r.compute(this, PORT, getParameter(PORT));
+        try {
+            String host = getParameter(HOST);
+            Integer port = getParameterAsInteger(PORT);
+            if (host != null && port != null) {
+                _Socket = new DatagramSocket(new InetSocketAddress(
+                        host, port));
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
     }
 
     @Override
     public void dismantle() {
         super.dismantle();
-        removeRelation(new ChangeHostAndPort());
         if (_Socket != null) {
             _Socket.close();
             _Socket = null;
@@ -86,38 +96,4 @@ public class UserDatagramProtocolHandler extends DataHandler<DatagramPacket> {
             e.printStackTrace();
         }
     }
-
-    /**
-     * The class {@link ChangeHostAndPort}. It is intended to (re-)set the
-     * {@link DatagramSocket} of the {@link UserDatagramProtocolHandler} object
-     * whenever the {@link UserDatagramProtocolHandler#HOST} parameter or
-     * {@link UserDatagramProtocolHandler#PORT} is changed.
-     *
-     * @author Claas Ahlrichs (claasahl@tzi.de)
-     */
-    private class ChangeHostAndPort implements Relation {
-
-        @Override
-        public void compute(Configurable configurable, String parameter,
-                            String value) {
-            if (HOST.equals(parameter) || PORT.equals(parameter)) {
-                try {
-                    if (_Socket != null) {
-                        _Socket.close();
-                    }
-
-                    String host = getParameter(HOST);
-                    Integer port = getParameterAsInteger(PORT);
-                    if (host != null && port != null) {
-                        _Socket = new DatagramSocket(new InetSocketAddress(
-                                host, port));
-                    }
-                } catch (IOException ioe) {
-                    ioe.printStackTrace();
-                }
-            }
-        }
-
-    }
-
 }

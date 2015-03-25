@@ -5,6 +5,7 @@ import de.claas.mosis.io.generator.Linear;
 import de.claas.mosis.processing.debug.BreakOut;
 import de.claas.mosis.processing.debug.Forward;
 import de.claas.mosis.processing.debug.Null;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,15 +16,17 @@ import java.util.Set;
 import static org.junit.Assert.*;
 
 /**
- * The JUnit test for class {@link ProcessingVisitor}. It is intended to collect
- * and document a set of test cases for the tested class. Please refer to the
- * individual tests for more detailed information.
+ * The JUnit test for class {@link de.claas.mosis.flow.visitor.ProcessingVisitor}.
+ * It is intended to collect and document a set of test cases for the tested
+ * class. Please refer to the individual tests for more detailed information.
+ * <p/>
+ * Additional test cases can be found in {@link de.claas.mosis.flow.VisitorTest}.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
 public class ProcessingVisitorTest {
 
-    private ProcessingVisitor _V;
+    private Visitor _V;
     private PlainNode _P1, _P2;
     private CompositeNode _C;
     private BreakOut _B1, _B21, _B22, _B3;
@@ -32,12 +35,16 @@ public class ProcessingVisitorTest {
     public void before() {
         _B1 = new BreakOut();
         _B1.setParameter(BreakOut.CLASS, Linear.class.getName());
+        _B1.setUp();
         _B21 = new BreakOut();
         _B21.setParameter(BreakOut.CLASS, Linear.class.getName());
+        _B21.setUp();
         _B22 = new BreakOut();
         _B22.setParameter(BreakOut.CLASS, Forward.class.getName());
+        _B22.setUp();
         _B3 = new BreakOut();
         _B3.setParameter(BreakOut.CLASS, Null.class.getName());
+        _B3.setUp();
 
         _V = new ProcessingVisitor();
         _P1 = new PlainNode(_B1);
@@ -52,12 +59,20 @@ public class ProcessingVisitorTest {
         _C.addSuccessor(_P2, new UnbiasedLink());
     }
 
+    @After
+    public void after() {
+        _B1.dismantle();
+        _B21.dismantle();
+        _B22.dismantle();
+        _B3.dismantle();
+    }
+
     @Test
     public void shouldNotHaveBeenCalled() {
-        assertEquals(0, _B1.getCalls());
-        assertEquals(0, _B21.getCalls());
-        assertEquals(0, _B22.getCalls());
-        assertEquals(0, _B3.getCalls());
+        assertEquals(0, _B1.getCallsToProcess());
+        assertEquals(0, _B21.getCallsToProcess());
+        assertEquals(0, _B22.getCallsToProcess());
+        assertEquals(0, _B3.getCallsToProcess());
     }
 
     @Test
@@ -75,10 +90,10 @@ public class ProcessingVisitorTest {
         _V.visitCompositeNode(_C);
         _V.visitPlainNode(_P2);
 
-        assertEquals(1, _B1.getCalls());
-        assertEquals(1, _B21.getCalls());
-        assertEquals(1, _B22.getCalls());
-        assertEquals(1, _B3.getCalls());
+        assertEquals(1, _B1.getCallsToProcess());
+        assertEquals(1, _B21.getCallsToProcess());
+        assertEquals(1, _B22.getCallsToProcess());
+        assertEquals(1, _B3.getCallsToProcess());
     }
 
     @Test
@@ -109,7 +124,7 @@ public class ProcessingVisitorTest {
         _C.getOutboundLink(_P2).push(Arrays.<Object>asList(23L));
         _P1.getOutboundLink(_P2).push(Arrays.<Object>asList("hello"));
         _V.visitPlainNode(_P2);
-        assertEquals(Arrays.asList(23L, "hello"), _B3.getLastInput());
+        assertEquals(Arrays.<Object>asList(23L, "hello"), _B3.getLastInput());
 
         _P1.removeSuccessor(_P2);
         _C.removeSuccessor(_P2);
@@ -117,7 +132,7 @@ public class ProcessingVisitorTest {
         _P1.getOutboundLink(_C).push(Arrays.<Object>asList("world"));
         _P2.getOutboundLink(_C).push(Arrays.<Object>asList(42.0));
         _V.visitCompositeNode(_C);
-        assertEquals(Arrays.asList("world", 42.0), _B21.getLastInput());
+        assertEquals(Arrays.<Object>asList("world", 42.0), _B21.getLastInput());
     }
 
     @Test
@@ -150,18 +165,18 @@ public class ProcessingVisitorTest {
         // Regular modules should only be called when input values are present.
         // Data sources (no preceding modules) may always be called.
         _V.visitPlainNode(_P2);
-        assertEquals(0, _B3.getCalls());
+        assertEquals(0, _B3.getCallsToProcess());
         _C.removeSuccessor(_P2);
         _V.visitPlainNode(_P2);
-        assertEquals(1, _B3.getCalls());
+        assertEquals(1, _B3.getCallsToProcess());
 
         _V.visitCompositeNode(_C);
-        assertEquals(0, _B21.getCalls());
-        assertEquals(0, _B22.getCalls());
+        assertEquals(0, _B21.getCallsToProcess());
+        assertEquals(0, _B22.getCallsToProcess());
         _P1.removeSuccessor(_C);
         _V.visitCompositeNode(_C);
-        assertEquals(1, _B21.getCalls());
-        assertEquals(1, _B22.getCalls());
+        assertEquals(1, _B21.getCallsToProcess());
+        assertEquals(1, _B22.getCallsToProcess());
     }
 
 }

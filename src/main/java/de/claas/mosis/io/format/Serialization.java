@@ -1,10 +1,8 @@
 package de.claas.mosis.io.format;
 
-import de.claas.mosis.io.FileImpl;
+import de.claas.mosis.annotation.Category;
+import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.io.StreamHandler;
-import de.claas.mosis.io.StreamHandlerImpl;
-import de.claas.mosis.io.UrlImpl;
-import de.claas.mosis.model.Processor;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -12,15 +10,21 @@ import java.io.ObjectOutputStream;
 import java.util.List;
 
 /**
- * The class {@link Serialization}. It is intended to (de-)serialize objects.
- * This {@link StreamHandler} allows to read and write serialized objects from
- * any of the {@link StreamHandlerImpl} implementations (e.g. {@link FileImpl}
- * or {@link UrlImpl}).
+ * The class {@link de.claas.mosis.io.format.Serialization}. It is intended to
+ * (de-)serialize objects. This {@link de.claas.mosis.io.StreamHandler} allows
+ * to read and write serialized objects from any of the {@link
+ * de.claas.mosis.io.StreamHandlerImpl} implementations (e.g. {@link
+ * de.claas.mosis.io.FileImpl} or {@link de.claas.mosis.io.UrlImpl}).
  *
- * @param <T> type of (incoming and outgoing) data. See {@link Processor} for
- *            details.
+ * @param <T> type of (incoming and outgoing) data. See {@link
+ *            de.claas.mosis.model.Processor} for details.
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
+@Documentation(
+        category = Category.DataFormat,
+        author = {"Claas Ahlrichs"},
+        description = "This implementation represents a data format for serialization and deserialization of objects.",
+        purpose = "To allow serialization and deserialization.")
 public class Serialization<T> extends StreamHandler<T> {
 
     private ObjectInputStream _Input;
@@ -49,7 +53,6 @@ public class Serialization<T> extends StreamHandler<T> {
             try {
                 _Input.close();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } finally {
                 _Input = null;
@@ -59,7 +62,6 @@ public class Serialization<T> extends StreamHandler<T> {
             try {
                 _Output.close();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } finally {
                 _Output = null;

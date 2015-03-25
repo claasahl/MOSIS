@@ -1,7 +1,5 @@
 package de.claas.mosis.processing.debug;
 
-import de.claas.mosis.model.ProcessorAdapterTest;
-import de.claas.mosis.model.ProcessorTest;
 import de.claas.mosis.util.Utils;
 import org.junit.After;
 import org.junit.Before;
@@ -13,12 +11,12 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 /**
- * The JUnit test for class {@link Forward}. It is intended to collect and
- * document a set of test cases for the tested class. Please refer to the
- * individual tests for more detailed information.
+ * The JUnit test for class {@link de.claas.mosis.processing.debug.Forward}. It
+ * is intended to collect and document a set of test cases for the tested class.
+ * Please refer to the individual tests for more detailed information.
  * <p/>
- * Additional test cases can be found in {@link ProcessorTest} and
- * {@link ProcessorAdapterTest}.
+ * Additional test cases can be found in {@link de.claas.mosis.model.ProcessorTest}
+ * and {@link de.claas.mosis.model.ProcessorAdapterTest}.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */

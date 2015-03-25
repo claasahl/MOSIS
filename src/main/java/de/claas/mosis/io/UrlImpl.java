@@ -1,5 +1,6 @@
 package de.claas.mosis.io;
 
+import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
 
 import java.io.IOException;
@@ -9,13 +10,15 @@ import java.net.URL;
 import java.net.URLConnection;
 
 /**
- * The class {@link UrlImpl}. It is intended to provide access to {@link URL}s,
- * such that {@link StreamHandler} implementations can process them.
+ * The class {@link de.claas.mosis.io.UrlImpl}. It is intended to provide access
+ * to {@link java.net.URL}s, such that {@link de.claas.mosis.io.StreamHandler}
+ * implementations can process them.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
 public class UrlImpl extends StreamHandlerImpl {
 
+    @Parameter("The URL that is to be accessed / processed.")
     public static final String URL = "url";
     private URLConnection _ConnIn;
     private URLConnection _ConnOut;

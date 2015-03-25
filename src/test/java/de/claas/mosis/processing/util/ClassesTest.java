@@ -1,8 +1,6 @@
 package de.claas.mosis.processing.util;
 
 import de.claas.mosis.io.generator.Function;
-import de.claas.mosis.model.ProcessorAdapterTest;
-import de.claas.mosis.model.ProcessorTest;
 import de.claas.mosis.processing.debug.Forward;
 import de.claas.mosis.processing.debug.Null;
 import de.claas.mosis.util.Utils;
@@ -15,12 +13,12 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 /**
- * The JUnit test for class {@link Classes}. It is intended to collect and
- * document a set of test cases for the tested class. Please refer to the
- * individual tests for more detailed information.
+ * The JUnit test for class {@link de.claas.mosis.processing.util.Classes}. It
+ * is intended to collect and document a set of test cases for the tested class.
+ * Please refer to the individual tests for more detailed information.
  * <p/>
- * Additional test cases can be found in {@link ProcessorTest} and
- * {@link ProcessorAdapterTest}.
+ * Additional test cases can be found in {@link de.claas.mosis.model.ProcessorTest}
+ * and {@link de.claas.mosis.model.ProcessorAdapterTest}.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -57,12 +55,12 @@ public class ClassesTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterClassPathMayNotBeNull() {
-        _P.setParameter(Classes.CLASSPATH, null);
+        Utils.updateParameter(_P, Classes.CLASSPATH, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterSeparatorMayNotBeNull() {
-        _P.setParameter(Classes.SEPARATOR, null);
+        Utils.updateParameter(_P, Classes.SEPARATOR, null);
     }
 
     @Test

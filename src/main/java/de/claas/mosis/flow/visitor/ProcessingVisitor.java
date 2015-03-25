@@ -8,11 +8,12 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- * The class {@link ProcessingVisitor}. It is an implementation of the
- * {@link Visitor} interface. It is intended to invoke the processing
- * capabilities of the underlying {@link Processor} modules for all nodes within
- * a graph. This implementation also takes care of forwarding output data to the
- * corresponding successors.
+ * The class {@link de.claas.mosis.flow.visitor.ProcessingVisitor}. It is an
+ * implementation of the {@link de.claas.mosis.flow.Visitor} interface. It is
+ * intended to invoke the processing capabilities of the underlying {@link
+ * de.claas.mosis.model.Processor} modules for all nodes within a graph. This
+ * implementation also takes care of forwarding output data to the corresponding
+ * successors.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -34,7 +35,7 @@ public class ProcessingVisitor implements Visitor {
             distributeOutputs(node, _Out);
             in.clear();
         }
-        return (!node.hasPredecessors() && !_Out.isEmpty()) || node.hasPredecessors();
+        return true;
     }
 
     @Override

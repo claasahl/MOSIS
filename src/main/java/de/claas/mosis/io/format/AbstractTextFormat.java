@@ -1,13 +1,10 @@
 package de.claas.mosis.io.format;
 
+import de.claas.mosis.annotation.Category;
+import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.annotation.Parameter;
-import de.claas.mosis.io.FileImpl;
 import de.claas.mosis.io.StreamHandler;
-import de.claas.mosis.io.StreamHandlerImpl;
-import de.claas.mosis.io.UrlImpl;
 import de.claas.mosis.model.Condition;
-import de.claas.mosis.model.Configurable;
-import de.claas.mosis.model.Relation;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -16,15 +13,21 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * The class {@link AbstractTextFormat}. It is intended to provide a common
- * (partial) implementation of the {@link StreamHandler} interface for
- * line-based data formatted (e.g. CSV, ARFF, JSON, etc.). This
- * {@link StreamHandler} allows to read and write lines of text (i.e.
- * {@link String}) from any of the {@link StreamHandlerImpl} implementations
- * (e.g. {@link FileImpl} or {@link UrlImpl}).
+ * The class {@link de.claas.mosis.io.format.AbstractTextFormat}. It is intended
+ * to provide a common (partial) implementation of the {@link
+ * de.claas.mosis.io.StreamHandler} interface for line-based data formatted
+ * (e.g. CSV, ARFF, JSON, etc.). This {@link de.claas.mosis.io.StreamHandler}
+ * allows to read and write lines of text (i.e. {@link java.lang.String}) from
+ * any of the {@link de.claas.mosis.io.StreamHandlerImpl} implementations (e.g.
+ * {@link de.claas.mosis.io.FileImpl} or {@link de.claas.mosis.io.UrlImpl}).
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
+@Documentation(
+        category = Category.DataFormat,
+        author = {"Claas Ahlrichs"},
+        description = "This implementation represents a data format for storing and retrieving (plain) text.",
+        purpose = "To allow storage and retrieval in (plain) text.")
 public abstract class AbstractTextFormat<T> extends StreamHandler<T> {
 
     @Parameter("Number of bytes used during input operations.")
@@ -102,20 +105,16 @@ public abstract class AbstractTextFormat<T> extends StreamHandler<T> {
     @Override
     public void setUp() {
         super.setUp();
-        Relation r = new bla();
-        r.compute(this, BUFFER_SIZE, getParameter(BUFFER_SIZE));
-        addRelation(r);
+        _Buffer = new byte[getParameterAsInteger(BUFFER_SIZE)];
     }
 
     @Override
     public void dismantle() {
         super.dismantle();
-        removeRelation(new bla());
         if (_Input != null) {
             try {
                 _Input.close();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } finally {
                 _Input = null;
@@ -125,7 +124,6 @@ public abstract class AbstractTextFormat<T> extends StreamHandler<T> {
             try {
                 _Output.close();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } finally {
                 _Output = null;
@@ -139,10 +137,11 @@ public abstract class AbstractTextFormat<T> extends StreamHandler<T> {
      * the end of the stream has been reached, then <code>null</code> is
      * returned.
      *
-     * @param preserveLineEnding true, if line-termination characters should be preserved.
-     *                           false, if line-termination characters should not be returned.
+     * @param preserveLineEnding true, if line-termination characters should be
+     *                           preserved. false, if line-termination
+     *                           characters should not be returned.
      * @return the next line of plain text
-     * @throws IOException if something unexpected happens
+     * @throws java.io.IOException if something unexpected happens
      */
     protected String readLine(boolean preserveLineEnding) throws IOException {
         int length = 0, startIndex;
@@ -199,9 +198,9 @@ public abstract class AbstractTextFormat<T> extends StreamHandler<T> {
      * characters (i.e. 0x0A, 0x0D, 0x0A 0x0D, 0x0D 0x0A).
      *
      * @param line            the line of plain text
-     * @param appendEndEnding true, if line-termination characters should be appended.
-     *                        false, otherwise.
-     * @throws IOException if something unexpected happens
+     * @param appendEndEnding true, if line-termination characters should be
+     *                        appended. false, otherwise.
+     * @throws java.io.IOException if something unexpected happens
      */
     protected void writeLine(String line, boolean appendEndEnding)
             throws IOException {
@@ -210,17 +209,4 @@ public abstract class AbstractTextFormat<T> extends StreamHandler<T> {
         getOutputStream().write(data);
         getOutputStream().flush();
     }
-
-    private class bla implements Relation {
-
-        @Override
-        public void compute(Configurable configurable, String parameter,
-                            String value) {
-            if (BUFFER_SIZE.equals(parameter)) {
-                _Buffer = new byte[Integer.parseInt(value)];
-            }
-        }
-
-    }
-
 }

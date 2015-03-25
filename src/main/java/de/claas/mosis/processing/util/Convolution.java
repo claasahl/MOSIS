@@ -1,17 +1,16 @@
 package de.claas.mosis.processing.util;
 
 import de.claas.mosis.model.Condition;
-import de.claas.mosis.model.Configurable;
-import de.claas.mosis.model.Relation;
 import de.claas.mosis.processing.BufferingProcessor;
 
 import java.util.List;
 import java.util.regex.Pattern;
 
 /**
- * The class {@link Convolution}. It is intended to provide the means to do a
- * one-dimensional convolution. This {@link BufferingProcessor} implementation
- * can be used to highlight (or suppress) certain features of input values.
+ * The class {@link de.claas.mosis.processing.util.Convolution}. It is intended
+ * to provide the means to do a one-dimensional convolution. This {@link
+ * de.claas.mosis.processing.BufferingProcessor} implementation can be used to
+ * highlight (or suppress) certain features of input values.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -45,15 +44,26 @@ public class Convolution extends BufferingProcessor<Double, Double> {
     @Override
     public void setUp() {
         super.setUp();
-        Relation r = new UpdateFactors();
-        addRelation(r);
-        r.compute(this, WEIGHTS, getParameter(WEIGHTS));
+
+        // Preparations
+        String separator = Pattern.quote(getParameter(SEPARATOR));
+        String[] factors = getParameter(WEIGHTS).split(separator);
+        int length = getParameterAsInteger(WINDOW_SIZE);
+
+        // Update
+        _Factors = new double[length];
+        for (int i = 0; i < length; i++) {
+            if (i < factors.length && !factors[i].trim().isEmpty()) {
+                _Factors[i] = Double.parseDouble(factors[i].trim());
+            } else {
+                _Factors[i] = getParameterAsDouble(DEFAULT_VALUE);
+            }
+        }
     }
 
     @Override
     public void dismantle() {
         super.dismantle();
-        removeRelation(new UpdateFactors());
         _Factors = null;
     }
 
@@ -74,41 +84,4 @@ public class Convolution extends BufferingProcessor<Double, Double> {
         }
         out.add(result);
     }
-
-    /**
-     * The class {@link UpdateFactors}. It is intended to update the
-     * {@link Convolution#_Factors} array whenever the
-     * {@link Convolution#WEIGHTS}, {@link Convolution#DEFAULT_VALUE} or
-     * {@link Convolution#WINDOW_SIZE} parameter is changed.
-     *
-     * @author Claas Ahlrichs (claasahl@tzi.de)
-     */
-    private class UpdateFactors implements Relation {
-
-        @Override
-        public void compute(Configurable configurable, String parameter,
-                            String value) {
-            if (WEIGHTS.equals(parameter) || WINDOW_SIZE.equals(parameter)
-                    || DEFAULT_VALUE.equals(parameter)) {
-                // Preparations
-                String separator = Pattern.quote(getParameter(SEPARATOR));
-                String[] factors = (WEIGHTS.equals(parameter) ? value
-                        : getParameter(WEIGHTS)).split(separator);
-                int length = WINDOW_SIZE.equals(parameter) ? Integer
-                        .parseInt(value) : getParameterAsInteger(WINDOW_SIZE);
-
-                // Update
-                _Factors = new double[length];
-                for (int i = 0; i < length; i++) {
-                    if (i < factors.length && !factors[i].trim().isEmpty()) {
-                        _Factors[i] = Double.parseDouble(factors[i].trim());
-                    } else {
-                        _Factors[i] = getParameterAsDouble(DEFAULT_VALUE);
-                    }
-                }
-            }
-        }
-
-    }
-
 }

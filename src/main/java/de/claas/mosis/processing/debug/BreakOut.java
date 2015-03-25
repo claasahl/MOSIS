@@ -1,23 +1,33 @@
 package de.claas.mosis.processing.debug;
 
+import de.claas.mosis.annotation.Category;
+import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.model.DecoratorProcessor;
 
 import java.util.List;
 import java.util.Vector;
 
 /**
- * The class {@link BreakOut}. It is intended for debugging purposes. This
- * {@link DecoratorProcessor} implementation provides access to the most recent
- * input (see {@link #getLastInput()}) and output (see {@link #getLastOutput()})
- * values.
+ * The class {@link de.claas.mosis.processing.debug.BreakOut}. It is intended
+ * for debugging purposes. This {@link de.claas.mosis.model.DecoratorProcessor}
+ * implementation provides access to the most recent input (see {@link
+ * #getLastInput()}) and output (see {@link #getLastOutput()}) values as well as
+ * several other potentially relevant statistics.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
+@Documentation(
+        category = Category.Decorator,
+        author = {"Claas Ahlrichs"},
+        description = "This is a DecoratorProcessor which provides access to the most recent set of input and output values that were passed to the process-method. It also count how often various methods were called.",
+        purpose = "This implementation is intended for debugging purposes.")
 public class BreakOut extends DecoratorProcessor<Object, Object> {
 
     private List<Object> _Input;
     private List<Object> _Output;
-    private int _Calls;
+    private int _CallsToSetup;
+    private int _CallsToDismantle;
+    private int _CallsToProcess;
 
     /**
      * Returns the latest input values.
@@ -38,24 +48,49 @@ public class BreakOut extends DecoratorProcessor<Object, Object> {
     }
 
     /**
+     * Returns the number of calls of {@link #setUp()}.
+     *
+     * @return the number of calls of {@link #setUp()}
+     */
+    public int getCallsToSetUp() {
+        return _CallsToSetup;
+    }
+
+    /**
+     * Returns the number of calls of {@link #dismantle()}.
+     *
+     * @return the number of calls of {@link #dismantle()}
+     */
+    public int getCallsToDismantle() {
+        return _CallsToDismantle;
+    }
+
+    /**
      * Returns the number of calls of {@link #process(List, List)}.
      *
      * @return the number of calls of {@link #process(List, List)}
      */
-    public int getCalls() {
-        return _Calls;
+    public int getCallsToProcess() {
+        return _CallsToProcess;
+    }
+
+    @Override
+    public void setUp() {
+        super.setUp();
+        _CallsToSetup++;
     }
 
     @Override
     public void dismantle() {
         super.dismantle();
+        _CallsToDismantle++;
         _Input = null;
         _Output = null;
     }
 
     @Override
     public void process(List<Object> in, List<Object> out) {
-        _Calls++;
+        _CallsToProcess++;
         _Input = in == null ? null : new Vector<>(in);
         super.process(in, out);
         _Output = out == null ? null : new Vector<>(out);

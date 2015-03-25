@@ -15,9 +15,10 @@ import java.util.Vector;
 import static org.junit.Assert.*;
 
 /**
- * The JUnit test for {@link Link} classes. It is intended to collect and
- * document a set of test cases that are applicable to all {@link Link} classes.
- * Please refer to the individual tests for more detailed information.
+ * The JUnit test for {@link de.claas.mosis.flow.Link} classes. It is intended
+ * to collect and document a set of test cases that are applicable to all {@link
+ * de.claas.mosis.flow.Link} classes. Please refer to the individual tests for
+ * more detailed information.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -29,10 +30,10 @@ public class LinkTest {
     private Link _L;
 
     /**
-     * Initializes this JUnit test for an implementation of the {@link Link}
-     * class.
+     * Initializes this JUnit test for an implementation of the {@link
+     * de.claas.mosis.flow.Link} class.
      *
-     * @param clazz implementation of {@link Link} class
+     * @param clazz implementation of {@link de.claas.mosis.flow.Link} class
      * @param args  arguments for instantiating the implementing class
      */
     public LinkTest(Class<Link> clazz, Object[] args) {
@@ -51,7 +52,7 @@ public class LinkTest {
                 new Object[]{null, -23, 1L, 42.3, "hello world", new Object()}});
         impl.add(new Object[]{
                 BiasedLink.class,
-                new Object[]{-23, 1L, 42.3, "hello world", new Object()}});
+                new Object[]{null, -23, 1L, 42.3, "hello world", new Object()}});
         return impl;
     }
 

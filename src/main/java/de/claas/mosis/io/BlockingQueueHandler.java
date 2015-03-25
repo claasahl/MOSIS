@@ -1,32 +1,35 @@
 package de.claas.mosis.io;
 
+import de.claas.mosis.annotation.Category;
+import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.Condition;
-import de.claas.mosis.model.Configurable;
-import de.claas.mosis.model.Processor;
-import de.claas.mosis.model.Relation;
 import de.claas.mosis.util.Utils;
 
 import java.util.List;
-import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
- * The class {@link BlockingQueueHandler}. It is intended to enable
- * communication with external entities through a {@link BlockingQueue}. This
- * {@link DataHandler} provide an alternative to the otherwise (mostly)
- * stream-based communication. This will typically be utilized in scenarios
- * where an external entity needs to push {@link Object}s directly into the
- * framework (and not through other means such as files or databases).
+ * The class {@link de.claas.mosis.io.BlockingQueueHandler}. It is intended to
+ * enable communication with external entities through a {@link
+ * java.util.concurrent.BlockingQueue}. This {@link de.claas.mosis.io.DataHandler}
+ * provide an alternative to the otherwise (mostly) stream-based communication.
+ * This will typically be utilized in scenarios where an external entity needs
+ * to push {@link java.lang.Object}s directly into the framework (and not
+ * through other means such as files or databases).
  *
- * @param <T> type of (incoming and outgoing) data. See {@link Processor} for
- *            details.
+ * @param <T> type of (incoming and outgoing) data. See {@link
+ *            de.claas.mosis.model.Processor} for details.
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
+@Documentation(
+        category = Category.InputOutput,
+        author = {"Claas Ahlrichs"},
+        description = "This implementation allows storing data in a queue as well as retrieving data from a queue.",
+        purpose = "To allow storage and retrieval of objects within a (blocking) queue.")
 public class BlockingQueueHandler<T> extends DataHandler<T> {
 
-    // TODO Add to test(s)
     @Parameter("Name of class from queue. An instance of this class backs this handler. Any class, implementing java.util.concurrent.BlockingQueue, can be used.")
     public static final String CLASS = "class (queue)";
     private BlockingQueue<T> _Queue;
@@ -40,30 +43,35 @@ public class BlockingQueueHandler<T> extends DataHandler<T> {
     }
 
     /**
-     * Returns the (input / output) {@link Queue}. When in "reading" mode (see
-     * {@link #isReadOnly(List)}), then the head of the queue is removed and
-     * returned every time {@link #process(java.util.List, java.util.List)} is called. When in "writing"
-     * mode (see {@link #isWriteOnly(List)}), then all incoming elements are
-     * appended to the queue every time {@link #process(java.util.List, java.util.List)} is called.
+     * Returns the (input / output) {@link java.util.Queue}. When in "reading"
+     * mode (see {@link #isReadOnly(java.util.List)}), then the head of the
+     * queue is removed and returned every time {@link #process(java.util.List,
+     * java.util.List)} is called. When in "writing" mode (see {@link
+     * #isWriteOnly(java.util.List)}, then all incoming elements are appended to
+     * the queue every time {@link #process(java.util.List, java.util.List)} is
+     * called.
      *
-     * @return the (input / output) {@link Queue}
+     * @return the (input / output) {@link java.util.Queue}
      */
     public BlockingQueue<T> getQueue() {
         return _Queue;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void setUp() {
         super.setUp();
-        Relation r = new ImplCreator();
-        addRelation(r);
-        r.compute(this, CLASS, getParameter(CLASS));
+        try {
+            _Queue = (BlockingQueue) Utils.instance(Class
+                    .forName(getParameter(CLASS)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void dismantle() {
         super.dismantle();
-        removeRelation(new ImplCreator());
         _Queue = null;
     }
 
@@ -88,35 +96,4 @@ public class BlockingQueueHandler<T> extends DataHandler<T> {
             }
         }
     }
-
-    /**
-     * The class {@link ImplCreator}. It is intended to create {@link Queue}
-     * objects whenever the {@link BlockingQueueHandler#CLASS} parameter is
-     * changed.
-     *
-     * @author Claas Ahlrichs (claasahl@tzi.de)
-     */
-    private class ImplCreator implements Relation {
-
-        @SuppressWarnings("unchecked")
-        @Override
-        public void compute(Configurable configurable, String parameter,
-                            String value) {
-            if (CLASS.equals(parameter)) {
-                try {
-                    _Queue = (BlockingQueue<T>) Utils.instance(Class
-                            .forName(value));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            return obj != null && getClass().equals(obj.getClass());
-        }
-
-    }
-
 }

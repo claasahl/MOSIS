@@ -7,9 +7,9 @@ import java.util.Arrays;
 import static org.junit.Assert.*;
 
 /**
- * The JUnit test for class {@link QueueHandler}. It is intended to collect and
- * document a set of test cases for the tested class. Please refer to the
- * individual tests for more detailed information.
+ * The JUnit test for class {@link de.claas.mosis.io.QueueHandler}. It is
+ * intended to collect and document a set of test cases for the tested class.
+ * Please refer to the individual tests for more detailed information.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -22,7 +22,7 @@ public class QueueHandlerTest extends DataHandlerTest<Long, QueueHandler<Long>> 
 
     @Override
     public void shouldRead() throws Exception {
-        _H.setParameter(DataHandler.MODE, DataHandler.MODE_READ);
+        Utils.updateParameter(_H, DataHandler.MODE, DataHandler.MODE_READ);
 
         assertTrue(_H.getQueue().isEmpty());
         _H.getQueue().offer(23L);
@@ -37,7 +37,7 @@ public class QueueHandlerTest extends DataHandlerTest<Long, QueueHandler<Long>> 
 
     @Override
     public void shouldWrite() throws Exception {
-        _H.setParameter(DataHandler.MODE, DataHandler.MODE_WRITE);
+        Utils.updateParameter(_H, DataHandler.MODE, DataHandler.MODE_WRITE);
 
         assertNull(Utils.process(_H, (Long) null));
         assertNull(_H.getQueue().poll());
@@ -52,7 +52,7 @@ public class QueueHandlerTest extends DataHandlerTest<Long, QueueHandler<Long>> 
 
     @Override
     public void shouldDetermineMode() throws Exception {
-        _H.setParameter(DataHandler.MODE, DataHandler.MODE_AUTO);
+        Utils.updateParameter(_H, DataHandler.MODE, DataHandler.MODE_AUTO);
 
         assertTrue(_H.getQueue().isEmpty());
         _H.getQueue().offer(10L);

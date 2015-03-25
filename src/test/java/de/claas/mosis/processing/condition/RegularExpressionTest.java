@@ -1,8 +1,6 @@
 package de.claas.mosis.processing.condition;
 
 import de.claas.mosis.model.Condition;
-import de.claas.mosis.model.Condition.RegularExpression;
-import de.claas.mosis.model.ConditionTest;
 import org.junit.Test;
 
 import java.util.regex.PatternSyntaxException;
@@ -11,11 +9,11 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
- * The JUnit test for class {@link RegularExpression}. It is intended to collect
- * and document a set of test cases for the tested class. Please refer to the
- * individual tests for more detailed information.
+ * The JUnit test for class {@link de.claas.mosis.model.Condition.RegularExpression}.
+ * It is intended to collect and document a set of test cases for the tested
+ * class. Please refer to the individual tests for more detailed information.
  * <p/>
- * Additional test cases can be found in {@link ConditionTest}.
+ * Additional test cases can be found in {@link de.claas.mosis.model.ConditionTest}.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -28,15 +26,16 @@ public class RegularExpressionTest {
             "A"};
 
     /**
-     * Returns an instantiated {@link RegularExpression} class. If appropriate,
-     * the instance is configured with default values as well as the given
-     * parameters.
+     * Returns an instantiated {@link de.claas.mosis.model.Condition.RegularExpression}
+     * class. If appropriate, the instance is configured with default values as
+     * well as the given parameters.
      *
      * @param p regular expression that the parameter should match (
      *          <code>null</code> if all parameters are accepted)
      * @param v regular expression that the value should match (
      *          <code>null</code> if all values are accepted)
-     * @return an instantiated {@link RegularExpression} class
+     * @return an instantiated {@link de.claas.mosis.model.Condition.RegularExpression}
+     * class
      */
     private Condition build(String p, String v) {
         return new Condition.RegularExpression(p, v);

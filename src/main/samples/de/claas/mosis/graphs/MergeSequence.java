@@ -6,15 +6,15 @@ import de.claas.mosis.io.StandardInputOutputImpl;
 import de.claas.mosis.io.format.PlainText;
 import de.claas.mosis.io.generator.Linear;
 import de.claas.mosis.io.generator.Random;
-import de.claas.mosis.model.Processor;
 import de.claas.mosis.processing.debug.ToString;
 
 /**
- * The class {@link MergeSequence} is a sample demonstrator. It is intended to
- * show the use of a (simple) sequential information flow, where the results of
- * two independent {@link Processor} objects are merged. Here the basic sequence
- * is based on three {@link Processor} objects only (i.e. two sources and a
- * sink).
+ * The class {@link de.claas.mosis.graphs.MergeSequence} is a sample
+ * demonstrator. It is intended to show the use of a (simple) sequential
+ * information flow, where the results of two independent {@link
+ * de.claas.mosis.model.Processor} objects are merged. Here the basic sequence
+ * is based on three {@link de.claas.mosis.model.Processor} objects only (i.e.
+ * two sources and a sink).
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -27,8 +27,8 @@ public class MergeSequence {
      * sink. The function's slope and intercept can be varied by changing the
      * method's arguments.
      *
-     * @param args the arguments, namely slope (i.e. {@link Linear#M}) and
-     *             intercept (i.e. {@link Linear#B}).
+     * @param args the arguments, namely slope (i.e. {@link de.claas.mosis.io.generator.Linear#M})
+     *             and intercept (i.e. {@link de.claas.mosis.io.generator.Linear#B}).
      */
     public static void main(String[] args) throws Exception {
         // Prepare processing modules

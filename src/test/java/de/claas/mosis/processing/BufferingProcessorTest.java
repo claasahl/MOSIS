@@ -1,7 +1,5 @@
 package de.claas.mosis.processing;
 
-import de.claas.mosis.model.ProcessorAdapterTest;
-import de.claas.mosis.model.ProcessorTest;
 import de.claas.mosis.processing.util.Convolution;
 import de.claas.mosis.processing.util.Delay;
 import de.claas.mosis.util.Utils;
@@ -20,13 +18,13 @@ import java.util.Vector;
 import static org.junit.Assert.*;
 
 /**
- * The JUnit test for {@link BufferingProcessor} classes. It is intended to
- * collect and document a set of test cases that are applicable to all
- * {@link BufferingProcessor} classes. Please refer to the individual tests for
- * more detailed information.
+ * The JUnit test for {@link de.claas.mosis.processing.BufferingProcessor}
+ * classes. It is intended to collect and document a set of test cases that are
+ * applicable to all {@link de.claas.mosis.processing.BufferingProcessor}
+ * classes. Please refer to the individual tests for more detailed information.
  * <p/>
- * Additional test cases can be found in {@link ProcessorTest} and
- * {@link ProcessorAdapterTest}.
+ * Additional test cases can be found in {@link de.claas.mosis.model.ProcessorTest}
+ * and {@link de.claas.mosis.model.ProcessorAdapterTest}.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -37,10 +35,11 @@ public class BufferingProcessorTest {
     private BufferingProcessor<Object, Object> _P;
 
     /**
-     * Initializes this JUnit test for an implementation of the
-     * {@link BufferingProcessor} class.
+     * Initializes this JUnit test for an implementation of the {@link
+     * de.claas.mosis.processing.BufferingProcessor} class.
      *
-     * @param clazz implementation of {@link BufferingProcessor} class
+     * @param clazz implementation of {@link de.claas.mosis.processing.BufferingProcessor}
+     *              class
      */
     public BufferingProcessorTest(
             Class<BufferingProcessor<Object, Object>> clazz) {
@@ -74,34 +73,36 @@ public class BufferingProcessorTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterWindowSizeMayNotBeNull() throws Exception {
-        _P.setParameter(BufferingProcessor.WINDOW_SIZE, null);
+        Utils.updateParameter(_P, BufferingProcessor.WINDOW_SIZE, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterWindowSizeMustBeAnInteger() throws Exception {
         try {
-            _P.setParameter(BufferingProcessor.WINDOW_SIZE, "1");
-            _P.setParameter(BufferingProcessor.WINDOW_SIZE, "12");
+            Utils.updateParameters(_P,
+                    BufferingProcessor.WINDOW_SIZE, "1",
+                    BufferingProcessor.WINDOW_SIZE, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
-        _P.setParameter(BufferingProcessor.WINDOW_SIZE, "1.2");
+        Utils.updateParameter(_P, BufferingProcessor.WINDOW_SIZE, "1.2");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterWindowSizeMustBePositive() throws Exception {
         try {
-            _P.setParameter(BufferingProcessor.WINDOW_SIZE, "0");
-            _P.setParameter(BufferingProcessor.WINDOW_SIZE, "12");
+            Utils.updateParameters(_P,
+                    BufferingProcessor.WINDOW_SIZE, "0",
+                    BufferingProcessor.WINDOW_SIZE, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
-        _P.setParameter(BufferingProcessor.WINDOW_SIZE, "-1");
+        Utils.updateParameter(_P, BufferingProcessor.WINDOW_SIZE, "-1");
     }
 
     @Test
     public void shouldBufferEnoughData() throws Exception {
-        _P.setParameter(BufferingProcessor.WINDOW_SIZE, "5");
+        Utils.updateParameter(_P, BufferingProcessor.WINDOW_SIZE, "5");
         for (int i = 0; i < 10; i++) {
             List<Object> data;
             if (i < 5) {
@@ -116,7 +117,7 @@ public class BufferingProcessorTest {
 
     @Test
     public void shouldBeFull() throws Exception {
-        _P.setParameter(BufferingProcessor.WINDOW_SIZE, "5");
+        Utils.updateParameter(_P, BufferingProcessor.WINDOW_SIZE, "5");
         for (int i = 0; i < 10; i++) {
             if (i < 5) {
                 assertFalse(_P.isBufferFull());
@@ -139,7 +140,7 @@ public class BufferingProcessorTest {
 
     @Test
     public void shouldBuffer() throws Exception {
-        _P.setParameter(BufferingProcessor.WINDOW_SIZE, "5");
+        Utils.updateParameter(_P, BufferingProcessor.WINDOW_SIZE, "5");
         assertNull(_P.appendAndRemove(Arrays.<Object>asList(1.0)));
         assertNull(_P.appendAndRemove(Arrays.<Object>asList(1.0)));
         assertNull(_P.appendAndRemove(Arrays.<Object>asList(1.0)));
@@ -151,7 +152,7 @@ public class BufferingProcessorTest {
 
     @Test
     public void shouldBeInOrder() throws Exception {
-        _P.setParameter(BufferingProcessor.WINDOW_SIZE, "5");
+        Utils.updateParameter(_P, BufferingProcessor.WINDOW_SIZE, "5");
         assertNull(_P.appendAndRemove(Arrays.<Object>asList(1.0)));
         assertNull(_P.appendAndRemove(Arrays.<Object>asList(2.0)));
         assertNull(_P.appendAndRemove(Arrays.<Object>asList(3.0)));
@@ -173,7 +174,7 @@ public class BufferingProcessorTest {
 
     @Test
     public void shouldHandleNullValues() throws Exception {
-        _P.setParameter(BufferingProcessor.WINDOW_SIZE, "5");
+        Utils.updateParameter(_P, BufferingProcessor.WINDOW_SIZE, "5");
         assertNull(_P.appendAndRemove(Arrays.<Object>asList(1.0)));
         assertNull(_P.appendAndRemove(Arrays.asList(null, null)));
         assertNull(_P.appendAndRemove(Arrays.asList(null, null)));
@@ -188,7 +189,7 @@ public class BufferingProcessorTest {
     @Test
     public void shouldCopyInputs() throws Exception {
         List<Object> in = new Vector<>();
-        _P.setParameter(BufferingProcessor.WINDOW_SIZE, "5");
+        Utils.updateParameter(_P, BufferingProcessor.WINDOW_SIZE, "5");
         in.add(23);
         _P.appendAndRemove(in);
         in.add(42);
@@ -199,7 +200,7 @@ public class BufferingProcessorTest {
 
     @Test
     public void shouldBufferAllInputs() throws Exception {
-        _P.setParameter(BufferingProcessor.WINDOW_SIZE, "5");
+        Utils.updateParameter(_P, BufferingProcessor.WINDOW_SIZE, "5");
         _P.appendAndRemove(Arrays.<Object>asList(1));
         _P.appendAndRemove(Arrays.<Object>asList(2, 3));
         _P.appendAndRemove(Arrays.<Object>asList(3, 4, 5));

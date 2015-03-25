@@ -5,8 +5,6 @@ import de.claas.mosis.io.PipedImpl;
 import de.claas.mosis.io.StreamHandler;
 import de.claas.mosis.io.StreamHandlerTest;
 import de.claas.mosis.util.Utils;
-import org.junit.After;
-import org.junit.Before;
 
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -15,9 +13,9 @@ import java.io.ObjectOutputStream;
 import static org.junit.Assert.*;
 
 /**
- * The JUnit test for class {@link Serialization}. It is intended to collect and
- * document a set of test cases for the tested class. Please refer to the
- * individual tests for more detailed information.
+ * The JUnit test for class {@link de.claas.mosis.io.format.Serialization}. It
+ * is intended to collect and document a set of test cases for the tested class.
+ * Please refer to the individual tests for more detailed information.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -27,21 +25,28 @@ public class SerializationTest extends StreamHandlerTest<Object, Serialization<O
 
     @Override
     protected Serialization<Object> build() throws Exception {
-        return new Serialization<>();
+        Serialization<Object> handler = new Serialization<>();
+        handler.setParameter(StreamHandler.IMPL, PipedImpl.class.getName());
+        return handler;
     }
 
-    @Before
+    @Override
     public void before() throws Exception {
         super.before();
         _H = build();
-        _H.setParameter(StreamHandler.IMPL, PipedImpl.class.getName());
         _H.setUp();
     }
 
-    @After
+    @Override
     public void after() {
         super.after();
         _H.dismantle();
+    }
+
+    @Override
+    public void assumptionsOnImpl() throws Exception {
+        assertEquals(PipedImpl.class.getName(),
+                _H.getParameter(StreamHandler.IMPL));
     }
 
     @Override
@@ -59,7 +64,7 @@ public class SerializationTest extends StreamHandlerTest<Object, Serialization<O
 
     @Override
     public void shouldRead() throws Exception {
-        _H.setParameter(DataHandler.MODE, DataHandler.MODE_READ);
+        Utils.updateParameter(_H, DataHandler.MODE, DataHandler.MODE_READ);
 
         ObjectOutputStream o = _H.getOutputStream();
         o.writeObject(23L);
@@ -71,7 +76,7 @@ public class SerializationTest extends StreamHandlerTest<Object, Serialization<O
 
     @Override
     public void shouldWrite() throws Exception {
-        _H.setParameter(DataHandler.MODE, DataHandler.MODE_WRITE);
+        Utils.updateParameter(_H, DataHandler.MODE, DataHandler.MODE_WRITE);
 
         assertNull(Utils.process(_H, (Object) null));
         ObjectInputStream i = _H.getInputStream();
@@ -86,7 +91,7 @@ public class SerializationTest extends StreamHandlerTest<Object, Serialization<O
 
     @Override
     public void shouldDetermineMode() throws Exception {
-        _H.setParameter(DataHandler.MODE, DataHandler.MODE_AUTO);
+        Utils.updateParameter(_H, DataHandler.MODE, DataHandler.MODE_AUTO);
 
         ObjectOutputStream o = _H.getOutputStream();
         o.writeObject(10L);

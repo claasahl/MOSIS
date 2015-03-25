@@ -1,14 +1,10 @@
 package de.claas.mosis.io.format;
 
+import de.claas.mosis.annotation.Category;
+import de.claas.mosis.annotation.Documentation;
 import de.claas.mosis.annotation.Parameter;
-import de.claas.mosis.io.FileImpl;
-import de.claas.mosis.io.StreamHandler;
-import de.claas.mosis.io.StreamHandlerImpl;
-import de.claas.mosis.io.UrlImpl;
 import de.claas.mosis.model.Condition;
-import de.claas.mosis.model.Configurable;
 import de.claas.mosis.model.Data;
-import de.claas.mosis.model.Relation;
 import de.claas.mosis.util.Parser;
 
 import java.util.Collections;
@@ -17,36 +13,35 @@ import java.util.Vector;
 import java.util.regex.Pattern;
 
 /**
- * The class {@link CommaSeparatedValues}. It is intended to read and write CSV
- * data (comma separated value). This {@link StreamHandler} allows to read and
- * write CSV data from any of the {@link StreamHandlerImpl} implementations
- * (e.g. {@link FileImpl} or {@link UrlImpl}).
+ * The class {@link de.claas.mosis.io.format.CommaSeparatedValues}. It is
+ * intended to read and write CSV data (comma separated value). This {@link
+ * de.claas.mosis.io.StreamHandler} allows to read and write CSV data from any
+ * of the {@link de.claas.mosis.io.StreamHandlerImpl} implementations (e.g.
+ * {@link de.claas.mosis.io.FileImpl} or {@link de.claas.mosis.io.UrlImpl}).
  * <p/>
  * This implementation is based on the definitions given in RFC 4180, which is
  * publicly available at http://www.ietf.org/rfc/rfc4180.txt. The therein
  * contained ABNF grammar was slightly modified and the final result is listed
  * below:
  * <p/>
- * <ol>
- * <li>csv-text = [header NEWLINE] record *(NEWLINE record) [NEWLINE]</li>
- * <li>header = name *(SEPARATOR name)</li>
- * <li>record = field *(SEPARATOR field)</li>
- * <li>name = field</li>
- * <li>field = escaped / unescaped</li>
- * <li>escaped = DQUOTE *(TEXTDATA / SEPARATOR / CR / LF / TWODQUOTES) DQUOTE</li>
- * <li>unescaped = *TEXTDATA</li>
- * </ol>
- * <ol>
- * <li>SEPARATOR = %x2C; this terminal is configurable</li>
- * <li>CR = %x0D ;as per section 6.1 of RFC 2234 [2]</li>
- * <li>DQUOTE = %x22 ;as per section 6.1 of RFC 2234 [2]</li>
- * <li>LF = %x0A ;as per section 6.1 of RFC 2234 [2]</li>
- * <li>NEWLINE = (CR LF) / (LF CR) / CR / LF</li>
- * <li>TEXTDATA = %x20-21 / %x23-2B / %x2D-7E</li>
+ * <ol> <li>csv-text = [header NEWLINE] record *(NEWLINE record) [NEWLINE]</li>
+ * <li>header = name *(SEPARATOR name)</li> <li>record = field *(SEPARATOR
+ * field)</li> <li>name = field</li> <li>field = escaped / unescaped</li>
+ * <li>escaped = DQUOTE *(TEXTDATA / SEPARATOR / CR / LF / TWODQUOTES)
+ * DQUOTE</li> <li>unescaped = *TEXTDATA</li> </ol> <ol> <li>SEPARATOR = %x2C;
+ * this terminal is configurable</li> <li>CR = %x0D ;as per section 6.1 of RFC
+ * 2234 [2]</li> <li>DQUOTE = %x22 ;as per section 6.1 of RFC 2234 [2]</li>
+ * <li>LF = %x0A ;as per section 6.1 of RFC 2234 [2]</li> <li>NEWLINE = (CR LF)
+ * / (LF CR) / CR / LF</li> <li>TEXTDATA = %x20-21 / %x23-2B / %x2D-7E</li>
  * </ol>
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
+@Documentation(
+        category = Category.DataFormat,
+        author = {"Claas Ahlrichs"},
+        description = "This implementation represents a data format for storing and retrieving CSV data.",
+        purpose = "To allow storage as CSV data and retrieval of CSV data.")
 public class CommaSeparatedValues extends AbstractTextFormat<Data> {
 
     @Parameter("Separating character between two adjacent data fields.")
@@ -95,15 +90,15 @@ public class CommaSeparatedValues extends AbstractTextFormat<Data> {
     @Override
     public void setUp() {
         super.setUp();
-        Relation r = new ChangeSeparator();
-        addRelation(r);
-        r.compute(this, SEPARATOR, getParameter(SEPARATOR));
+        // TODO Avoid hard coded patterns
+        Separator = Pattern.compile(Pattern.quote(getParameter(SEPARATOR)));
+        int sep = getParameter(SEPARATOR).charAt(0);
+        Textdata = Pattern.compile(String.format("[^\\x00-\\x1F\\x22\\x%02X]", sep));
     }
 
     @Override
     public void dismantle() {
         super.dismantle();
-        removeRelation(new ChangeSeparator());
         Separator = null;
     }
 
@@ -206,14 +201,15 @@ public class CommaSeparatedValues extends AbstractTextFormat<Data> {
      * <b>csv-text = [header NEWLINE] record *(NEWLINE record) [NEWLINE]</b>
      *
      * @param csv        the CSV data that is being processed
-     * @param header     true, if the first line of CSV data should be interpreted as
-     *                   column headers. false, if CSV data does not have such column
-     *                   headers
-     * @param attributes if data was successfully processed, then the list will be
-     *                   updated to represent the column headers (if no such column
-     *                   headers exist, then they are automatically generated)
-     * @param data       if data was successfully processed, then the list will be
-     *                   updated to represent the processed CSV data
+     * @param header     true, if the first line of CSV data should be
+     *                   interpreted as column headers. false, if CSV data does
+     *                   not have such column headers
+     * @param attributes if data was successfully processed, then the list will
+     *                   be updated to represent the column headers (if no such
+     *                   column headers exist, then they are automatically
+     *                   generated)
+     * @param data       if data was successfully processed, then the list will
+     *                   be updated to represent the processed CSV data
      * @return the CSV data that was processed by this call
      */
     private String csvText(StringBuilder csv, boolean header,
@@ -273,8 +269,8 @@ public class CommaSeparatedValues extends AbstractTextFormat<Data> {
      * <b>header = name *(SEPARATOR name)</b>
      *
      * @param csv        the CSV data that is being processed
-     * @param attributes if data was successfully processed, then the list will be
-     *                   updated to represent the column header
+     * @param attributes if data was successfully processed, then the list will
+     *                   be updated to represent the column header
      * @return the CSV data that was processed by this call
      */
     private String header(StringBuilder csv, List<String> attributes) {
@@ -312,12 +308,12 @@ public class CommaSeparatedValues extends AbstractTextFormat<Data> {
      * <b>record = field *(SEPARATOR field)</b>
      *
      * @param csv        the CSV data that is being processed
-     * @param attributes the column headers. If there are more columns then column
-     *                   headers, then the missing headers are automatically generated
-     *                   and appended to this list.
-     * @param data       if data was successfully processed, then the {@link Data}
-     *                   object will be updated to represent the processed CSV data /
-     *                   record
+     * @param attributes the column headers. If there are more columns then
+     *                   column headers, then the missing headers are
+     *                   automatically generated and appended to this list.
+     * @param data       if data was successfully processed, then the {@link
+     *                   de.claas.mosis.model.Data} object will be updated to
+     *                   represent the processed CSV data / record
      * @return the CSV data that was processed by this call
      */
     private String record(StringBuilder csv, List<String> attributes, Data data) {
@@ -356,9 +352,9 @@ public class CommaSeparatedValues extends AbstractTextFormat<Data> {
      * <b>name = field</b>
      *
      * @param csv  the CSV data that is being processed
-     * @param text if data was successfully processed, then the
-     *             {@link StringBuilder} instance will be updated with the text
-     *             that is represented by the above rule
+     * @param text if data was successfully processed, then the {@link
+     *             java.lang.StringBuilder} instance will be updated with the
+     *             text that is represented by the above rule
      * @return the CSV data that was processed by this call
      */
     private String name(StringBuilder csv, StringBuffer text) {
@@ -373,9 +369,9 @@ public class CommaSeparatedValues extends AbstractTextFormat<Data> {
      * <b>field = escaped / unescaped</b>
      *
      * @param csv  the CSV data that is being processed
-     * @param text if data was successfully processed, then the
-     *             {@link StringBuilder} instance will be updated with the text
-     *             that is represented by the above rule
+     * @param text if data was successfully processed, then the {@link
+     *             StringBuilder} instance will be updated with the text that is
+     *             represented by the above rule
      * @return the CSV data that was processed by this call
      */
     private String field(StringBuilder csv, StringBuffer text) {
@@ -399,9 +395,9 @@ public class CommaSeparatedValues extends AbstractTextFormat<Data> {
      * DQUOTE</b>
      *
      * @param csv  the CSV data that is being processed
-     * @param text if data was successfully processed, then the
-     *             {@link StringBuilder} instance will be updated with the text
-     *             in between the quotes
+     * @param text if data was successfully processed, then the {@link
+     *             java.lang.StringBuilder} instance will be updated with the
+     *             text in between the quotes
      * @return the CSV data that was processed by this call
      */
     private String escaped(StringBuilder csv, StringBuffer text) {
@@ -453,9 +449,9 @@ public class CommaSeparatedValues extends AbstractTextFormat<Data> {
      * <b>unescaped = *TEXTDATA</b>
      *
      * @param csv  the CSV data that is being processed
-     * @param text if data was successfully processed, then the
-     *             {@link StringBuilder} instance will be updated with the text
-     *             that is represented by the above rule
+     * @param text if data was successfully processed, then the {@link
+     *             java.lang.StringBuilder} instance will be updated with the
+     *             text that is represented by the above rule
      * @return the CSV data that was processed by this call
      */
     private String unescaped(StringBuilder csv, StringBuffer text) {
@@ -493,27 +489,5 @@ public class CommaSeparatedValues extends AbstractTextFormat<Data> {
 
         }
         return processed.toString();
-    }
-
-    /**
-     * The class {@link ChangeSeparator}. It is intended to (re-)set the
-     * separator character of the {@link CommaSeparatedValues} object whenever
-     * the {@link CommaSeparatedValues#SEPARATOR} parameter is changed.
-     *
-     * @author Claas Ahlrichs (claasahl@tzi.de)
-     */
-    private class ChangeSeparator implements Relation {
-
-        @Override
-        public void compute(Configurable configurable, String parameter,
-                            String value) {
-            if (SEPARATOR.equals(parameter)) {
-                // TODO Avoid hard coded patterns
-                Separator = Pattern.compile(Pattern.quote(value));
-                int sep = value.charAt(0);
-                Textdata = Pattern.compile(String.format("[^\\x00-\\x1F\\x22\\x%02X]", sep));
-            }
-        }
-
     }
 }

@@ -1,30 +1,26 @@
 package de.claas.mosis.flow.iterator;
 
-import de.claas.mosis.flow.Graph;
 import de.claas.mosis.flow.Node;
 
 import java.util.*;
 
 
 /**
- * The class {@link OneShotLevelOrder}. It is intended to provide sequential
- * access to all {@link Node} objects in a {@link Graph}. This {@link Iterator}
- * is meant for a single iteration across all objects in a {@link Graph}. The
- * objects are returned based on their shortest distance to a root (or data
- * source). Data sources are returned first (i.e. level 0), then their
- * successors (i.e. level 1), then the successors' successors (i.e. level 2),
- * and so on (i.e. level 3,4,...). This is repeated until the deepest
- * {@link Node} ({@link Node} with longest distance to a root) was returned.
- * There are no ordering constraints for {@link Node} objects that have the same
- * depth. They are essentially randomly returned.
+ * The class {@link de.claas.mosis.flow.iterator.OneShotLevelOrder}. It is
+ * intended to provide sequential access to all {@link de.claas.mosis.flow.Node}
+ * objects in a {@link de.claas.mosis.flow.Graph}. This {@link
+ * java.util.Iterator} is meant for a single iteration across all objects in a
+ * {@link de.claas.mosis.flow.Graph}. The objects are returned based on their
+ * shortest distance to a root (or data source). Data sources are returned first
+ * (i.e. level 0), then their successors (i.e. level 1), then the successors'
+ * successors (i.e. level 2), and so on (i.e. level 3,4,...). This is repeated
+ * until the deepest {@link de.claas.mosis.flow.Node} ({@link
+ * de.claas.mosis.flow.Node} with longest distance to a root) was returned.
+ * There are no ordering constraints for {@link de.claas.mosis.flow.Node}
+ * objects that have the same depth. They are essentially randomly returned.
  * <p/>
- * <ol>
- * <li>iteration: level 0 (data sources)</li>
- * <li>iteration: level 1</li>
- * <li>iteration: level 2</li>
- * <li>iteration: level 3</li>
- * <li>...</li>
- * </ol>
+ * <ol> <li>iteration: level 0 (data sources)</li> <li>iteration: level 1</li>
+ * <li>iteration: level 2</li> <li>iteration: level 3</li> <li>...</li> </ol>
  *
  * @author Claas Ahlrichs (c.ahlrichs@neusta.de)
  */

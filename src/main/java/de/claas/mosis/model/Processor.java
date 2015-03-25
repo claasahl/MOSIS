@@ -5,20 +5,20 @@ import de.claas.mosis.annotation.Documentation;
 import java.util.List;
 
 /**
- * The interface {@link Processor}. It is intended to provide a unified way for
- * processing time series data. This represents a generic module that can be
- * utilized to perform an arbitrary computations, transformations, etc. Multiple
- * of these modules can be linked together in order to perform more complex
- * tasks (e.g. transform data from one format to another, inspect network
- * traffic or analyze OpenStreetMap data, etc.).
+ * The interface {@link de.claas.mosis.model.Processor}. It is intended to
+ * provide a unified way for processing time series data. This represents a
+ * generic module that can be utilized to perform an arbitrary computations,
+ * transformations, etc. Multiple of these modules can be linked together in
+ * order to perform more complex tasks (e.g. transform data from one format to
+ * another, inspect network traffic or analyze OpenStreetMap data, etc.).
  * <p/>
- * The life-cycle is such that {@link #setUp()} is called first. Then
- * {@link #process(List, List)} is invoked as often as required and finally the
- * module is dismantled with {@link #dismantle()}. At this point, the set-up
- * method may be invoked again. Thus starting the cycle over again.
+ * The life-cycle is such that {@link #setUp()} is called first. Then {@link
+ * #process(java.util.List, java.util.List)} is invoked as often as required and
+ * finally the module is dismantled with {@link #dismantle()}. At this point,
+ * the set-up method may be invoked again. Thus starting the cycle over again.
  *
- * @param <I> type of incoming data (e.g. {@link Integer})
- * @param <O> type of outgoing data (e.g. {@link Double})
+ * @param <I> type of incoming data (e.g. {@link java.lang.Integer})
+ * @param <O> type of outgoing data (e.g. {@link java.lang.Double})
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
 @Documentation(
@@ -51,8 +51,15 @@ public interface Processor<I, O> extends Configurable {
      * Sets up the processing module. This method should be used to perform any
      * initialization (e.g. based on configuration parameters) that may the
      * required for the module to properly work. It can be safely assumed that
-     * this method is invoked before any processing is done (i.e. call of
-     * {@link #process(List, List)}).
+     * this method is invoked before any processing is done (i.e. call of {@link
+     * #process(java.util.List, java.util.List)}).
+     * <p/>
+     * One cannot assume that a module reacts to changes im a parameter
+     * immediately. However, the module must have reacted to changes in a
+     * parameter after this method has been called. Nonetheless, a module may
+     * adapt to changes in parameters as soon as they occur. But when using
+     * arbitrary modules, one must "restart" a module to ensure that changes in
+     * parameters take effect.
      */
     public void setUp();
 

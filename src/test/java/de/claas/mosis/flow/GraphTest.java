@@ -7,19 +7,20 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * The JUnit test for class {@link Graph}. It is intended to collect and
- * document a set of test cases for the tested class. Please refer to the
- * individual tests for more detailed information.
+ * The JUnit test for class {@link de.claas.mosis.flow.Graph}. It is intended to
+ * collect and document a set of test cases for the tested class. Please refer
+ * to the individual tests for more detailed information.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
 public class GraphTest {
 
     /**
-     * Returns an instantiated {@link Graph} class. If appropriate, the instance
-     * is configured with default values as well as the given parameters.
+     * Returns an instantiated {@link de.claas.mosis.flow.Graph} class. If
+     * appropriate, the instance is configured with default values as well as
+     * the given parameters.
      *
-     * @return an instantiated {@link Graph} class
+     * @return an instantiated {@link de.claas.mosis.flow.Graph} class
      */
     private Graph build() {
         return new Graph();

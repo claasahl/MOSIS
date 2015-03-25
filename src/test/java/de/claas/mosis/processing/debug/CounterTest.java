@@ -1,8 +1,5 @@
 package de.claas.mosis.processing.debug;
 
-import de.claas.mosis.model.DecoratorProcessorTest;
-import de.claas.mosis.model.ProcessorAdapterTest;
-import de.claas.mosis.model.ProcessorTest;
 import de.claas.mosis.util.Utils;
 import org.junit.After;
 import org.junit.Before;
@@ -12,12 +9,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 /**
- * The JUnit test for class {@link Counter}. It is intended to collect and
- * document a set of test cases for the tested class. Please refer to the
- * individual tests for more detailed information.
+ * The JUnit test for class {@link de.claas.mosis.processing.debug.Counter}. It
+ * is intended to collect and document a set of test cases for the tested class.
+ * Please refer to the individual tests for more detailed information.
  * <p/>
- * Additional test cases can be found in {@link ProcessorTest},
- * {@link ProcessorAdapterTest} and {@link DecoratorProcessorTest}.
+ * Additional test cases can be found in {@link de.claas.mosis.model.ProcessorTest},
+ * {@link de.claas.mosis.model.ProcessorAdapterTest} and {@link
+ * de.claas.mosis.model.DecoratorProcessorTest}.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
@@ -49,29 +47,31 @@ public class CounterTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterCounterMayNotBeNull() throws Exception {
-        _P.setParameter(Counter.COUNTER, null);
+        Utils.updateParameter(_P, Counter.COUNTER, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterCounterMustBeAnInteger() throws Exception {
         try {
-            _P.setParameter(Counter.COUNTER, "1");
-            _P.setParameter(Counter.COUNTER, "12");
+            Utils.updateParameters(_P,
+                    Counter.COUNTER, "1",
+                    Counter.COUNTER, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
-        _P.setParameter(Counter.COUNTER, "1.2");
+        Utils.updateParameter(_P, Counter.COUNTER, "1.2");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parameterCounterMustBePositive() throws Exception {
         try {
-            _P.setParameter(Counter.COUNTER, "0");
-            _P.setParameter(Counter.COUNTER, "12");
+            Utils.updateParameters(_P,
+                    Counter.COUNTER, "0",
+                    Counter.COUNTER, "12");
         } catch (Exception e) {
             fail(e.toString());
         }
-        _P.setParameter(Counter.COUNTER, "-1");
+        Utils.updateParameter(_P, Counter.COUNTER, "-1");
     }
 
     @Test
