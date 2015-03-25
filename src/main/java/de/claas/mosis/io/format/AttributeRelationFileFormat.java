@@ -1,11 +1,11 @@
 package de.claas.mosis.io.format;
 
+import de.claas.mosis.model.Data;
+import de.claas.mosis.util.Parser;
+
 import java.util.List;
 import java.util.Vector;
 import java.util.regex.Pattern;
-
-import de.claas.mosis.model.Data;
-import de.claas.mosis.util.Parser;
 
 /**
  * The class {@link AttributeRelationFileFormat}.
@@ -117,9 +117,6 @@ public class AttributeRelationFileFormat extends AbstractTextFormat<Data> {
 	    } else {
 		for (Data datum : in) {
 		    writeLine(toARFF(datum), true);
-		}
-		if (shouldFoward()) {
-		    out.addAll(in);
 		}
 	    }
 	} catch (Exception e) {
