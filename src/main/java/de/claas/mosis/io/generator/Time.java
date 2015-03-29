@@ -21,9 +21,19 @@ import java.util.List;
         purpose = "To provide access to time.")
 public class Time extends ProcessorAdapter<Long, Long> {
 
+    @Parameter("Whether the time should be in absolute numbers or relative to the first call.")
+    public static final String MODE = "mode";
+    public static final String MODE_ABSOLUTE = "absolute";
+    public static final String MODE_RELATIVE = "relative";
+    private long reference = -1;
+// TODO init. condition
+
     @Override
     public void process(List<Long> in, List<Long> out) {
-        out.add(System.currentTimeMillis());
+        if(reference == -1) {
+            reference = MODE_RELATIVE.equals(getParameter(MODE)) ? System.currentTimeMillis() : 0;
+        }
+        out.add(System.currentTimeMillis() - reference);
     }
 
 }

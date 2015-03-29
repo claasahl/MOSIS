@@ -32,6 +32,7 @@ public class Linear extends ProcessorAdapter<Double, Double> {
     public static final String B = "b";
     @Parameter("Step with which parameter X is increased.")
     public static final String STEP = "step";
+    double m, b, x, step;
 
     /**
      * Initializes the class with default values.
@@ -48,14 +49,17 @@ public class Linear extends ProcessorAdapter<Double, Double> {
     }
 
     @Override
-    public void process(List<Double> in, List<Double> out) {
-        double m = getParameterAsDouble(M);
-        double x = getParameterAsDouble(X);
-        double b = getParameterAsDouble(B);
-        double step = getParameterAsDouble(STEP);
+    public void setUp() {
+        m = getParameterAsDouble(M);
+        x = getParameterAsDouble(X);
+        b = getParameterAsDouble(B);
+        step = getParameterAsDouble(STEP);
+    }
 
-        setParameter(X, x + step);
+    @Override
+    public void process(List<Double> in, List<Double> out) {       
         out.add(m * x + b);
+        x = x + step;
     }
 
 }
