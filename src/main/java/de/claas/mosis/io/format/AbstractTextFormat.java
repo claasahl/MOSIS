@@ -26,7 +26,7 @@ import java.util.Queue;
 @Documentation(
         category = Category.DataFormat,
         author = {"Claas Ahlrichs"},
-        description = "This implementation represents a data format for storing and retrieving (plain) text.",
+        description = "This is a partial realization of a StreamHandler which provides common functionality for reading and writing text-based data formats. Here, the character set, size of buffer for reading and writing operations as well as the line separator can be configured. When creating new text-based data formats, one may want to use PlainText or CommaSeparatedValues as reference implementations.",
         purpose = "To allow storage and retrieval in (plain) text.")
 public abstract class AbstractTextFormat<T> extends StreamHandler<T> {
 

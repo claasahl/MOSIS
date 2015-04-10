@@ -24,7 +24,7 @@ import java.util.List;
 @Documentation(
         category = Category.Decorator,
         author = {"Claas Ahlrichs"},
-        description = "This is a DecoratorProcessor which measures the number of milliseconds that the decorated module requires for processing. This implementation also provides several ",
+        description = "This is a realization of a DecoratorProcessor that is mostly intended for debugging purposes. This implementation measures the number of milliseconds that the decorated module requires for processing. It can be used to analyze processing time of modules and optimize time efficiency.",
         purpose = "This implementation is intended for debugging purposes.")
 public class Time extends DecoratorProcessor<Object, Object> {
 

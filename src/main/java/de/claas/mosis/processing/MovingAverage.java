@@ -19,7 +19,7 @@ import java.util.List;
 @Documentation(
         category = Category.Other,
         author = {"Claas Ahlrichs"},
-        description = "This implementation calculates the moving average for its input values.",
+        description = "This is a realization of the BufferingProcessor which is used to calculate a moving average for its input data. The number of data samples that are considered for the moving average can be configured. By setting the mode, it can also be configured how the moving average is calculated in the initial phase where the buffer is only partially filled (i.e. the number of data samples in the buffer is smaller than the actual size of the buffer). In general, the options include: waiting for the buffer to fill up, using the current size of the buffer or using the actual size of the buffer.",
         purpose = "To calculate the moving average.")
 public class MovingAverage extends BufferingProcessor<Double, Double> {
 

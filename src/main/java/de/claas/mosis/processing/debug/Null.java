@@ -19,7 +19,7 @@ import java.util.List;
         dataSource = true,
         category = Category.Other,
         author = {"Claas Ahlrichs"},
-        description = "Regardless of the input values, this implementation will always return exactly one null-value.",
+        description = "This module is mostly intended for debugging purposes. Regardless of the input data, it will always return exactly one ``null''-value. This is basically an empty generator.",
         purpose = "This implementation is intended for debugging purposes.")
 public class Null extends ProcessorAdapter<Object, Object> {
 

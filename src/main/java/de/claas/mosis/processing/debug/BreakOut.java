@@ -19,7 +19,7 @@ import java.util.Vector;
 @Documentation(
         category = Category.Decorator,
         author = {"Claas Ahlrichs"},
-        description = "This is a DecoratorProcessor which provides access to the most recent set of input and output values that were passed to the process-method. It also count how often various methods were called.",
+        description = "This is a realization of a DecoratorProcessor that is mostly intended for debugging purposes. This implementation provides access to the most recent set of input and output data that were passed to the process-method. It also counts the number of calls to various methods (e.g. setUp, process and dismantle).",
         purpose = "This implementation is intended for debugging purposes.")
 public class BreakOut extends DecoratorProcessor<Object, Object> {
 

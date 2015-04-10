@@ -34,7 +34,7 @@ import java.util.List;
 @Documentation(
         category = Category.Decorator,
         author = {"Claas Ahlrichs"},
-        description = "This is a DecoratorProcessor which logs all method calls (including their parameters and return values).",
+        description = "This is a realization of a DecoratorProcessor that is mostly intended for debugging purposes. This implementation logs all method calls including their parameters and return values. It utilizes Java's built-in logging mechanisms and it can be configured to use any available logger. This implementation is most likely to be used when detailed access logs are required.",
         purpose = "This implementation is intended for debugging purposes.")
 public class Logger<I, O> extends DecoratorProcessor<I, O> {
 

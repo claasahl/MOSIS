@@ -19,7 +19,7 @@ import java.util.List;
 @Documentation(
         category = Category.Decorator,
         author = {"Claas Ahlrichs"},
-        description = "This is a DecoratorProcessor which waits a defined number of milliseconds before calling the decorated module.",
+        description = "This is a realization of a DecoratorProcessor that is mostly intended for debugging purposes. This implementation waits a defined number of milliseconds before calling the decorated module. It is useful for slowing down the processing of data within the framework. The wait time could be configured to a length that processing can be observed as it happens (e.g. log messages can be read by a human as processing happens).",
         purpose = "This implementation is intended for debugging purposes.")
 public class Sleep extends DecoratorProcessor<Object, Object> {
 

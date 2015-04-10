@@ -37,7 +37,7 @@ import java.util.Collection;
 @Documentation(
         category = Category.InputOutput,
         author = {"Claas Ahlrichs"},
-        description = "This implementation allows storing data in an OutputStream as well as retrieving data from an InputStream.",
+        description = "This is a partial implementation of a DataHandler which allows reading and writing of stream-based resources. This implementation manages input and output streams. It represents the middle piece between implementations of data formats and data storage options.  This implementation will read and write to the standard input and output by default. But it can also be configured to any stream-based resource (see implementations of StreamHandlerImpl such as FileImpl or UrlImpl). This module is most useful when creating a new data format which is also why most data formats in this framework utilize this module. One may want to use concrete implementations such as PlainText or TransmissionControlProtocolImpl as reference.",
         purpose = "To allow storage and retrieval of objects within any stream-based resource.")
 public abstract class StreamHandler<T> extends DataHandler<T> implements Observer {
 

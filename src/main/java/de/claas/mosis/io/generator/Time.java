@@ -2,6 +2,7 @@ package de.claas.mosis.io.generator;
 
 import de.claas.mosis.annotation.Category;
 import de.claas.mosis.annotation.Documentation;
+import de.claas.mosis.annotation.Parameter;
 import de.claas.mosis.model.ProcessorAdapter;
 
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.List;
         dataSource = true,
         category = Category.InputOutput,
         author = {"Claas Ahlrichs"},
-        description = "This implementation outputs the current time (in milliseconds since 1970).",
+        description = "This implementation acts as a data source. By default it outputs the current time in milliseconds since January first 1970. The implementation will do so regardless of the input data, if any. The module can also be configured to return relative time values. In this mode, the first call to this module will output zero and all succeeding calls will output the time (in milliseconds) that elapsed since the first call.",
         purpose = "To provide access to time.")
 public class Time extends ProcessorAdapter<Long, Long> {
 

@@ -33,7 +33,7 @@ import java.util.*;
         dataSource = true,
         category = Category.InputOutput,
         author = {"Claas Ahlrichs"},
-        description = "This implementation provides access to a predefined sequence of numbers.",
+        description = "This is a realization of a ProcessingAdapter and it returns a predefined sequence of numbers (similarly to Linear). This implementation returns one by default. However, the mathematical expression that is used to generate the sequence can be configured. The input data from one or multiple inbound modules are used as input values for the expression. This module is especially powerful when used in combination with Linear. Not just linear expressions, but also functions (e.g. 'sin', 'cos', etc.) as well as exponential expressions can be utilized.",
         purpose = "To provide access to a predefined sequence of numbers.")
 public class Function extends ProcessorAdapter<Double, Double> {
 

@@ -23,7 +23,7 @@ import java.util.Stack;
 @Documentation(
         category = Category.InputOutput,
         author = {"Claas Ahlrichs"},
-        description = "This implementation allows creating (empty) files and listing file system objects.",
+        description = "This is a realization of a DataHandler which accesses file systems entries. It is used to recursively list files and directories. By default, it will list all files of the root file system (e.g. ``/'' on unix-based operating systems and ``C:'' on Windows-based operating systems). However, it can be configured to point to any directory. During reading operations, the module will list all files and directories. During writing operations, the module will create the files and directories that are passed into it.",
         purpose = "To allow creating and listing file system objects.")
 public class FileHandler extends DataHandler<File> {
 

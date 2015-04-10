@@ -25,7 +25,7 @@ import java.util.List;
  */
 @Documentation(
         purpose = "It is intended to wrap another module in order to extend its functionality and / or intercept calls to it.",
-        description = "This implementation is meant to be overridden in one way or another. It is intended to wrap another module and forwards all method calls to it. Subclasses may want to override some (or all methods) to add functionality and behavior.",
+        description = "This implementation is meant to be overridden in one way or another. It is intended to wrap another module and to forward all method calls to it. Subclasses may want to override some (or all methods) to add functionality and behavior to existing modules. Most decorators within the framework use this default implementation to realize their specific functionality. When new decorators are added to the framework, then this module is likely to provide all the required default behavior. It is encouraged to use concrete decorators as reference implementations (e.g. Time or Logger).",
         author = "Claas Ahlrichs",
         noOutputData = "This implementation will forward output data from the module that it wraps. Refer to the wrapped module for more details.")
 public class DecoratorProcessor<I, O> extends ProcessorAdapter<I, O> implements Observer {

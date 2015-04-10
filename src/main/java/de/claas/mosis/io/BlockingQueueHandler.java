@@ -26,7 +26,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 @Documentation(
         category = Category.InputOutput,
         author = {"Claas Ahlrichs"},
-        description = "This implementation allows storing data in a queue as well as retrieving data from a queue.",
+        description = "This is a realization of a DataHandler which allows external programs to communicate with the framework. It allows external entities to push and pull data into / from the framework thus circumventing the otherwise (mostly) stream-based interface options. The actual implementation of the utilized queue can be configured to any BlockingQueue (by default a LinkedBlockingQueue us used). In contrast to the QueueHandler, this module will block during reading and writing operations when necessary. This can be especially useful when the external entity wants to provide data samples at its own pace rather than adhering to the timing requirements of the framework.",
         purpose = "To allow storage and retrieval of objects within a (blocking) queue.")
 public class BlockingQueueHandler<T> extends DataHandler<T> {
 

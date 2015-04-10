@@ -23,7 +23,7 @@ import java.util.List;
 @Documentation(
         category = Category.DataFormat,
         author = {"Claas Ahlrichs"},
-        description = "This implementation represents a data format for serialization and deserialization of objects.",
+        description = "This is a realization of a StreamHandler. It allows the framework to read and write Java objects directly from files, network streams, etc. It utilizes the serialization mechanism that are part of the Java runtime environment.",
         purpose = "To allow serialization and deserialization.")
 public class Serialization<T> extends StreamHandler<T> {
 

@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Documentation(
         purpose = "This implementation covers handling of parameters.",
-        description = "This is a partial implementation of the main interface (i.e. Processor). It is intended to provide a unified way for getting and setting parameters. One can use this as a basis for creating new modules.",
+        description = "This is a partial implementation of the main interface (i.e. Processor). It is intended to provide a unified way of handling parameters. Most modules within the framework use this implementation for getting, setting and constraining parameters. When a new module is created, then this implementation is likely to be referenced. It provides functionality that is expected to be common to almost all modules. Those wanting to implement new modules may also want to use BufferingProcessor or Linear as reference implementations.",
         author = "Claas Ahlrichs",
         noOutputData = "Refer to concrete implementations.")
 public abstract class ProcessorAdapter<I, O> extends ConfigurableAdapter

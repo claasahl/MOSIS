@@ -22,7 +22,7 @@ import java.util.List;
         dataSource = true,
         category = Category.InputOutput,
         author = {"Claas Ahlrichs"},
-        description = "This implementation outputs random numbers.",
+        description = "This implementation acts as a data source for pseudo random numbers. By default, it outputs a random number between zero (inclusive) and one (exclusive). The upper and lower boundary can be configured. The seed that is used to generate pseudo random numbers can also be configured.",
         purpose = "To provide access to random numbers.")
 public class Random extends ProcessorAdapter<Double, Double> implements Observer {
 

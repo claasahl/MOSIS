@@ -20,7 +20,7 @@ import java.util.List;
 @Documentation(
         category = Category.DataFormat,
         author = {"Claas Ahlrichs"},
-        description = "This implementation represents a data format for storing and retrieving (plain) text.",
+        description = "This is a realization of an AbstractTextFormat. It allows the framework to read and write plain text. The module can be configured to enforce a line separator after writing a data sample. It can also be configured to prepend a prefix before any writing operation.",
         purpose = "To allow storage in (plain) text and retrieval of (plain) text.")
 public class PlainText extends AbstractTextFormat<String> {
 

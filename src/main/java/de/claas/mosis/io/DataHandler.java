@@ -27,7 +27,7 @@ import java.util.List;
 @Documentation(
         category = Category.InputOutput,
         author = {"Claas Ahlrichs"},
-        description = "This implementation represents a data format for storing and retrieving (plain) text.",
+        description = "This represents a partial implementation for modules that intend to act as data sources and data sinks. Here, a common set of functions and configuration options are defined. Most modules within the framework, that are capable of reading data from some external source and capable of writing data to some external sink, will make use of this module as their basis. When creating new data sources and data sinks, one is encouraged to use modules that built on this module as reference (e.g. StreamHandler or QueueHandler). This partial implementation allows setting the mode of operation (i.e. read-only, write-only or read-and-write).",
         purpose = "To allow storage in (plain) text and retrieval of (plain) text.")
 public abstract class DataHandler<T> extends ProcessorAdapter<T, T> {
 

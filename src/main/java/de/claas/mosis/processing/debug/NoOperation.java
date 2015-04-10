@@ -17,7 +17,7 @@ import java.util.List;
         noOutputData = {"It will never return a value."},
         category = Category.Other,
         author = {"Claas Ahlrichs"},
-        description = "This implementation does nothing.",
+        description = "This module is intended for debugging purposes. This implementation does nothing (i.e. no forwarding, no processing, etc.) and basically represents a dead end in the graph of modules.",
         purpose = "This implementation is intended for debugging purposes.")
 public class NoOperation extends ProcessorAdapter<Object, Object> {
 

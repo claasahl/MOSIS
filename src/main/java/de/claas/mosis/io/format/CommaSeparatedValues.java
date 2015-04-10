@@ -40,7 +40,7 @@ import java.util.regex.Pattern;
 @Documentation(
         category = Category.DataFormat,
         author = {"Claas Ahlrichs"},
-        description = "This implementation represents a data format for storing and retrieving CSV data.",
+        description = "This is a realization of an AbstractTextFormat. It allows the framework to read and write data samples in the form of comma separated values (CSV). In addition to the configuration options from AbstractTextFormat (i.e. buffer size, line separator and character set) and StreamHandler (i.e. whether data is read from files, websites, etc.), this module can also be configured to include a header line. The separator between fields can be configured as well.",
         purpose = "To allow storage as CSV data and retrieval of CSV data.")
 public class CommaSeparatedValues extends AbstractTextFormat<Data> {
 

@@ -21,7 +21,7 @@ import java.util.List;
         canHandelMissingData = true,
         category = Category.Other,
         author = {"Claas Ahlrichs"},
-        description = "This implementation forwards all input values as output values.",
+        description = "This module is mostly intended for debugging purposes. It forwards all input data as output data. This can be useful when two or more paths within the graph of modules need to be normalized (i.e. their length must be identical before they can be merged).",
         purpose = "This implementation is intended for debugging purposes.")
 public class Forward<I> extends ProcessorAdapter<I, I> {
 

@@ -20,7 +20,7 @@ import java.util.List;
 @Documentation(
         category = Category.Decorator,
         author = {"Claas Ahlrichs"},
-        description = "This is a DecoratorProcessor which counts how often the process-method of the decorated module was called.",
+        description = "This is a realization of a DecoratorProcessor that is mostly intended for debugging purposes. This implementation counts the number of times that the process-method of the decorated module was called. Here, the count can be retrieved as a parameter.",
         purpose = "This implementation is intended for debugging purposes.")
 public class Counter extends DecoratorProcessor<Object, Object> {
 

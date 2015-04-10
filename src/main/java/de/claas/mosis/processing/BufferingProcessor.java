@@ -22,7 +22,7 @@ import java.util.Vector;
  */
 @Documentation(
         purpose = "It is intended to buffer incoming data (in an ordered fashion) and provide access to it.",
-        description = "It is a partial implementation of a module which provides a sliding window. It is intended to buffer incoming data (in an ordered fashion) and provide access to it.",
+        description = "This is a partial implementation of a module which provides a sliding window. It is intended to buffer incoming data (in an ordered fashion) and provide access to it. The size if the sliding window can be configured to any positive integer (including zero). Setting the length to zero will disable buffering and all input data are directly accessible.",
         author = "Claas Ahlrichs",
         noOutputData = "Depends on actual implementation (this is a partial implementation).")
 public abstract class BufferingProcessor<I, O> extends ProcessorAdapter<I, O> {

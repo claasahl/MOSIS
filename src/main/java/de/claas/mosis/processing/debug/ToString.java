@@ -20,7 +20,7 @@ import java.util.List;
         canHandelMissingData = true,
         category = Category.Other,
         author = {"Claas Ahlrichs"},
-        description = "This implementation converts all input values into String-objects. Null values are simply forwarded.",
+        description = "This implementation is mostly intended for debugging purposes. It converts all input values into String-objects. Null values are simply forwarded. This is especially useful when a sequence of data needs to be dumped in a plain text file or written to the standard input-output (i.e. terminal or console).",
         purpose = "This implementation is intended for debugging purposes.")
 public class ToString extends ProcessorAdapter<Object, String> {
 

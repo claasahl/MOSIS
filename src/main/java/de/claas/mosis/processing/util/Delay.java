@@ -20,7 +20,7 @@ import java.util.List;
         canHandelMissingData = true,
         category = Category.Other,
         author = {"Claas Ahlrichs"},
-        description = "This implementation allows the delayed forwarding of input values.",
+        description = "This is a realization of the BufferingProcessor which allows the delayed forwarding of input data. The delay can be configured to any positive integer (including zero). Setting the delay to zero forwards input data without a delay. This implementation can be used (similarly to Forward) to avoid misalignments when multiple paths of varying lengths within a graph of modules need to be merged.",
         purpose = "To delay and forward input values.")
 public class Delay<T> extends BufferingProcessor<T, T> {
 

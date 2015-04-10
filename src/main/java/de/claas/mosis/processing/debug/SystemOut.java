@@ -20,7 +20,7 @@ import java.util.List;
 @Documentation(
         category = Category.Decorator,
         author = {"Claas Ahlrichs"},
-        description = "This is a DecoratorProcessor which the name and input values right before the decorated module is called. It also outputs the name and output values right after the decorated module was called.",
+        description = "This is a realization of a  DecoratorProcessor that is mostly intended for debugging purposes. This implementation outputs the input and output data of the decorated module. A name can be configured which would also be outputted.",
         purpose = "This implementation is intended for debugging purposes.")
 public class SystemOut extends DecoratorProcessor<Object, Object> {
 

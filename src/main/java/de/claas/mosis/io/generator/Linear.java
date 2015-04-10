@@ -20,7 +20,7 @@ import java.util.List;
         dataSource = true,
         category = Category.InputOutput,
         author = {"Claas Ahlrichs"},
-        description = "This implementation provides access to a predefined sequence of numbers.",
+        description = "This implementation acts as a data source for a predefined (and linear) sequence of numbers. The generated numbers follow the pattern 'y = m*x + b', where 'y' corresponds to the returned number, 'm' defines the slope, 'b' represents the offset (for 'x=0') and 'x' sets the starting point. Any variable on the right hand-side of the expression can be configured. Every call to this module will increase the value of 'x' by one (default value) and return the 'y'-value. However, the step width (for 'x') between two successive calls can also be configured to any real number.",
         purpose = "To provide access to a predefined sequence of numbers.")
 public class Linear extends ProcessorAdapter<Double, Double> {
 

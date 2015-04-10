@@ -25,7 +25,7 @@ import java.util.List;
 @Documentation(
         category = Category.InputOutput,
         author = {"Claas Ahlrichs"},
-        description = "This implementation allows storing data in UDP datagrams as well as retrieving data from UDP datagrams.",
+        description = "This is a realization of a DataHandler which provides access to UDP-based services. The module can be used to retrieve and transmit UDP-based datagrams. Depending on the the mode, this implementation can either retrieve (read-only), send (write-only) or both (read-and-write). The server and port with which the communication is established are configurable. The buffer used for reading datagrams can also be configured (by default 2048 bytes are allocated).",
         purpose = "To allow storage in UDP datagrams and retrieval of UDP datagrams.")
 public class UserDatagramProtocolHandler extends DataHandler<DatagramPacket> {
 

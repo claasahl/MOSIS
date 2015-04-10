@@ -18,7 +18,7 @@ import java.util.List;
 @Documentation(
         category = Category.Other,
         author = {"Claas Ahlrichs"},
-        description = "This implementation calculates the distance between two successive input values.",
+        description = "This is a realization of the ComparingProcessor which determines the distance between two successive input data. The module can be configured to use any port (i.e. if multiple modules output their data into this module then any one of them can be used). By default the first module is used.",
         purpose = "To calculate the distance between two successive input values.")
 public class Distance extends ComparingProcessor<Double, Double> {
 

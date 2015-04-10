@@ -26,7 +26,7 @@ import java.util.Queue;
 @Documentation(
         category = Category.InputOutput,
         author = {"Claas Ahlrichs"},
-        description = "This implementation allows storing data in a queue as well as retrieving data from a queue.",
+        description = "This is a realization of a DataHandler which allows external programs to programatically feed data into the framework and programatically read data from the framework. This module is intended to create a simple way of interfacing external programs with the framework. The actual implementation of the utilized queue can be configured (by default a LinkedList is used).  In contrast to the BlockingQueueHandler, this module expects external entities to provide their data samples in a timely manner. The framework will process all data samples in the queue until it is empty. This assumes that the external entity can provide data samples with at least the same timing that the framework requires to process them. Once the queue is empty (either because all samples were processed or the external entity could not keep up) processing will stop.",
         purpose = "To allow storage and retrieval of objects within a queue.")
 public class QueueHandler<T> extends DataHandler<T> {
 

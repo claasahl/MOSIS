@@ -21,7 +21,7 @@ import de.claas.mosis.processing.util.Delay;
  */
 @Documentation(
         purpose = "It provides the ability to compare incoming data samples to previous ones.",
-        description = "It is a partial implementation of the main interface (i.e. Processor) which buffers a single sample. The idea is to provide the ability to compare an incoming sample to the previous sample without having to use a BufferingProcessor module.",
+        description = "This is a partial implementation of the main interface (i.e. Processor) which buffers a single sample. The idea is to provide the ability to compare an incoming sample to the previous sample without having to use a BufferingProcessor module. By default it compares input data from the first port (i.e. if multiple modules output their data into this implementation then data from the first one is used only). However, this number can be configured to any inbound module.",
         author = "Claas Ahlrichs",
         noOutputData = "Refer to concrete implementations.")
 public abstract class ComparingProcessor<I, O> extends ProcessorAdapter<I, O> {

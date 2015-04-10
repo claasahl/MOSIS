@@ -25,7 +25,7 @@ import java.util.jar.JarInputStream;
  */
 @Documentation(
         purpose = "It is intended to output all accessible classes within the class path.",
-        description = "This module provides access to all accessible classes within the current class path. The returned list of classes has no particular order. The fully-qualified-classname is returned.",
+        description = "This implementation iterates all accessible classes within the current class path and outputs their fully-qualified name. The returned classes are in no particular order. The class path can be configured to consider only classes within a particular directory or jar-file. By default, the entire Java class path is searched and returned (i.e. including all classes within the Java runtime environment).",
         author = "Claas Ahlrichs",
         outputData = String.class)
 public class Classes extends ProcessorAdapter<Object, String> {
