@@ -27,6 +27,7 @@ import java.util.Vector;
         noOutputData = "Depends on actual implementation (this is a partial implementation).")
 public abstract class BufferingProcessor<I, O> extends ProcessorAdapter<I, O> {
 
+    // TODO add parameter for "step width" / "overlap"
     @Parameter("Number of samples being buffered.")
     public static final String WINDOW_SIZE = "size of window";
     private List<List<I>> _Window;

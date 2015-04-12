@@ -60,6 +60,7 @@ public @interface Documentation {
      * @return a reference to a publication on which the annotated class is
      * based
      */
+    // TODO annotation for references: Book, Article, etc.????
     public String reference() default "";
 
     /**

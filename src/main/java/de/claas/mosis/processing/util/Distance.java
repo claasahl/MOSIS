@@ -22,6 +22,7 @@ import java.util.List;
         purpose = "To calculate the distance between two successive input values.")
 public class Distance extends ComparingProcessor<Double, Double> {
 
+    // TODO Remove port (from description)
     @Override
     public void process(List<Double> in, List<Double> out) {
         Double curr = in.get(getParameterAsInteger(PORT_TO_USE));

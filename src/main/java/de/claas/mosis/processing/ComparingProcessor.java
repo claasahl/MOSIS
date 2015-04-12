@@ -26,6 +26,7 @@ import de.claas.mosis.processing.util.Delay;
         noOutputData = "Refer to concrete implementations.")
 public abstract class ComparingProcessor<I, O> extends ProcessorAdapter<I, O> {
 
+    // TODO Remove port
     @Parameter("N-th input processor / module which values are compare (zero-indexed). E.g. when set to three then only the input values comping from the fourth processor / module (parent) are utilized and compared.")
     public static final String PORT_TO_USE = Delay.PORT_TO_USE;
     private I _LastValue;
