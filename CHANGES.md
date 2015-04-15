@@ -1,3 +1,13 @@
+Version 0.6 (2015-04-12)
+========================
+- Added a module for logging.
+- Fixed several formatting, documention, and spelling issues.
+- Largely revised tests.
+- Added option to use composite nodes.
+- Added new data handler for files.
+- Replaced Relation-interface with Observer/Observable structure.
+
+
 Version 0.55 (2014-03-09)
 =========================
 - Move "flow"-related classes into package "de.claas.mosis.flow" (e.g. Node and Link).
