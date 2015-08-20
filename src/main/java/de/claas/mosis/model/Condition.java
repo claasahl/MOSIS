@@ -93,17 +93,17 @@ public interface Condition {
         public String toString() {
             String msg = "";
             if (_RegExParameter != null) {
-                String format = "parameter does not match '%s'";
+                String format = "parameter must match '%s'";
                 msg += String.format(format, _RegExParameter);
             }
             if (_RegExValue != null) {
                 if (!msg.isEmpty()) {
                     msg += "and / or ";
                 }
-                String format = "value does not match '%s'";
+                String format = "value must match '%s'";
                 msg += String.format(format, _RegExValue);
             }
-            return msg + ".";
+            return msg;
         }
 
     }
@@ -189,7 +189,7 @@ public interface Condition {
 
         @Override
         public String toString() {
-            String format = "Parameter is not greater than %f";
+            String format = "parameter must be greater than %f";
             return String.format(format, _Threshold);
         }
 
@@ -234,7 +234,7 @@ public interface Condition {
 
         @Override
         public String toString() {
-            String format = "Parameter is not greater or equal %f";
+            String format = "parameter must be greater or equal %f";
             return String.format(format, _Threshold);
         }
 
@@ -279,7 +279,7 @@ public interface Condition {
 
         @Override
         public String toString() {
-            String format = "Parameter is not less than %f";
+            String format = "parameter must be less than %f";
             return String.format(format, _Threshold);
         }
 
@@ -324,7 +324,7 @@ public interface Condition {
 
         @Override
         public String toString() {
-            String format = "Parameter is not less or equal %f";
+            String format = "parameter must be less or equal %f";
             return String.format(format, _Threshold);
         }
 
@@ -369,7 +369,7 @@ public interface Condition {
 
         @Override
         public String toString() {
-            String format = "Parameter is not in list (%s).";
+            String format = "parameter must be one of: %s";
             return String.format(format, _List);
         }
 
@@ -401,7 +401,7 @@ public interface Condition {
 
         @Override
         public String toString() {
-            return "Parameter is null.";
+            return "parameter must not be null";
         }
 
     }
@@ -432,7 +432,7 @@ public interface Condition {
 
         @Override
         public String toString() {
-            return "Parameter is read-only.";
+            return "parameter is read-only";
         }
 
     }
@@ -465,7 +465,7 @@ public interface Condition {
 
         @Override
         public String toString() {
-            return "File does not exist.";
+            return "file must exist";
         }
 
     }
@@ -504,7 +504,7 @@ public interface Condition {
 
         @Override
         public String toString() {
-            return "Parameter may only be written once.";
+            return "parameter may only be written once";
         }
 
     }
@@ -554,7 +554,7 @@ public interface Condition {
         @Override
         public String toString() {
             return String.format(
-                    "Parameter should not meet the condition: \"%s\"",
+                    "parameter may not meet condition: \"%s\"",
                     _Condition);
         }
 
@@ -593,7 +593,7 @@ public interface Condition {
 
         @Override
         public String toString() {
-            return "Class does not exist.";
+            return "class must exist";
         }
 
     }
@@ -680,7 +680,7 @@ public interface Condition {
 
         @Override
         public String toString() {
-            return "Provides access to various statistics.";
+            return "provides access to various statistics";
         }
 
     }
