@@ -35,7 +35,7 @@ public class ProcessingVisitor implements Visitor {
             distributeOutputs(node, _Out);
             in.clear();
         }
-        return true;
+        return node.hasPredecessors() || !_Out.isEmpty();
     }
 
     @Override
@@ -59,7 +59,7 @@ public class ProcessingVisitor implements Visitor {
             distributeOutputs(node, _Out);
         }
         level--;
-        return true;
+        return node.hasPredecessors() || !_Out.isEmpty();
     }
 
     private List<Object> getInputs() {
