@@ -4,12 +4,16 @@ import de.claas.mosis.io.generator.Linear;
 import de.claas.mosis.processing.debug.*;
 import de.claas.mosis.util.Utils;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -31,6 +35,7 @@ import static org.junit.Assert.*;
 @RunWith(Parameterized.class)
 public class DecoratorProcessorTest {
 
+	private static PrintStream systemOut = null;
     private final Class<DecoratorProcessor<Object, Object>> _Clazz;
     private DecoratorProcessor<Object, Object> _P1;
     private Processor<Object, Object> _P2;
@@ -58,6 +63,19 @@ public class DecoratorProcessorTest {
         impl.add(new Object[]{Time.class});
         impl.add(new Object[]{Logger.class});
         return impl;
+    }
+    
+    @BeforeClass
+    public static void beforeClass() {
+    	// suppress annoying outputs during testing
+    	systemOut = System.out;
+    	System.setOut(new PrintStream(new ByteArrayOutputStream()));
+    }
+    
+    @AfterClass
+    public static void afterClass() {
+    	// restore original output stream
+    	System.setOut(systemOut);
     }
 
     @Before
