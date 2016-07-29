@@ -106,7 +106,7 @@ public class BlockingQueueHandlerTest extends DataHandlerTest<Long, BlockingQueu
     @Test(expected = NullPointerException.class)
     public void shouldNotAcceptNullValues() {
         Utils.updateParameter(_H, DataHandler.MODE, DataHandler.MODE_WRITE);
-        Utils.process(_H, null);
+        Utils.process(_H, (Long[])null);
     }
 
 }

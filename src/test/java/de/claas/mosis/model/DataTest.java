@@ -48,7 +48,7 @@ public class DataTest {
         assertNull(d.getAs(KeyNull));
         assertEquals(ValueDouble, d.<Double>getAs(KeyDouble), 0.0001);
         assertEquals(ValueEnum, d.getAs(KeyEnum));
-        assertEquals(ValueLong, d.getAs(KeyLong));
+        assertEquals(ValueLong, (long)d.getAs(KeyLong));
         assertEquals(ValueString, d.getAs(KeyString));
 
     }

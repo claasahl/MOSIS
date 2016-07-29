@@ -18,11 +18,11 @@ import java.util.Set;
  */
 public class SettingUpVisitor implements Visitor {
 
-    private final Set<Processor> setup = new HashSet<>();
+    private final Set<Processor<?, ?>> setup = new HashSet<>();
 
     @Override
     public boolean visitPlainNode(PlainNode node) {
-        Processor p = node.getProcessor();
+        Processor<?, ?> p = node.getProcessor();
         if (!setup.contains(p)) {
             p.setUp();
             setup.add(p);

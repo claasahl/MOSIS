@@ -62,7 +62,7 @@ public class QueueHandler<T> extends DataHandler<T> {
     public void setUp() {
         super.setUp();
         try {
-            _Queue = (Queue) Utils.instance(Class.forName(getParameter(CLASS)));
+            _Queue = (Queue<T>) Utils.instance(Class.forName(getParameter(CLASS)));
         } catch (Exception e) {
             e.printStackTrace();
         }

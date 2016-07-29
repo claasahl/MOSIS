@@ -62,7 +62,7 @@ public class BlockingQueueHandler<T> extends DataHandler<T> {
     public void setUp() {
         super.setUp();
         try {
-            _Queue = (BlockingQueue) Utils.instance(Class
+            _Queue = (BlockingQueue<T>) Utils.instance(Class
                     .forName(getParameter(CLASS)));
         } catch (Exception e) {
             e.printStackTrace();

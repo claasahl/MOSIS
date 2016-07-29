@@ -30,7 +30,6 @@ public abstract class Utils {
      */
     @SafeVarargs
     public static <I, O> O process(Processor<I, O> p, I... in) {
-        @SuppressWarnings("unchecked")
         List<O> out = new Vector<>();
         p.process(in == null ? null : Arrays.asList(in), out);
         return (out.isEmpty() ? null : out.get(0));
@@ -49,7 +48,6 @@ public abstract class Utils {
      */
     @SafeVarargs
     public static <I, O> List<O> processAll(Processor<I, O> p, I... in) {
-        @SuppressWarnings("unchecked")
         List<O> out = new Vector<>();
         p.process(in == null ? null : Arrays.asList(in), out);
         return out;
@@ -106,7 +104,7 @@ public abstract class Utils {
      * @param parameter the parameter that needs to be changes
      * @param value     the "new" value for the parameter
      */
-    public static void updateParameter(Processor processor, String parameter, String value) {
+    public static void updateParameter(Processor<?, ?> processor, String parameter, String value) {
         updateParameters(processor, parameter, value);
     }
 
@@ -120,7 +118,7 @@ public abstract class Utils {
      * @param processor  the module which parameter needs changing
      * @param parameters pairs of parameters and their corresponding values
      */
-    public static void updateParameters(Processor processor, String... parameters) {
+    public static void updateParameters(Processor<?, ?> processor, String... parameters) {
         if (parameters != null && parameters.length % 2 == 0) {
             processor.dismantle();
             for (int i = 0; i < parameters.length; i += 2) {
