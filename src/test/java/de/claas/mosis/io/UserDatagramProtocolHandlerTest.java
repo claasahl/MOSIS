@@ -152,11 +152,11 @@ public class UserDatagramProtocolHandlerTest extends
     @Override
     public void shouldRead() throws Exception {
         DatagramSocket s = new DatagramSocket(new InetSocketAddress(
-                "localhost", 90));
+                "localhost", 9090));
         Utils.updateParameters(_H,
                 DataHandler.MODE, DataHandler.MODE_READ,
                 UserDatagramProtocolHandler.HOST, "localhost",
-                UserDatagramProtocolHandler.PORT, "81");
+                UserDatagramProtocolHandler.PORT, "9081");
 
         DatagramPacket p = createDatagram(null, _H);
         s.send(p);
@@ -167,11 +167,11 @@ public class UserDatagramProtocolHandlerTest extends
     @Override
     public void shouldWrite() throws Exception {
         DatagramSocket s = new DatagramSocket(new InetSocketAddress(
-                "localhost", 100));
+                "localhost", 9100));
         Utils.updateParameters(_H,
                 DataHandler.MODE, DataHandler.MODE_WRITE,
                 UserDatagramProtocolHandler.HOST, "localhost",
-                UserDatagramProtocolHandler.PORT, "82");
+                UserDatagramProtocolHandler.PORT, "9082");
 
         DatagramPacket p = createDatagram(s, null);
         p.setLength(50);
@@ -186,10 +186,10 @@ public class UserDatagramProtocolHandlerTest extends
     @Override
     public void shouldDetermineMode() throws Exception {
         DatagramSocket s = new DatagramSocket(new InetSocketAddress(
-                "localhost", 110));
+                "localhost", 9110));
         Utils.updateParameters(_H, DataHandler.MODE, DataHandler.MODE_AUTO,
                 UserDatagramProtocolHandler.HOST, "localhost",
-                UserDatagramProtocolHandler.PORT, "83");
+                UserDatagramProtocolHandler.PORT, "9083");
 
         DatagramPacket p = createDatagram(s, null);
         p.setLength(42);
