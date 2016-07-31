@@ -23,7 +23,7 @@
         <developer>
             <id>claasahl</id>
             <name>Claas Ahlrichs</name>
-            <email>claasahl__AT_tzi.de</email>
+            <email>claasahl__AT_gmail.com</email>
         </developer>
     </developers>
 
@@ -39,31 +39,19 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-version}</version>
                 <configuration>
                     <source>${java-version}</source>
                     <target>${java-version}</target>
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven-javadoc-version}</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
                         <goals>
                             <goal>jar</goal>
                         </goals>
@@ -76,6 +64,8 @@
     <properties>
         <java-version>1.8</java-version>
         <junit-version>4.9</junit-version>
+        <maven-compiler-version>3.5.1</maven-compiler-version>
+		<maven-javadoc-version>2.10.4</maven-javadoc-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
