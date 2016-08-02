@@ -49,7 +49,7 @@ import java.util.regex.Pattern;
  * return U+000D</li> <li>%x74 / ; t tab U+0009</li> <li>%x75 4HEXDIG ; uXXXX
  * U+XXXX</li> <li>)</li> </ol> <ol> <li>quotation-mark = %x22 ; "</li>
  * <li>unescaped = %x20-21 / %x23-5B / %x5D-10FFFF</li> </ol>
- *
+ *TODO use PARSER project rather than implementing the parsing manually
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
 @Documentation(

@@ -34,7 +34,7 @@ import java.util.regex.Pattern;
  * <li>LF = %x0A ;as per section 6.1 of RFC 2234 [2]</li> <li>NEWLINE = (CR LF)
  * / (LF CR) / CR / LF</li> <li>TEXTDATA = %x20-21 / %x23-2B / %x2D-7E</li>
  * </ol>
- *
+ * TODO use PARSER project rather than implementing the parsing manually
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */
 @Documentation(
