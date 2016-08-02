@@ -234,7 +234,7 @@ public class DecoratorProcessor<I, O> extends ProcessorAdapter<I, O> implements 
      * {@value #SHADOWED} is going to be removed, as it is only used to indicate
      * whether the parameter should be stored within the decorated module or the
      * decorating module.
-     * <p/>
+     * <p>
      * This function is closely related to {@link #isDecoratedParameter(String)}.
      *
      * @param parameter the parameter

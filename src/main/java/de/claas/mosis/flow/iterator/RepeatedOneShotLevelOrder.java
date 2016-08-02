@@ -13,7 +13,7 @@ import java.util.*;
  * de.claas.mosis.flow.iterator.OneShotLevelOrder}, where a single iteration
  * across all {@link de.claas.mosis.flow.Node}s is performed, this process is
  * repeated.
- * <p/>
+ * <p>
  * <ol> <li>iteration: level 0 (data sources)</li> <li>iteration: level 1</li>
  * <li>iteration: level 2</li> <li>...</li> <li>iteration: level 0 (data
  * sources)</li> <li>iteration: level 1</li> <li>iteration: level 2</li>

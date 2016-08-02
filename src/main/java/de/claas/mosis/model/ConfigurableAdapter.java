@@ -183,7 +183,7 @@ public class ConfigurableAdapter implements Configurable {
      * Condition)}) is contained in the list returned by this method. This
      * method will always return a list, even if it is empty. Thus
      * <code>null</code> will never be returned.
-     * <p/>
+     * <p>
      * The list may be edited and clear. It does not affect the internal status
      * of this {@link de.claas.mosis.model.Configurable}.
      *
@@ -231,7 +231,7 @@ public class ConfigurableAdapter implements Configurable {
      * by calling {@link #removeObserver(Observer)}) is contained in the list
      * returned by this method. This method will always return a list, even if
      * it is empty. Thus <code>null</code> will never be returned.
-     * <p/>
+     * <p>
      * The list may be edited and clear. It does not affect the internal status
      * of this {@link de.claas.mosis.model.Configurable}.
      *

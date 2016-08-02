@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
  * intended to collect and document a set of test cases that are applicable to
  * all {@link de.claas.mosis.io.DataHandler} classes. Please refer to the
  * individual tests for more detailed information.
- * <p/>
+ * <p>
  * Additional test cases can be found in {@link de.claas.mosis.model.ProcessorTest}
  * and {@link de.claas.mosis.model.ProcessorAdapterTest}.
  *

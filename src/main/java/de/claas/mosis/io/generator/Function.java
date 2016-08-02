@@ -13,18 +13,18 @@ import java.util.*;
  * generate values of arbitrary arithmetic expressions. The idea is to provide a
  * text-based expression, which is then parsed and interpreted. This class is
  * mainly intended for debugging purposes.
- * <p/>
+ * <p>
  * Valid arithmetic expressions are of the form:</br>
- * <p/>
+ * <p>
  * <ol> <li>expression = term { ("+" | "-") term }.</li> <li>term = factor {
  * ("*" | "/") factor }.</li> <li>factor = value | ["cos" | "sin"] "("
  * expression ")" | factor "^" expression.</li> <li>value = number |
  * variable.</li> <li>number = ["+" | "-"] digit { digit } ["." digit { digit
  * }].</li> <li>digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" |
  * "9".</li> <li>variable = "x" { digit }.</li> </ol>
- * <p/>
+ * <p>
  * TODO There seems to be a difference between the grammar above and the impl.
- * <p/>
+ * <p>
  * The above grammar is given in EBNF (Extended Backus-Naur Form).
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)

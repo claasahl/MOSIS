@@ -20,7 +20,7 @@ import java.util.Collection;
  * de.claas.mosis.model.Processor}s. This {@link de.claas.mosis.io.DataHandler}
  * is intended to enable external entities to communicate with the framework
  * through stream-based resources.
- * <p/>
+ * <p>
  * Calls to {@link #getParameters()}, {@link #getParameter(String)} and {@link
  * #setParameter(String, String)} take the parameters of the {@link
  * de.claas.mosis.io.StreamHandlerImpl} instance into account (i.e. they are

@@ -18,12 +18,12 @@ import java.util.regex.Pattern;
  * de.claas.mosis.io.StreamHandler} allows to read and write CSV data from any
  * of the {@link de.claas.mosis.io.StreamHandlerImpl} implementations (e.g.
  * {@link de.claas.mosis.io.FileImpl} or {@link de.claas.mosis.io.UrlImpl}).
- * <p/>
+ * <p>
  * This implementation is based on the definitions given in RFC 4180, which is
  * publicly available at http://www.ietf.org/rfc/rfc4180.txt. The therein
  * contained ABNF grammar was slightly modified and the final result is listed
  * below:
- * <p/>
+ * <p>
  * <ol> <li>csv-text = [header NEWLINE] record *(NEWLINE record) [NEWLINE]</li>
  * <li>header = name *(SEPARATOR name)</li> <li>record = field *(SEPARATOR
  * field)</li> <li>name = field</li> <li>field = escaped / unescaped</li>
@@ -197,7 +197,7 @@ public class CommaSeparatedValues extends AbstractTextFormat<Data> {
      * Returns the CSV data that was processed by this call. If no data was
      * processed (e.g. incomplete or invalid CSV data), then <code>null</code>
      * is returned. The data is processed as defined in rule:
-     * <p/>
+     * <p>
      * <b>csv-text = [header NEWLINE] record *(NEWLINE record) [NEWLINE]</b>
      *
      * @param csv        the CSV data that is being processed
@@ -265,7 +265,7 @@ public class CommaSeparatedValues extends AbstractTextFormat<Data> {
      * Returns the CSV data that was processed by this call. If no data was
      * processed (e.g. incomplete or invalid CSV data), then <code>null</code>
      * is returned. The data is processed as defined in rule:
-     * <p/>
+     * <p>
      * <b>header = name *(SEPARATOR name)</b>
      *
      * @param csv        the CSV data that is being processed
@@ -304,7 +304,7 @@ public class CommaSeparatedValues extends AbstractTextFormat<Data> {
      * Returns the CSV data that was processed by this call. If no data was
      * processed (e.g. incomplete or invalid CSV data), then <code>null</code>
      * is returned. The data is processed as defined in rule:
-     * <p/>
+     * <p>
      * <b>record = field *(SEPARATOR field)</b>
      *
      * @param csv        the CSV data that is being processed
@@ -348,7 +348,7 @@ public class CommaSeparatedValues extends AbstractTextFormat<Data> {
      * Returns the CSV data that was processed by this call. If no data was
      * processed (e.g. incomplete or invalid CSV data), then <code>null</code>
      * is returned. The data is processed as defined in rule:
-     * <p/>
+     * <p>
      * <b>name = field</b>
      *
      * @param csv  the CSV data that is being processed
@@ -365,7 +365,7 @@ public class CommaSeparatedValues extends AbstractTextFormat<Data> {
      * Returns the CSV data that was processed by this call. If no data was
      * processed (e.g. incomplete or invalid CSV data), then <code>null</code>
      * is returned. The data is processed as defined in rule:
-     * <p/>
+     * <p>
      * <b>field = escaped / unescaped</b>
      *
      * @param csv  the CSV data that is being processed
@@ -390,7 +390,7 @@ public class CommaSeparatedValues extends AbstractTextFormat<Data> {
      * Returns the CSV data that was processed by this call. If no data was
      * processed (e.g. incomplete or invalid CSV data), then <code>null</code>
      * is returned. The data is processed as defined in rule:
-     * <p/>
+     * <p>
      * <b>escaped = DQUOTE *(TEXTDATA / SEPARATOR / CR / LF / 2DQUOTE)
      * DQUOTE</b>
      *
@@ -445,7 +445,7 @@ public class CommaSeparatedValues extends AbstractTextFormat<Data> {
      * Returns the CSV data that was processed by this call. If no data was
      * processed (e.g. incomplete or invalid CSV data), then <code>null</code>
      * is returned. The data is processed as defined in rule:
-     * <p/>
+     * <p>
      * <b>unescaped = *TEXTDATA</b>
      *
      * @param csv  the CSV data that is being processed

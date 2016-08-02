@@ -16,12 +16,12 @@ import java.util.regex.Pattern;
  * {@link de.claas.mosis.io.StreamHandler} allows to read and write JSON data
  * from any of the {@link de.claas.mosis.io.StreamHandlerImpl} implementations
  * (e.g. {@link de.claas.mosis.io.FileImpl} or {@link de.claas.mosis.io.UrlImpl}).
- * <p/>
+ * <p>
  * This implementation is based on the definitions given in RFC 4627, which is
  * publicly available at http://www.ietf.org/rfc/rfc4180.txt. The therein
  * contained EBNF grammar was slightly modified and the final result is listed
  * below:
- * <p/>
+ * <p>
  * Terminal symbols: <ol> <li>JSON-text = object / array</li> </ol> <ol>
  * <li>begin-array = ws %x5B ws ; [ left square bracket</li> <li>begin-object =
  * ws %x7B ws ; { left curly bracket</li> <li>end-array = ws %x5D ws ; ] right
@@ -148,7 +148,7 @@ public class JavaScriptObjectNotation extends AbstractTextFormat<Data> {
      * Returns the JSON data that was processed by this call. If no data was
      * processed (e.g. incomplete or invalid JSON data), then <code>null</code>
      * is returned. The data is processed as defined in rule:
-     * <p/>
+     * <p>
      * <b>JSON-text = object / array</b>
      *
      * @param json   the JSON data that is being processed
@@ -179,7 +179,7 @@ public class JavaScriptObjectNotation extends AbstractTextFormat<Data> {
      * Returns the JSON data that was processed by this call. If no data was
      * processed (e.g. incomplete or invalid JSON data), then <code>null</code>
      * is returned. The data is processed as defined in rule:
-     * <p/>
+     * <p>
      * <b>object = begin-object [ member *( value-separator member ) ]
      * end-object</b>
      *
@@ -225,7 +225,7 @@ public class JavaScriptObjectNotation extends AbstractTextFormat<Data> {
      * Returns the JSON data that was processed by this call. If no data was
      * processed (e.g. incomplete or invalid JSON data), then <code>null</code>
      * is returned. The data is processed as defined in rule:
-     * <p/>
+     * <p>
      * <b>array = begin-array [ value *( value-separator value ) ]
      * end-array</b>
      *
@@ -270,7 +270,7 @@ public class JavaScriptObjectNotation extends AbstractTextFormat<Data> {
      * Returns the JSON data that was processed by this call. If no data was
      * processed (e.g. incomplete or invalid JSON data), then <code>null</code>
      * is returned. The data is processed as defined in rule:
-     * <p/>
+     * <p>
      * <b>member = string name-separator value</b>
      *
      * @param json the JSON data that is being processed
@@ -312,7 +312,7 @@ public class JavaScriptObjectNotation extends AbstractTextFormat<Data> {
      * Returns the JSON data that was processed by this call. If no data was
      * processed (e.g. incomplete or invalid JSON data), then <code>null</code>
      * is returned. The data is processed as defined in rule:
-     * <p/>
+     * <p>
      * <b>string = quotation-mark *character quotation-mark</b>
      *
      * @param json the JSON data that is being processed
@@ -349,7 +349,7 @@ public class JavaScriptObjectNotation extends AbstractTextFormat<Data> {
      * Returns the JSON data that was processed by this call. If no data was
      * processed (e.g. incomplete or invalid JSON data), then <code>null</code>
      * is returned. The data is processed as defined in rule:
-     * <p/>
+     * <p>
      * <b>character = unescaped / escaped</b>
      *
      * @param json the JSON data that is being processed * @param text if data
@@ -380,7 +380,7 @@ public class JavaScriptObjectNotation extends AbstractTextFormat<Data> {
      * Returns the JSON data that was processed by this call. If no data was
      * processed (e.g. incomplete or invalid JSON data), then <code>null</code>
      * is returned. The data is processed as defined in rule:
-     * <p/>
+     * <p>
      * <b>value = false / null / true / object / array / number / string</b>
      *
      * @param json   the JSON data that is being processed
@@ -442,7 +442,7 @@ public class JavaScriptObjectNotation extends AbstractTextFormat<Data> {
      * Returns the JSON data that was processed by this call. If no data was
      * processed (e.g. incomplete or invalid JSON data), then <code>null</code>
      * is returned. The data is processed as defined in rule:
-     * <p/>
+     * <p>
      * <b>number = [ minus ] integer [ frac ] [ exp ]</b>
      *
      * @param json the JSON data that is being processed
@@ -480,7 +480,7 @@ public class JavaScriptObjectNotation extends AbstractTextFormat<Data> {
      * Returns the JSON data that was processed by this call. If no data was
      * processed (e.g. incomplete or invalid JSON data), then <code>null</code>
      * is returned. The data is processed as defined in rule:
-     * <p/>
+     * <p>
      * <b>integer = zero / ( DIGIT1-9 *DIGIT )</b>
      *
      * @param json the JSON data that is being processed
@@ -509,7 +509,7 @@ public class JavaScriptObjectNotation extends AbstractTextFormat<Data> {
      * Returns the JSON data that was processed by this call. If no data was
      * processed (e.g. incomplete or invalid JSON data), then <code>null</code>
      * is returned. The data is processed as defined in rule:
-     * <p/>
+     * <p>
      * <b>frac = decimal-point +DIGIT</b>
      *
      * @param json the JSON data that is being processed
@@ -540,7 +540,7 @@ public class JavaScriptObjectNotation extends AbstractTextFormat<Data> {
      * Returns the JSON data that was processed by this call. If no data was
      * processed (e.g. incomplete or invalid JSON data), then <code>null</code>
      * is returned. The data is processed as defined in rule:
-     * <p/>
+     * <p>
      * <b>exp = e [ minus / plus ] +DIGIT</b>
      *
      * @param json the JSON data that is being processed

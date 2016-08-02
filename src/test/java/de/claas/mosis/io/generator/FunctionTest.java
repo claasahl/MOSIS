@@ -12,7 +12,7 @@ import static org.junit.Assert.assertNotNull;
  * The JUnit test for class {@link de.claas.mosis.io.generator.Function}. It is
  * intended to collect and document a set of test cases for the tested class.
  * Please refer to the individual tests for more detailed information.
- * <p/>
+ * <p>
  * Additional test cases can be found in {@link de.claas.mosis.model.ProcessorTest}
  * and {@link de.claas.mosis.model.ProcessorAdapterTest}.
  *

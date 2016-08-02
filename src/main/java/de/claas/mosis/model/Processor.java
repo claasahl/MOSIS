@@ -11,7 +11,7 @@ import java.util.List;
  * transformations, etc. Multiple of these modules can be linked together in
  * order to perform more complex tasks (e.g. transform data from one format to
  * another, inspect network traffic or analyze OpenStreetMap data, etc.).
- * <p/>
+ * <p>
  * The life-cycle is such that {@link #setUp()} is called first. Then {@link
  * #process(java.util.List, java.util.List)} is invoked as often as required and
  * finally the module is dismantled with {@link #dismantle()}. At this point,
@@ -53,7 +53,7 @@ public interface Processor<I, O> extends Configurable {
      * required for the module to properly work. It can be safely assumed that
      * this method is invoked before any processing is done (i.e. call of {@link
      * #process(java.util.List, java.util.List)}).
-     * <p/>
+     * <p>
      * One cannot assume that a module reacts to changes im a parameter
      * immediately. However, the module must have reacted to changes in a
      * parameter after this method has been called. Nonetheless, a module may

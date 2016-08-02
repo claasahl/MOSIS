@@ -12,7 +12,7 @@ import java.util.Map;
  * and their corresponding values. Implementing classes may want to verify that
  * the parameter, value and / or both satisfy certain criteria (e.g. such as a
  * value being numeric or a parameter being properly formatted).
- * <p/>
+ * <p>
  * <b>Note:</b> It is highly recommended to override {@link #equals(Object)},
  * {@link #hashCode()} and {@link #toString()}. They are used for management
  * purposes (see {@link de.claas.mosis.model.ConfigurableAdapter#addCondition(String,

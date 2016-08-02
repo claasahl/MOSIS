@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
  * The JUnit test for class {@link de.claas.mosis.processing.debug.ToString}. It
  * is intended to collect and document a set of test cases for the tested class.
  * Please refer to the individual tests for more detailed information.
- * <p/>
+ * <p>
  * Additional test cases can be found in {@link de.claas.mosis.model.ProcessorTest},
  * {@link de.claas.mosis.model.ProcessorAdapterTest} and {@link
  * de.claas.mosis.model.DecoratorProcessorTest}.

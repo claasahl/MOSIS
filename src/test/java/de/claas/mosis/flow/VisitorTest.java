@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
  * intended to collect and document a set of test cases that are applicable to
  * all {@link de.claas.mosis.flow.Visitor} classes. Please refer to the
  * individual tests for more detailed information.
- * <p/>
+ * <p>
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
  */

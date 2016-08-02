@@ -5,7 +5,7 @@ package de.claas.mosis.flow;
  * a unified way for implementing functionality across a graph of {@link
  * de.claas.mosis.flow.Node}s. This represents a generic approach that can be
  * used to perform checks, process data or other arbitrary operations.
- * <p/>
+ * <p>
  * The idea is such that implementations of the {@link java.util.Iterator}
  * interface (e.g. {@link de.claas.mosis.flow.iterator.OneShotLevelOrder}) are
  * used to iterate over a graph of processing modules (i.e. {@link

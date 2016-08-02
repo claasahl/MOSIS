@@ -18,7 +18,7 @@ import java.util.*;
  * de.claas.mosis.flow.Node} with longest distance to a root) was returned.
  * There are no ordering constraints for {@link de.claas.mosis.flow.Node}
  * objects that have the same depth. They are essentially randomly returned.
- * <p/>
+ * <p>
  * <ol> <li>iteration: level 0 (data sources)</li> <li>iteration: level 1</li>
  * <li>iteration: level 2</li> <li>iteration: level 3</li> <li>...</li> </ol>
  *

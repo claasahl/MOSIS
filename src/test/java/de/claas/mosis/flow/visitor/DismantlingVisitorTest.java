@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
  * The JUnit test for class {@link de.claas.mosis.flow.visitor.DismantlingVisitor}.
  * It is intended to collect and document a set of test cases for the tested
  * class. Please refer to the individual tests for more detailed information.
- * <p/>
+ * <p>
  * Additional test cases can be found in {@link de.claas.mosis.flow.VisitorTest}.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)

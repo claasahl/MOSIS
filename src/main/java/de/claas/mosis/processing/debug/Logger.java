@@ -18,7 +18,7 @@ import java.util.List;
  * wrapped {@link de.claas.mosis.model.Processor} object. The actual logging is
  * based on Java's logging implementation (see {@link java.util.logging.Logger}
  * and related classes / interfaces).
- * <p/>
+ * <p>
  * The {@link java.util.logging.Logger}, that is being utilized by this module,
  * must have been registered by the {@link java.util.logging.LogManager}. The
  * {@link java.util.logging.Level} of the {@link java.util.logging.Logger} and

@@ -20,7 +20,7 @@ import java.util.*;
  * objects from level 0 to level 3). There are no ordering constraints for
  * {@link de.claas.mosis.flow.Node} objects that have the same depth. They are
  * essentially randomly returned.
- * <p/>
+ * <p>
  * <ol> <li>iteration: level 0 (data sources)</li> <li>iteration: level 1 and
  * level 0</li> <li>iteration: level 2, level 1 and level 0</li> <li>iteration:
  * level 3, level 2, level 1 and level 0</li> <li>...</li> </ol>

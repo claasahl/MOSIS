@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
  * It is intended to collect and document a set of test cases that are
  * applicable to all {@link de.claas.mosis.model.ConfigurableAdapter} classes.
  * Please refer to the individual tests for more detailed information.
- * <p/>
+ * <p>
  * Additional test cases can be found in {@link de.claas.mosis.model.ConfigurableTest}.
  *
  * @author Claas Ahlrichs (claasahl@tzi.de)
